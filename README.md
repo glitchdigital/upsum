@@ -1,21 +1,35 @@
-# Next.js Starter
+# Upsum
 
-This is a starter Next.js project that shows how to put together a simple website with server and client side rendering powered by Next.js, which uses React.
+## Getting started
 
-It provides an example with header, footer and layout files, shows how to include CSS and JavaScript on specific pages, how to write code that does asynchronous data fetching (including how to write different routines for client and server rendering, if you wish) as well as some more advanced usage.
+### Varnish 4.x and Node 6.x
 
-Like all Next.js projects it features automatic pre-fetching of templates with a ServiceWorker, renders pages both client and server side and live reloading in development.
+The website uses Varnish 4.x and Node 6.x.
 
-## Running locally
+We are using Varnish as a cache and as a way to handle URL writes and to have prettier URLs than Next.js router currently allows for.
 
-To get started in development mode, just clone the repository and run:
+e.g. /question/foo-bar is passed to the Next.js app as /question?q=foo-bar
+
+You can install both varnish and node with standard package managers such as `brew` (on Mac OS), `apt/dpkg` (on Debian/Ubuntu) and 'yum/rpm' (on RedHat).
+
+### Running locally
+
+If you use brew to install varnish on MacOS, and want to run it locally, you can start it it on port 8080 with:
+
+    /usr/local/sbin/varnishd -F -f varnish.conf -a 0.0.0.0:8080
+
+To start the server locally in development mode, with live reload enabled just install the modules and call the 'dev' run script:
 
     npm install
     npm run dev
+    
+Once both Varnish and the server are running to go http://localhost:8080
 
-## Building and deploying
+### Building and deploying the server in production
 
-If you wanted to run this site in production, you should build and run it:
+When deploying on a new server, copy the the `varnish.conf` file to the appropriate place for your operating system (e.g. `/etc/default/varnish` on Debian, `/etc/sysconfig/varnish` on RedHat and `/etc/varnish` on other systems) and be sure to set Varnish to run at startup.
+
+To install and start the service in production just install the modules, build and run:
 
     npm install
     npm run build

@@ -5,7 +5,13 @@ import Footer from '../components/footer'
 export default ({ children }) => (
   <div>
     <Header />
-    { children }
+    <div className="container">
+      <div className="row">
+        <div className="twelve columns">
+          { children }
+        </div>
+      </div>
+    </div>
     <Footer />
   </div>
 )

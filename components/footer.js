@@ -3,7 +3,13 @@ import Link from 'next/link'
 
 export default() => (
   <footer>
-    <hr/>
-    <p><Link href="/">Home</Link> | &copy; {new Date().getYear() + 1900}</p>
+    <div className="container">
+      <div className="row">
+        <div className="twelve columns">
+          <hr/>
+          <p>&copy; <Link href="/">Upsum</Link> {new Date().getYear() + 1900}</p>
+        </div>
+      </div>
+    </div>
   </footer>
 )

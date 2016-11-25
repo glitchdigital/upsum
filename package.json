@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-starter",
-  "version": "1.0.0",
-  "description": "A starter Next.js project",
+  "name": "upsum",
+  "version": "1.0.1",
+  "description": "Upsum",
   "main": "index.js",
   "dependencies": {
     "next": "*",
@@ -15,5 +15,5 @@
     "start": "next start"
   },
   "author": "",
-  "license": "ISC"
+  "license": ""
 }

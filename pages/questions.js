@@ -5,11 +5,16 @@ import Questions from '../lib/questions'
 export default class extends React.Component {
   
   static async getInitialProps({ req }) {
-    let questions = new Questions
-    let results = await questions.search({ limit: 10 })
-    return { questions: results }
+   let questions = new Questions
+   let results = await questions.search({ limit: 10 })
+   return { questions: results }
   }
 
+
+  constructor (props) {
+    super(props)
+  }
+   
   render() {
     return (
       <Page>
