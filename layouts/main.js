@@ -6,11 +6,7 @@ export default ({ children }) => (
   <div>
     <Header />
     <div className="container">
-      <div className="row">
-        <div className="twelve columns">
-          { children }
-        </div>
-      </div>
+      { children }
     </div>
     <Footer />
   </div>

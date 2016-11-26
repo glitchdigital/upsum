@@ -24,6 +24,10 @@ export default() => (
         }
         p {
           font-size: 18px;
+          line-height: 28px;
+        }
+        a {
+          text-decoration: none;
         }
         a.nostyle {
           color: #444;

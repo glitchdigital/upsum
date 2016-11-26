@@ -3,16 +3,12 @@ import Page from '../layouts/main'
 
 export default class Error extends React.Component {
   
-  static getInitialProps ({ res, xhr }) {
+  static getInitialProps({ res, xhr }) {
     const errorCode = res ? res.statusCode : xhr.status
     return { errorCode }
   }
   
-  constructor (props) {
-    super(props)
-  }
-  
-  render () {
+  render() {
     var response
     switch (this.props.errorCode) {
       case 200: // Also display a 404 if someone requests /_error :)
