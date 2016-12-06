@@ -1,9 +1,11 @@
 import React from 'react'
 import Page from '../layouts/main'
+import { Session } from '../models/session'
 
 export default class Error extends React.Component {
   
-  static getInitialProps({ res, xhr }) {
+  static getInitialProps({ req, res, xhr }) {
+    const session = Session(req)
     const errorCode = res ? res.statusCode : xhr.status
     return { errorCode }
   }

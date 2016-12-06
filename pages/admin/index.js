@@ -1,7 +1,8 @@
 import React from 'react'
-import Page from '../layouts/main'
-import Questions from '../models/questions'
-import { Session } from '../models/session'
+import Page from '../../layouts/main'
+import Questions from '../../models/questions'
+import Link from 'next/link'
+import { Session } from '../../models/session'
 
 export default class extends React.Component {
   
@@ -16,7 +17,8 @@ export default class extends React.Component {
     return (
       <Page>
         <div className="row">
-          <div className="eight columns">
+          <div className="nine columns">
+            <h2>Recently Added Questions</h2> 
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>
@@ -25,13 +27,8 @@ export default class extends React.Component {
               ))
             }
           </div>
-          <div className="four columns">
-            {/*
-            <h5>POPULAR</h5>
-            <p>…</p>
-            <h5>NEW</h5>
-            <p>…</p>
-          */}
+          <div className="three columns">
+            &nbsp;
           </div>
         </div>
       </Page>

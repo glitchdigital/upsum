@@ -5,8 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "next": "*",
+    "react-cookie": "^1.0.4",
     "react-redux": "^4.4.6",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

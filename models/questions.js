@@ -1,41 +1,53 @@
-import 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch'
 
 export default class Questions {
 
   async get(id) {
-    let res = await fetch('http://localhost:3001/Question/'+id)
-    let json = await res.json()
+    const res = await fetch('http://localhost:3001/Question/'+id)
+    const json = await res.json()
     return json
   }
 
-  async create(options) {
-    let res = await fetch('http://localhost:3001/Question', {
+  async create(question, apiKey) {
+    const res = await fetch('http://localhost:3001/Question', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': ''
+        'x-api-key': apiKey
       },
-      body: JSON.stringify({
-        name: 'Example question',
-        text: 'Example answer',
-      })
+      body: JSON.stringify(question)
     })
-    let json = await res.json()
+    const json = await res.json()
     return json
   }
 
-  async update(options) {
-    
+  async update(question, apiKey) {
+    const id = question['@id'].split('/')[4]
+    const res = await fetch('http://localhost:3001/Question/'+id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey
+      },
+      body: JSON.stringify(question)
+    })
+    return res
   }
 
-  async delete(options) {
-    
+  async delete(id, apiKey) {
+    const res = await fetch('http://localhost:3001/Question/'+id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey
+      }
+    })
+    return res
   }
-  
 
   async search(options) {
-    let res = await fetch('http://localhost:3001/Question/search')
-    let json = await res.json()
+    const res = await fetch('http://localhost:3001/Question/search')
+    const json = await res.json()
     if (json instanceof Array) {
       return json
     } else {
