@@ -25,11 +25,15 @@ export default class extends React.Component {
 
       return (
         <Page>
-          <h2>{this.props.question.name}</h2>
-          <p><i>{this.props.question.text}</i></p>
-          <h5>Answer</h5>
-          <p>{ (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "This question has not been answered yet!" }</p>
-          <p>{editButton}</p>
+          <div itemScope itemType="http://schema.org/Question">
+            <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
+            <p itemProp="text"><i>{this.props.question.text}</i></p>
+            <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
+              <h5>Answer</h5>
+              <p itemProp="text">{ (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "This question has not been answered yet!" }</p>
+            </div>
+            <p>{editButton}</p>
+          </div>
         </Page>
       )
     } else { 
