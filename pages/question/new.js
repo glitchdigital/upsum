@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Page from '../../layouts/main'
 import Questions from '../../models/questions'
 import { Session } from '../../models/session'
+import Textarea from 'react-textarea-autosize'
 
 export default class extends React.Component {
 
@@ -63,14 +64,14 @@ export default class extends React.Component {
               <label htmlFor="question">The question</label>
               <input name="question" className="u-full-width" type="text" placeholder="What is the question?" id="question" />
               <label htmlFor="questionDetail">Additional detail to clarify the question (optional)</label>
-              <textarea name="questionDetail" className="u-full-width" placeholder="Optional detail to clarify the question." id="questionDetail"></textarea>
+              <Textarea name="questionDetail" className="u-full-width" placeholder="Optional detail to clarify the question." id="questionDetail"></Textarea>
               <h4>Answer</h4>
               {/*
               <label htmlFor="answerDetail">The answer to the question</label>
               <input name="answer" className="u-full-width" type="text" placeholder="The answer to the question." id="answer" />
               */}
               <label htmlFor="answerDetail">The answer to the question</label>
-              <textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question," id="answerDetail"></textarea>
+              <Textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question." id="answerDetail"></Textarea>
               <p className="u-pull-right">
                 <Link href="/"><span className="button">Cancel</span></Link>
                 &nbsp;

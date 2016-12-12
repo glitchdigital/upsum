@@ -1,12 +1,14 @@
 {
   "name": "upsum",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Upsum",
   "main": "index.js",
   "dependencies": {
+    "marked": "^0.3.6",
     "next": "*",
     "react-cookie": "^1.0.4",
     "react-redux": "^4.4.6",
+    "react-textarea-autosize": "^4.0.5",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
   },

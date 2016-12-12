@@ -55,7 +55,7 @@ export default class extends React.Component {
         <div className="container">
           <div className="row">
             <div className="six columns">
-              <h1><a href="/" className="nostyle"><i className="fa fa-lg fa-arrow-circle-o-up"></i> Upsum</a></h1>
+              <h1><a href="/" className="nostyle"><i className="fa fa-lg fa-fw fa-arrow-circle-o-up"></i>Upsum</a></h1>
             </div>
             <div className="six columns">
               <Provider store={this.session}>

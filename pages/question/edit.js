@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Page from '../../layouts/main'
 import Questions from '../../models/questions'
 import { Session } from '../../models/session'
+import Textarea from 'react-textarea-autosize'
 
 export default class extends React.Component {
   
@@ -10,10 +11,13 @@ export default class extends React.Component {
     const session = Session(req)
     const questions = new Questions
     const question = await questions.get(query.id)
+    
+    if (!question['acceptedAnswer'])
+      question['acceptedAnswer'] = { name: '', description: '' };
+    
     return { question: question, session: session.getState() }
   }
    
-
   constructor(props) {
      super(props)
      this.state = this.props.question
@@ -21,7 +25,7 @@ export default class extends React.Component {
      this.handleChange = this.handleChange.bind(this)
      this.handleSubmit = this.handleSubmit.bind(this)
    }
-
+   
   async handleDelete(event) {
     if (confirm('Are you sure you want delete this question?')) {
       const questionId = this.state['@id'].split('/')[4]
@@ -71,14 +75,14 @@ export default class extends React.Component {
               <label htmlFor="question">The question</label>
               <input name="question" className="u-full-width" type="text" placeholder="What is the question?" id="question" value={this.state.name}/>
               <label htmlFor="questionDetail">Additional detail to clarify the question (optional)</label>
-              <textarea name="questionDetail" className="u-full-width" placeholder="Optional detail to clarify the question." id="questionDetail" value={this.state.text}></textarea>
+              <Textarea name="questionDetail" className="u-full-width" placeholder="Optional detail to clarify the question." id="questionDetail" value={this.state.text}></Textarea>
               <h4>Answer</h4>
               {/*
               <label htmlFor="answerDetail">The answer to the question</label>
               <input name="answer" className="u-full-width" type="text" placeholder="The answer to the question." id="answer" value={this.state.acceptedAnswer.name}>/>
               */}
               <label htmlFor="answerDetail">The answer to the question</label>
-              <textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question," id="answerDetail" value={this.state.acceptedAnswer.text}></textarea>
+              <Textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question." id="answerDetail" value={this.state.acceptedAnswer.text}></Textarea>
               <div className="u-cf u-full-width">
                 <span className="u-pull-left"><span onClick={this.handleDelete} className="button"><i className="fa fa-fw fa-lg fa-trash"></i> Delete</span></span>
                 <span className="u-pull-right">

@@ -46,7 +46,7 @@ export default class Questions {
   }
 
   async search(options) {
-    const res = await fetch('http://localhost:3001/Question/search')
+    const res = await fetch('http://localhost:3001/Question/?sort=-_created')
     const json = await res.json()
     if (json instanceof Array) {
       return json
