@@ -46,7 +46,23 @@ export default class Questions {
   }
 
   async search(options) {
-    const res = await fetch('http://localhost:3001/Question/?sort=-_created')
+    var url = 'http://localhost:3001/Question/?'
+
+    if ("sort" in options) {
+      url += "sort="+encodeURIComponent(options.sort)
+    } else {
+      url += 'sort=-_updated'
+    }
+
+    if ("limit" in options)
+      url += "&limit="+encodeURIComponent(options.limit)
+      
+    if ("name" in options)
+      url += "&name="+encodeURIComponent(options.name)
+      
+    console.log(url);
+    
+    const res = await fetch(url)
     const json = await res.json()
     if (json instanceof Array) {
       return json

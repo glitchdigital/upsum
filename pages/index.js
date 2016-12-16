@@ -2,13 +2,14 @@ import React from 'react'
 import Page from '../layouts/main'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
+import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {
   
   static async getInitialProps({ req }) {
     const session = Session(req)
     const questions = new Questions
-    const results = await questions.search({ limit: 10 })
+    const results = await questions.search({ limit: 25 })
     return { questions: results }
   }
 
@@ -17,10 +18,12 @@ export default class extends React.Component {
       <Page>
         <div className="row">
           <div className="eight columns">
+          <h3>Questions</h3>
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>
-                  <h4><a href={"/questions/"+question['@id'].split('/')[4]}>{question.name || "Untitled"}</a></h4>
+                  <h4 style={{marginBottom: 0}}><a href={"/questions/"+question['@id'].split('/')[4]}>{question.name}</a></h4>
+                  <p>Answered <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></p>
                 </div>
               ))
             }

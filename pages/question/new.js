@@ -32,6 +32,9 @@ export default class extends React.Component {
     if (event.target.name == "questionDetail")
       this.state.text = event.target.value
 
+      if (event.target.name == "image")
+        this.state.image = event.target.value
+
     if (event.target.name == "answer")
       this.state.acceptedAnswer.name = event.target.value
 
@@ -57,7 +60,7 @@ export default class extends React.Component {
     return (
       <Page>
         <div className="row">
-          <div className="nine columns">
+          <div className="twelve columns">
             <h2><i className="fa fa-fw fa-plus"></i> New Question</h2>
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
               <h4>Question</h4>
@@ -65,6 +68,8 @@ export default class extends React.Component {
               <input name="question" className="u-full-width" type="text" placeholder="What is the question?" id="question" />
               <label htmlFor="questionDetail">Additional detail to clarify the question (optional)</label>
               <Textarea name="questionDetail" className="u-full-width" placeholder="Optional detail to clarify the question." id="questionDetail"></Textarea>
+              <label htmlFor="image"><i className="fa fa-fw fa-image"></i> Image URL (optional)</label>
+              <input name="image" className="u-full-width" type="text" placeholder="" id="image" value={this.state.image}/>
               <h4>Answer</h4>
               {/*
               <label htmlFor="answerDetail">The answer to the question</label>
