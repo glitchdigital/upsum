@@ -71,7 +71,7 @@ export default class extends React.Component {
     return (
       <Page>
         <div className="row">
-          <div className="twelve columns">
+          <div className="eight columns">
             <h2><i className="fa fa-fw fa-pencil"></i> Edit Question</h2>
             <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
               <h4>Question</h4>

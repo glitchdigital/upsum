@@ -6,11 +6,11 @@ import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {
   
-  static async getInitialProps({ req }) {
+  static async getInitialProps({ req, query }) {
     const session = Session(req)
     const questions = new Questions
-    const results = await questions.search({ limit: 25 })
-    return { questions: results }
+    const results = await questions.search({ limit: 25, name: query.q })
+    return { questions: results, query: query.q }
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class extends React.Component {
       <Page>
         <div className="row">
           <div className="twelve columns">
-            <h3>Questions</h3>
+          <h3><i>"{this.props.query}"</i></h3>
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>

@@ -57,10 +57,9 @@ export default class Questions {
     if ("limit" in options)
       url += "&limit="+encodeURIComponent(options.limit)
       
-    if ("name" in options)
-      url += "&name="+encodeURIComponent(options.name)
-      
-    console.log(url);
+    if ("name" in options) {
+      url += "&name="+encodeURIComponent(options.name.replace(/s /gi, " ").replace(/s$/i, ""))
+    }
     
     const res = await fetch(url)
     const json = await res.json()

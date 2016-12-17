@@ -17,8 +17,8 @@ export default class extends React.Component {
     return (
       <Page>
         <div className="row">
-          <div className="eight columns">
-          <h3>Questions</h3>
+          <div className="twelve columns">
+            <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>

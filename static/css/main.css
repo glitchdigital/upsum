@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: #444;
+  background-color: #ddd;
+}
+.header .container {
+  padding: 0 20px;
+}
+.container {
+  background-color: #eee;
+  padding: 0 20px 20px 20px;
+}
+hr {
+  height: 0;
+  border: 0;
+  margin: 0 0 10px 0;
+  border-top: 4px solid #ddd;
+}
+h1.title {
+  margin: 0px 0 0 0;
+  white-space: nowrap; 
+  font-weight: 300;
+  font-size: 60px;
+  line-height: 90px;
+}
+h1.title img {
+  position: relative;
+  top: 19px;
+  height: 110px;
+  width: 110px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+a.title-slogan,
+.title-slogan {
+  position: relative;
+  top: -20px;
+  margin-left: 120px;
+  background: #444;
+  color: #fff;
+  display: inline-block;
+  padding: 0 10px;
+  white-space: nowrap; 
+}
+p {
+  font-size: 18px;
+  line-height: 28px;
+}
+p.muted {
+  color: #888;
+}
+a {
+  text-decoration: none;
+}
+a.nostyle {
+  color: #444;
+  text-decoration: none;
+}
+footer a,
+footer p {
+  color: #888;
+  text-decoration: none;
+}
+#search input {
+  position: relative;
+  border: none;
+  background-color: #eee;
+  border-radius: 0px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 20px;
+  margin-right: 40px;
+}
+#search input:focus {
+  background-color: #fff;
+}
+#search .fa-microphone {
+  position: absolute;
+  top: 35px;
+  right: 10px;
+  background-color: #ddd;
+  color: #888;
+  line-height: 50px;
+  padding: 0 12px;
+  margin-left: 10px;
+  border-radius: 100px;
+}
+#search .fa-microphone:hover,
+#search .fa-microphone:focus {
+  background-color: #888;
+  color: #fff;
+  cursor: pointer;
+}
+#search.recording input {
+  visibility: hidden;
+}
+#search.recording .fa-microphone:hover,
+#search.recording .fa-microphone:focus,
+#search.recording .fa-microphone {
+  background-color: red;
+  color: #fff;
+  cursor: none;
+}

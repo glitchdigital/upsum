@@ -14,10 +14,14 @@ module.exports = connect(state => state)(React.createClass({
     return {}
   },
   startDictation: function() {
-    if (window.hasOwnProperty('webkitSpeechRecognition')) {
-
-      var recognition = new webkitSpeechRecognition();
-
+    if (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')) {
+      
+      document.getElementById('search').className = "recording";
+      document.getElementById('recordingButton').className += " faa-pulse animated";
+      
+      var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+      
+      var recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
 
@@ -25,29 +29,34 @@ module.exports = connect(state => state)(React.createClass({
       recognition.start();
 
       recognition.onresult = function(e) {
-        document.getElementById('transcript').value = e.results[0][0].transcript;
+        document.getElementById('searchInput').value = e.results[0][0].transcript;
         recognition.stop();
         document.getElementById('search').submit();
       };
 
       recognition.onerror = function(e) {
         recognition.stop();
+        document.getElementById('search').submit();
       }
 
     }
   },
   render: function() {
+    let speechInput = ''
+    if (typeof window !== 'undefined' && (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')))
+      speechInput = <i id="recordingButton" className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
+    
     if (this.props.sessionId) {
       return (
-        <div style={{paddingTop: '40px', textAlign: 'right'}}>
+        <div style={{paddingTop: '40px', textAlign: 'right', position: 'relative'}}>
           <form id="search" method="get" action="/search">
-            <input type="text" name="q" id="transcript" placeholder="Got a question?" />
-            <i className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
+            <input type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news" />
+            {speechInput}
           </form>
           <p style={{margin: '5px 0'}}>
             Logged in as <strong>{this.props.name}</strong>
             &nbsp;<span style={{opacity: '.25'}}>|</span>&nbsp;
-            <Link href="/question/new">New Question…</Link>
+            <Link href="/question/new">New Question</Link>
             &nbsp;<span style={{opacity: '.25'}}>|</span>&nbsp;
             <a href="#" onClick={this.handleLogout} >Logout</a>
           </p>
@@ -60,10 +69,10 @@ module.exports = connect(state => state)(React.createClass({
       )
     } else {
       return (
-        <div style={{paddingTop: '40px', textAlign: 'right'}}>
+        <div style={{paddingTop: '40px', textAlign: 'right', position: 'relative'}}>
           <form id="search" method="get" action="/search">
-            <input type="text" name="q" id="transcript" placeholder="Got a question?" />
-            <i className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
+            <input type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news" />
+            {speechInput}
           </form>
         </div>
       )
