@@ -28,7 +28,9 @@ export const reducer = (session = {
   }, action) => {
   switch (action.type) {
     case 'LOGIN':
-      cookie.save('session', action.session, { path: '/' })
+      var expiryDate = new Date();
+      expiryDate.setFullYear(expiryDate.getFullYear() + 10);
+      cookie.save('session', action.session, { path: '/', expires: expiryDate })
       return action.session
     case 'LOGOUT':
       cookie.remove('session', { path: '/' })

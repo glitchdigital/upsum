@@ -2,14 +2,18 @@ import fetch from 'isomorphic-fetch'
 
 export default class Questions {
 
+  hostname() {
+    return 'http://localhost:3001'
+  }
+  
   async get(id) {
-    const res = await fetch('http://localhost:3001/Question/'+id)
+    const res = await fetch(this.hostname()+'/Question/'+id)
     const json = await res.json()
     return json
   }
 
   async create(question, apiKey) {
-    const res = await fetch('http://localhost:3001/Question', {
+    const res = await fetch(this.hostname()+'/Question', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +27,7 @@ export default class Questions {
 
   async update(question, apiKey) {
     const id = question['@id'].split('/')[4]
-    const res = await fetch('http://localhost:3001/Question/'+id, {
+    const res = await fetch(this.hostname()+'/Question/'+id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +39,7 @@ export default class Questions {
   }
 
   async delete(id, apiKey) {
-    const res = await fetch('http://localhost:3001/Question/'+id, {
+    const res = await fetch(this.hostname()+'/Question/'+id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +50,7 @@ export default class Questions {
   }
 
   async search(options) {
-    var url = 'http://localhost:3001/Question/?'
+    var url = this.hostname()+'/Question/?'
 
     if ("sort" in options) {
       url += "sort="+encodeURIComponent(options.sort)
@@ -60,7 +64,7 @@ export default class Questions {
     if ("name" in options) {
       url += "&name="+encodeURIComponent(options.name.replace(/s /gi, " ").replace(/s$/i, ""))
     }
-    
+        
     const res = await fetch(url)
     const json = await res.json()
     if (json instanceof Array) {
