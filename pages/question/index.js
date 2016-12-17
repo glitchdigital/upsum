@@ -83,7 +83,7 @@ export default class extends React.Component {
                         <p>
                           <a href={"/questions/"+question['@id'].split('/')[4]}>{question.name}</a>
                           <br/>
-                          <span className="muted"><i className="fa fa-fw fa-clock-o"></i><TimeAgo date={question['@dateModified']} /></span>
+                          <span className="muted"><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></span>
                         </p>
                       </div>
                     ))

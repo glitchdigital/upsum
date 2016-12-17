@@ -2,6 +2,7 @@ import React from 'react'
 import Page from '../layouts/main'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
+import Marked from 'Marked'
 import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {
@@ -18,7 +19,7 @@ export default class extends React.Component {
       <Page>
         <div className="row">
           <div className="twelve columns">
-            <h3>Questions</h3>
+            <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>

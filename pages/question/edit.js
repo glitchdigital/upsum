@@ -93,7 +93,7 @@ export default class extends React.Component {
                 <span className="u-pull-right">
                   <a href={"/questions/"+this.state['@id'].split('/')[4]} className="button">Cancel</a>
                   &nbsp;
-                  <button type="submit" className="button-primary ">Save changes</button>
+                  <button type="submit" className="button-primary">Save changes</button>
                 </span>
               </div>
             </form>

@@ -2,6 +2,7 @@ import React from 'react'
 import Page from '../layouts/main'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
+import Marked from 'Marked'
 import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {

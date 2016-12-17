@@ -18,7 +18,7 @@ export default class extends React.Component {
       <Page>
         <div className="row">
           <div className="twelve columns">
-          <h3><i>"{this.props.query}"</i></h3>
+          <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>

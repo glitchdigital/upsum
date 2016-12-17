@@ -80,7 +80,7 @@ export default class extends React.Component {
               <p className="u-pull-right">
                 <Link href="/"><span className="button">Cancel</span></Link>
                 &nbsp;
-                <button type="submit" className="button-primary ">Add new question</button>
+                <button type="submit" className="button-primary">Add new question</button>
               </p>
             </form>
           </div>
