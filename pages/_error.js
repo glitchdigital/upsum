@@ -13,7 +13,7 @@ export default class Error extends React.Component {
   render() {
     var response
     switch (this.props.errorCode) {
-      case 200: // Also display a 404 if someone requests /_error :)
+      case 200: // Also display a 404 if someone explicitly requests /_error
       case 404:
         response = (
           <Page>

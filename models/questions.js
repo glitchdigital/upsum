@@ -52,19 +52,19 @@ export default class Questions {
   async search(options) {
     var url = this.hostname()+'/Question/?'
 
-    if ("sort" in options) {
+    if ("sort" in options && options.sort !== undefined) {
       url += "sort="+encodeURIComponent(options.sort)
     } else {
       url += 'sort=-_updated'
     }
 
-    if ("limit" in options)
+    if ("limit" in options && options.limit !== undefined)
       url += "&limit="+encodeURIComponent(options.limit)
       
-    if ("name" in options) {
+    if ("name" in options && options.name !== undefined) {
       url += "&name="+encodeURIComponent(options.name.replace(/s /gi, " ").replace(/s$/i, ""))
     }
-        
+
     const res = await fetch(url)
     const json = await res.json()
     if (json instanceof Array) {

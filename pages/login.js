@@ -1,6 +1,6 @@
+import Link from 'next/prefetch'
 import React from 'react'
 import Page from '../layouts/main'
-import Link from 'next/link'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
 

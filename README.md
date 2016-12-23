@@ -1,36 +1,34 @@
 # Upsum
 
+"The news, summed up"
+
+News as Structured Data Q&A
+
 ## Getting started
 
-### Varnish 4.x and Node 6.x
+The website use Node 6.x and the Next.js framework (wich uses React).
 
-The website uses Varnish 4.x and Node 6.x.
-
-We are using Varnish as a cache and as a way to handle URL writes and to have prettier URLs than Next.js router currently allows for.
-
-e.g. /question/foo-bar is passed to the Next.js app as /question?q=foo-bar
-
-You can install both varnish and node with standard package managers such as `brew` (on Mac OS), `apt/dpkg` (on Debian/Ubuntu) and 'yum/rpm' (on RedHat).
+It is currently using the Next.js 2.0 Beta, so we don't have to be dependant on a seperate Varnish server to handle routing.
 
 ### Running locally
 
-If you use brew to install varnish on MacOS, and want to run it locally, you can start it it on port 8080 with:
-
-    /usr/local/sbin/varnishd -F -f varnish.conf -a 0.0.0.0:8080
-
-To start the server locally in development mode, with live reload enabled just install the modules and call the 'dev' run script:
+To run the server locally in development mode, with live reload enabled just install the modules and start it:
 
     npm install
-    npm run dev
+    npm start
     
-Once both Varnish and the server are running to go http://localhost:8080
+The web server will start at http://localhost:3000
+
+In development mode, changes in the code will live reload in the browser.
 
 ### Building and deploying the server in production
 
-When deploying on a new server, copy the the `varnish.conf` file to the appropriate place for your operating system (e.g. `/etc/default/varnish` on Debian, `/etc/sysconfig/varnish` on RedHat and `/etc/varnish` on other systems) and be sure to set Varnish to run at startup.
-
-To install and start the service in production just install the modules, build and run:
+To install and run the service in production just install the modules, build and start it:
 
     npm install
     npm run build
-    npm start
+    NODE_ENV=production npm start
+    
+In production, web server will start at http://localhost:80 (but the PORT argument can be set to override the default port).
+
+In production mode, changes will not live reload and the `npm run build` step will need to be run every time new code is deployed.

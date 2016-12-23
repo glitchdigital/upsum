@@ -1,3 +1,4 @@
+import Link from 'next/prefetch'
 import React from 'react'
 import Page from '../layouts/main'
 import Questions from '../models/questions'
@@ -23,19 +24,11 @@ export default class extends React.Component {
             {
               this.props.questions.map((question, i) => (
                 <div key={i}>
-                  <h4 style={{marginBottom: 0}}><a href={"/questions/"+question['@id'].split('/')[4]}>{question.name}</a></h4>
+                  <h4 style={{marginBottom: 0}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link></h4>
                   <p>Answered <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></p>
                 </div>
               ))
             }
-          </div>
-          <div className="four columns">
-            {/*
-            <h5>POPULAR</h5>
-            <p>…</p>
-            <h5>NEW</h5>
-            <p>…</p>
-          */}
           </div>
         </div>
       </Page>

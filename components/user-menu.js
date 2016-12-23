@@ -1,8 +1,11 @@
+import Link from 'next/prefetch'
 import React from 'react'
 import { connect } from 'react-redux'
-import Link from 'next/link'
 import { Session } from '../models/session'
 
+/** 
+ * @TODO Refactor syntax
+ */
 module.exports = connect(state => state)(React.createClass({
   handleLogout: function() {
     const session = Session()

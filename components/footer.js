@@ -1,5 +1,5 @@
+import Link from 'next/prefetch'
 import React from 'react'
-import Link from 'next/link'
 import { Session } from '../models/session'
 
 export default class extends React.Component {

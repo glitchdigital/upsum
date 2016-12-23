@@ -1,5 +1,6 @@
+import Head from 'next/head'
+import Link from 'next/prefetch'
 import React from 'react'
-import Link from 'next/link'
 import Page from '../../layouts/main'
 import Questions from '../../models/questions'
 import { Session } from '../../models/session'
@@ -56,6 +57,9 @@ export default class extends React.Component {
 
       return (
         <Page>
+          <Head>
+            <title>{this.props.question.name}</title>
+          </Head>
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">
               <div className="twelve columns">
@@ -81,7 +85,7 @@ export default class extends React.Component {
                     this.props.relatedQuestions.map((question, i) => (
                       <div key={i}>
                         <p>
-                          <a href={"/questions/"+question['@id'].split('/')[4]}>{question.name}</a>
+                          <Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link>
                           <br/>
                           <span className="muted"><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></span>
                         </p>
