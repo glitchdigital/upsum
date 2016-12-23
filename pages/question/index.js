@@ -4,11 +4,11 @@ import React from 'react'
 import Page from '../../layouts/main'
 import Questions from '../../models/questions'
 import { Session } from '../../models/session'
-import Marked from 'Marked'
+import marked from 'marked'
 import TimeAgo from 'react-timeago'
 
-Marked.setOptions({
-  renderer: new Marked.Renderer(),
+marked.setOptions({
+  renderer: new marked.Renderer(),
   gfm: true,
   tables: true,
   breaks: false,
@@ -71,10 +71,10 @@ export default class extends React.Component {
             <div className="row">
               <div className="eight columns">
                 {imageTag}
-                <span itemProp="text" dangerouslySetInnerHTML={{__html: (this.props.question.text) ? Marked(this.props.question.text) : "" }}></span>
+                <span itemProp="text" dangerouslySetInnerHTML={{__html: (this.props.question.text) ? marked(this.props.question.text) : "" }}></span>
                 <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
                   <h5>Answered <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} /></h5>
-                  <p itemProp="text" dangerouslySetInnerHTML={{__html: (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? Marked(this.props.question.acceptedAnswer.text) : "This question has not been answered yet!" }}></p>
+                  <p itemProp="text" dangerouslySetInnerHTML={{__html: (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? marked(this.props.question.acceptedAnswer.text) : "This question has not been answered yet!" }}></p>
                 </div>
                 {editButton}
               </div>
