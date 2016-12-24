@@ -22,6 +22,7 @@ export default class extends React.Component {
           <link rel="stylesheet" href="/static/css/font-awesome-animation.min.css"/>
           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
           <title>Upsum</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
         </Head>
         <div className="header">
           <div className="container">
