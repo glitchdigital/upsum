@@ -27,7 +27,7 @@ To install and run the service in production just install the modules, build and
 
     npm install
     npm run build
-    NODE_ENV=production npm start
+    NODE_ENV=production nohup npm start &
     
 In production, web server will start at http://localhost:80 (but the PORT argument can be set to override the default port).
 
