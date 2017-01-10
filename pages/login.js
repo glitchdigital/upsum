@@ -37,7 +37,9 @@ export default class extends React.Component {
     if (this.state.name && this.state.sessionId) {
       const session = Session()
       session.dispatch({ type: 'LOGIN', session: this.state })
-      this.props.url.pushTo("/")
+      window.location = "/"
+      // @TODO pushTo doesn't work here for some reason
+      //this.props.url.pushTo("/")
     } else {
       alert("Please enter your name and provide an API Key")
     }

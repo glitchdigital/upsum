@@ -96,7 +96,10 @@ export default class extends React.Component {
       
       let imageTag
       if (this.state.question.image) {
-        imageTag = <img src={this.state.question.image} style={{width: '100%', height: 'auto', marginBottom: '20px'}}/>
+        imageTag = 
+          <div>
+            <div className="question-image" style={{backgroundImage: 'url('+this.state.question.image+')'}}></div>
+          </div>
       }
 
       return (
@@ -144,8 +147,11 @@ export default class extends React.Component {
           </div>
           <div className="row">
             <div className="twelve columns">
-              <p className="muted">
+              <p className="muted" style={{fontSize: '15px', marginBottom: '5px'}}>
                 <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
+              </p>
+              <p className="muted" style={{fontSize: '15px'}}>
+                <i>Images from flickr.com and marked suitable for commercial use (note: image credits currently missing).</i>
               </p>
             </div>
           </div>

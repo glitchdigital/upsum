@@ -80,6 +80,7 @@ footer p {
 #search .search-input {
   text-align: right;
   width: 100%;
+  max-width: 400px;
 }
 #search .search-input-with-mic {
   margin-right: 40px;
@@ -137,4 +138,20 @@ footer p {
   background-color: #e5e5e5;
   padding: 5px 10px;
   margin-bottom: 20px;
+}
+.question-image {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 20px;
+}
+@media (min-width: 660px) {
+  .question-image {
+    height: 400px;
+  }
 }
