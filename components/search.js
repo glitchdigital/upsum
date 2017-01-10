@@ -41,33 +41,15 @@ export default class extends React.Component {
     let speechInput = ''
     if (typeof window !== 'undefined' && (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')))
       speechInput = <i id="recordingButton" className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
-      
-    if (this.props.sessionId) {
-      return (
-        <div className="search">
-          <form id="search" method="get" action="/search">
-            <input className={(speechInput) ?  'search-input-with-mic' : 'search-input'} type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
-            {speechInput}
-          </form>
-          <p style={{marginTop: '5px', marginBottom: '0px'}}>
-            Logged in as <strong>{this.props.name}</strong>
-            &nbsp;<span style={{opacity: '.25'}}>|</span>&nbsp;
-            <Link href="/question/new">New Question</Link>
-            &nbsp;<span style={{opacity: '.25'}}>|</span>&nbsp;
-            <a href="#" onClick={this.handleLogout} >Logout</a>
-          </p>
-        </div>
-      )
-    } else {
-      return (
-        <div className="search">
-          <form id="search" method="get" action="/search">
-            <input className={(speechInput) ? 'search-input-with-mic' : 'search-input'} type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
-            {speechInput}
-          </form>
-        </div>
-      )
-    }
+    
+    return (
+      <div className="search">
+        <form id="search" method="get" action="/search">
+          <input className="search-input" type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
+          {speechInput}
+        </form>
+      </div>
+    )
   }
   
 }

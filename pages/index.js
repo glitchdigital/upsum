@@ -49,22 +49,22 @@ export default class extends React.Component {
             <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
           </div>
         </div>
-        <div className="row">
-          <div className="four columns">
+        <div className="row question-cards">
+          <div className="four columns question-card-column-1">
             {
               questionsAsLists[0].map((question, i) => {
                 return this.renderQuestionCard(question, i)
               })
             }
           </div>
-          <div className="four columns">
+          <div className="four columns question-card-column-2">
             {
               questionsAsLists[1].map((question, i) => {
                 return this.renderQuestionCard(question, i)
               })
             }
           </div>
-          <div className="four columns">
+          <div className="four columns question-card-column-3">
             {
               questionsAsLists[2].map((question, i) => {
                 return this.renderQuestionCard(question, i)

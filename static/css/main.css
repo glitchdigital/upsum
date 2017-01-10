@@ -66,39 +66,44 @@ footer p {
 #search {
   margin-bottom: 0;
 }
-
-#search .search-input-with-mic,
 #search .search-input {
   position: relative;
   border: none;
   background-color: #eee;
-  border-radius: 0px;
-  text-align: left;
+  background-color: #f9f9f9;
+  border-radius: 20px;
   font-size: 18px;
   line-height: 20px;
+  width: 100%;
+  text-align: center;
 }
 #search .search-input {
-  text-align: right;
-  width: 100%;
-  max-width: 400px;
+
 }
-#search .search-input-with-mic {
-  margin-right: 40px;
+@media (min-width: 660px) {
+  #search .search-input {
+    width: 90%;
+    max-width: 330px;
+  }
 }
-#search .search-input:focus,
-#search .search-input-with-mic:focus {
+#search .search-input:focus {
   background-color: #fff;
 }
 #search .fa-microphone {
   position: absolute;
   top: 5px;
-  right: 10px;
+  right: 0px;
   background-color: #ddd;
   color: #888;
   line-height: 50px;
   padding: 0 12px;
-  margin-left: 10px;
   border-radius: 100px;
+}
+@media (min-width: 660px) {
+  #search .fa-microphone {
+    position: absolute;
+    top: 35px;
+  }
 }
 #search .fa-microphone:hover,
 #search .fa-microphone:focus {
@@ -113,7 +118,8 @@ footer p {
   color: #fff;
   cursor: none;
 }
-#search.recording .search-input-with-mic {
+#search.recording .search-input {
+  background: transparent;
   opacity: 0.5;
 }
 .user { 
@@ -127,11 +133,8 @@ footer p {
 }
 @media (min-width: 660px) {
   .search {
-    padding-top: 30px;
-  }
-  #search .fa-microphone {
-    position: absolute;
-    top: 25px;
+    padding-top: 40px;
+    margin-right: 30px;
   }
 }
 .question-sidebar {
@@ -141,13 +144,13 @@ footer p {
 }
 .question-card {
   background: #fff;
-  padding: 5px 10px;
-  margin-bottom: 20px;
+  padding: 10px 15px;
+  margin-bottom: 25px;
 }
 .question-card h3 {
-  font-size: 28px;
-  line-height: 34px;
-  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
 }
 .question-card-image {
   background-color: #e5e5e5;
@@ -181,5 +184,20 @@ footer p {
 @media (min-width: 660px) {
   .question-image {
     height: 300px;
+  }
+}
+
+@media (min-width: 660px) {
+  .question-card-column-1 {
+    margin: 0 1.2% 0 0;
+    width: 31.6% !important;
+  }
+  .question-card-column-2 {
+    margin: 0 1.2%;
+    width: 31.6% !important;
+  }
+  .question-card-column-3 {
+    margin: 0 0 0 1.2%;
+    width: 31.6% !important;
   }
 }
