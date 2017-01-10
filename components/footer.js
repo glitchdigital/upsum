@@ -23,7 +23,7 @@ export default class extends React.Component {
           <div className="row">
             <div className="twelve columns">
               <hr/>
-              <p>&copy; <Link href="/">Upsum</Link> {new Date().getYear() + 1900} {loginButton}</p>
+              <p>&copy; <Link href="/">Upsum</Link> {new Date().getYear() + 1900} {loginButton} (<strong>Beta</strong>)</p>
             </div>
           </div>
         </div>

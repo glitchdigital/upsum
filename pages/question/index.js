@@ -151,7 +151,7 @@ export default class extends React.Component {
                 <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
               </p>
               <p className="muted" style={{fontSize: '15px'}}>
-                <i>Images from flickr.com and marked suitable for commercial use (note: image credits currently missing).</i>
+                <i>Images via <a href="http://flickr.com">flickr.com</a> and marked suitable for both non-commercial and commercial re-use (note: image credits are currently missing).</i>
               </p>
             </div>
           </div>

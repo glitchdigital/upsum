@@ -139,7 +139,35 @@ footer p {
   padding: 5px 10px;
   margin-bottom: 20px;
 }
+.question-card {
+  background: #fff;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
+.question-card h3 {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 600;
+}
+.question-card-image {
+  background-color: #e5e5e5;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 20px;
+}
+@media (min-width: 660px) {
+  .question-card-image {
+    height: 200px;
+  }
+}
 .question-image {
+  background-color: #e5e5e5;
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -152,6 +180,6 @@ footer p {
 }
 @media (min-width: 660px) {
   .question-image {
-    height: 400px;
+    height: 300px;
   }
 }
