@@ -23,6 +23,7 @@ h1.title {
   font-weight: 300;
   font-size: 60px;
   line-height: 90px;
+  color: #444;
 }
 h1.title img {
   position: relative;
@@ -62,7 +63,28 @@ footer p {
   color: #888;
   text-decoration: none;
 }
-#search input {
+
+#search .search-input {
+  position: relative;
+  border: none;
+  background-color: #eee;
+  border-radius: 0px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+#search .search-input-with-mic {
+  margin-right: 40px;
+}
+
+
+#search .search-input {
+  text-align: right;
+  width: 100%;
+}
+
+#search .search-input-with-mic {
   position: relative;
   border: none;
   background-color: #eee;
@@ -72,12 +94,16 @@ footer p {
   line-height: 20px;
   margin-right: 40px;
 }
-#search input:focus {
+
+
+#search .search-input:focus,
+#search .search-input-with-mic:focus {
   background-color: #fff;
 }
+
 #search .fa-microphone {
   position: absolute;
-  top: 35px;
+  top: 0;
   right: 10px;
   background-color: #ddd;
   color: #888;
@@ -95,10 +121,35 @@ footer p {
 #search.recording input {
   visibility: hidden;
 }
+
 #search.recording .fa-microphone:hover,
 #search.recording .fa-microphone:focus,
 #search.recording .fa-microphone {
   background-color: red;
   color: #fff;
   cursor: none;
+}
+
+.user-menu { 
+  position: relative;
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 660px) {
+  .user-menu {
+    padding-top: 40px;
+    margin-bottom: 0px;
+  }
+  
+  #search .fa-microphone {
+    position: absolute;
+    top: 35px;
+  }
+}
+
+.question-sidebar {
+  background-color: #e5e5e5;
+  padding: 5px 10px;
+  margin-bottom: 20px;
 }

@@ -91,7 +91,7 @@ export default class extends React.Component {
               <div className="u-cf u-full-width">
                 <span className="u-pull-left"><span onClick={this.handleDelete} className="button"><i className="fa fa-fw fa-lg fa-trash"></i> Delete</span></span>
                 <span className="u-pull-right">
-                  <a href={"/questions/"+this.state['@id'].split('/')[4]} className="button">Cancel</a>
+                  <Link href={"/question?id="+this.state['@id'].split('/')[4]} as={"/questions/"+this.state['@id'].split('/')[4]}><span className="button">Cancel</span></Link>
                   &nbsp;
                   <button type="submit" className="button-primary">Save changes</button>
                 </span>

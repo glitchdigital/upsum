@@ -51,9 +51,9 @@ module.exports = connect(state => state)(React.createClass({
     
     if (this.props.sessionId) {
       return (
-        <div style={{paddingTop: '40px', textAlign: 'right', position: 'relative'}}>
+        <div className="user-menu">
           <form id="search" method="get" action="/search">
-            <input type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news" />
+            <input className={(speechInput) ?  'search-input-with-mic' : 'search-input'} type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
             {speechInput}
           </form>
           <p style={{margin: '5px 0'}}>
@@ -63,18 +63,13 @@ module.exports = connect(state => state)(React.createClass({
             &nbsp;<span style={{opacity: '.25'}}>|</span>&nbsp;
             <a href="#" onClick={this.handleLogout} >Logout</a>
           </p>
-            {/*
-          <p>
-            <Link href="/question/new"><span className="button button-primary"><i className="fa fa-fw fa-plus"></i> New Question</span></Link>
-          </p>
-              */}
         </div>
       )
     } else {
       return (
-        <div style={{paddingTop: '40px', textAlign: 'right', position: 'relative'}}>
+        <div className="user-menu">
           <form id="search" method="get" action="/search">
-            <input type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news" />
+            <input className={(speechInput) ? 'search-input-with-mic' : 'search-input'} type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
             {speechInput}
           </form>
         </div>
