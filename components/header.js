@@ -3,7 +3,8 @@ import Link from 'next/prefetch'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Session } from '../models/session'
-import UserMenu from '../components/user-menu'
+import User from '../components/user'
+import Search from '../components/search'
 
 export default class extends React.Component {
 
@@ -18,7 +19,7 @@ export default class extends React.Component {
         <Head>
           <link rel="stylesheet" href="/static/css/normalize.css"/>
           <link rel="stylesheet" href="/static/css/skeleton.css"/>
-          <link rel="stylesheet" href="/static/css/main.css?v=1.3.0"/>
+          <link rel="stylesheet" href="/static/css/main.css?v=1.3.1"/>
           <link rel="stylesheet" href="/static/css/font-awesome-animation.min.css"/>
           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
           <title>Upsum</title>
@@ -32,8 +33,13 @@ export default class extends React.Component {
                 <Link href="/"><p className="title-slogan">The news, summed up</p></Link>
               </div>
               <div className="six columns">
+                  <Search />
+              </div>
+            </div>
+            <div className="row">
+              <div className="twelve columns">
                 <Provider store={this.session}>
-                  <UserMenu />
+                  <User />
                 </Provider>
               </div>
             </div>

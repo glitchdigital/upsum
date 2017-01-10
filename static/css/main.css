@@ -33,11 +33,11 @@ h1.title img {
   margin-right: 5px;
   vertical-align: middle;
 }
-a.title-slogan,
 .title-slogan {
   position: relative;
   top: -20px;
   margin-left: 120px;
+  margin-bottom: 0px;
   background: #444;
   color: #fff;
   display: inline-block;
@@ -63,7 +63,11 @@ footer p {
   color: #888;
   text-decoration: none;
 }
+#search {
+  margin-bottom: 0;
+}
 
+#search .search-input-with-mic,
 #search .search-input {
   position: relative;
   border: none;
@@ -73,37 +77,20 @@ footer p {
   font-size: 18px;
   line-height: 20px;
 }
-
-#search .search-input-with-mic {
-  margin-right: 40px;
-}
-
-
 #search .search-input {
   text-align: right;
   width: 100%;
 }
-
 #search .search-input-with-mic {
-  position: relative;
-  border: none;
-  background-color: #eee;
-  border-radius: 0px;
-  text-align: left;
-  font-size: 18px;
-  line-height: 20px;
   margin-right: 40px;
 }
-
-
 #search .search-input:focus,
 #search .search-input-with-mic:focus {
   background-color: #fff;
 }
-
 #search .fa-microphone {
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 10px;
   background-color: #ddd;
   color: #888;
@@ -118,10 +105,6 @@ footer p {
   color: #fff;
   cursor: pointer;
 }
-#search.recording input {
-  visibility: hidden;
-}
-
 #search.recording .fa-microphone:hover,
 #search.recording .fa-microphone:focus,
 #search.recording .fa-microphone {
@@ -129,25 +112,27 @@ footer p {
   color: #fff;
   cursor: none;
 }
-
-.user-menu { 
-  position: relative;
-  text-align: right;
-  margin-bottom: 30px;
+#search.recording .search-input-with-mic {
+  opacity: 0.5;
 }
-
+.user { 
+  text-align: right;
+  margin-bottom: 10px;
+}
+.search {
+  position: relative;
+  padding-top: 10px;
+  text-align: right;
+}
 @media (min-width: 660px) {
-  .user-menu {
-    padding-top: 40px;
-    margin-bottom: 0px;
+  .search {
+    padding-top: 30px;
   }
-  
   #search .fa-microphone {
     position: absolute;
-    top: 35px;
+    top: 25px;
   }
 }
-
 .question-sidebar {
   background-color: #e5e5e5;
   padding: 5px 10px;
