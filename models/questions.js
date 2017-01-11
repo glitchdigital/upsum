@@ -62,7 +62,7 @@ export default class Questions {
       url += "&limit="+encodeURIComponent(options.limit)
       
     if ("name" in options && options.name !== undefined) {
-      url += "&name="+encodeURIComponent(options.name.replace(/s /gi, " ").replace(/s$/i, ""))
+      url += "&name="+encodeURIComponent(options.name.replace(/^[ ]s( |$)/gi, " ").replace(/s/i, ""))
     }
 
     const res = await fetch(url)

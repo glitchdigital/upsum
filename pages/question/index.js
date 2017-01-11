@@ -37,18 +37,16 @@ export default class extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      question: props.question,
       relatedQuestions: props.relatedQuestions
     }
   }
 
   // This is called on initial page load
   async componentDidMount() {
-    const relatedQuestions = await this.constructor.getRelatedQuestions(this.state.question)
+    const relatedQuestions = await this.constructor.getRelatedQuestions(this.props.question)
     
     // Update state
     this.setState({
-      question: this.state.question,
       relatedQuestions: relatedQuestions
     })
   }
@@ -60,7 +58,6 @@ export default class extends React.Component {
     
     // Update state
     this.setState({
-      question: nextProps.question,
       relatedQuestions: relatedQuestions
     })
   }
@@ -72,8 +69,10 @@ export default class extends React.Component {
 
     const questions = new Questions
 
+    let searchQuery = question.name
+
     // Get questions that have a similar title
-    const relatedQuestions = await questions.search({ limit: 6, name: question.name })
+    const relatedQuestions = await questions.search({ limit: 6, name: searchQuery })
     
     // Don't include the question on this page as a related question
     relatedQuestions.forEach((relatedQuestion, index) => {
@@ -85,7 +84,7 @@ export default class extends React.Component {
   }
    
   render() {
-    if (this.state.question['@id']) {
+    if (this.props.question['@id']) {
       
       let editButton
       if (this.props.session.sessionId) {
@@ -95,44 +94,43 @@ export default class extends React.Component {
       }
       
       let imageTag
-      if (this.state.question.image) {
+      if (this.props.question.image) {
         imageTag = 
           <div>
-            <div className="question-image" style={{backgroundImage: 'url('+this.state.question.image+')'}}></div>
+            <div className="question-image" style={{backgroundImage: 'url('+this.props.question.image+')'}}></div>
           </div>
       }
 
       let answeredOn = <div><h5>This question has not been answered yet!</h5></div>
-      if (this.state.question.acceptedAnswer && this.state.question.acceptedAnswer.text)
+      if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text)
         answeredOn =
           <div>
             <h5>
-                <i className="fa fa-fw fa-clock-o"></i>
-                <TimeAgo date={this.state.question['@dateModified']} />
+                <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} />
             </h5>
           </div>
         
       return (
         <Page>
           <Head>
-            <title>{this.state.question.name}</title>
+            <title>{this.props.question.name}</title>
           </Head>
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">
               <div className="twelve columns">
-                <span itemProp="dateCreated" style={{display: "none"}}>{this.state.question['@dateCreated']}</span>
-                <span itemProp="dateModified" style={{display: "none"}}>{this.state.question['@dateModified']}</span>
-                <h2 itemProp="name"><strong>{this.state.question.name}</strong></h2>
+                <span itemProp="dateCreated" style={{display: "none"}}>{this.props.question['@dateCreated']}</span>
+                <span itemProp="dateModified" style={{display: "none"}}>{this.props.question['@dateModified']}</span>
+                <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
               </div>
             </div>
             <div className="row">
               <div className="eight columns">
                 {imageTag}
-                <ReactMarkdown source={this.state.question.text || ''}/>
+                <ReactMarkdown source={this.props.question.text || ''}/>
                 <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
                 {answeredOn}
                   <div itemProp="text">
-                    <ReactMarkdown source={(this.state.question.acceptedAnswer && this.state.question.acceptedAnswer.text) ? this.state.question.acceptedAnswer.text : "" }/>
+                    <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
                   </div>
                 </div>
                 {editButton}
