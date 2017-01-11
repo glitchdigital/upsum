@@ -12,7 +12,7 @@ export default class extends React.Component {
     const session = Session(req)
 
     let searchQuery = query.q
-    searchQuery = searchQuery.replace(/(^who is|^what is|^why is|^who are|^what are|^why are)/gi, '')
+    searchQuery = searchQuery.replace(/(^who is|^what is|^why is|^who was|^what was|^who will|^what will|^why will|^why will|^who are|^what are|^why are)/gi, '')
     searchQuery = searchQuery.replace(/(^who |^what |^why )/gi, '')
     
     const questions = new Questions
