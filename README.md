@@ -6,29 +6,38 @@ News as Structured Data Q&A
 
 ## Getting started
 
-The website use Node 6.x and the Next.js framework (wich uses React).
+The website use Node 6.x and the Next.js 2.0 framework (which uses React).
 
-It is currently using the Next.js 2.0 Beta, so we don't have to be dependant on a seperate Varnish server to handle routing.
+It uses `forever` to stop/start/restart in production (installed with `npm install forever -g`).
 
 ### Running locally
 
 To run the server locally in development mode, with live reload enabled just install the modules and start it:
 
     npm install
-    npm start
+    npm run dev
     
 The web server will start at http://localhost:3000
 
-In development mode, changes in the code will live reload in the browser.
+In development mode, changes to pages and components will live update in the browser without reloading.
 
 ### Building and deploying the server in production
 
 To install and run the service in production just install the modules, build and start it:
 
     npm install
-    npm run build
-    NODE_ENV=production nohup npm start &
+    npm start
+  
+To stop the service use:
+
+    npm stop
+    
+You can also restart the service:
+
+    npm restart
     
 In production, web server will start at http://localhost:80 (but the PORT argument can be set to override the default port).
 
-In production mode, changes will not live reload and the `npm run build` step will need to be run every time new code is deployed.
+In production mode, changes will not live reload.
+
+Starting and restarting the service will trigger an 'build' step first, which can take a few seconds to complete.

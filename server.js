@@ -3,6 +3,9 @@ const sitemap = require('express-sitemap')
 const next = require('next')
 const fetch = require('isomorphic-fetch')
 
+process.env.NODE_ENV = process.env.NODE_ENV || "production"
+process.env.PORT = process.env.PORT || 80
+
 const app = next({
   dir: '.', 
   dev: (process.env.NODE_ENV == 'production') ? false : true
@@ -34,7 +37,6 @@ app.prepare()
   })
 
   server.get('/sitemap.xml', function(req, res) {
-
     let sitemapOptions = {
       http: 'http',
       url: 'upsum.org',
@@ -79,15 +81,8 @@ app.prepare()
     return handle(req, res)
   })
 
-  // Default port is 3000
-  let port = (process.env.PORT) ? process.env.PORT : 3000
-  
-  // Default port in production is 80 (but can be overridden)
-  if (!process.env.PORT && process.env.NODE_ENV == 'production')
-    port = 80
-  
-  server.listen(port, (err) => {
+  server.listen(process.env.PORT , (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:'+port)
+    console.log('> Ready on http://localhost:'+process.env.PORT+" ["+process.env.NODE_ENV+"]")
   })
 })

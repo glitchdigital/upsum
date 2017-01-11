@@ -1,3 +1,6 @@
 .next/
 node_modules/
 npm-debug.log
+/err.log
+/forever.log
+/out.log

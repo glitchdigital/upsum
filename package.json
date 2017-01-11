@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Upsum",
   "main": "index.js",
   "dependencies": {
@@ -17,10 +17,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js",
+    "dev": "NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
-    "#start": "next start",
-    "start": "node server.js"
+    "start": "next build; forever start -a -l forever.log -o out.log -e err.log server.js",
+    "stop": "forever stop server.js",
+    "restart": "next build; forever restart server.js"
   },
   "author": "",
   "license": ""
