@@ -10,12 +10,11 @@ export default class extends React.Component {
   static async getInitialProps({ req }) {
     const session = Session(req)
     const questions = new Questions
-    const results = await questions.search({ limit: 24 })
+    const results = await questions.search({ limit: 64 })
     return { questions: results }
   }
 
   renderQuestionCard(question, i) {
-    
     let imageTag
     if (question.image) {
       imageTag = 
@@ -27,20 +26,21 @@ export default class extends React.Component {
       <div className="question-card" key={i}>
         <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link></h3>
         {imageTag}
-        <p style={{marginBottom: '10px'}}>Answered <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></p>
+        <p style={{marginBottom: '10px'}}><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></p>
       </div>
     )
   }
   
   render() {
-    // Split questions into seperate lists (with n per list )
-    const numberOfLists = 3
-    const questions = [...this.props.questions]
-    const questionsPerList = questions.length / numberOfLists
-    const questionsAsLists = []
-    while (questions.length > 0) {
-      questionsAsLists.push(questions.splice(0, numberOfLists))
-    }
+    // Split questions into seperate columns
+    const numberOfColumns = 3
+    const questions = []
+    let currentList = 0
+    this.props.questions.forEach((question) => {
+      if (currentList == numberOfColumns) currentList = 0
+      if (!questions[currentList]) questions[currentList] = []
+      questions[currentList++].push(question)
+    })
     
     return (
       <Page>
@@ -50,23 +50,23 @@ export default class extends React.Component {
           </div>
         </div>
         <div className="row question-cards">
-          <div className="four columns question-card-column-1">
+          <div className="columns four first">
             {
-              questionsAsLists[0].map((question, i) => {
+              questions[0].map((question, i) => {
                 return this.renderQuestionCard(question, i)
               })
             }
           </div>
-          <div className="four columns question-card-column-2">
+          <div className="columns four">
             {
-              questionsAsLists[1].map((question, i) => {
+              questions[1].map((question, i) => {
                 return this.renderQuestionCard(question, i)
               })
             }
           </div>
-          <div className="four columns question-card-column-3">
+          <div className="columns four last">
             {
-              questionsAsLists[2].map((question, i) => {
+              questions[2].map((question, i) => {
                 return this.renderQuestionCard(question, i)
               })
             }

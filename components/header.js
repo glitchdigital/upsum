@@ -19,17 +19,37 @@ export default class extends React.Component {
         <Head>
           <link rel="stylesheet" href="/static/css/normalize.css"/>
           <link rel="stylesheet" href="/static/css/skeleton.css"/>
-          <link rel="stylesheet" href="/static/css/main.css?v=1.3.3"/>
+          <link rel="stylesheet" href="/static/css/main.css?v=1.3.4"/>
           <link rel="stylesheet" href="/static/css/font-awesome-animation.min.css"/>
           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+          <style>{`
+            body {
+              margin: 0;
+              font-family: sans-serif;
+              color: #444;
+              background-color: #eee;
+            }
+            @media (min-width: 660px) {  
+              body {
+                background-color: #ddd;
+              }
+              .header .container {
+                padding: 0 20px;
+              }
+              .container {
+                background-color: #eee;
+                padding: 0 20px 20px 20px;
+              }
+            }
+          `}</style>
         </Head>
         <div className="header">
           <div className="container">
             <div className="row">
               <div className="six columns">
-                <Link href="/"><h1 className="title"><img src="/static/images/upsum-logo.png?v=1" alt="Upsum logo"/>Upsum</h1></Link>
+                <Link href="/"><h1 className="title"><img style={{height: '110px', width: '110px'}} src="/static/images/upsum-logo.png?v=1" alt="Upsum logo"/>Upsum</h1></Link>
                 <Link href="/"><p className="title-slogan">The news, summed up</p></Link>
               </div>
               <div className="six columns">

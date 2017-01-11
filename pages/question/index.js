@@ -102,6 +102,16 @@ export default class extends React.Component {
           </div>
       }
 
+      let answeredOn = <div><h5>This question has not been answered yet!</h5></div>
+      if (this.state.question.acceptedAnswer && this.state.question.acceptedAnswer.text)
+        answeredOn =
+          <div>
+            <h5>
+                <i className="fa fa-fw fa-clock-o"></i>
+                <TimeAgo date={this.state.question['@dateModified']} />
+            </h5>
+          </div>
+        
       return (
         <Page>
           <Head>
@@ -120,9 +130,9 @@ export default class extends React.Component {
                 {imageTag}
                 <ReactMarkdown source={this.state.question.text || ''}/>
                 <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
-                  <h5>Answered <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.state.question['@dateModified']} /></h5>
+                {answeredOn}
                   <div itemProp="text">
-                    <ReactMarkdown source={(this.state.question.acceptedAnswer && this.state.question.acceptedAnswer.text) ? this.state.question.acceptedAnswer.text : "This question has not been answered yet!" }/>
+                    <ReactMarkdown source={(this.state.question.acceptedAnswer && this.state.question.acceptedAnswer.text) ? this.state.question.acceptedAnswer.text : "" }/>
                   </div>
                 </div>
                 {editButton}
