@@ -33,7 +33,7 @@ app.prepare()
   })
 
   server.get('/questions', (req, res) => {
-    render(req, res, '/', req.params)
+    res.redirect('/')
   })
 
   server.get('/sitemap.xml', function(req, res) {
