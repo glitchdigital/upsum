@@ -13,6 +13,7 @@ export default class Questions {
   }
 
   async create(question, apiKey) {
+    if (!question.dateCreated) question.dateCreated = Date.now()
     const res = await fetch(this.hostname()+'/Question', {
       method: 'POST',
       headers: {
@@ -26,6 +27,7 @@ export default class Questions {
   }
 
   async update(question, apiKey) {
+    if (!question.dateModified) question.dateModified = Date.now()
     const id = question['@id'].split('/')[4]
     const res = await fetch(this.hostname()+'/Question/'+id, {
       method: 'PUT',
@@ -61,10 +63,9 @@ export default class Questions {
     if ("limit" in options && options.limit !== undefined)
       url += "&limit="+encodeURIComponent(options.limit)
       
-    if ("name" in options && options.name !== undefined) {
-      url += "&name="+encodeURIComponent(options.name.replace(/^[ ]s( |$)/gi, " ").replace(/s/i, ""))
-    }
-
+    if ("name" in options && options.name !== undefined)
+      url += "&name="+encodeURIComponent(options.name)
+    
     const res = await fetch(url)
     const json = await res.json()
     if (json instanceof Array) {

@@ -1,11 +1,12 @@
 import Link from 'next/prefetch'
 import React from 'react'
-import Page from '../../layouts/main'
+import Layout from '../../components/layout'
+import Page from '../../components/page'
 import Questions from '../../models/questions'
 import { Session } from '../../models/session'
 import Textarea from 'react-textarea-autosize'
 
-export default class extends React.Component {
+export default class extends Page {
 
   getInitialProps({ req }) {
     const session = Session(req)
@@ -58,7 +59,7 @@ export default class extends React.Component {
   
   render() {
     return (
-      <Page>
+      <Layout>
         <div className="row">
           <div className="eight columns">
             <h2><i className="fa fa-fw fa-plus"></i> New Question</h2>
@@ -85,7 +86,7 @@ export default class extends React.Component {
             </form>
           </div>
         </div>
-      </Page>
+      </Layout>
     )
   }
   

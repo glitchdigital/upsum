@@ -1,10 +1,11 @@
 import Link from 'next/prefetch'
 import React from 'react'
-import Page from '../layouts/main'
+import Layout from '../components/layout'
+import Page from '../components/page'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
 
-export default class extends React.Component {
+export default class extends Page {
   
   static async getInitialProps({ req }) {
     const session = Session(req)
@@ -49,7 +50,7 @@ export default class extends React.Component {
   render() {
     if (this.props.session.sessionId) {
       return (
-        <Page>
+        <Layout>
           <div className="row">
             <div className="twelve columns">
               <p style={{textAlign: 'center', padding: '50px 0 25px 0'}}>You are signed in as <strong>{this.props.session.name}</strong></p>
@@ -58,11 +59,11 @@ export default class extends React.Component {
               </p>
             </div>
           </div>
-        </Page>
+        </Layout>
       )
     } else {
       return (
-        <Page>
+        <Layout>
           <div className="row">
             <div className="two columns">&nbsp;</div>
             <div className="eight columns">
@@ -81,7 +82,7 @@ export default class extends React.Component {
             </div>
             <div className="two columns">&nbsp;</div>
           </div>
-        </Page>
+        </Layout>
       )
     }
   }

@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/prefetch'
 import React from 'react'
-import Page from '../../layouts/main'
+import Layout from '../../components/layout'
+import Page from '../../components/page'
 import Questions from '../../models/questions'
 import { Session } from '../../models/session'
 import ReactMarkdown from 'react-markdown'
 import TimeAgo from 'react-timeago'
 
-export default class extends React.Component {
+export default class extends Page {
   
   static async getInitialProps({ req, query }) {
     const session = Session(req)
@@ -94,38 +95,52 @@ export default class extends React.Component {
       }
       
       let imageTag
-      if (this.props.question.image) {
+      if (this.props.question.image && this.props.question.image.url) {
         imageTag = 
           <div>
-            <div className="question-image" style={{backgroundImage: 'url('+this.props.question.image+')'}}></div>
+            <div className="question-image" style={{backgroundImage: 'url('+this.props.question.image.url+')'}}></div>
+            <div className="question-image-text">
+              <p>{this.props.question.image.caption}</p>
+              <p className="muted"><i>Image Credit: {this.props.question.image.publisher.name}</i></p>
+            </div>
           </div>
       }
 
-      let answeredOn = <div><h5>This question has not been answered yet!</h5></div>
+      let videoTag
+      if (this.props.question.video && this.props.question.video.url) {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = this.props.question.video.url.match(regExp)
+        if (match && match[2].length == 11) {
+          const videoEmbedUrl = "//www.youtube.com/embed/"+match[2]
+          videoTag =
+            <div className="question-video">
+              <iframe width="100%" height="400" src={videoEmbedUrl} frameborder="0" allowfullscreen></iframe>
+            </div>
+        }
+      }
+      
+      let answeredOn = <div><h4>This question has not been answered yet!</h4></div>
       if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text)
         answeredOn =
           <div>
-            <h5>
+            <p className="muted">
                 <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} />
-            </h5>
+            </p>
           </div>
         
       return (
-        <Page>
+        <Layout>
           <Head>
             <title>{this.props.question.name}</title>
           </Head>
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">
-              <div className="twelve columns">
+              <div className="eight columns">
+                <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
                 <span itemProp="dateCreated" style={{display: "none"}}>{this.props.question['@dateCreated']}</span>
                 <span itemProp="dateModified" style={{display: "none"}}>{this.props.question['@dateModified']}</span>
-                <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
-              </div>
-            </div>
-            <div className="row">
-              <div className="eight columns">
                 {imageTag}
+                {videoTag}
                 <ReactMarkdown source={this.props.question.text || ''}/>
                 <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
                 {answeredOn}
@@ -137,13 +152,11 @@ export default class extends React.Component {
               </div>
               <div className="four columns">
                 <div className="question-sidebar">
-                  <h4>More Questions</h4>
-                  {
+                {
                     this.state.relatedQuestions.map((question, i) => (
-                      <div key={i}>
-                        <p>
-                          <Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link>
-                          <br/>
+                      <div key={i} className="question-card" onClick={ () => this.props.url.push("/question?id="+question['@id'].split('/')[4], "/questions/"+question['@id'].split('/')[4]) }>
+                        <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link></h3>
+                        <p style={{marginBottom: '0px'}}>
                           <span className="muted"><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></span>
                         </p>
                       </div>
@@ -158,18 +171,15 @@ export default class extends React.Component {
               <p className="muted" style={{fontSize: '15px', marginBottom: '5px'}}>
                 <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
               </p>
-              <p className="muted" style={{fontSize: '15px'}}>
-                <i>Images via <a href="http://flickr.com">flickr.com</a> and marked suitable for both non-commercial and commercial re-use (note: image credits are currently missing).</i>
-              </p>
             </div>
           </div>
-        </Page>
+        </Layout>
       )
     } else { 
       return (
-        <Page>
+        <Layout>
           <h4>{"Couldn't find the question you were looking for."}</h4>
-        </Page>
+        </Layout>
       )
     }
   }

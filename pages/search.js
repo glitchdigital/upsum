@@ -1,12 +1,14 @@
 import Link from 'next/prefetch'
 import React from 'react'
-import Page from '../layouts/main'
+import MediaQuery from 'react-responsive'
+import Layout from '../components/layout'
 import Questions from '../models/questions'
+import Page from '../components/page'
 import { Session } from '../models/session'
 import TimeAgo from 'react-timeago'
 import ReactMarkdown from 'react-markdown'
 
-export default class extends React.Component {
+export default class extends Page {
   
   static async getInitialProps({ req, query }) {
     const session = Session(req)
@@ -22,14 +24,14 @@ export default class extends React.Component {
 
   renderQuestionCard(question, i) {
     let imageTag
-    if (question.image) {
+    if (question.image && question.image.url) {
       imageTag = 
         <Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>
-          <div className="question-card-image" style={{backgroundImage: 'url('+question.image+')'}}></div>
+          <div className="question-card-image" style={{backgroundImage: 'url('+question.image.url+')'}}></div>
         </Link>
     }
     return(
-      <div className="question-card" key={i}>
+      <div className="question-card" key={i} onClick={ () => this.props.url.push("/question?id="+question['@id'].split('/')[4], "/questions/"+question['@id'].split('/')[4]) }>
         <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link></h3>
         {imageTag}
         <p style={{marginBottom: '10px'}}><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></p>
@@ -51,36 +53,49 @@ export default class extends React.Component {
     })
 
     return (
-      <Page>
+      <Layout>
         <div className="row">
           <div className="twelve columns">
             <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
           </div>
         </div>
-        <div className="row question-cards">
-          <div className="columns four first">
-            {
-              questions[0].map((question, i) => {
-                return this.renderQuestionCard(question, i)
-              })
-            }
+        <MediaQuery maxWidth={659}>
+          <div className="row question-cards">
+            <div className="columns twelve">
+              {
+                this.props.questions.map((question, i) => {
+                  return this.renderQuestionCard(question, i)
+                })
+              }
+            </div>
           </div>
-          <div className="columns four">
-            {
-              questions[1].map((question, i) => {
-                return this.renderQuestionCard(question, i)
-              })
-            }
+        </MediaQuery>
+        <MediaQuery minWidth={660} values={{width: 660}}>
+          <div className="row question-cards">
+            <div className="columns four first">
+              {
+                questions[0].map((question, i) => {
+                  return this.renderQuestionCard(question, i)
+                })
+              }
+            </div>
+            <div className="columns four">
+              {
+                questions[1].map((question, i) => {
+                  return this.renderQuestionCard(question, i)
+                })
+              }
+            </div>
+            <div className="columns four last">
+              {
+                questions[2].map((question, i) => {
+                  return this.renderQuestionCard(question, i)
+                })
+              }
+            </div>
           </div>
-          <div className="columns four last">
-            {
-              questions[2].map((question, i) => {
-                return this.renderQuestionCard(question, i)
-              })
-            }
-          </div>
-        </div>
-      </Page>
+        </MediaQuery>
+      </Layout>
     )
   }
   

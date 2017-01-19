@@ -1,5 +1,5 @@
 import React from 'react'
-import Page from '../layouts/main'
+import Layout from '../components/layout'
 import { Session } from '../models/session'
 
 export default class Error extends React.Component {
@@ -16,29 +16,29 @@ export default class Error extends React.Component {
       case 200: // Also display a 404 if someone explicitly requests /_error
       case 404:
         response = (
-          <Page>
+          <Layout>
             <h3>Page Not Found</h3>
             <p>The page <strong>{ this.props.url.pathname }</strong> does not exist.</p>
-          </Page>
+          </Layout>
         )
         break
       case 500:
         response = (
-          <Page>
+          <Layout>
             <h3>Internal Server Error</h3>
             <p>An internal server error occurred.</p>
-          </Page>
+          </Layout>
         )
         break
       default:
         response = (
-          <Page>
+          <Layout>
             <h3>HTTP { this.props.errorCode } Error</h3>
             <p>
               An <strong>HTTP { this.props.errorCode }</strong> error occurred while
               trying to access <strong>{ this.props.url.pathname }</strong>
             </p>
-          </Page>
+          </Layout>
         )
     }
     return response
