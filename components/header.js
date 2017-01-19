@@ -19,7 +19,7 @@ export default class extends React.Component {
         <Head>
           <link rel="stylesheet" href="/static/css/normalize.css"/>
           <link rel="stylesheet" href="/static/css/skeleton.css"/>
-          <link rel="stylesheet" href="/static/css/main.css?v=1.3.5"/>
+          <link rel="stylesheet" href="/static/css/main.css?v=1.3.8"/>
           <link rel="stylesheet" href="/static/css/font-awesome-animation.min.css"/>
           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
           <title>Upsum</title>
