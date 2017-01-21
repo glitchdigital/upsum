@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Upsum",
   "main": "index.js",
   "dependencies": {
@@ -21,6 +21,7 @@
     "dev": "NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
     "start": "node server.js",
+    "deploy": "npm build; eb deploy",
     "forever-start": "next build; forever start -a -l forever.log -o out.log -e err.log server.js",
     "forever-stop": "forever stop server.js",
     "forever-restart": "next build; forever restart server.js"

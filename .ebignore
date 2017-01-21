@@ -1,4 +1,7 @@
+node_modules/*
 .git/
 .gitignore
 *.log
-.elasticbeanstalk/
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
