@@ -4,3 +4,8 @@ npm-debug.log
 /err.log
 /forever.log
 /out.log
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
