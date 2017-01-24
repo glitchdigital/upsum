@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
@@ -20,8 +20,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development PORT=3000 node server.js",
-    "build": "next build; node -e \"process.stdout.write(require('./package.json').version)\" > .next/BUILD_ID",
-    "start": "node server.js",
+    "build": "next build",
+    "start": "next build; node -e \"process.stdout.write(require('./package.json').version)\" > .next/BUILD_ID; node server.js",
     "forever-start": "next build; forever start -a -l forever.log -o out.log -e err.log server.js",
     "forever-stop": "forever stop server.js",
     "forever-restart": "next build; forever restart server.js"
