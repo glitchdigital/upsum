@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 export default class Questions {
 
   hostname() {
-    return '//api.upsum.glitched.news'
+    return 'http://api.upsum.glitched.news'
   }
   
   async get(id) {
