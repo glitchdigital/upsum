@@ -29,6 +29,16 @@ export default class extends React.Component {
               color: #444;
               background-color: #eee;
             }
+            .logo {
+              text-align: center;
+            }
+            .logo img {
+              margin-top: 20px;
+              margin-bottom: 10px;
+              height: auto;
+              width: 90%;
+              border: 0;
+            }
             @media (min-width: 660px) {
               body {
                 background-color: #e5e5e5;
@@ -40,6 +50,13 @@ export default class extends React.Component {
                 background-color: #eee;
                 padding: 10px 30px 30px 30px;
               }
+              .logo {
+                text-align: left;
+              }
+              .logo img {
+                height: 124px;
+                width: 350px;
+              }
             }
           `}</style>
         </Head>
@@ -50,7 +67,9 @@ export default class extends React.Component {
           <div className="container">
             <div className="row">
               <div className="six columns">
-                <Link href="/"><a href="/"><img style={{marginTop: '20px', marginBottom: '10px', height: '116px', width: '330px', border: '0'}} src="/static/images/upsum-logo.png" alt="Upsum - The news, summed up"/></a></Link>
+                <div className="logo">
+                  <Link href="/"><a href="/"><img src="/static/images/upsum-logo-2017-02-01.png" alt="Upsum - The news, summed up"/></a></Link>
+                </div>
               </div>
               <div className="six columns">
                   <Search />
