@@ -3,13 +3,33 @@ import fetch from 'isomorphic-fetch'
 export default class Questions {
 
   hostname() {
+    return 'http://localhost:3001'
     return 'http://api.upsum.glitched.news'
   }
   
   async get(id) {
     const res = await fetch(this.hostname()+'/Question/'+id)
-    const json = await res.json()
-    return json
+    const question = await res.json()
+
+    // If not all properties are specified on an question,
+    // add blank default values to make working with them easier
+    if (!question['acceptedAnswer'])
+      question['acceptedAnswer'] = { name: '', description: '' }
+    
+    if (!question['image'])
+      question['image'] = {}
+    
+    if (!question['image'].publisher)
+      question['image'].publisher = {}
+
+    if (!question['video'])
+      question['video'] = {}
+    
+    if (!question['video'].publisher)
+      question['video'].publisher = {}
+
+    // @FIXME Check res to see if successful
+    return question
   }
 
   async create(question, apiKey) {
@@ -22,8 +42,8 @@ export default class Questions {
       },
       body: JSON.stringify(question)
     })
-    const json = await res.json()
-    return json
+    // @FIXME Check res to see if successful
+    return await res.json()
   }
 
   async update(question, apiKey) {
@@ -37,7 +57,8 @@ export default class Questions {
       },
       body: JSON.stringify(question)
     })
-    return res
+    // @FIXME Check res to see if successful
+    return await this.get(id)
   }
 
   async delete(id, apiKey) {
@@ -48,7 +69,8 @@ export default class Questions {
         'x-api-key': apiKey
       }
     })
-    return res
+    // @FIXME Check res to see if successful
+    return true
   }
 
   async search(options) {
@@ -67,9 +89,9 @@ export default class Questions {
       url += "&name="+encodeURIComponent(options.name)
     
     const res = await fetch(url)
-    const json = await res.json()
-    if (json instanceof Array) {
-      return json
+    const questions = await res.json()
+    if (questions instanceof Array) {
+      return questions
     } else {
       // @FIXME Something bad happened
       return []

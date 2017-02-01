@@ -39,7 +39,7 @@ export default class extends Page {
             <div className="columns twelve">
               {
                 this.props.questions.map((question, i) => {
-                  return <QuestionCard question={question} url={this.props.url} key={i}/>
+                  return <QuestionCard question={question} key={i}/>
                 })
               }
             </div>
@@ -50,21 +50,21 @@ export default class extends Page {
             <div className="columns four first">
               {
                 questions[0].map((question, i) => {
-                  return <QuestionCard question={question} url={this.props.url} key={i}/>
+                  return <QuestionCard question={question} key={i}/>
                 })
               }
             </div>
             <div className="columns four">
               {
                 questions[1].map((question, i) => {
-                  return <QuestionCard question={question} url={this.props.url} key={i}/>
+                  return <QuestionCard question={question} key={i}/>
                 })
               }
             </div>
             <div className="columns four last">
               {
                 questions[2].map((question, i) => {
-                  return <QuestionCard question={question} url={this.props.url} key={i}/>
+                  return <QuestionCard question={question} key={i}/>
                 })
               }
             </div>

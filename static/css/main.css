@@ -1,3 +1,6 @@
+form {
+  margin: 0;
+}
 hr {
   height: 0;
   border: 0;
@@ -113,9 +116,16 @@ footer p {
   background: transparent;
   opacity: 0.5;
 }
-.user { 
+.menubar { 
   text-align: right;
-  margin-bottom: 10px;
+  margin: 0;
+  background-color: #444;
+  color: #fff;
+  padding: 5px 20px;
+}
+.menubar .container {
+  background: transparent;
+  padding: 0;
 }
 .search {
   position: relative;
@@ -128,22 +138,18 @@ footer p {
     margin-right: 30px;
   }
 }
-.question-sidebar {
-  padding-top: 20px;
-}
 .question-card {
   background: #fff;
   padding: 10px 15px;
   margin-bottom: 25px;
-  box-shadow: 0 2px 2px rgba(0,0,0,.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
   cursor: pointer;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius:  20px;
+  border-radius: 5px 30px 5px 30px;
 }
 @media (min-width: 660px) {
   .question-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,.2);
-    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(0,0,0,.2);
+    transform: scale(1.05);
     transition-duration: 0.1s;
   }
 }
@@ -231,12 +237,15 @@ footer p {
   }
   
 }
+.buttons {
+  text-align: right;
+  margin-bottom: 0px;
+}
 .buttons .button,
 .buttons .button-primary-button,
 .buttons button {
   margin-right: 10px;
 }
-
 .buttons .button:last-child,
 .buttons .button-primary-button:last-child,
 .buttons button:last-child {
@@ -264,16 +273,91 @@ footer p {
   text-align: right;
   padding-top: 6px;
 }
-.date-label {
-  background-color: #555;
+.question-card .date-label {
+  background-color: #25D5FD;
   color: #fff;
-  padding: 2px 6px 2px 40px;
+  padding: 2px 16px 2px 20px;
   margin: 0;
-  margin-left: -15px;
+  margin-left: -25px;
   margin-bottom: 5px;
   display: inline-block;
   font-size: 18px;
   line-height: 30px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius:  2px;
+  position: relative;
+  z-index: 1;
+  height: 30px;
+  border-radius: 0 2px 2px 0;
 }
+.question-card .date-label:before {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  border-style: solid;
+  border-color: transparent transparent #1DB3DA transparent;
+  top: -15px;
+  left: 0px;
+  border-width: 0 0 15px 10px;
+  z-index: -1;
+}
+/*
+.question-card .date-label:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: -15px;
+  display: inline-block;
+  background: transparent;
+  border-top: 17px solid #25D5FD;
+  border-bottom: 17px solid #25D5FD;
+  border-right: 15px solid transparent;
+  width: 5px;
+  height: 0px;
+}
+*/
+.question {
+  background: #fff;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.2);
+  border-radius: 5px 30px 5px 30px;
+}
+.question .date-label {
+  background-color: #25D5FD;
+  color: #fff;
+  position: relative;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 2px 16px 2px 25px;
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  margin-left: -25px;
+  z-index: 1;
+  border-radius: 0 2px 2px 0;
+}
+.question .date-label:before {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  border-style: solid;
+  border-color: transparent transparent #1DB3DA transparent;
+  top: -15px;
+  left: 0px;
+  border-width: 0 0 15px 10px;
+  z-index: -1;
+}
+/*
+.question .date-label:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: -15px;
+  display: inline-block;
+  background: transparent;
+  border-top: 17px solid #25D5FD;
+  border-bottom: 17px solid #25D5FD;
+  border-right: 15px solid transparent;
+  width: 5px;
+  height: 0px;
+}
+*/

@@ -3,7 +3,7 @@ import Link from 'next/prefetch'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Session } from '../models/session'
-import User from '../components/user'
+import MenuBar from '../components/menubar'
 import Search from '../components/search'
 
 export default class extends React.Component {
@@ -40,11 +40,14 @@ export default class extends React.Component {
               }
               .container {
                 background-color: #eee;
-                padding: 0 30px 30px 30px;
+                padding: 10px 30px 30px 30px;
               }
             }
           `}</style>
         </Head>
+        <Provider store={this.session}>
+          <MenuBar />
+        </Provider>
         <div className="header">
           <div className="container">
             <div className="row">
@@ -53,13 +56,6 @@ export default class extends React.Component {
               </div>
               <div className="six columns">
                   <Search />
-              </div>
-            </div>
-            <div className="row">
-              <div className="twelve columns">
-                <Provider store={this.session}>
-                  <User />
-                </Provider>
               </div>
             </div>
           </div>

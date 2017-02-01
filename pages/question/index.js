@@ -17,9 +17,7 @@ export default class extends Page {
     
     // Get question
     const question = await questions.get(query.id)
-    if (!question['acceptedAnswer'])
-      question['acceptedAnswer'] = { name: '', description: '' };
-
+    
     // When running on the server we get related questions in getInitialProps() 
     // When running in the browser we can fetch them after the page load in
     // componentDidMount() to improve page rendering time.
@@ -90,7 +88,7 @@ export default class extends Page {
       
       let editButton
       if (this.props.session.sessionId) {
-        editButton = <p style={{textAlign: "right"}}><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a href={"/question/edit?id="+this.props.id} className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link></p>
+        editButton = <p className="buttons"><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a href={"/question/edit?id="+this.props.id} className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link></p>
       } else {
         editButton = <span/>
       }
@@ -128,8 +126,8 @@ export default class extends Page {
       if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text)
         answeredOn =
           <div>
-            <p className="muted">
-                <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} />
+            <p className="date-label">
+              <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} />
             </p>
           </div>
         
@@ -141,25 +139,27 @@ export default class extends Page {
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">
               <div className="eight columns">
-                <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
-                <span itemProp="dateCreated" style={{display: "none"}}>{this.props.question['@dateCreated']}</span>
-                <span itemProp="dateModified" style={{display: "none"}}>{this.props.question['@dateModified']}</span>
-                {imageTag}
-                {videoTag}
-                <ReactMarkdown source={this.props.question.text || ''}/>
-                <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
-                {answeredOn}
-                  <div itemProp="text">
-                    <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+                <div className="question">
+                  <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
+                  <span itemProp="dateCreated" style={{display: "none"}}>{this.props.question['@dateCreated']}</span>
+                  <span itemProp="dateModified" style={{display: "none"}}>{this.props.question['@dateModified']}</span>
+                  {imageTag}
+                  {videoTag}
+                  <ReactMarkdown source={this.props.question.text || ''}/>
+                  <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
+                  {answeredOn}
+                    <div itemProp="text">
+                      <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+                    </div>
                   </div>
+                  {editButton}
                 </div>
-                {editButton}
               </div>
               <div className="four columns">
                 <div className="question-sidebar">
                 {
                   this.state.relatedQuestions.map((question, i) => {
-                    return <QuestionCard question={question} url={this.props.url} key={i}/>
+                    return <QuestionCard question={question} key={i}/>
                   })
                 }
                 </div>
