@@ -20,7 +20,7 @@ app.prepare()
   const server = express()
 
   // Use connect asserts to serve minified, versioned, CSS built from less
-  var assetsPath = "assets/"+Package.version
+  const assetsPath = "assets/"+Package.version
   server.use(function(req, res, next) {
     if (req.url.match(/^\/assets\//))
       req.url = req.url.replace(/^\/assets\/(.*?)\//, '/'+assetsPath+'/')
