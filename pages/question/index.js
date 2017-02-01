@@ -130,7 +130,18 @@ export default class extends Page {
               <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} />
             </p>
           </div>
-        
+
+      
+      let citation
+      if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.citation)
+        citation = 
+          <div>
+             <h5>Source(s)</h5>
+            <div className="muted">
+              <ReactMarkdown source={this.props.question.acceptedAnswer.citation}/>
+           </div>
+          </div>
+
       return (
         <Layout>
           <Head>
@@ -152,6 +163,7 @@ export default class extends Page {
                       <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
                     </div>
                   </div>
+                  {citation}
                   {editButton}
                 </div>
               </div>

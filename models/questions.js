@@ -13,7 +13,7 @@ export default class Questions {
     // If not all properties are specified on an question,
     // add blank default values to make working with them easier
     if (!question['acceptedAnswer'])
-      question['acceptedAnswer'] = { name: '', description: '' }
+      question['acceptedAnswer'] = { name: '', description: '', citation: '' }
     
     if (!question['image'])
       question['image'] = {}

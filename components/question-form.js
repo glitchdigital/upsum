@@ -59,6 +59,9 @@ export default class extends React.Component {
     if (event.target.name == "answerDetail")
       this.state.question.acceptedAnswer.text = event.target.value
 
+    if (event.target.name == "answerCitation")
+      this.state.question.acceptedAnswer.citation = event.target.value
+
     this.setState(this.state.question)
   }
 
@@ -174,6 +177,9 @@ export default class extends React.Component {
         */}
         <label htmlFor="answerDetail">The answer to the question</label>
         <Textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question." id="answerDetail" value={this.state.question.acceptedAnswer.text}></Textarea>
+        <label htmlFor="answerCitation">Source (Optional)</label>
+        <Textarea name="answerCitation" className="u-full-width" placeholder="The source(s) being cited" id="answerCitation" value={this.state.question.acceptedAnswer.citation}></Textarea>
+
         <div className="u-cf u-full-width">
           {deleteButton}
           <p className="buttons u-pull-right">

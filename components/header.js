@@ -28,6 +28,8 @@ export default class extends React.Component {
               font-family: sans-serif;
               color: #444;
               background-color: #eee;
+              font-size: 18px;
+              line-height: 28px;
             }
             .logo {
               text-align: center;

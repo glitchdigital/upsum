@@ -22,6 +22,11 @@ export default class extends Page {
     const questions = []
     let currentList = 0
     this.props.questions.forEach((question) => {
+
+      // Skip questions without answers
+      //if (!question.acceptedAnswer || !question.acceptedAnswer.text)
+      //  return
+      
       if (currentList == numberOfColumns) currentList = 0
       if (!questions[currentList]) questions[currentList] = []
       questions[currentList++].push(question)

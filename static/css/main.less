@@ -2,6 +2,9 @@
 @import "normalize.less";
 @import "skeleton.less";
 
+@primaryColor: #25D5FD;
+@primaryColorDarker: darken(@primaryColor, 20%);
+
 form {
   margin: 0;
 }
@@ -46,6 +49,7 @@ p {
   font-size: 18px;
   line-height: 28px;
 }
+.muted p,
 p.muted {
   color: #888;
 }
@@ -146,15 +150,16 @@ footer p {
   }
 }
 .question-card {
-  background: #fff;
+  background: #f9f9f9;
   padding: 10px 15px;
   margin-bottom: 25px;
-  box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+  box-shadow: 0px 3px 0px rgba(0,0,0,.1);
   cursor: pointer;
   border-radius: 5px 30px 5px 30px;
 }
 @media (min-width: 660px) {
   .question-card:hover {
+    background: #fff;
     box-shadow: 0 5px 0px rgba(0,0,0,.2);
     transform: scale(1.025);
     transition-duration: 0.1s;
@@ -165,7 +170,13 @@ footer p {
   font-size: 22px;
   line-height: 28px;
   font-weight: 600;
-  color: #444;
+  color: #555;
+}
+@media (min-width: 660px) {
+  .question-card:hover h3,
+  .question-card:hover h3 a {
+    color: #444;
+  }
 }
 .question-card-image {
   background-color: #e5e5e5;
@@ -281,7 +292,7 @@ footer p {
   padding-top: 6px;
 }
 .question-card .date-label {
-  background-color: #25D5FD;
+  background-color: @primaryColor;
   color: #fff;
   padding: 2px 16px 2px 20px;
   margin: 0;
@@ -300,7 +311,7 @@ footer p {
   font-size: 0.5em;
   position: absolute;
   border-style: solid;
-  border-color: transparent transparent #1DB3DA transparent;
+  border-color: transparent transparent @primaryColorDarker transparent;
   top: -15px;
   left: 0px;
   border-width: 0 0 15px 10px;
@@ -325,16 +336,16 @@ footer p {
   background: #fff;
   padding: 10px 15px;
   margin-bottom: 25px;
-  box-shadow: 0px 3px 0px rgba(0,0,0,.2);
+  box-shadow: 0 5px 0px rgba(0,0,0,.2);
   border-radius: 5px 30px 5px 30px;
 }
 .question .date-label {
-  background-color: #25D5FD;
+  background-color: @primaryColor;
   color: #fff;
   position: relative;
   font-size: 18px;
   line-height: 30px;
-  padding: 2px 16px 2px 25px;
+  padding: 2px 16px 2px 20px;
   display: inline-block;
   height: 30px;
   position: relative;
@@ -347,7 +358,7 @@ footer p {
   font-size: 0.5em;
   position: absolute;
   border-style: solid;
-  border-color: transparent transparent #1DB3DA transparent;
+  border-color: transparent transparent @primaryColorDarker transparent;
   top: -15px;
   left: 0px;
   border-width: 0 0 15px 10px;

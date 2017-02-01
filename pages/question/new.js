@@ -13,14 +13,15 @@ export default class extends Page {
       text: '',
       acceptedAnswer: {
         name: '',
-        text: ''
+        text: '',
+        citation: ''
       },
       image: {
         publisher: {}
       },
       video: {
         publisher: {}
-      }
+      },
     }
     return (
       <Layout>
