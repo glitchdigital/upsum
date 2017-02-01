@@ -74,7 +74,7 @@ export default class extends Page {
                 <label htmlFor="apiKey">Your API Key</label>
                 <input name="apiKey" className="u-full-width" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" id="apiKey" />
                 <p className="u-pull-right">
-                  <Link href="/"><span className="button">Cancel</span></Link>
+                  <Link href="/"><a href="/" className="button">Cancel</a></Link>
                   &nbsp;
                   <button type="submit" className="button-primary ">Sign in</button>
                 </p>

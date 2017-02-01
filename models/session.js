@@ -20,12 +20,14 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import cookie from 'react-cookie'
 
-export const reducer = (session = { 
-    name: '',
-    email: '',
-    sessionId: '',
-    admin: false 
-  }, action) => {
+const sessionModel = {
+  name: '',
+  email: '',
+  sessionId: '',
+  admin: false 
+}
+
+export const reducer = (session = sessionModel, action) => {
   switch (action.type) {
     case 'LOGIN':
       var expiryDate = new Date();
@@ -34,7 +36,8 @@ export const reducer = (session = {
       return action.session
     case 'LOGOUT':
       cookie.remove('session', { path: '/' })
-      return null
+      session = sessionModel
+      return session
     default:
       return session
   }

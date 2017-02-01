@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/prefetch'
 import React from 'react'
-import Layout from '../../components/layout'
-import Page from '../../components/page'
-import Questions from '../../models/questions'
-import { Session } from '../../models/session'
 import ReactMarkdown from 'react-markdown'
 import TimeAgo from 'react-timeago'
+import Questions from '../../models/questions'
+import { Session } from '../../models/session'
+import Layout from '../../components/layout'
+import Page from '../../components/page'
+import QuestionCard from '../../components/question-card'
 
 export default class extends Page {
   
@@ -89,12 +90,13 @@ export default class extends Page {
       
       let editButton
       if (this.props.session.sessionId) {
-        editButton = <p style={{textAlign: "right"}}><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><span className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</span></Link></p>
+        editButton = <p style={{textAlign: "right"}}><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a href={"/question/edit?id="+this.props.id} className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link></p>
       } else {
         editButton = <span/>
       }
       
       let imageTag
+      /*
       if (this.props.question.image && this.props.question.image.url) {
         imageTag = 
           <div>
@@ -105,18 +107,21 @@ export default class extends Page {
             </div>
           </div>
       }
+      */
 
       let videoTag
       if (this.props.question.video && this.props.question.video.url) {
-        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+        /*
         var match = this.props.question.video.url.match(regExp)
         if (match && match[2].length == 11) {
           const videoEmbedUrl = "//www.youtube.com/embed/"+match[2]
           videoTag =
             <div className="question-video">
-              <iframe width="100%" height="400" src={videoEmbedUrl} frameborder="0" allowfullscreen></iframe>
+              <iframe width="100%" height="400" src={videoEmbedUrl} frameBorder="0" allowFullScreen></iframe>
             </div>
         }
+        */
       }
       
       let answeredOn = <div><h4>This question has not been answered yet!</h4></div>
@@ -153,15 +158,10 @@ export default class extends Page {
               <div className="four columns">
                 <div className="question-sidebar">
                 {
-                    this.state.relatedQuestions.map((question, i) => (
-                      <div key={i} className="question-card" onClick={ () => this.props.url.push("/question?id="+question['@id'].split('/')[4], "/questions/"+question['@id'].split('/')[4]) }>
-                        <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link></h3>
-                        <p style={{marginBottom: '0px'}}>
-                          <span className="muted"><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></span>
-                        </p>
-                      </div>
-                    ))
-                  }
+                  this.state.relatedQuestions.map((question, i) => {
+                    return <QuestionCard question={question} url={this.props.url} key={i}/>
+                  })
+                }
                 </div>
               </div>
             </div>

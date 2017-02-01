@@ -1,12 +1,11 @@
 import Link from 'next/prefetch'
 import React from 'react'
 import MediaQuery from 'react-responsive'
-import Layout from '../components/layout'
 import Questions from '../models/questions'
-import Page from '../components/page'
 import { Session } from '../models/session'
-import TimeAgo from 'react-timeago'
-import ReactMarkdown from 'react-markdown'
+import Layout from '../components/layout'
+import Page from '../components/page'
+import QuestionCard from '../components/question-card'
 
 export default class extends Page {
   
@@ -20,23 +19,6 @@ export default class extends Page {
     const questions = new Questions
     const results = await questions.search({ limit: 25, name: searchQuery })
     return { questions: results, query: query.q }
-  }
-
-  renderQuestionCard(question, i) {
-    let imageTag
-    if (question.image && question.image.url) {
-      imageTag = 
-        <Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>
-          <div className="question-card-image" style={{backgroundImage: 'url('+question.image.url+')'}}></div>
-        </Link>
-    }
-    return(
-      <div className="question-card" key={i} onClick={ () => this.props.url.push("/question?id="+question['@id'].split('/')[4], "/questions/"+question['@id'].split('/')[4]) }>
-        <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>{question.name}</Link></h3>
-        {imageTag}
-        <p style={{marginBottom: '10px'}}><i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} /></p>
-      </div>
-    )
   }
   
   render() {
@@ -64,7 +46,7 @@ export default class extends Page {
             <div className="columns twelve">
               {
                 this.props.questions.map((question, i) => {
-                  return this.renderQuestionCard(question, i)
+                  return <QuestionCard question={question} url={this.props.url} key={i}/>
                 })
               }
             </div>
@@ -75,21 +57,21 @@ export default class extends Page {
             <div className="columns four first">
               {
                 questions[0].map((question, i) => {
-                  return this.renderQuestionCard(question, i)
+                  return <QuestionCard question={question} url={this.props.url} key={i}/>
                 })
               }
             </div>
             <div className="columns four">
               {
                 questions[1].map((question, i) => {
-                  return this.renderQuestionCard(question, i)
+                  return <QuestionCard question={question} url={this.props.url} key={i}/>
                 })
               }
             </div>
             <div className="columns four last">
               {
                 questions[2].map((question, i) => {
-                  return this.renderQuestionCard(question, i)
+                  return <QuestionCard question={question} url={this.props.url} key={i}/>
                 })
               }
             </div>
