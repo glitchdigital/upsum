@@ -19,7 +19,6 @@ export default class extends React.Component {
     return (
       <header>
         <Head>
-          <link rel="stylesheet" href={"/assets/"+Package.version+"/main.css"}/>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           <style dangerouslySetInnerHTML={{__html: stylesheet}}/>

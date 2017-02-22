@@ -1,13 +1,13 @@
 {
   "name": "upsum",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
   "dependencies": {
     "express": "^4.14.0",
     "express-sitemap": "^1.7.0",
-    "next": "^2.0.0-beta.23",
+    "next": "^2.0.0-beta.32",
     "node-sass": "^4.5.0",
     "raw-loader": "^0.5.1",
     "react": "^15.4.2",
@@ -26,7 +26,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development PORT=3000 node index.js",
     "build": "next build",
-    "start": "next build; node -e \"process.stdout.write(require('./package.json').version)\" > .next/BUILD_ID; node index.js",
+    "start": "node index.js",
     "forever-start": "next build; forever start -a -l forever.log -o out.log -e err.log index.js",
     "forever-stop": "forever stop index.js",
     "forever-restart": "next build; forever restart index.js"

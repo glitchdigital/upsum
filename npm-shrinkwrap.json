@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
@@ -1961,9 +1961,16 @@
       "resolved": "https://registry.npmjs.org/htmlescape/-/htmlescape-1.1.1.tgz"
     },
     "http-errors": {
-      "version": "1.5.1",
-      "from": "http-errors@>=1.5.1 <1.6.0",
-      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-1.5.1.tgz"
+      "version": "1.4.0",
+      "from": "http-errors@>=1.4.0 <1.5.0",
+      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-1.4.0.tgz",
+      "dependencies": {
+        "inherits": {
+          "version": "2.0.1",
+          "from": "inherits@2.0.1",
+          "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
+        }
+      }
     },
     "http-signature": {
       "version": "1.1.1",
@@ -2523,6 +2530,11 @@
       "from": "next@>=2.0.0-beta.23 <3.0.0",
       "resolved": "https://registry.npmjs.org/next/-/next-2.0.0-beta.32.tgz",
       "dependencies": {
+        "http-errors": {
+          "version": "1.5.1",
+          "from": "http-errors@>=1.5.0 <1.6.0",
+          "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-1.5.1.tgz"
+        },
         "send": {
           "version": "0.14.1",
           "from": "send@0.14.1",
@@ -2704,16 +2716,6 @@
       "from": "path-match@1.2.4",
       "resolved": "https://registry.npmjs.org/path-match/-/path-match-1.2.4.tgz",
       "dependencies": {
-        "http-errors": {
-          "version": "1.4.0",
-          "from": "http-errors@>=1.4.0 <1.5.0",
-          "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-1.4.0.tgz"
-        },
-        "inherits": {
-          "version": "2.0.1",
-          "from": "inherits@2.0.1",
-          "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
-        },
         "path-to-regexp": {
           "version": "1.7.0",
           "from": "path-to-regexp@>=1.0.0 <2.0.0",
@@ -3120,6 +3122,11 @@
       "from": "send@0.14.2",
       "resolved": "https://registry.npmjs.org/send/-/send-0.14.2.tgz",
       "dependencies": {
+        "http-errors": {
+          "version": "1.5.1",
+          "from": "http-errors@>=1.5.1 <1.6.0",
+          "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-1.5.1.tgz"
+        },
         "ms": {
           "version": "0.7.2",
           "from": "ms@0.7.2",
