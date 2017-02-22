@@ -88,7 +88,7 @@ export default class extends Page {
     if (relatedQuestions.length < 5) {
       const recentQuestions = await questions.search({ limit: 10 })
       recentQuestions.forEach((recentQuestion, index) => {
-        if (relatedQuestions.length >= 5) {
+        if (relatedQuestions.length >= 5 || question['@id'] == recentQuestion['@id']) {
           return
         } else {
           let existsInArray = false
@@ -150,7 +150,7 @@ export default class extends Page {
         answeredOn =
           <div>
             <p className="date-label">
-              <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question['@dateModified']} />
+              <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question.acceptedAnswer.datePublished || this.props.question['@dateModified']} />
             </p>
           </div>
 
@@ -159,7 +159,7 @@ export default class extends Page {
       if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.citation)
         citation = 
           <div>
-             <h5>Source(s)</h5>
+           <h5>Source(s)</h5>
             <div className="muted">
               <ReactMarkdown source={this.props.question.acceptedAnswer.citation}/>
            </div>

@@ -16,12 +16,17 @@ export default class extends React.Component {
         </Link>
     }
     */
+    let datePublished = question['@dateModified']
+    if (question.acceptedAnswer && question.acceptedAnswer.datePublished) {
+      datePublished = question.acceptedAnswer.datePublished
+    }
+    
     return(
       <div className="question-card" onClick={ () => Router.push("/question?id="+question['@id'].split('/')[4], "/questions/"+question['@id'].split('/')[4]) }>
         <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}><a>{question.name}</a></Link></h3>
         {imageTag}
         <p className="date-label">
-          <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} />
+          <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
         </p>
       </div>
     )
