@@ -55,6 +55,7 @@ export default class extends Page {
   // This is called any time the question changes
   // e.g. a related question is clicked on in the sidebar
   async componentWillReceiveProps(nextProps) {
+    super.updateGoogleAnalytics(nextProps)
     const relatedQuestions = await this.constructor.getRelatedQuestions(nextProps.question)
     
     // Update state
