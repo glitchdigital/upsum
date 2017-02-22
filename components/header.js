@@ -6,7 +6,7 @@ import { Session } from '../models/session'
 import MenuBar from '../components/menubar'
 import Search from '../components/search'
 import Package from '../package.json'
-import InlineCSS from '../css/main.scss'
+import inlineCSS from '../css/main.scss'
 
 export default class extends React.Component {
 
@@ -22,7 +22,7 @@ export default class extends React.Component {
     if (process.env.NODE_ENV === 'production') {
       stylesheet = <link rel="stylesheet" type="text/css" href={'/static/css/main-' + Package.version + '.css'}/>
     } else {
-      stylesheet = <style dangerouslySetInnerHTML={{__html: InlineCSS}}/>
+      stylesheet = <style dangerouslySetInnerHTML={{__html: inlineCSS}}/>
     }
 
     return (

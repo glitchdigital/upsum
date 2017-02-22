@@ -4,6 +4,8 @@ const next = require('next')
 const fetch = require('isomorphic-fetch')
 const path = require('path')
 const Package = require('./package.json')
+const sass = require('node-sass')
+const fs = require('fs')
 
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
@@ -17,6 +19,19 @@ const handle = app.getRequestHandler()
 app.prepare()
 .then(() => {
   const server = express()
+
+  // In production mode, generate static CSS file, with version backed into name
+  if (process.env.NODE_ENV == 'production') {
+    sass.render({
+      file: './css/main.scss'
+    }, function(err, result) {
+      fs.writeFile('./static/css/main-' + Package.version + '.css', result.css, function(err) {
+        if (err) {
+          throw new Error(err)
+        }
+      })
+    })
+  }
 
   server.use(function(req, res, next) {
     res.setHeader('Vary', 'Accept-Encoding')
@@ -92,4 +107,8 @@ app.prepare()
     if (err) throw err
     console.log('> Ready on http://localhost:'+process.env.PORT+" ["+process.env.NODE_ENV+"]")
   })
+})
+.catch(err => {
+  console.log('An error occurred, unable to start the server')
+  console.log(err)
 })

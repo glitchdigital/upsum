@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
@@ -25,8 +25,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development PORT=3000 node index.js",
-    "build-css": "sass css/main.scss static/css/main-`node -e \"process.stdout.write(require('./package.json').version)\"`.css",
-    "build": "next build; sass css/main.scss static/css/main-`node -e \"process.stdout.write(require('./package.json').version)\"`.css",
+    "build": "next build",
     "start": "node index.js"
   },
   "author": "Iain Collins <iain.collins@glitch.digital>",
