@@ -7,6 +7,43 @@
 $primaryColor: #25D5FD;
 $primaryColorDarker: darken($primaryColor, 20%);
 
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: #444;
+  background-color: #eee;
+  font-size: 18px;
+  line-height: 28px;
+}
+.logo {
+  text-align: center;
+}
+.logo img {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: auto;
+  width: 90%;
+  border: 0;
+}
+@media (min-width: 660px) {
+  body {
+    background-color: #e5e5e5;
+  }
+  .header .container {
+    padding: 0 30px;
+  }
+  .container {
+    background-color: #eee;
+    padding: 10px 30px 30px 30px;
+  }
+  .logo {
+    text-align: left;
+  }
+  .logo img {
+    height: 124px;
+    width: 350px;
+  }
+}
 form {
   margin: 0;
 }

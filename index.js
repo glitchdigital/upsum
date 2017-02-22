@@ -2,7 +2,6 @@ const express = require('express')
 const sitemap = require('express-sitemap')
 const next = require('next')
 const fetch = require('isomorphic-fetch')
-const connectAssets = require('connect-assets')
 const path = require('path')
 const Package = require('./package.json')
 
@@ -19,29 +18,11 @@ app.prepare()
 .then(() => {
   const server = express()
 
-  // Use connect asserts to serve minified, versioned, CSS built from less
-  const assetsPath = "assets/"+Package.version
   server.use(function(req, res, next) {
     res.setHeader('Vary', 'Accept-Encoding')
-    
-    // Always serve assets from any path (a hack)
-    if (req.url.match(/^\/assets\//))
-      req.url = req.url.replace(/^\/assets\/(.*?)\//, '/'+assetsPath+'/')
-
     next()
   })
   
-  server.use(connectAssets({
-    paths: [path.join(__dirname, 'static/css')],
-    helperContext: server.locals,
-    fingerprinting: false,
-    build: true,
-    buildDir: "assets",
-    compile: true,
-    compress: true,
-    servePath: assetsPath
-  }))
-
   server.get('/questions/edit/:id', (req, res) => {
     if ("id" in req.params) {
       return app.render(req, res, '/question/edit', req.params)
