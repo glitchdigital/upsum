@@ -71,16 +71,38 @@ export default class extends Page {
     const questions = new Questions
 
     let searchQuery = question.name
-
+    searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
+    searchQuery = searchQuery.replace(/(^who |^what |^why |^how | to | the | and | is )/gi, ' ')
+      
     // Get questions that have a similar title
-    const relatedQuestions = await questions.search({ limit: 6, name: searchQuery })
+    const relatedQuestions = await questions.search({ limit: 5, name: searchQuery })
     
     // Don't include the question on this page as a related question
     relatedQuestions.forEach((relatedQuestion, index) => {
       if (question['@id'] == relatedQuestion['@id'])
         relatedQuestions.splice(index, 1)
-
     })
+    
+    // If there are less than 5 questions in the related questions, add recent
+    // questions to make up the difference in the list
+    if (relatedQuestions.length < 5) {
+      const recentQuestions = await questions.search({ limit: 10 })
+      recentQuestions.forEach((recentQuestion, index) => {
+        if (relatedQuestions.length >= 5) {
+          return
+        } else {
+          let existsInArray = false
+          relatedQuestions.forEach((relatedQuestion, index) => {
+            if (recentQuestion['@id'] == relatedQuestion['@id'])
+              existsInArray = true
+          })
+          if (existsInArray === false) {
+            relatedQuestions.push(recentQuestion)
+          }
+        }
+      })
+    }
+    
     return relatedQuestions
   }
    

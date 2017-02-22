@@ -1,11 +1,12 @@
+$lightBlue: #25D5FD;
+
+$primaryColor: #25D5FD;
+$primaryColorDarker: darken($primaryColor, 20%);
 
 @import "font-awesome.scss";
 @import "font-awesome-animation.min.scss";
 @import "normalize.scss";
 @import "skeleton.scss";
-
-$primaryColor: #25D5FD;
-$primaryColorDarker: darken($primaryColor, 20%);
 
 body {
   margin: 0;

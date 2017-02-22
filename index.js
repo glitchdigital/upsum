@@ -2,10 +2,7 @@ const express = require('express')
 const sitemap = require('express-sitemap')
 const next = require('next')
 const fetch = require('isomorphic-fetch')
-const path = require('path')
-const Package = require('./package.json')
 const sass = require('node-sass')
-const fs = require('fs')
 
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
@@ -25,7 +22,7 @@ app.prepare()
     next()
   })
 
-  // Add route to server compiled SCSS from /assets/{build id}/main.css
+  // Add route to serve compiled SCSS from /assets/{build id}/main.css
   const sassResult = sass.renderSync({file: './css/main.scss'})
   server.get('/assets/:id/main.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css')

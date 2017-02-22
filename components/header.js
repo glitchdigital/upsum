@@ -18,7 +18,7 @@ export default class extends React.Component {
   render(url) {
     let stylesheet
     if (process.env.NODE_ENV === 'production') {
-      // In production, serve pre-built CSS file from /assets path
+      // In production, serve pre-built CSS file from /assets/{version}/main.css
       let pathToCSS = '/assets/' + Package.version + '/main.css'
       stylesheet = <link rel="stylesheet" type="text/css" href={pathToCSS}/>
     } else {

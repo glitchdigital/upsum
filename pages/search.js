@@ -8,20 +8,20 @@ import Page from '../components/page'
 import QuestionCard from '../components/question-card'
 
 export default class extends Page {
-  
+
   static async getInitialProps({ req, query }) {
     await super.getInitialProps({req})
     const session = Session(req)
 
     let searchQuery = query.q
-    searchQuery = searchQuery.replace(/(^who is|^what is|^why is|^who was|^what was|^who will|^what will|^why will|^why will|^who are|^what are|^why are)/gi, '')
-    searchQuery = searchQuery.replace(/(^who |^what |^why )/gi, '')
-    
+    searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
+    searchQuery = searchQuery.replace(/(^who |^what |^why |)/gi, '')
+
     const questions = new Questions
     const results = await questions.search({ limit: 25, name: searchQuery })
     return { questions: results, query: query.q }
   }
-  
+
   render() {
     // Split questions into seperate columns
     const numberOfColumns = 3
