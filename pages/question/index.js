@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/prefetch'
+import Link from 'next/link'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import TimeAgo from 'react-timeago'
@@ -12,6 +12,7 @@ import QuestionCard from '../../components/question-card'
 export default class extends Page {
   
   static async getInitialProps({ req, query }) {
+    await super.getInitialProps({req})
     const session = Session(req)
     const questions = new Questions
     
@@ -146,6 +147,15 @@ export default class extends Page {
         <Layout>
           <Head>
             <title>{this.props.question.name}</title>
+            <meta property="og:title" content="{this.props.question.name}"/>
+            <meta property="og:url" content="https://www.upsum.glitched.news"/>
+            <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+            <meta name="og:image" content="/images/logo-square.png"/>
+            <meta name="twitter:card" content="summary"/>
+            <meta name="twitter:site" content="upsum"/>
+            <meta name="twitter:title" content="{this.props.question.name}"/>
+            <meta name="twitter:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+            <meta name="twitter:image" content="/images/logo-square.png"/>
           </Head>
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">

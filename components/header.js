@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import Link from 'next/prefetch'
+import Link from 'next/link'
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Session } from '../models/session'
 import MenuBar from '../components/menubar'
 import Search from '../components/search'
 import Package from '../package.json'
-import stylesheet from '../css/main.scss'
+import InlineCSS from '../css/main.scss'
 
 export default class extends React.Component {
 
@@ -16,12 +16,21 @@ export default class extends React.Component {
   }
 
   render(url) {
+    
+    // Include CSS from static, versioned file or inline in development mode
+    let stylesheet
+    if (process.env.NODE_ENV === 'production') {
+      stylesheet = <link rel="stylesheet" type="text/css" href={'/static/css/main-' + Package.version + '.css'}/>
+    } else {
+      stylesheet = <style dangerouslySetInnerHTML={{__html: InlineCSS}}/>
+    }
+
     return (
       <header>
         <Head>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-          <style dangerouslySetInnerHTML={{__html: stylesheet}}/>
+          {stylesheet}
         </Head>
         <Provider store={this.session}>
           <MenuBar />

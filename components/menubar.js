@@ -1,4 +1,4 @@
-import Link from 'next/prefetch'
+import Link from 'next/link'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Session } from '../models/session'

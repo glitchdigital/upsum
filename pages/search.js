@@ -1,4 +1,4 @@
-import Link from 'next/prefetch'
+import Link from 'next/link'
 import React from 'react'
 import MediaQuery from 'react-responsive'
 import Questions from '../models/questions'
@@ -10,6 +10,7 @@ import QuestionCard from '../components/question-card'
 export default class extends Page {
   
   static async getInitialProps({ req, query }) {
+    await super.getInitialProps({req})
     const session = Session(req)
 
     let searchQuery = query.q

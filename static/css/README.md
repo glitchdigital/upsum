@@ -1,0 +1,1 @@
+CSS compiled from the SCSS files will be generated here in production.

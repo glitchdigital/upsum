@@ -1,4 +1,4 @@
-import Link from 'next/prefetch'
+import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
 import TimeAgo from 'react-timeago'
