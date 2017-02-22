@@ -22,16 +22,21 @@ app.prepare()
   // Use connect asserts to serve minified, versioned, CSS built from less
   const assetsPath = "assets/"+Package.version
   server.use(function(req, res, next) {
+    res.setHeader('Vary', 'Accept-Encoding')
+    
+    // Always serve assets from any path (a hack)
     if (req.url.match(/^\/assets\//))
       req.url = req.url.replace(/^\/assets\/(.*?)\//, '/'+assetsPath+'/')
+
     next()
   })
+  
   server.use(connectAssets({
     paths: [path.join(__dirname, 'static/css')],
     helperContext: server.locals,
     fingerprinting: false,
     build: true,
-    buildDir: "//tmp/assets",
+    buildDir: "assets",
     compile: true,
     compress: true,
     servePath: assetsPath

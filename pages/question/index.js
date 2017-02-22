@@ -88,7 +88,7 @@ export default class extends Page {
       
       let editButton
       if (this.props.session.sessionId) {
-        editButton = <p className="buttons"><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a href={"/question/edit?id="+this.props.id} className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link></p>
+        editButton = <p className="buttons"><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link></p>
       } else {
         editButton = <span/>
       }

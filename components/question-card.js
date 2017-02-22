@@ -12,13 +12,13 @@ export default class extends React.Component {
     if (question.image && question.image.url) {
       imageTag = 
         <Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}>
-          <a href={"/question?id="+question['@id'].split('/')[4]}><div className="question-card-image" style={{backgroundImage: 'url('+question.image.url+')'}}></div></a>
+          <a><div className="question-card-image" style={{backgroundImage: 'url('+question.image.url+')'}}></div></a>
         </Link>
     }
     */
     return(
       <div className="question-card" onClick={ () => Router.push("/question?id="+question['@id'].split('/')[4], "/questions/"+question['@id'].split('/')[4]) }>
-        <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}><a href={"/question?id="+question['@id'].split('/')[4]}>{question.name}</a></Link></h3>
+        <h3 style={{marginBottom: '10px'}}><Link href={"/question?id="+question['@id'].split('/')[4]} as={"/questions/"+question['@id'].split('/')[4]}><a>{question.name}</a></Link></h3>
         {imageTag}
         <p className="date-label">
           <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question['@dateModified']} />

@@ -18,7 +18,8 @@ export default class extends Page {
         name: '',
         email: '',
         sessionId: '',
-        admin: true 
+        isLoggedIn: false,
+        admin: false 
      }
      this.handleChange = this.handleChange.bind(this)
      this.handleSubmit = this.handleSubmit.bind(this)
@@ -74,7 +75,7 @@ export default class extends Page {
                 <label htmlFor="apiKey">Your API Key</label>
                 <input name="apiKey" className="u-full-width" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" id="apiKey" />
                 <p className="u-pull-right">
-                  <Link href="/"><a href="/" className="button">Cancel</a></Link>
+                  <Link href="/"><a className="button">Cancel</a></Link>
                   &nbsp;
                   <button type="submit" className="button-primary ">Sign in</button>
                 </p>

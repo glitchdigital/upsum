@@ -24,6 +24,7 @@ const sessionModel = {
   name: '',
   email: '',
   sessionId: '',
+  isLoggedIn: false,
   admin: false 
 }
 

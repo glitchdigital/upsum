@@ -20,7 +20,7 @@ export default connect(state => state)(class extends React.Component {
                 <p style={{margin: '5px 0'}}>
                   <i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong>
                   &nbsp;
-                  <Link href="/question/new"><a className="button button-primary" href="/question/new">New Question</a></Link>
+                  <Link href="/question/new"><a className="button button-primary">New Question</a></Link>
                   &nbsp;
                   <a className="button" href="#" onClick={this.handleLogout} >Logout</a>
                 </p>

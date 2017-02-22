@@ -1,9 +1,11 @@
-@import "font-awesome-animation.min.css";
-@import "normalize.less";
-@import "skeleton.less";
 
-@primaryColor: #25D5FD;
-@primaryColorDarker: darken(@primaryColor, 20%);
+@import "font-awesome.css";
+@import "font-awesome-animation.min.css";
+@import "normalize.scss";
+@import "skeleton.scss";
+
+$primaryColor: #25D5FD;
+$primaryColorDarker: darken($primaryColor, 20%);
 
 form {
   margin: 0;
@@ -292,7 +294,7 @@ footer p {
   padding-top: 6px;
 }
 .question-card .date-label {
-  background-color: @primaryColor;
+  background-color: $primaryColor;
   color: #fff;
   padding: 2px 16px 2px 20px;
   margin: 0;
@@ -311,7 +313,7 @@ footer p {
   font-size: 0.5em;
   position: absolute;
   border-style: solid;
-  border-color: transparent transparent @primaryColorDarker transparent;
+  border-color: transparent transparent $primaryColorDarker transparent;
   top: -15px;
   left: 0px;
   border-width: 0 0 15px 10px;
@@ -340,7 +342,7 @@ footer p {
   border-radius: 5px 30px 5px 30px;
 }
 .question .date-label {
-  background-color: @primaryColor;
+  background-color: $primaryColor;
   color: #fff;
   position: relative;
   font-size: 18px;
@@ -358,7 +360,7 @@ footer p {
   font-size: 0.5em;
   position: absolute;
   border-style: solid;
-  border-color: transparent transparent @primaryColorDarker transparent;
+  border-color: transparent transparent $primaryColorDarker transparent;
   top: -15px;
   left: 0px;
   border-width: 0 0 15px 10px;

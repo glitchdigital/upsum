@@ -183,7 +183,7 @@ export default class extends React.Component {
         <div className="u-cf u-full-width">
           {deleteButton}
           <p className="buttons u-pull-right">
-            <Link href={questionId ? "/question?id="+questionId : "/"} as={questionId ? "/questions/"+questionId : "/"}><a href={questionId ? "/questions/"+questionId : "/"} className="button">Cancel</a></Link>
+            <Link href={questionId ? "/question?id="+questionId : "/"} as={questionId ? "/questions/"+questionId : "/"}><a className="button">Cancel</a></Link>
             <button type="submit" className="button-primary">Save changes</button>
           </p>
         </div>

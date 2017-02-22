@@ -15,7 +15,7 @@ export default class extends React.Component {
     if (this.session.sessionId) {
       loginButton = <span/>
     } else {
-      loginButton = <span>| <a href="/login"><i className="fa fa-sign-in"></i> Contributors</a></span>
+      loginButton = <span>| <Link href="/login"><a><i className="fa fa-sign-in"></i> Contributors</a></Link></span>
     }
 
     return (
@@ -24,7 +24,7 @@ export default class extends React.Component {
           <div className="row">
             <div className="twelve columns">
               <hr/>
-              <p>&copy; <Link href="/"><a href="/">Upsum</a></Link> {new Date().getYear() + 1900} {loginButton} <i>v{Package.version} beta</i></p>
+              <p>&copy; <Link href="/"><a>Upsum</a></Link> {new Date().getYear() + 1900} {loginButton} <i>v{Package.version} beta</i></p>
             </div>
           </div>
         </div>

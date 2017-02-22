@@ -19,7 +19,6 @@ export default class extends React.Component {
       <header>
         <Head>
           <link rel="stylesheet" href={"/assets/"+Package.version+"/main.css"}/>
-          <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           <style>{`
@@ -70,7 +69,7 @@ export default class extends React.Component {
             <div className="row">
               <div className="six columns">
                 <div className="logo">
-                  <Link href="/"><a href="/"><img src="/static/images/upsum-logo-2017-02-01.png" alt="Upsum - The news, summed up"/></a></Link>
+                  <Link href="/"><a><img src="/static/images/upsum-logo-2017-02-01.png" alt="Upsum - The news, summed up"/></a></Link>
                 </div>
               </div>
               <div className="six columns">
