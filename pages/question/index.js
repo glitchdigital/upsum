@@ -8,6 +8,7 @@ import { Session } from '../../models/session'
 import Layout from '../../components/layout'
 import Page from '../../components/page'
 import QuestionCard from '../../components/question-card'
+import AdSense from 'react-adsense'
 
 export default class extends Page {
   
@@ -199,6 +200,7 @@ export default class extends Page {
                   {citation}
                   {editButton}
                 </div>
+                {/* <AdSense.Google client='ca-pub-123' slot='456'/> */}
               </div>
               <div className="four columns">
                 <div className="question-sidebar">

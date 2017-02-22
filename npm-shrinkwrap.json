@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
@@ -2938,6 +2938,11 @@
       "version": "15.4.2",
       "from": "react@>=15.4.2 <16.0.0",
       "resolved": "https://registry.npmjs.org/react/-/react-15.4.2.tgz"
+    },
+    "react-adsense": {
+      "version": "0.0.1",
+      "from": "react-adsense@latest",
+      "resolved": "https://registry.npmjs.org/react-adsense/-/react-adsense-0.0.1.tgz"
     },
     "react-cookie": {
       "version": "1.0.4",
