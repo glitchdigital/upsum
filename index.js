@@ -29,6 +29,8 @@ app.prepare()
   const sassResult = sass.renderSync({file: './css/main.scss'})
   server.get('/assets/:id/main.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css')
+    res.setHeader("Cache-Control", "public, max-age=2592000")
+    res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString())
     res.send(sassResult.css)
   })
 
