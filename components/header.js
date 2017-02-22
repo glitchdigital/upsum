@@ -16,12 +16,13 @@ export default class extends React.Component {
   }
 
   render(url) {
-    
-    // Include CSS from static, versioned file or inline in development mode
     let stylesheet
     if (process.env.NODE_ENV === 'production') {
-      stylesheet = <link rel="stylesheet" type="text/css" href={'/static/css/main-' + Package.version + '.css'}/>
+      // In production, serve pre-built CSS file from /assets path
+      let pathToCSS = '/assets/' + Package.version + '/main.css'
+      stylesheet = <link rel="stylesheet" type="text/css" href={pathToCSS}/>
     } else {
+      // In development, serve CSS inline (with live reloading) with webpack
       stylesheet = <style dangerouslySetInnerHTML={{__html: inlineCSS}}/>
     }
 

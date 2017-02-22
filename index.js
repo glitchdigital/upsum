@@ -20,24 +20,18 @@ app.prepare()
 .then(() => {
   const server = express()
 
-  // In production mode, generate static CSS file, with version backed into name
-  if (process.env.NODE_ENV == 'production') {
-    sass.render({
-      file: './css/main.scss'
-    }, function(err, result) {
-      fs.writeFile('./static/css/main-' + Package.version + '.css', result.css, function(err) {
-        if (err) {
-          throw new Error(err)
-        }
-      })
-    })
-  }
-
   server.use(function(req, res, next) {
     res.setHeader('Vary', 'Accept-Encoding')
     next()
   })
-  
+
+  // Add route to server compiled SCSS from /assets/{build id}/main.css
+  const sassResult = sass.renderSync({file: './css/main.scss'})
+  server.get('/assets/:id/main.css', (req, res) => {
+    res.setHeader('Content-Type', 'text/css')
+    res.send(sassResult.css)
+  })
+
   server.get('/questions/edit/:id', (req, res) => {
     if ("id" in req.params) {
       return app.render(req, res, '/question/edit', req.params)
@@ -45,7 +39,7 @@ app.prepare()
       return app.render(req, res, '/', req.params)
     }
   })
-  
+
   server.get('/questions/:id', (req, res) => {
     if ("id" in req.params) {
       return app.render(req, res, '/question', req.params)
@@ -72,7 +66,7 @@ app.prepare()
         }
       }
     }
-    
+
     // Add 50 most recently updated questions to the sitemap
     fetch("http://api.upsum.glitched.news/Question?sort=-_updated&limit=50")
     .then(function(response) {
@@ -80,11 +74,10 @@ app.prepare()
       .then(function(json) {
         if (json instanceof Array) {
           json.forEach(function(question, index) {
-            
             // Set homepage last modified date to that of last question modified
             if (index === 0)
               sitemapOptions.route['/'].lastmod = question['@dateModified'].split('T')[0]
-              
+
             let route = "/questions/"+question['@id'].split('/')[4]
             sitemapOptions.map[route] = ['get']
             sitemapOptions.route[route] = {
@@ -98,7 +91,7 @@ app.prepare()
       })
     })
   })
-  
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })
