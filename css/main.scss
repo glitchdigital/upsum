@@ -453,19 +453,22 @@ footer p {
 }
 
 .button-facebook,
-.button-facebook:hover {
+.button-facebook:hover,
+.button-facebook:active  {
   border-color: #3B5998;
   background-color: #3B5998;
   color: #fff;
 }
 .button-twitter,
-.button-twitter:hover {
+.button-twitter:hover,
+.button-twitter:active {
   border-color: #00aced;
   background-color: #00aced;
   color: #fff;
 }
 .button-google,
-.button-google:hover {
+.button-google:hover,
+.button-google:active {
   border-color: #d34836;
   background-color: #d34836;
   color: #fff;
