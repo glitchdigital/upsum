@@ -194,6 +194,7 @@ export default class extends Page {
             <meta property="og:title" content={this.props.question.name}/>
             <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+            <meta property="og:image" content={this.props.shareImage}/>
             <meta name="og:image" content={this.props.shareImage}/>
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:site" content="upsum"/>
@@ -219,7 +220,7 @@ export default class extends Page {
                   </div>
                   {citation}
                   <div className="buttons">
-                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.shareUrl + "t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
+                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.shareUrl + "&t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
                     <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.shareUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
                     {editButton}
                   </div>
