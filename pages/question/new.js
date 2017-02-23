@@ -14,7 +14,8 @@ export default class extends Page {
       acceptedAnswer: {
         name: '',
         text: '',
-        citation: ''
+        citation: '',
+        datePublished: Date.now()
       },
       image: {
         publisher: {}

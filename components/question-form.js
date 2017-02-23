@@ -5,6 +5,8 @@ import TimeAgo from 'react-timeago'
 import Textarea from 'react-textarea-autosize'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
+import moment from 'moment'
+import DatePicker from 'react-datepicker'
 
 export default class extends React.Component {
 
@@ -16,6 +18,7 @@ export default class extends React.Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleDatePublishedChange = this.handleDatePublishedChange.bind(this)
   }
    
   async handleDelete(event) {
@@ -65,6 +68,11 @@ export default class extends React.Component {
     this.setState(this.state.question)
   }
 
+  handleDatePublishedChange(date) {
+    this.state.question.acceptedAnswer.datePublished = date.toDate()
+    this.setState(this.state.question)
+  }
+  
   async handleSubmit(event) {
     event.preventDefault()
     const session = Session()
@@ -180,6 +188,12 @@ export default class extends React.Component {
         <label htmlFor="answerCitation">Source (Optional)</label>
         <Textarea name="answerCitation" className="u-full-width" placeholder="The source(s) being cited" id="answerCitation" value={this.state.question.acceptedAnswer.citation}></Textarea>
 
+        <label htmlFor="answerDatePublished">Date Answered</label>
+        <i className="fa fa-fw fa-calendar"/> <DatePicker todayButton={"Today"} dateFormat="YYYY-MM-DD" selected={moment(this.state.question.acceptedAnswer.datePublished)} onChange={this.handleDatePublishedChange}/>
+        <p className="muted">
+          <i>When updating the answer for an existing question, leave "Date Answered" unchanged for minor edits but do change it for significant updates.</i>
+        </p>
+          
         <div className="u-cf u-full-width">
           {deleteButton}
           <p className="buttons u-pull-right">

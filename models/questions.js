@@ -15,6 +15,9 @@ export default class Questions {
     if (!question['acceptedAnswer'])
       question['acceptedAnswer'] = { name: '', description: '', citation: '' }
     
+    if (!question.acceptedAnswer.datePublished)
+      question.acceptedAnswer.datePublished = question['@dateModified']
+    
     if (!question['image'])
       question['image'] = {}
     
@@ -78,7 +81,7 @@ export default class Questions {
     if ("sort" in options && options.sort !== undefined) {
       url += "sort="+encodeURIComponent(options.sort)
     } else {
-      url += 'sort=-_updated'
+      url += 'sort=-_created'
     }
 
     if ("limit" in options && options.limit !== undefined)
