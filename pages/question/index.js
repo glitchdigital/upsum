@@ -35,11 +35,11 @@ export default class extends Page {
       if (typeof window === 'undefined') {
         shareUrl = 'https://' + req.hostname + '/questions/' + query.id
         shareImageTwitter = 'https://' + req.hostname + '/static/images/upsum-logo-share-twitter.png'
-        shareImageFacebook = 'https://' + req.hostname + '/static/images/upsum-logo-share-facebook.png'
+        shareImageFacebook = 'https://' + req.hostname + '/static/images/upsum-logo-share-facebook-v2.png'
       } else {
         shareUrl = 'https://' + window.location.host + '/questions/' + query.id
         shareImageTwitter = 'https://' + window.location.host + '/static/images/upsum-logo-share-twitter.png'
-        shareImageFacebook = 'https://' + window.location.host + '/static/images/upsum-logo-share-facebook.png'
+        shareImageFacebook = 'https://' + window.location.host + '/static/images/upsum-logo-share-facebook-v2.png'
       }
     }
     
@@ -197,7 +197,7 @@ export default class extends Page {
             <meta property="og:title" content={this.props.question.name}/>
             <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
-            <meta property="og:image" content="https://upsum.glitched.news/static/images/upsum-logo-share-facebook.png"/>
+            <meta property="og:image" content="https://upsum.glitched.news/static/images/upsum-logo-share-facebook-v2.png"/>
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:site" content="upsumnews"/>
             <meta name="twitter:title" content={this.props.question.name}/>
