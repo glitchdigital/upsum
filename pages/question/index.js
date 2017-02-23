@@ -28,21 +28,25 @@ export default class extends Page {
     if (typeof window === 'undefined' && question['@id'])
       relatedQuestions = await this.getRelatedQuestions(question)
 
-    let sharingUrl
+    let shareUrl
+    let shareImage
     if (question['@id']) {
       if (typeof window === 'undefined') {
-        sharingUrl = 'https://' + req.hostname + '/questions/' + query.id
+        shareUrl = 'https://' + req.hostname + '/questions/' + query.id
+        shareImage = 'https://' + req.hostname + '/images/upsum-logo-square.png'
       } else {
-        sharingUrl = 'https://' + window.location.host + '/questions/' + query.id
+        shareUrl = 'https://' + window.location.host + '/questions/' + query.id
+        shareImage = 'https://' + window.location.host + '/images/upsum-logo-square.png'
       }
     }
-  
+    
     return {
       id: query.id,
       question: question,
       relatedQuestions: relatedQuestions,
       session: session.getState(),
-      sharingUrl: sharingUrl
+      shareUrl: shareUrl,
+      shareImage: shareImage
     }
   }
   
@@ -188,14 +192,14 @@ export default class extends Page {
           <Head>
             <title>{this.props.question.name}</title>
             <meta property="og:title" content={this.props.question.name}/>
-            <meta property="og:url" content="https://www.upsum.glitched.news"/>
+            <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
-            <meta name="og:image" content="/images/upsum-logo-square.png"/>
+            <meta name="og:image" content={this.props.shareImage}/>
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:site" content="upsum"/>
             <meta name="twitter:title" content={this.props.question.name}/>
             <meta name="twitter:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
-            <meta name="twitter:image" content="/images/upsum-logo-square.png"/>
+            <meta name="twitter:image" content={this.props.shareImage}/>
           </Head>
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">
@@ -215,8 +219,8 @@ export default class extends Page {
                   </div>
                   {citation}
                   <div className="buttons">
-                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.sharingUrl + "t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
-                    <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.sharingUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.shareUrl + "t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
+                    <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.shareUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
                     {editButton}
                   </div>
                 </div>
