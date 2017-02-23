@@ -86,8 +86,6 @@ export default class Questions {
       
     if ("name" in options && options.name !== undefined)
       url += "&name="+encodeURIComponent(options.name.replace(/[^0-9a-z_ -]/gi, ''))
-    
-    console.log(url)
       
     const res = await fetch(url)
     const questions = await res.json()

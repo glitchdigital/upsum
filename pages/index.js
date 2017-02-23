@@ -5,7 +5,6 @@ import Questions from '../models/questions'
 import Layout from '../components/layout'
 import Page from '../components/page'
 import QuestionCard from '../components/question-card'
-import AdSense from 'react-adsense'
 
 export default class extends Page {
   
@@ -14,6 +13,17 @@ export default class extends Page {
     const questions = new Questions
     const results = await questions.search({ limit: 64 })
     return { questions: results }
+  }
+
+  componentDidMount() {
+    if (!window.googleadsenseloaded) {
+      window.googleadsenseloaded = true
+      if (!adsbygoogle) var adsbygoogle
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8690794745241806",
+        enable_page_level_ads: true
+      })
+    }
   }
 
   render() {
@@ -38,7 +48,6 @@ export default class extends Page {
           <div className="row">
             <div className="twelve columns">
               <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
-              <AdSense.Google client='ca-pub-8690794745241806' slot='0'/>
             </div>
           </div>
           <MediaQuery maxWidth={659}>
