@@ -27,12 +27,22 @@ export default class extends Page {
     let relatedQuestions = []
     if (typeof window === 'undefined' && question['@id'])
       relatedQuestions = await this.getRelatedQuestions(question)
-    
+
+    let sharingUrl
+    if (question['@id']) {
+      if (typeof window === 'undefined') {
+        sharingUrl = 'https://' + req.hostname + '/questions/' + question['@id']
+      } else {
+        sharingUrl = 'https://' + window.location.host + '/questions/' + question['@id']
+      }
+    }
+  
     return {
       id: query.id,
       question: question,
       relatedQuestions: relatedQuestions,
-      session: session.getState()
+      session: session.getState(),
+      sharingUrl: sharingUrl
     }
   }
   
@@ -107,13 +117,19 @@ export default class extends Page {
     
     return relatedQuestions
   }
+  
+  popup(e) {
+    window.open(e.target.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+    e.preventDefault()
+    return false
+  }
    
   render() {
     if (this.props.question['@id']) {
       
       let editButton
       if (this.props.session.sessionId) {
-        editButton = <p className="buttons"><Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link></p>
+        editButton = <Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link>
       } else {
         editButton = <span/>
       }
@@ -198,7 +214,11 @@ export default class extends Page {
                     </div>
                   </div>
                   {citation}
-                  {editButton}
+                  <div className="buttons">
+                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.sharingUrl + "t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
+                    <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.sharingUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+                    {editButton}
+                  </div>
                 </div>
                 <AdSense.Google client='ca-pub-8690794745241806' slot='0'/>
               </div>
