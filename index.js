@@ -3,6 +3,7 @@ const sitemap = require('express-sitemap')
 const next = require('next')
 const fetch = require('isomorphic-fetch')
 const sass = require('node-sass')
+const RSS = require('rss')
 
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
@@ -65,9 +66,8 @@ app.prepare()
         }
       }
     }
-
     // Add 50 most recently updated questions to the sitemap
-    fetch("http://api.upsum.glitched.news/Question?sort=-_updated&limit=50")
+    fetch("http://upsum-api.glitched.news/Question?sort=-_created&limit=50")
     .then(function(response) {
       response.json()
       .then(function(json) {
@@ -91,6 +91,40 @@ app.prepare()
     })
   })
 
+  server.get('/rss.xml', function(req, res) {
+    var rssFeed = new RSS({
+      title: 'Upsum',
+      description: 'The news, summed up',
+      feed_url: 'https://upsum.gliched.news/rss.xml',
+      site_url: 'https://upsum.gliched.news/',
+      image_url: 'https://upsum.gliched.news/static/images/upsum-logo-share-twitter.png',
+      language: 'en',
+      pubDate: new Date().toString(),
+      ttl: '60'
+    })
+
+    // Add 50 most recently updated questions to the RSS feed
+    fetch("http://upsum-api.glitched.news/Question?sort=-_created&limit=50")
+    .then(function(response) {
+      response.json()
+      .then(function(json) {
+        if (json instanceof Array) {
+          json.forEach(function(question, index) {
+            let url = "https://upsum.glitched.news/questions/"+question['@id'].split('/')[4]
+            rssFeed.item({
+                title: question.name,
+                description: (question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : "",
+                url: url,
+                date: question['@dateCreated']
+            })
+          })
+        }
+        res.send(rssFeed.xml())
+      })
+    })
+  })
+
+  
   server.get('*', (req, res) => {
     return handle(req, res)
   })
