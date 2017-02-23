@@ -1,6 +1,6 @@
 $lightBlue: #25D5FD;
 
-$primaryColor: #25D5FD;
+$primaryColor: #555;
 $primaryColorDarker: darken($primaryColor, 20%);
 
 @import "font-awesome.scss";
@@ -26,6 +26,13 @@ body {
   width: 280px;
   border: 0;
 }
+
+.header .container { 
+  padding-top: 0px;
+}
+.container {
+  padding-top: 10px;
+}
 @media (min-width: 660px) {
   body {
     background-color: #e5e5e5;
@@ -35,7 +42,7 @@ body {
   }
   .container {
     background-color: #eee;
-    padding: 10px 30px 30px 30px;
+    padding: 20px 30px 30px 30px;
   }
   .logo {
     text-align: left;
@@ -208,7 +215,7 @@ footer p {
 .question-card h3,
 .question-card h3 a {
   font-size: 22px;
-  line-height: 28px;
+  line-height: 32px;
   font-weight: 600;
   color: #555;
 }
@@ -378,6 +385,9 @@ footer p {
   margin-bottom: 25px;
   box-shadow: 0 5px 0px rgba(0,0,0,.2);
   border-radius: 5px 30px 5px 30px;
+}
+.question h2 {
+  font-weight: 400;
 }
 .question .date-label {
   background-color: $primaryColor;
