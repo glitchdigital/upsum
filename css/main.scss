@@ -454,22 +454,25 @@ footer p {
 
 .button-facebook,
 .button-facebook:hover,
-.button-facebook:active  {
+.button-facebook:active,
+.button-facebook:visited  {
   border-color: #3B5998;
   background-color: #3B5998;
-  color: #fff;
+  color: #fff !important;
 }
 .button-twitter,
 .button-twitter:hover,
-.button-twitter:active {
+.button-twitter:active,
+.button-twitter:visited {
   border-color: #00aced;
   background-color: #00aced;
-  color: #fff;
+  color: #fff !important;
 }
 .button-google,
 .button-google:hover,
-.button-google:active {
+.button-google:active,
+.button-google:visited {
   border-color: #d34836;
   background-color: #d34836;
-  color: #fff;
+  color: #fff !important;
 }
