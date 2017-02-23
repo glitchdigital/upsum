@@ -16,6 +16,12 @@ body {
   font-size: 18px;
   line-height: 28px;
 }
+
+h3 {
+  font-size: 28px;
+  font-weight: 500;
+}
+
 .logo {
   text-align: center;
 }
@@ -32,13 +38,15 @@ body {
     width: 300px;
   }
 }
-@media (min-width: 660px) {
-  .logo {
-    text-align: left;
-  }
+@media (min-width: 500px) {
   .logo img {
     height: 124px;
     width: 350px;
+  }
+}
+@media (min-width: 660px) {
+  .logo {
+    text-align: left;
   }
 }
 .header .container { 

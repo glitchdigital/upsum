@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "1.7.15",
+  "version": "1.7.16",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
