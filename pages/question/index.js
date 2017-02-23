@@ -200,7 +200,7 @@ export default class extends Page {
                   {citation}
                   {editButton}
                 </div>
-                {/* <AdSense.Google client='ca-pub-123' slot='456'/> */}
+                <AdSense.Google client='ca-pub-8690794745241806' slot='0'/>
               </div>
               <div className="four columns">
                 <div className="question-sidebar">

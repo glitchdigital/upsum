@@ -5,6 +5,7 @@ import Questions from '../models/questions'
 import Layout from '../components/layout'
 import Page from '../components/page'
 import QuestionCard from '../components/question-card'
+import AdSense from 'react-adsense'
 
 export default class extends Page {
   
@@ -37,6 +38,7 @@ export default class extends Page {
           <div className="row">
             <div className="twelve columns">
               <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
+              <AdSense.Google client='ca-pub-8690794745241806' slot='0'/>
             </div>
           </div>
           <MediaQuery maxWidth={659}>
