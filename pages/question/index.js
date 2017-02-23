@@ -31,9 +31,9 @@ export default class extends Page {
     let sharingUrl
     if (question['@id']) {
       if (typeof window === 'undefined') {
-        sharingUrl = 'https://' + req.hostname + '/questions/' + question['@id']
+        sharingUrl = 'https://' + req.hostname + '/questions/' + query.id
       } else {
-        sharingUrl = 'https://' + window.location.host + '/questions/' + question['@id']
+        sharingUrl = 'https://' + window.location.host + '/questions/' + query.id
       }
     }
   
