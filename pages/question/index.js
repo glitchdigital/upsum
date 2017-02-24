@@ -227,6 +227,9 @@ export default class extends Page {
                     {editButton}
                   </div>
                 </div>
+                <p className="muted" style={{fontSize: '15px'}}>
+                  <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
+                </p>
               </div>
               <div className="four columns">
                 <div className="question-sidebar">
@@ -237,13 +240,6 @@ export default class extends Page {
                 }
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="twelve columns">
-              <p className="muted" style={{fontSize: '15px', marginBottom: '5px'}}>
-                <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
-              </p>
             </div>
           </div>
         </Layout>

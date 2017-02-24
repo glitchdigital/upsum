@@ -24,13 +24,14 @@ h3 {
   font-size: 28px;
   font-weight: 500;
 }
-
+a {
+  font-weight: bold;
+}
 .logo {
   text-align: center;
 }
 .logo img {
   margin-top: 20px;
-  margin-bottom: 10px;
   height: 99px;
   width: 280px;
   border: 0;
@@ -50,6 +51,7 @@ h3 {
 @media (min-width: 660px) {
   .logo {
     text-align: left;
+    margin-bottom: 10px;
   }
 }
 .header .container { 
@@ -131,6 +133,7 @@ footer p {
   text-decoration: none;
 }
 #search {
+  margin-top: 20px;
   margin-bottom: 0;
   position: relative;
 }
