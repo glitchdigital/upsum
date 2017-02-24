@@ -8,10 +8,6 @@ if (typeof window !== 'undefined') {
 export default class extends React.Component {
 
   static async getInitialProps({ req }) {
-    // Force scroll to top when navigating between pages
-    if (typeof window !== 'undefined')
-      window.scrollTo(0, 0)
-
     return {}
   }
   
@@ -22,6 +18,12 @@ export default class extends React.Component {
   
   componentWillReceiveProps(nextProps) {
     this.updateGoogleAnalytics()
+  }
+  
+  componentWillUnmount() {
+    // Force scroll to top when navigating between pages
+    if (typeof window !== 'undefined')
+      window.scrollTo(0, 0)
   }
   
   // Update Google Analytics on page load (both on first load & with new props)
