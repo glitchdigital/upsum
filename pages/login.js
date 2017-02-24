@@ -43,7 +43,7 @@ export default class extends Page {
       // @TODO pushTo doesn't work here for some reason
       //this.props.url.pushTo("/")
     } else {
-      alert("Please enter your name and provide an API Key")
+      alert("Please enter your name and provide an access key")
     }
     event.preventDefault()
   }
@@ -66,13 +66,17 @@ export default class extends Page {
       return (
         <Layout>
           <div className="row">
-            <div className="two columns">&nbsp;</div>
-            <div className="eight columns">
+            <div className="three columns">&nbsp;</div>
+            <div className="six columns">
+              <br/>
               <form method="post" onSubmit={this.handleSubmit} onChange={this.handleChange}>
                 <h4>Sign In</h4>
+                <p>
+                  Authorized contributors can sign-in with an access key.
+                </p>
                 <label htmlFor="name">Your name</label>
                 <input name="name" className="u-full-width" type="text" placeholder="John Smith" id="name" />
-                <label htmlFor="apiKey">Your API Key</label>
+                <label htmlFor="apiKey">Your Access Key</label>
                 <input name="apiKey" className="u-full-width" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" id="apiKey" />
                 <p className="u-pull-right">
                   <Link href="/"><a className="button">Cancel</a></Link>
