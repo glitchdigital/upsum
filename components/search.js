@@ -5,6 +5,19 @@ import { Session } from '../models/session'
 
 export default class extends React.Component {
   
+  constructor (props) {
+    super(props)
+    this.session = Session()
+    this.state = {
+      speechInputStyle: { display: 'none'}
+    }
+  }
+
+  async componentDidMount() {
+    if (typeof window !== 'undefined' && (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')))
+      this.setState({ speechInputStyle: { display: 'block'} })
+  }
+  
   startDictation() {
     if (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')) {
       
@@ -38,15 +51,11 @@ export default class extends React.Component {
   }
   
   render() {
-    let speechInput = ''
-    if (typeof window !== 'undefined' && (window.hasOwnProperty('SpeechRecognition') || window.hasOwnProperty('webkitSpeechRecognition')))
-      speechInput = <i id="recordingButton" className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
-    
     return (
       <div className="search">
         <form id="search" method="get" action="/search">
           <input className="search-input" type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
-          {speechInput}
+          <i style={this.state.speechInputStyle} id="recordingButton" className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
         </form>
       </div>
     )

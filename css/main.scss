@@ -132,6 +132,7 @@ footer p {
 }
 #search {
   margin-bottom: 0;
+  position: relative;
 }
 #search .search-input {
   position: relative;
@@ -144,12 +145,12 @@ footer p {
   width: 100%;
   text-align: center;
 }
-#search .search-input {
-
-}
 @media (min-width: 660px) {
+  #search {
+    right: -20px;
+  }
   #search .search-input {
-    width: 90%;
+    width: 80%;
     max-width: 330px;
   }
 }
@@ -158,7 +159,7 @@ footer p {
 }
 #search .fa-microphone {
   position: absolute;
-  top: 5px;
+  top: -5px;
   right: 0px;
   background-color: #ddd;
   color: #888;
@@ -169,7 +170,7 @@ footer p {
 @media (min-width: 660px) {
   #search .fa-microphone {
     position: absolute;
-    top: 35px;
+    top: -5px;
   }
 }
 #search .fa-microphone:hover,
