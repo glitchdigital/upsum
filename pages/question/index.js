@@ -199,7 +199,7 @@ export default class extends Page {
             <meta property="og:title" content={this.props.question.name}/>
             <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? removeMarkdown(this.props.question.acceptedAnswer.text) : ""}/>
-            <meta property="og:image" content="https://upsum.glitched.news/static/images/upsum-logo-share-facebook-v2.png"/>
+            <meta property="og:image" content="https://upsum.glitched.news/static/images/upsum-logo-share-twitter.png"/>
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:site" content="upsumnews"/>
             <meta name="twitter:title" content={this.props.question.name}/>
