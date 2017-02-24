@@ -91,7 +91,9 @@ export default class extends Page {
 
     let searchQuery = question.name
     searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
-    searchQuery = searchQuery.replace(/(^who |^what |^why |^how | to | the | and | is )/gi, ' ')
+    searchQuery = searchQuery.replace(/(^who |^what |^why |^how |^the )/gi, '')
+    searchQuery = searchQuery.replace(/( the | to | and | is )/gi, ' ')
+
       
     // Get questions that have a similar title
     const relatedQuestions = await questions.search({ limit: 5, name: searchQuery })

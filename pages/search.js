@@ -15,8 +15,9 @@ export default class extends Page {
 
     let searchQuery = query.q
     searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
-    searchQuery = searchQuery.replace(/(^who |^what |^why |)/gi, '')
-
+    searchQuery = searchQuery.replace(/(^who |^what |^why |^how |^the )/gi, '')
+    searchQuery = searchQuery.replace(/( the | to | and | is )/gi, ' ')
+    
     const questions = new Questions
     const results = await questions.search({ limit: 25, name: searchQuery })
     return { questions: results, query: query.q }
@@ -34,12 +35,17 @@ export default class extends Page {
       if (currentList == numberOfColumns) currentList = 0
       questions[currentList++].push(question)
     })
+    
+    let noResultsMessage
+    if (this.props.questions.length === 0)
+      noResultsMessage = <p style={{textAlign: 'center'}}><i>Sorry, questions match what you searched for!</i></p>
 
     return (
       <Layout>
         <div className="row">
           <div className="twelve columns">
             <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
+            {noResultsMessage}
           </div>
         </div>
         <MediaQuery maxWidth={659}>

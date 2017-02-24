@@ -24,7 +24,7 @@ export default class extends React.Component {
           <div className="row">
             <div className="twelve columns">
               <hr/>
-              <p>&copy; <Link href="/"><a>Upsum</a></Link> {new Date().getYear() + 1900} {loginButton} <i>v{Package.version} beta</i> | <a href="/rss.xml"><i className="fa fa-rss"/> RSS Feed</a></p>
+              <p>&copy; <Link href="/"><a>Upsum</a></Link> {new Date().getYear() + 1900} {loginButton} <i>v{Package.version} beta</i> <a href="/rss.xml"><i className="fa fa-rss"/> RSS Feed</a></p>
             </div>
           </div>
         </div>
