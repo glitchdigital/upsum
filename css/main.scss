@@ -41,20 +41,23 @@ a {
     height: 107px;
     width: 300px;
   }
+
 }
 @media (min-width: 500px) {
   .logo img {
     height: 124px;
     width: 350px;
   }
+
 }
 @media (min-width: 660px) {
   .logo {
     text-align: left;
     margin-bottom: 10px;
   }
+
 }
-.header .container { 
+.header .container {
   padding-top: 0px;
 }
 .container {
@@ -71,6 +74,7 @@ a {
     background-color: #eee;
     padding: 20px 30px 30px 30px;
   }
+
 }
 form {
   margin: 0;
@@ -83,7 +87,7 @@ hr {
 }
 h1.title {
   margin: 0px 0 0 0;
-  white-space: nowrap; 
+  white-space: nowrap;
   font-weight: 300;
   font-size: 60px;
   line-height: 90px;
@@ -104,7 +108,7 @@ h1.title img {
   color: #fff;
   display: inline-block;
   padding: 0 10px;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 h5 {
   text-transform: uppercase;
@@ -156,6 +160,7 @@ footer p {
     width: 80%;
     max-width: 330px;
   }
+
 }
 #search .search-input:focus {
   background-color: #fff;
@@ -175,6 +180,7 @@ footer p {
     position: absolute;
     top: -5px;
   }
+
 }
 #search .fa-microphone:hover,
 #search .fa-microphone:focus {
@@ -193,7 +199,7 @@ footer p {
   background: transparent;
   opacity: 0.5;
 }
-.menubar { 
+.menubar {
   text-align: right;
   margin: 0;
   background-color: #e5e5e5;
@@ -204,7 +210,7 @@ footer p {
   background: transparent;
   padding: 0;
 }
-.menubar .button { 
+.menubar .button {
   margin-bottom: 0;
 }
 .search {
@@ -217,6 +223,7 @@ footer p {
     padding-top: 40px;
     margin-right: 30px;
   }
+
 }
 .question-card {
   background: #f9f9f9;
@@ -233,6 +240,7 @@ footer p {
     transform: scale(1.025);
     transition-duration: 0.1s;
   }
+
 }
 .question-card h3,
 .question-card h3 a {
@@ -246,6 +254,7 @@ footer p {
   .question-card:hover h3 a {
     color: #444;
   }
+
 }
 .question-card-image {
   background-color: #e5e5e5;
@@ -263,6 +272,7 @@ footer p {
   .question-card-image {
     height: 250px;
   }
+
 }
 .question-image {
   background-color: #e5e5e5;
@@ -299,6 +309,7 @@ footer p {
   .question-image {
     height: 300px;
   }
+
 }
 @media (min-width: 660px) {
   .question-cards .columns.four {
@@ -322,7 +333,7 @@ footer p {
   .question-cards .three.columns.last {
     margin: 0 0 0 0.7%;
   }
-  
+
 }
 .buttons {
   text-align: right;
@@ -388,17 +399,17 @@ footer p {
 }
 /*
 .question-card .date-label:after {
-  content: "";
-  position: absolute;
-  top: 0px;
-  right: -15px;
-  display: inline-block;
-  background: transparent;
-  border-top: 17px solid #25D5FD;
-  border-bottom: 17px solid #25D5FD;
-  border-right: 15px solid transparent;
-  width: 5px;
-  height: 0px;
+content: "";
+position: absolute;
+top: 0px;
+right: -15px;
+display: inline-block;
+background: transparent;
+border-top: 17px solid #25D5FD;
+border-bottom: 17px solid #25D5FD;
+border-right: 15px solid transparent;
+width: 5px;
+height: 0px;
 }
 */
 .question {
@@ -438,17 +449,17 @@ footer p {
 }
 /*
 .question .date-label:after {
-  content: "";
-  position: absolute;
-  top: 0px;
-  right: -15px;
-  display: inline-block;
-  background: transparent;
-  border-top: 17px solid #25D5FD;
-  border-bottom: 17px solid #25D5FD;
-  border-right: 15px solid transparent;
-  width: 5px;
-  height: 0px;
+content: "";
+position: absolute;
+top: 0px;
+right: -15px;
+display: inline-block;
+background: transparent;
+border-top: 17px solid #25D5FD;
+border-bottom: 17px solid #25D5FD;
+border-right: 15px solid transparent;
+width: 5px;
+height: 0px;
 }
 */
 
@@ -460,7 +471,7 @@ footer p {
 .button-facebook,
 .button-facebook:hover,
 .button-facebook:active,
-.button-facebook:visited  {
+.button-facebook:visited {
   border-color: #3B5998;
   background-color: #3B5998;
   color: #fff !important;
