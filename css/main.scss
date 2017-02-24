@@ -492,3 +492,30 @@ height: 0px;
   background-color: #d34836;
   color: #fff !important;
 }
+
+.question {
+  animation: fadein 0.5s;
+}
+
+.question-card {
+  animation: fadein 0.5s;
+}
+
+.question-sidebar .question-card {
+  animation: fadein 0.2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadein-grow {
+    from { opacity: 0; height: 0;}
+    to   { opacity: 1; max-height: 150px; }
+}
+
+@keyframes grow {
+    from { height: 0;}
+    to   { max-height: 150px; }
+}

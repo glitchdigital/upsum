@@ -67,6 +67,10 @@ export default class extends Page {
 
   // This is called on initial page load
   async componentDidMount() {
+    this.setState({
+      relatedQuestions: []
+    })
+    
     const relatedQuestions = await this.constructor.getRelatedQuestions(this.props.question)
     
     // Update state
@@ -78,7 +82,12 @@ export default class extends Page {
   // This is called any time the question changes
   // e.g. a related question is clicked on in the sidebar
   async componentWillReceiveProps(nextProps) {
-    super.updateGoogleAnalytics(nextProps)
+    super.componentWillReceiveProps(nextProps)
+    
+    this.setState({
+      relatedQuestions: []
+    })
+
     const relatedQuestions = await this.constructor.getRelatedQuestions(nextProps.question)
     
     // Update state
