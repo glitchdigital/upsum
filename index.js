@@ -4,6 +4,7 @@ const next = require('next')
 const fetch = require('isomorphic-fetch')
 const sass = require('node-sass')
 const RSS = require('rss')
+const marked = require('marked')
 
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
@@ -113,7 +114,7 @@ app.prepare()
             let url = "https://upsum.glitched.news/questions/"+question['@id'].split('/')[4]
             rssFeed.item({
                 title: question.name,
-                description: (question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : "",
+                description: marked((question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : ""),
                 url: url,
                 date: question['@dateCreated']
             })
