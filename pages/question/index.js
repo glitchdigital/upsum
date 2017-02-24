@@ -28,15 +28,18 @@ export default class extends Page {
     if (typeof window === 'undefined' && question['@id'])
       relatedQuestions = await this.getRelatedQuestions(question)
 
+    // Define URLs for sharing
     let shareUrl
     let shareImageTwitter
     let shareImageFacebook
     if (question['@id']) {
       if (typeof window === 'undefined') {
+        // Server side render
         shareUrl = 'https://' + req.hostname + '/questions/' + query.id
         shareImageTwitter = 'https://' + req.hostname + '/static/images/upsum-logo-share-twitter.png'
         shareImageFacebook = 'https://' + req.hostname + '/static/images/upsum-logo-share-facebook-v2.png'
       } else {
+        // Client side render
         shareUrl = 'https://' + window.location.host + '/questions/' + query.id
         shareImageTwitter = 'https://' + window.location.host + '/static/images/upsum-logo-share-twitter.png'
         shareImageFacebook = 'https://' + window.location.host + '/static/images/upsum-logo-share-facebook-v2.png'
@@ -49,7 +52,9 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       session: session.getState(),
       shareUrl: shareUrl,
-      shareImageTwitter: shareImageTwitter
+      shareImage: shareImageTwitter,
+      shareImageTwitter: shareImageTwitter,
+      shareImageFacebook: shareImageFacebook
     }
   }
   
@@ -199,12 +204,12 @@ export default class extends Page {
             <meta property="og:title" content={this.props.question.name}/>
             <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? removeMarkdown(this.props.question.acceptedAnswer.text) : ""}/>
-            <meta property="og:image" content="https://upsum.glitched.news/static/images/upsum-logo-share-twitter.png"/>
+            <meta property="og:image" content={this.props.shareImage}/>
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:site" content="upsumnews"/>
             <meta name="twitter:title" content={this.props.question.name}/>
             <meta name="twitter:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? removeMarkdown(this.props.question.acceptedAnswer.text) : "" }/>
-            <meta name="twitter:image" content={this.props.shareImageTwitter}/>
+            <meta name="twitter:image" content={this.props.shareImage}/>
           </Head>
           <div itemScope itemType="http://schema.org/Question">
             <div className="row">
