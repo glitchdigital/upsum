@@ -96,9 +96,9 @@ app.prepare()
     var rssFeed = new RSS({
       title: 'Upsum',
       description: 'The news, summed up',
-      feed_url: 'https://upsum.gliched.news/rss.xml',
-      site_url: 'https://upsum.gliched.news/',
-      image_url: 'https://upsum.gliched.news/static/images/upsum-logo-share-twitter.png',
+      feed_url: 'https://upsum.news/rss.xml',
+      site_url: 'https://upsum.news/',
+      image_url: 'https://upsum.news/static/images/upsum-logo-share-twitter.png',
       language: 'en',
       pubDate: new Date().toString(),
       ttl: '60'
