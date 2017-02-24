@@ -15,7 +15,7 @@ export default class extends React.Component {
     if (this.session.sessionId) {
       loginButton = <span/>
     } else {
-      loginButton = <span>&nbsp; <Link href="/login"><a><i className="fa fa-sign-in"></i> Sign-In</a></Link> &nbsp;</span>
+      loginButton = <span>&nbsp; <Link href="/signin"><a><i className="fa fa-sign-in"></i> Sign-in</a></Link> &nbsp;</span>
     }
 
     return (

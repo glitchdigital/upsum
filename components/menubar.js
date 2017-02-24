@@ -16,10 +16,11 @@ export default connect(state => state)(class extends React.Component {
         <div className="menubar">
           <div className="container">
             <div className="row">
-              <div className="twelve columns">
+              <div className="six columns">
+                <p style={{float: 'left', margin: '10px 0 0 0'}} className="muted">Signed in as <i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></p>
+              </div>
+              <div className="six columns">
                 <p style={{margin: '5px 0'}}>
-                  <i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong>
-                  &nbsp;
                   <Link href="/question/new"><a className="button button-primary">New Question</a></Link>
                   &nbsp;
                   <a className="button" href="#" onClick={this.handleLogout} >Logout</a>
