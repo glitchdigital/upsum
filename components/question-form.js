@@ -189,7 +189,7 @@ export default class extends React.Component {
         <Textarea name="answerCitation" className="u-full-width" placeholder="The source(s) being cited" id="answerCitation" value={this.state.question.acceptedAnswer.citation}></Textarea>
 
         <label htmlFor="answerDatePublished">Date Answered</label>
-        <i className="fa fa-fw fa-calendar"/> <DatePicker todayButton={"Today"} dateFormat="YYYY-MM-DD" selected={moment(this.state.question.acceptedAnswer.datePublished)} onChange={this.handleDatePublishedChange}/>
+        <i className="fa fa-fw fa-calendar"/> <DatePicker fixedHeight todayButton={"Today"} dateFormat="YYYY-MM-DD" selected={moment(this.state.question.acceptedAnswer.datePublished)} onChange={this.handleDatePublishedChange}/>
         <p className="muted">
           <i>When updating the answer for an existing question, leave "Date Answered" unchanged for minor edits but do change it for significant updates.</i>
         </p>

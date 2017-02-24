@@ -138,8 +138,8 @@ $blue: #4295f4;
 .react-datepicker__day {
   color: #000;
   display: inline-block;
-  width: 38px;
-  line-height: 32px;
+  width: 34px;
+  line-height: 30px;
   text-align: center;
   margin: 2px }
 
@@ -149,6 +149,11 @@ $blue: #4295f4;
     border-radius: 2px;
     background-color: #f0f0f0; }
   .react-datepicker__day--today {
+}
+
+.react-datepicker__day--outside-month {
+  color: #aaa;
+  background-color: #f1f1f1;
 }
   .react-datepicker__day--highlighted {
     border-radius: 2px;
@@ -290,11 +295,11 @@ $blue: #4295f4;
   cursor: pointer;
   text-align: center;
   font-weight: bold;
-  padding: 5px 0;
+  padding: 2px 0;
   clear: left; }
 
 .react-datepicker__today-button:hover {
-  background: #eaeaea;
+  background: #eee;
 }
 
 .react-datepicker__tether-element {
