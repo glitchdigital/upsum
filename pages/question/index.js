@@ -67,6 +67,8 @@ export default class extends Page {
 
   // This is called on initial page load
   async componentDidMount() {
+    super.componentDidMount()
+    
     this.setState({
       relatedQuestions: []
     })
