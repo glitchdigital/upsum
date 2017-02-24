@@ -1,18 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
-import { Provider } from 'react-redux'
-import { Session } from '../models/session'
-import MenuBar from '../components/menubar'
 import Search from '../components/search'
 import Package from '../package.json'
 import inlineCSS from '../css/main.scss'
 
 export default class extends React.Component {
 
-  constructor (props) {
-    super(props)
-    this.session = Session()
+  // Never redraw header
+  shouldComponentUpdate(nextProps, nextState) {
+    return false
   }
 
   render(url) {
@@ -33,9 +30,6 @@ export default class extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           {stylesheet}
         </Head>
-        <Provider store={this.session}>
-          <MenuBar />
-        </Provider>
         <div className="header">
           <div className="container">
             <div className="row">
@@ -45,7 +39,7 @@ export default class extends React.Component {
                 </div>
               </div>
               <div className="six columns">
-                  <Search />
+                <Search />
               </div>
             </div>
           </div>
