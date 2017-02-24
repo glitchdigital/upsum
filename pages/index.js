@@ -16,6 +16,7 @@ export default class extends Page {
   }
 
   componentDidMount() {
+    /*
     if (!window.googleadsenseloaded) {
       window.googleadsenseloaded = true
       if (!adsbygoogle) var adsbygoogle
@@ -24,6 +25,7 @@ export default class extends Page {
         enable_page_level_ads: true
       })
     }
+    */
   }
 
   render() {

@@ -31,7 +31,6 @@ export default class extends React.Component {
         <Head>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           {stylesheet}
         </Head>
         <Provider store={this.session}>
