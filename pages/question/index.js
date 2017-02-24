@@ -112,7 +112,7 @@ export default class extends Page {
 
       
     // Get questions that have a similar title
-    const relatedQuestions = await questions.search({ limit: 5, name: searchQuery })
+    const relatedQuestions = await questions.search({ limit: 5, name: searchQuery, text: searchQuery  })
     
     // Don't include the question on this page as a related question
     relatedQuestions.forEach((relatedQuestion, index) => {
