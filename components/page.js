@@ -17,13 +17,13 @@ export default class extends React.Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    this.updateGoogleAnalytics()
     // Force scroll to top when loading new data in current page template
     if (typeof window !== 'undefined')
       window.scrollTo(0, 0)
   }
   
   componentDidMount() {
+    this.updateGoogleAnalytics()
     // Force scroll to top when navigating between pages
     if (typeof window !== 'undefined')
       window.scrollTo(0, 0)
