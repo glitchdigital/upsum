@@ -53,10 +53,14 @@ app.prepare()
     res.redirect('/')
   })
 
+  server.get('/robots.txt', function(req, res) {
+    res.send('Sitemap: https://upsum.news/sitemap.xml')
+  })
+  
   server.get('/sitemap.xml', function(req, res) {
     let sitemapOptions = {
-      http: 'http',
-      url: 'upsum.org',
+      http: 'https',
+      url: 'upsum.news',
       map: {
         '/': ['get']
       },
