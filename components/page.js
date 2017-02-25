@@ -36,8 +36,12 @@ export default class extends React.Component {
   // Update Google Analytics on page load (both on first load & with new props)
   updateGoogleAnalytics() {
     if (typeof window !== 'undefined') {
-      ReactGA.set({ page: window.location.pathname })
-      ReactGA.pageview(window.location.pathname)
+      // @FIXME Setting a delay so that we fire only after the route has changed
+      // (Otherwise page contents not always reflected correctly)
+      setTimeout(() => {
+        ReactGA.set({ page: window.location.pathname })
+        ReactGA.pageview(window.location.pathname)
+      }, 500)
     }
   }
 
