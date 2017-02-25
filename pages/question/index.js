@@ -208,18 +208,29 @@ export default class extends Page {
            </div>
           </div>
 
+      let description = 'Upsum - Find answers to questions about the news'
+      if ('text' in this.props.question
+          && this.props.question.text != '') {
+        description = removeMarkdown(this.props.question.text)
+      } else if ('acceptedAnswer' in this.props.question
+                  && 'text' in this.props.question.acceptedAnswer
+                  && this.props.question.acceptedAnswer.text !== '') {
+        description = removeMarkdown(this.props.question.acceptedAnswer.text)
+      }
+
       return (
         <Layout>
           <Head>
             <title>{this.props.question.name}</title>
+            <meta name="description" content={description}/>
             <meta property="og:title" content={this.props.question.name}/>
             <meta property="og:url" content={this.props.shareUrl}/>
-            <meta property="og:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? removeMarkdown(this.props.question.acceptedAnswer.text) : ""}/>
+            <meta property="og:description" content={description}/>
             <meta property="og:image" content={this.props.shareImage}/>
             <meta name="twitter:card" content="summary"/>
             <meta name="twitter:site" content="upsumnews"/>
             <meta name="twitter:title" content={this.props.question.name}/>
-            <meta name="twitter:description" content={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? removeMarkdown(this.props.question.acceptedAnswer.text) : "" }/>
+            <meta name="twitter:description" content={description}/>
             <meta name="twitter:image" content={this.props.shareImage}/>
           </Head>
           <div itemScope itemType="http://schema.org/Question">

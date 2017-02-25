@@ -50,6 +50,7 @@ export default class extends Page {
       <Layout>
         <Head>
           <title>Upsum - The news, summed up</title>
+          <meta name="description" content="Find accurate, quick and simple answers to your questions about the news."/>
         </Head>
         <div>
           <div className="row">

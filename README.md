@@ -2,7 +2,7 @@
 
 "The news, summed up"
 
-Using structured journalism to deliver news as questions & qnswers.
+Using structured journalism to deliver news as questions & answers.
 
 ## Getting started
 

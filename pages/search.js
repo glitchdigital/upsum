@@ -45,6 +45,7 @@ export default class extends Page {
       <Layout>
         <Head>
           <title>Upsum - Search {this.props.query}</title>
+          <meta name="description" content="Search Upsum for answers to your questions about the news."/>
         </Head>
         <div className="row">
           <div className="twelve columns">
