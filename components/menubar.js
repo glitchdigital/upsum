@@ -43,6 +43,8 @@ export default connect(state => state)(class extends React.Component {
                   <Link href="/"><a className="unstyled"><i className="fa fa-home"/> UPSUM</a></Link> <span className="beta">BETA</span>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}}>
+                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/> Follow</a>
+                  &nbsp; &nbsp; 
                   <a className="unstyled" href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope-o"/> Subscribe</a>
                 </p>
               </div>

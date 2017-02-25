@@ -204,7 +204,7 @@ footer p {
   margin: 0;
   background-color: #e5e5e5;
   color: #444;
-  padding: 5px 0;
+  padding: 5px 10px;
   background: #444;
   color: #fff;
 }
@@ -223,6 +223,11 @@ footer p {
 }
 
 @media (max-width: 659px) {
+  .menubar,
+  .menubar p,
+  .menubar a {
+    font-size: 14px !important;
+  }
   .sign-in-as {
     display: none;
   }
