@@ -17,7 +17,10 @@ export default connect(state => state)(class extends React.Component {
           <div className="container">
             <div className="row">
               <div className="six columns">
-                <p style={{float: 'left', margin: '10px 0 0 0'}} className="muted">Signed in as <i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></p>
+                <p style={{float: 'left', margin: '10px 0 0 0'}}>
+                <Link href="/"><a><i className="fa fa-fg fa-home"/> UPSUM</a></Link> <span className="beta">BETA</span>
+                &nbsp;| <span className="muted"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
+                </p>
               </div>
               <div className="six columns">
                 <p style={{margin: '5px 0'}}>
@@ -32,7 +35,21 @@ export default connect(state => state)(class extends React.Component {
       )
     } else {
       return (
-        <div></div>
+        <div className="menubar">
+          <div className="container">
+            <div className="row">
+              <div className="twelve columns">
+                <p style={{margin: '5px 0', float: 'left'}}>
+                  <Link href="/"><a><i className="fa fa-fg fa-home"/> UPSUM</a></Link> <span className="beta">BETA</span>
+                </p>
+                <p style={{margin: '5px 0', float: 'right'}}>
+                  <a href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope-o"/> Subscribe</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       )
     }
   }
