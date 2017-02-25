@@ -16,6 +16,7 @@ export default class extends Page {
   }
 
   componentDidMount() {
+    super.componentDidMount()
     /*
     if (!window.googleadsenseloaded) {
       window.googleadsenseloaded = true
