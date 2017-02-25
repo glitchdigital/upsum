@@ -68,7 +68,7 @@ app.prepare()
       }
     }
     // Add 50 most recently updated questions to the sitemap
-    fetch("http://upsum-api.glitched.news/Question?sort=-_created&limit=50")
+    fetch("https://api.upsum.news/Question?sort=-_created&limit=50")
     .then(function(response) {
       response.json()
       .then(function(json) {
@@ -105,13 +105,13 @@ app.prepare()
     })
 
     // Add 50 most recently updated questions to the RSS feed
-    fetch("http://upsum-api.glitched.news/Question?sort=-_created&limit=50")
+    fetch("https://api.upsum.news/Question?sort=-_created&limit=50")
     .then(function(response) {
       response.json()
       .then(function(json) {
         if (json instanceof Array) {
           json.forEach(function(question, index) {
-            let url = "https://upsum.glitched.news/questions/"+question['@id'].split('/')[4]
+            let url = "https://upsum.news/questions/"+question['@id'].split('/')[4]
             rssFeed.item({
                 title: question.name,
                 description: marked((question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : ""),
