@@ -204,7 +204,28 @@ footer p {
   margin: 0;
   background-color: #e5e5e5;
   color: #444;
-  padding: 5px 20px;
+  padding: 5px 0;
+  background: #444;
+  color: #fff;
+}
+.menubar a {
+  color: #ddd;
+}
+@media (min-width: 660px) {
+  .menubar {
+    padding: 5px 20px;
+    background: transparent;
+    color: #444
+  }
+  .menubar a {
+    color: #444
+  }
+}
+
+@media (max-width: 659px) {
+  .sign-in-as {
+    display: none;
+  }
 }
 .menubar .container {
   background: transparent;
@@ -213,7 +234,7 @@ footer p {
 .menubar .button {
   margin-bottom: 0;
 }
-.menubar a {
+a.unstyled {
   border: 0;
 }
 .menubar .beta {
