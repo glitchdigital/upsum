@@ -78,16 +78,19 @@ app.prepare()
       .then(function(json) {
         if (json instanceof Array) {
           json.forEach(function(question, index) {
-            // Set homepage last modified date to that of last question modified
-            if (index === 0)
-              sitemapOptions.route['/'].lastmod = question['@dateModified'].split('T')[0]
+            // Only add questions with answers to the sitemap!
+            if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
+              // Set homepage last modified date to that of last question modified
+              if (index === 0)
+                sitemapOptions.route['/'].lastmod = question['@dateModified'].split('T')[0]
 
-            let route = "/questions/"+question['@id'].split('/')[4]
-            sitemapOptions.map[route] = ['get']
-            sitemapOptions.route[route] = {
-              changefreq: 'weekly',
-              lastmod: question['@dateModified'].split('T')[0],
-              priority: 0.9
+              let route = "/questions/"+question['@id'].split('/')[4]
+              sitemapOptions.map[route] = ['get']
+              sitemapOptions.route[route] = {
+                changefreq: 'weekly',
+                lastmod: question['@dateModified'].split('T')[0],
+                priority: 0.9
+              }
             }
           })
         }
@@ -109,19 +112,31 @@ app.prepare()
     })
 
     // Add 50 most recently updated questions to the RSS feed
-    fetch("https://api.upsum.news/Question?sort=-_created&limit=50")
+    fetch('https://api.upsum.news/Question?sort=-_created&limit=50')
     .then(function(response) {
       response.json()
       .then(function(json) {
         if (json instanceof Array) {
           json.forEach(function(question, index) {
-            let url = "https://upsum.news/questions/"+question['@id'].split('/')[4]
-            rssFeed.item({
-                title: question.name,
-                description: marked((question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : ""),
-                url: url,
-                date: question['@dateCreated']
-            })
+            // Only add questions with answers to the feed!
+            if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
+              let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
+              let text = ''
+              if ('text' in question && question.text !== '') {
+                text += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
+              }
+              text += marked(question.acceptedAnswer.text)
+              if ('citation' in question.acceptedAnswer && question.acceptedAnswer.citation !== '') {
+                text += '<p><strong>Sources:</strong></p>'
+                     +marked(question.acceptedAnswer.citation)
+              }
+              rssFeed.item({
+                  title: question.name,
+                  description: text,
+                  url: url,
+                  date: question['@dateCreated']
+              })
+            }
           })
         }
         res.send(rssFeed.xml())
