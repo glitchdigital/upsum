@@ -17,7 +17,6 @@ export default class extends React.Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    this.updateGoogleAnalytics()
     // Force scroll to top when loading new data in current page template
     if (typeof window !== 'undefined')
       window.scrollTo(0, 0)
@@ -28,6 +27,10 @@ export default class extends React.Component {
     // Force scroll to top when navigating between pages
     if (typeof window !== 'undefined')
       window.scrollTo(0, 0)
+  }
+  
+  componentDidUpdate() {
+    this.updateGoogleAnalytics()
   }
   
   // Update Google Analytics on page load (both on first load & with new props)
