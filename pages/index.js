@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import MediaQuery from 'react-responsive'
@@ -47,6 +48,9 @@ export default class extends Page {
     
     return (
       <Layout>
+        <Head>
+          <title>Upsum - The news, summed up</title>
+        </Head>
         <div>
           <div className="row">
             <div className="twelve columns">

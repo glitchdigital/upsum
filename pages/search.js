@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import MediaQuery from 'react-responsive'
@@ -42,6 +43,9 @@ export default class extends Page {
 
     return (
       <Layout>
+        <Head>
+          <title>Upsum - Search {this.props.query}</title>
+        </Head>
         <div className="row">
           <div className="twelve columns">
             <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
