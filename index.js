@@ -54,7 +54,9 @@ app.prepare()
   })
 
   server.get('/robots.txt', function(req, res) {
-    res.send('Sitemap: https://upsum.news/sitemap.xml')
+    res.send("Sitemap: https://upsum.news/sitemap.xml\n"+
+             "User-agent: *\n"+
+             "Disallow: /signin\n")
   })
   
   server.get('/sitemap.xml', function(req, res) {
