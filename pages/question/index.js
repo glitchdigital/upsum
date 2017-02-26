@@ -196,13 +196,22 @@ export default class extends Page {
           </div>
 
       let description = 'Upsum - Find answers to questions about the news'
-      if ('text' in this.props.question
-          && this.props.question.text != '') {
+      if ('text' in this.props.question && this.props.question.text != '') {
         description = removeMarkdown(this.props.question.text)
       } else if ('acceptedAnswer' in this.props.question
                   && 'text' in this.props.question.acceptedAnswer
                   && this.props.question.acceptedAnswer.text !== '') {
         description = removeMarkdown(this.props.question.acceptedAnswer.text)
+      }
+      
+      let fullText = ''
+      if ('text' in this.props.question && this.props.question.text !== '') {
+        fullText += this.props.question.text+"\n\n"
+      }
+      if ('acceptedAnswer' in this.props.question
+          && 'text' in this.props.question.acceptedAnswer
+          && this.props.question.acceptedAnswer.text !== '') {
+        fullText += this.props.question.acceptedAnswer.text
       }
 
       return (
@@ -220,42 +229,58 @@ export default class extends Page {
             <meta name="twitter:description" content={description}/>
             <meta name="twitter:image" content={this.props.shareImage}/>
           </Head>
-          <div itemScope itemType="http://schema.org/Question">
-            <div className="row">
-              <div className="eight columns">
-                <div className="question">
-                  <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
-                  <span itemProp="dateCreated" style={{display: "none"}}>{this.props.question['@dateCreated']}</span>
-                  <span itemProp="dateModified" style={{display: "none"}}>{this.props.question['@dateModified']}</span>
-                  {imageTag}
-                  {videoTag}
-                  <ReactMarkdown source={this.props.question.text || ''}/>
-                  <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
-                  {answeredOn}
-                    <div itemProp="text">
-                      <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+          <div>
+            <div>
+              <div className="row">
+                <div className="eight columns">
+                  <div className="question">
+                    <div itemScope itemType="http://schema.org/Question">
+                      <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
+                      <span itemProp="url" style={{display: 'none'}}>{this.props.shareUrl}</span>
+                      <span itemProp="datePublished" style={{display: 'none'}}>{this.props.question['@dateCreated']}</span>
+                      <span itemProp="dateCreated" style={{display: 'none'}}>{this.props.question['@dateCreated']}</span>
+                      <span itemProp="dateModified" style={{display: 'none'}}>{this.props.question['@dateModified']}</span>
+                      {imageTag}
+                      {videoTag}
+                      <div style={{fontStyle: 'oblique'}}>
+                        <ReactMarkdown source={this.props.question.text || ''}/>
+                      </div>
+                      <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
+                      {answeredOn}
+                        <div itemProp="text">
+                          <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+                        </div>
+                      </div>
+                      {citation}
+                    </div>
+                    <div className="buttons">
+                      <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.shareUrl + "&t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
+                      <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.shareUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+                      {editButton}
                     </div>
                   </div>
-                  {citation}
-                  <div className="buttons">
-                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.shareUrl + "&t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
-                    <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.shareUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
-                    {editButton}
+                  <p className="muted" style={{fontSize: '15px'}}>
+                    <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
+                  </p>
+                </div>
+                <div className="four columns">
+                  <div className="question-sidebar">
+                  {
+                    this.state.relatedQuestions.map((question, i) => {
+                      return <QuestionCard question={question} key={i}/>
+                    })
+                  }
                   </div>
                 </div>
-                <p className="muted" style={{fontSize: '15px'}}>
-                  <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
-                </p>
               </div>
-              <div className="four columns">
-                <div className="question-sidebar">
-                {
-                  this.state.relatedQuestions.map((question, i) => {
-                    return <QuestionCard question={question} key={i}/>
-                  })
-                }
-                </div>
-              </div>
+            </div>
+            <div style={{display: 'none'}} itemscope itemtype="http://schema.org/NewsArticle">
+              <span itemprop="headline">{this.props.question.name}</span>
+              <span itemProp="url">{this.props.shareUrl}</span>
+              <span itemProp="datePublished">{this.props.question['@dateCreated']}</span>
+              <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
+              <span itemProp="dateModified">{this.props.question['@dateModified']}</span>
+              <span itemprop="text"><ReactMarkdown source={fullText}/></span>
             </div>
           </div>
         </Layout>
