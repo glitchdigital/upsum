@@ -274,13 +274,15 @@ export default class extends Page {
                 </div>
               </div>
             </div>
-            <div style={{display: 'none'}} itemscope itemtype="http://schema.org/NewsArticle">
-              <span itemprop="headline">{this.props.question.name}</span>
-              <span itemProp="url">{this.props.shareUrl}</span>
-              <span itemProp="datePublished">{this.props.question['@dateCreated']}</span>
-              <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
-              <span itemProp="dateModified">{this.props.question['@dateModified']}</span>
-              <span itemprop="text"><ReactMarkdown source={fullText}/></span>
+            <div style={{display: 'none'}}>
+              <div itemScope itemtype="http://schema.org/NewsArticle">
+                <span itemProp="headline">{this.props.question.name}</span>
+                <span itemProp="url">{this.props.shareUrl}</span>
+                <span itemProp="datePublished">{this.props.question['@dateCreated']}</span>
+                <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
+                <span itemProp="dateModified">{this.props.question['@dateModified']}</span>
+                <span itemprop="text"><ReactMarkdown source={fullText}/></span>
+              </div>
             </div>
           </div>
         </Layout>
