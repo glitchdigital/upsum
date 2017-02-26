@@ -266,19 +266,16 @@ p {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
   color: #444;
-}
-a:hover {
-  color: #000
-}
-p a {
   border-bottom: 1px dotted #888;
 }
-p a:hover {
+a:hover {
+  color: #000;
   border-bottom: 1px dotted #000;
 }
 
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+a.button,
 .button,
 button,
 input[type="submit"],
@@ -302,6 +299,7 @@ input[type="button"] {
   cursor: pointer;
   box-sizing: border-box;
 }
+a.button:hover,
 .button:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -316,6 +314,7 @@ input[type="button"]:focus {
   border-color: #888;
   outline: 0;
 }
+a.button.button-primary,
 .button.button-primary,
 button.button-primary,
 input[type="submit"].button-primary,
@@ -325,6 +324,7 @@ input[type="button"].button-primary {
   background-color: $primaryColor;
   border-color: $primaryColor;
 }
+a.button.button-primary:hover,
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,

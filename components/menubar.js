@@ -5,7 +5,8 @@ import { Session } from '../models/session'
 
 export default connect(state => state)(class extends React.Component {
 
-  handleLogout() {
+  handleLogout(e) {
+    e.preventDefault()
     const session = Session()
     session.dispatch({ type: 'LOGOUT' })
   }
@@ -16,14 +17,12 @@ export default connect(state => state)(class extends React.Component {
         <div className="menubar">
           <div className="container">
             <div className="row">
-              <div className="six columns">
-                <p style={{float: 'left', margin: '10px 0 0 0'}}>
-                <Link href="/"><a className="unstyled"><i className="fa fa-home"/> Upsum</a></Link> <span className="beta">BETA</span>
-                &nbsp;<span className="hidden-mobile"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
+              <div className="twelve columns">
+                <p style={{margin: '5px 0', float: 'left'}}>
+                  <Link href="/"><a className="unstyled"><i className="fa fa-home"/><span className="hidden-mobile"> Upsum</span></a></Link> <span className="beta">BETA</span>
+                  &nbsp;<span className="hidden-mobile"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
                 </p>
-              </div>
-              <div className="six columns">
-                <p style={{margin: '5px 0'}}>
+                <p style={{margin: '5px 0', float: 'right'}}>
                   <Link href="/question/new"><a className="button button-primary">New</a></Link>
                   &nbsp;
                   <a className="button" href="#" onClick={this.handleLogout} >Sign out</a>
