@@ -195,6 +195,13 @@ export default class extends Page {
            </div>
           </div>
 
+      let datePublished = this.props.question['@dateCreated']
+      if ('acceptedAnswer' in this.props.question
+          && 'text' in this.props.question.acceptedAnswer
+          && this.props.question.acceptedAnswer.datePublished !== '') {
+        datePublished = this.props.question.acceptedAnswer.datePublished
+      }
+
       let description = 'Upsum - Find answers to questions about the news'
       if ('text' in this.props.question && this.props.question.text != '') {
         description = removeMarkdown(this.props.question.text)
@@ -237,7 +244,7 @@ export default class extends Page {
                     <div itemScope itemType="http://schema.org/Question">
                       <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
                       <span itemProp="url" style={{display: 'none'}}>{this.props.shareUrl}</span>
-                      <span itemProp="datePublished" style={{display: 'none'}}>{this.props.question['@dateCreated']}</span>
+                      <span itemProp="datePublished" style={{display: 'none'}}>{datePublished}</span>
                       <span itemProp="dateCreated" style={{display: 'none'}}>{this.props.question['@dateCreated']}</span>
                       <span itemProp="dateModified" style={{display: 'none'}}>{this.props.question['@dateModified']}</span>
                       {imageTag}
@@ -275,13 +282,23 @@ export default class extends Page {
               </div>
             </div>
             <div style={{display: 'none'}}>
-              <div itemScope itemtype="http://schema.org/NewsArticle">
+              <div itemScope itemType="http://schema.org/NewsArticle">
                 <span itemProp="headline">{this.props.question.name}</span>
                 <span itemProp="url">{this.props.shareUrl}</span>
-                <span itemProp="datePublished">{this.props.question['@dateCreated']}</span>
+                <span itemProp="datePublished">{datePublished}</span>
                 <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
                 <span itemProp="dateModified">{this.props.question['@dateModified']}</span>
-                <span itemprop="text"><ReactMarkdown source={fullText}/></span>
+                <span itemProp="author" itemScope itemType="https://schema.org/Organization">
+                  <span itemProp="name">Upsum</span>
+                </span>
+                <div itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+                  <span itemProp="name">Upsum</span>
+                </span>
+                <div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+                  <img src="{this.props.shareImage}"/>
+                  <meta itemProp="url" content={this.props.shareImage}/>
+                </div>
+                <span itemProp="text"><ReactMarkdown source={fullText}/></span>
               </div>
             </div>
           </div>
