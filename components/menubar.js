@@ -18,8 +18,8 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="six columns">
                 <p style={{float: 'left', margin: '10px 0 0 0'}}>
-                <Link href="/"><a className="unstyled"><i className="fa fa-home"/> UPSUM</a></Link> <span className="beta">BETA</span>
-                &nbsp;<span className="sign-in-as muted"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
+                <Link href="/"><a className="unstyled"><i className="fa fa-home"/> Upsum</a></Link> <span className="beta">BETA</span>
+                &nbsp;<span className="hidden-mobile"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
                 </p>
               </div>
               <div className="six columns">
@@ -40,12 +40,12 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled"><i className="fa fa-home"/> UPSUM</a></Link> <span className="beta">BETA</span>
+                  <Link href="/"><a className="unstyled"><i className="fa fa-home"/><span className="hidden-mobile"> Upsum</span></a></Link> <span className="beta">BETA</span>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}}>
                   <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/> Follow</a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope-o"/> Subscribe</a>
+                  <a className="unstyled" href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope"/> Subscribe</a>
                 </p>
               </div>
             </div>

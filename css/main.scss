@@ -36,26 +36,23 @@ a {
   width: 280px;
   border: 0;
 }
-@media (min-width: 400px) {
+@media (min-width: 375px) {
   .logo img {
     height: 107px;
     width: 300px;
   }
-
 }
-@media (min-width: 500px) {
+@media (min-width: 412px) {
   .logo img {
     height: 124px;
     width: 350px;
   }
-
 }
 @media (min-width: 660px) {
   .logo {
     text-align: left;
     margin-bottom: 10px;
   }
-
 }
 .header .container {
   padding-top: 0px;
@@ -157,11 +154,16 @@ footer p {
     right: -20px;
   }
   #search .search-input {
-    width: 80%;
+    width: 70%;
     max-width: 330px;
   }
-
 }
+@media (min-width: 768px) {
+  #search .search-input {
+    width: 90%;
+  }
+}
+
 #search .search-input:focus {
   background-color: #fff;
 }
@@ -221,15 +223,12 @@ footer p {
     color: #444
   }
 }
-
 @media (max-width: 659px) {
-  .menubar,
-  .menubar p,
-  .menubar a {
-    font-size: 14px !important;
-  }
-  .sign-in-as {
+  .hidden-mobile {
     display: none;
+  }
+  a.unstyled {
+    border: 0 !important;
   }
 }
 .menubar .container {
@@ -263,7 +262,6 @@ a.unstyled {
     padding-top: 40px;
     margin-right: 30px;
   }
-
 }
 .question-card {
   background: #f9f9f9;
