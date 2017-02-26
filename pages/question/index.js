@@ -284,6 +284,7 @@ export default class extends Page {
             <div style={{display: 'none'}}>
               <div itemScope itemType="http://schema.org/NewsArticle">
                 <span itemProp="headline">{this.props.question.name}</span>
+                <link itemProp="mainEntityOfPage" href={this.props.shareUrl}/>
                 <span itemProp="url">{this.props.shareUrl}</span>
                 <span itemProp="datePublished">{datePublished}</span>
                 <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
@@ -293,10 +294,17 @@ export default class extends Page {
                 </span>
                 <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
                   <span itemProp="name">Upsum</span>
+                  <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
+                    <meta itemProp="url" content={this.props.shareImage}/>
+                    <meta itemProp="height" content="537"/>
+                    <meta itemProp="width" content="537"/>
+                  </span>
                 </span>
                 <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
                   <img src="{this.props.shareImage}"/>
                   <meta itemProp="url" content={this.props.shareImage}/>
+                  <meta itemProp="height" content="537"/>
+                  <meta itemProp="width" content="537"/>
                 </span>
                 <span itemProp="text"><ReactMarkdown source={fullText}/></span>
               </div>
