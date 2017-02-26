@@ -306,7 +306,7 @@ export default class extends Page {
                   <meta itemProp="height" content="537"/>
                   <meta itemProp="width" content="537"/>
                 </span>
-                <span itemProp="text"><ReactMarkdown source={fullText}/></span>
+                <span itemProp="articleBody"><ReactMarkdown source={fullText}/></span>
               </div>
             </div>
           </div>
