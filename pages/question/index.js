@@ -291,13 +291,13 @@ export default class extends Page {
                 <span itemProp="author" itemScope itemType="https://schema.org/Organization">
                   <span itemProp="name">Upsum</span>
                 </span>
-                <div itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+                <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
                   <span itemProp="name">Upsum</span>
                 </span>
-                <div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+                <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
                   <img src="{this.props.shareImage}"/>
                   <meta itemProp="url" content={this.props.shareImage}/>
-                </div>
+                </span>
                 <span itemProp="text"><ReactMarkdown source={fullText}/></span>
               </div>
             </div>
