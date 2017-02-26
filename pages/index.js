@@ -45,12 +45,21 @@ export default class extends Page {
       if (!questions[currentList]) questions[currentList] = []
       questions[currentList++].push(question)
     })
-    
+
     return (
       <Layout>
         <Head>
           <title>Upsum - The news, summed up</title>
           <meta name="description" content="Find accurate, quick and simple answers to your questions about the news."/>
+          <meta property="og:title" content="Upsum - The news, summed up"/>
+          <meta property="og:url" content="https://upsum.news"/>
+          <meta property="og:description" content="Find accurate, quick and simple answers to your questions about the news."/>
+          <meta property="og:image" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/>
+          <meta name="twitter:card" content="summary"/>
+          <meta name="twitter:site" content="upsumnews"/>
+          <meta name="twitter:title" content="Upsum - The news, summed up"/>
+          <meta name="twitter:description" content="Find accurate, quick and simple answers to your questions about the news."/>
+          <meta name="twitter:image" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/>
         </Head>
         <div>
           <div className="row">

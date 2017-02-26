@@ -29,22 +29,9 @@ export default class extends Page {
       relatedQuestions = await this.getRelatedQuestions(question)
 
     // Define URLs for sharing
-    let shareUrl
-    let shareImageTwitter
-    let shareImageFacebook
-    if (question['@id']) {
-      if (typeof window === 'undefined') {
-        // Server side render
-        shareUrl = 'https://' + req.hostname + '/questions/' + query.id
-        shareImageTwitter = 'https://' + req.hostname + '/static/images/upsum-logo-share-twitter.png'
-        shareImageFacebook = 'https://' + req.hostname + '/static/images/upsum-logo-share-facebook-v2.png'
-      } else {
-        // Client side render
-        shareUrl = 'https://' + window.location.host + '/questions/' + query.id
-        shareImageTwitter = 'https://' + window.location.host + '/static/images/upsum-logo-share-twitter.png'
-        shareImageFacebook = 'https://' + window.location.host + '/static/images/upsum-logo-share-facebook-v2.png'
-      }
-    }
+    let shareUrl = 'https://upsum.news/questions/' + query.id
+    let shareImageTwitter = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
+    let shareImageFacebook = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
     
     return {
       id: query.id,
