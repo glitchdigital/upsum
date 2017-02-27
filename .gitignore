@@ -13,6 +13,5 @@ npm-debug.log
 /.sass-cache
 static/css/main-*.css
 static/css/main-*.css.map
-/data
 /.DS_Store
 /.env
