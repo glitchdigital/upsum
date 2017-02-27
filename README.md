@@ -1,6 +1,7 @@
 # Upsum
 
-"The news, summed up"
+Upsum - The news, summed up
+https://upsum.news
 
 Using structured journalism to deliver news as questions & answers.
 
