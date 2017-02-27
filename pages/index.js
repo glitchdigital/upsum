@@ -12,7 +12,7 @@ export default class extends Page {
   static async getInitialProps({ req }) {
     await super.getInitialProps({req})
     const questions = new Questions
-    const results = await questions.search({ limit: 64 })
+    const results = await questions.search({ limit: 50 })
     return { questions: results }
   }
 
@@ -62,7 +62,7 @@ export default class extends Page {
           <meta name="twitter:image" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/>
         </Head>
         <div>
-          <div className="row">
+          <div style={{display: 'none'}} className="row">
             <div className="twelve columns">
               <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
             </div>

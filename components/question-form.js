@@ -3,22 +3,30 @@ import Link from 'next/link'
 import React from 'react'
 import TimeAgo from 'react-timeago'
 import Textarea from 'react-textarea-autosize'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
-import moment from 'moment'
-import DatePicker from 'react-datepicker'
+import Images from '../components/images'
+import ImagesModel from '../models/images'
 
 export default class extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      question: this.props.question
+      question: this.props.question,
+      imageSearchTextInput: '',
+      imageSearchText: ''
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDatePublishedChange = this.handleDatePublishedChange.bind(this)
+    this.handleImageSearchSubmit = this.handleImageSearchSubmit.bind(this)
+    this.handleImageSearchClear = this.handleImageSearchClear.bind(this)
+    this.handleAddImage = this.handleAddImage.bind(this)
+    this.handleImageRemoveImage = this.handleImageRemoveImage.bind(this)
   }
    
   async handleDelete(event) {
@@ -31,6 +39,22 @@ export default class extends React.Component {
     }
    }
 
+   handleImageSearchClear(event) {
+     this.setState({
+       question: this.state.question,
+       imageSearchTextInput: '',
+       imageSearchText: ''
+     })
+   }
+  
+  handleImageSearchSubmit(event) {
+    this.setState({
+      question: this.state.question,
+      imageSearchTextInput: this.state.imageSearchTextInput,
+      imageSearchText: this.state.imageSearchTextInput
+    })
+  }
+  
   handleChange(event) {
     if (event.target.name == "question")
       this.state.question.name = event.target.value
@@ -44,8 +68,11 @@ export default class extends React.Component {
     if (event.target.name == "imageCaption")
       this.state.question.image.caption = event.target.value
       
-    if (event.target.name == "imagePublisher")
+    if (event.target.name == "imagePublisherName")
       this.state.question.image.publisher.name = event.target.value
+      
+    if (event.target.name == "imagePublisherUrl")
+      this.state.question.image.publisher.url = event.target.value
 
     if (event.target.name == "videoUrl")
       this.state.question.video.url = event.target.value
@@ -65,19 +92,64 @@ export default class extends React.Component {
     if (event.target.name == "answerCitation")
       this.state.question.acceptedAnswer.citation = event.target.value
 
-    this.setState(this.state.question)
+    if (event.target.name == "imageSearchText")
+      this.state.imageSearchTextInput = event.target.value
+
+    this.setState({
+      question: this.state.question,
+      imageSearchTextInput: this.state.imageSearchTextInput,
+      imageSearchText: this.state.imageSearchText
+    })
   }
 
   handleDatePublishedChange(date) {
     this.state.question.acceptedAnswer.datePublished = date.toDate()
-    this.setState(this.state.question)
+    this.setState({
+      question: this.state.question,
+      imageSearchTextInput: this.state.imageSearchTextInput,
+      imageSearchText: this.state.imageSearchText
+    })
   }
   
+  async handleAddImage(image) {
+    this.state.question.image.url = "https://upsum.news/static/images/upsum-logo-share-twitter.png"
+    this.state.question.image.publisher.name = image.owner
+    this.state.question.image.publisher.url = image.url
+    this.state.question.image.caption = image.description
+    this.setState({
+      question: this.state.question,
+      imageSearchTextInput: this.state.imageSearchTextInput,
+      imageSearchText: this.state.imageSearchText
+    })
+    
+    const images = new ImagesModel()
+    const json = await images.deployToCDN(image.image.src)
+    this.state.question.image.url = json.secure_url
+    this.setState({
+      question: this.state.question,
+      imageSearchTextInput: this.state.imageSearchTextInput,
+      imageSearchText: this.state.imageSearchText
+    })
+  }
+  
+  handleImageRemoveImage() {
+    this.state.question.image = {
+      publisher: {}
+    }
+    this.setState({
+      question: this.state.question,
+      imageSearchTextInput: this.state.imageSearchTextInput,
+      imageSearchText: this.state.imageSearchText
+    })
+  }
+    
   async handleSubmit(event) {
     event.preventDefault()
+    
     const session = Session()
     const questions = new Questions
     let question = {}
+    
     if (this.state.question['@id']) {
       // If we have an ID, update the Question
       question = await questions.update(this.state.question, session.getState().sessionId)
@@ -92,10 +164,25 @@ export default class extends React.Component {
     
   render() {
     const questionId = this.state.question['@id'] ? this.state.question['@id'].split('/')[4] : null
+    
     let deleteButton
     if (questionId)
       deleteButton = <span className="u-pull-left"><span onClick={this.handleDelete} className="button"><i className="fa fa-fw fa-lg fa-trash"></i> Delete</span></span>
-    
+
+    let imageTag
+    if (this.state.question.image && this.state.question.image.url) {
+      let fileName = this.state.question.image.url.split('/').pop()
+      let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,c_fill/'+fileName
+      imageTag = 
+        <div>
+          <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
+            <div className="question-image-text">
+              <p className="image-caption">{this.state.question.image.caption}</p>
+              <p className="image-credit">Image credit: <a target="_blank" href={this.state.question.image.publisher.url}>{this.state.question.image.publisher.name}</a></p>
+            </div>
+        </div>
+    }
+
     return (
       <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <h4>Question</h4>
@@ -110,41 +197,58 @@ export default class extends React.Component {
           <button type="button"><i className="fa fa-lg fa-fw fa-volume-up"></i> Add audio…</button>
         </p>
         */}
-        <div style={{display: "none"}}>
-          <div className="box">
-            <div className="u-pull-right">
-              <i className={this.state.question.image.url ? "fa fa-lg fa-fw fa-check" : ""}></i>
-            </div>
-            <h5><i className="fa fa-fw fa-image"></i> Image</h5>
-            <div className="box-show-on-hover">
-              <div className="row">
-                <div className="two columns">
-                  <label htmlFor="imageUrl" className="vertical-form-label">URL </label>
-                </div>
-                <div className="ten columns">
-                  <input name="imageUrl" className="u-full-width" type="text" placeholder="" id="imageUrl" value={this.state.question.image.url}/>
-                </div>
+
+        <div style={{display: (this.state.question.image.url) ? 'none' : 'block'}}>
+          <div style={{overflow: 'auto'}}>
+            <i style={{float: 'left', marginRight: '5px', position: 'relative', top: '10px'}} className="fa fa-lg fa-fw fa-image"/>
+            <input style={{float: 'left', marginRight: '5px'}} name="imageSearchText" autoComplete="off" type="text" placeholder="Search for image…" value={this.state.imageSearchTextInput}/>
+            <button style={{float: 'left', marginRight: '5px'}} type="button" onClick={this.handleImageSearchSubmit}>Search</button>
+            <button style={{float: 'left'}} type="button" onClick={this.handleImageSearchClear}>Clear</button>
+          </div>
+          <Images text={this.state.imageSearchText} addImage={this.handleAddImage}/>
+        </div>
+
+        <div>
+          <div style={{display: (this.state.question.image.url) ? 'block' : 'none'}}>
+            <div style={{marginBottom: '10px'}}>{imageTag}</div>
+            <div className="row" style={{display: 'none'}}>
+              <div className="two columns">
+                <label htmlFor="imageUrl" className="vertical-form-label">URL </label>
               </div>
-              <div className="row">
-                <div className="two columns">
-                  <label htmlFor="imageCaption" className="vertical-form-label">Caption </label>
-                </div>
-                <div className="ten columns">
-              <input name="imageCaption" className="u-full-width" type="text" placeholder="" id="imageCaption" value={this.state.question.image.caption}/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="two columns">
-                  <label htmlFor="imagePublisher" className="vertical-form-label">Credit</label>
-                </div>
-                <div className="ten columns">
-                  <input name="imagePublisher" className="u-full-width" type="text" placeholder="" id="imagePublisher" value={this.state.question.image.publisher.name}/>
-                </div>
+              <div className="ten columns">
+                <input name="imageUrl" className="u-full-width" type="text" placeholder="" id="imageUrl" value={this.state.question.image.url}/>
               </div>
             </div>
+            <div className="row">
+              <div className="two columns">
+                <label htmlFor="imageCaption" className="vertical-form-label">Caption </label>
+              </div>
+              <div className="ten columns">
+            <input name="imageCaption" className="u-full-width" type="text" placeholder="" id="imageCaption" value={this.state.question.image.caption}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="two columns">
+                <label htmlFor="imagePublisherName" className="vertical-form-label">Credit</label>
+              </div>
+              <div className="ten columns">
+                <input name="imagePublisherName" className="u-full-width" type="text" placeholder="" id="imagePublisherName" value={this.state.question.image.publisher.name}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="two columns">
+                <label htmlFor="imagePublisherUrl" className="vertical-form-label">Link</label>
+              </div>
+              <div className="ten columns">
+                <input name="imagePublisherUrl" className="u-full-width" type="text" placeholder="" id="imagePublisherUrl" value={this.state.question.image.publisher.url}/>
+              </div>
+            </div>
+            <p className="buttons">
+              <button type="button" onClick={this.handleImageRemoveImage}><i className="fa fa-lg fa-fw fa-ban"/> Remove image</button>
+            </p>
           </div>
 
-          <div className="box">
+          <div style={{display: 'none'}} className="box">
             <div className="u-pull-right">
               <i className={this.state.question.video.url ? "fa fa-lg fa-fw fa-check" : ""}></i>
             </div>

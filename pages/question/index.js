@@ -32,7 +32,15 @@ export default class extends Page {
     let shareUrl = 'https://upsum.news/questions/' + query.id
     let shareImageTwitter = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
     let shareImageFacebook = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
-    
+
+    if ('image' in question &&
+        'url' in question.image &&
+        question.image.url != '') {
+      let fileName = question.image.url.split('/').pop()
+      shareImageTwitter = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_537,w_537,c_fill/'+fileName
+      shareImageFacebook = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,w_1200,c_fill/'+fileName
+    }
+
     return {
       id: query.id,
       question: question,
@@ -147,18 +155,16 @@ export default class extends Page {
       }
       
       let imageTag
-      /*
       if (this.props.question.image && this.props.question.image.url) {
         imageTag = 
           <div>
             <div className="question-image" style={{backgroundImage: 'url('+this.props.question.image.url+')'}}></div>
             <div className="question-image-text">
-              <p>{this.props.question.image.caption}</p>
-              <p className="muted"><i>Image Credit: {this.props.question.image.publisher.name}</i></p>
+              <p className="image-caption">{this.props.question.image.caption}</p>
+              <p className="image-credit">Image credit: <a target="_blank" href={this.props.question.image.publisher.url || 'https://upsum.news'}>{this.props.question.image.publisher.name || 'Upsum'}</a></p>
             </div>
           </div>
       }
-      */
 
       let videoTag
       if (this.props.question.video && this.props.question.video.url) {

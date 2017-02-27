@@ -20,7 +20,7 @@ export default class extends Page {
     searchQuery = searchQuery.replace(/( the | to | and | is )/gi, ' ')
     
     const questions = new Questions
-    const results = await questions.search({ limit: 25, name: searchQuery, text: searchQuery })
+    const results = await questions.search({ limit: 50, name: searchQuery, text: searchQuery })
     return { questions: results, query: query.q }
   }
 

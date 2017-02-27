@@ -18,7 +18,7 @@ export default connect(state => state)(class extends React.Component {
           <div className="container">
             <div className="row">
               <div className="twelve columns">
-                <p style={{margin: '5px 0', float: 'left'}}>
+                <p style={{margin: '10px 0', float: 'left'}}>
                   <Link href="/"><a className="unstyled"><i className="fa fa-home"/><span className="hidden-mobile"> Upsum</span></a></Link> <span className="beta">BETA</span>
                   &nbsp;<span className="hidden-mobile"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
                 </p>

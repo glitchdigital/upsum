@@ -5,7 +5,7 @@ import { Session } from '../models/session'
 
 export default class extends React.Component {
   
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.session = Session()
     this.state = {

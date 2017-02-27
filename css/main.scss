@@ -270,11 +270,13 @@ a.unstyled:hover {
 }
 .question-card {
   background: #f9f9f9;
-  padding: 10px 15px;
   margin-bottom: 25px;
   box-shadow: 3px 3px 0px rgba(0,0,0,.1);
   cursor: pointer;
   border-radius: 5px 30px 5px 30px;
+}
+.question-card-contents {
+  padding: 10px 15px 10px 15px;
 }
 @media (min-width: 660px) {
   .question-card:hover {
@@ -290,6 +292,7 @@ a.unstyled:hover {
   font-size: 22px;
   line-height: 32px;
   font-weight: 600;
+  margin-top: 0;
   color: #555;
 }
 @media (min-width: 660px) {
@@ -309,7 +312,6 @@ a.unstyled:hover {
   -o-background-size: cover;
   background-size: cover;
   background-position: center center;
-  margin-bottom: 20px;
 }
 @media (min-width: 660px) {
   .question-card-image {
@@ -319,7 +321,7 @@ a.unstyled:hover {
 }
 .question-image {
   background-color: #e5e5e5;
-  height: 250px;
+  height: 300px;
   width: 100%;
   overflow: hidden;
   -webkit-background-size: cover;
@@ -328,17 +330,51 @@ a.unstyled:hover {
   background-size: cover;
   background-position: center center;
 }
-.question-image-text {
-  padding: 5px;
+
+.image-thumbnail {
+  display: inline-block;
   background-color: #e5e5e5;
-  background-color: #222;
+  height: 120px;
+  width: 160px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center; 
+}
+
+.image-thumbnail:hover {
+  cursor: pointer;
+}
+
+.question-image-text {
+  text-align: right;
+  padding: 5px 0;
+  background-color: transparent;
   margin-bottom: 20px;
 }
+
+.question-image-text .image-caption,
+.question-image-text .image-caption p,
+.question-image-text .image-caption a {
+  color: #666;
+}
+.question-image-text .image-credit,
+.question-image-text .image-credit p,
+.question-image-text .image-credit a {
+  color: #999;
+}
 .question-image-text p {
-  color: #fff;
-  font-size: 15px;
-  line-height: 20px;
   margin-bottom: 0;
+}
+.question-image-text a {
+  border-bottom: 1px dotted #aaa !important;
+}
+.question-image-text .image-caption {
+  font-weight: bold;
 }
 .question-video {
   margin-bottom: 40px;
@@ -350,7 +386,7 @@ a.unstyled:hover {
 }
 @media (min-width: 660px) {
   .question-image {
-    height: 300px;
+    height: 400px;
   }
 
 }

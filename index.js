@@ -1,10 +1,19 @@
+'use strict'
+
 const express = require('express')
+const bodyParser = require('body-parser')
 const sitemap = require('express-sitemap')
 const next = require('next')
 const fetch = require('isomorphic-fetch')
 const sass = require('node-sass')
 const RSS = require('rss')
 const marked = require('marked')
+const routes = {
+  images: require('./routes/images')
+}
+
+// Load environment variables from .env file if present
+require('dotenv').load()
 
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
@@ -19,6 +28,9 @@ app.prepare()
 .then(() => {
   const server = express()
 
+  server.use(bodyParser.json())
+  server.use(bodyParser.urlencoded({ extended: true }))
+  
   server.use(function(req, res, next) {
     res.setHeader('Vary', 'Accept-Encoding')
     next()
@@ -49,9 +61,8 @@ app.prepare()
     }
   })
 
-  server.get('/questions', (req, res) => {
-    res.redirect('/')
-  })
+  server.get('/images', routes.images.get)
+  server.post('/images', routes.images.post)
 
   server.get('/robots.txt', function(req, res) {
     res.send("Sitemap: https://upsum.news/sitemap.xml\n"+
@@ -149,7 +160,6 @@ app.prepare()
     })
   })
 
-  
   server.get('*', (req, res) => {
     return handle(req, res)
   })
