@@ -238,7 +238,7 @@ export default class extends Page {
             <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={description}/>
             <meta property="og:image" content={this.props.shareImage}/>
-            <meta name="twitter:card" content="summary"/>
+            <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content="upsumnews"/>
             <meta name="twitter:title" content={this.props.question.name}/>
             <meta name="twitter:description" content={description}/>
