@@ -72,7 +72,7 @@ export default class extends Page {
                 </div>
               })
             }
-            <p style={{marginTop: '40px', marginBottom: '0', textAlign: 'center'}}><Link href="/"><a>That&#39;s all!</a></Link></p>
+            <p style={{marginTop: '40px', textAlign: 'center'}}><Link href="/"><a>That&#39;s all!</a></Link></p>
           </div>
         </div>
       </Layout>

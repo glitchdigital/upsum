@@ -54,7 +54,7 @@ export default class extends React.Component {
     return (
       <div className="search">
         <form id="search" method="get" action="/search">
-          <input className="search-input" type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news…" />
+          <input className="search-input" type="text" name="q" id="searchInput" autoComplete="off" placeholder="Ask about the news" />
           <i style={this.state.speechInputStyle} id="recordingButton" className="fa fa-lg fa-fw fa-microphone" onClick={this.startDictation}></i>
         </form>
       </div>
