@@ -37,7 +37,7 @@ export default class extends Page {
         'url' in question.image &&
         question.image.url != '') {
       let fileName = question.image.url.split('/').pop()
-      shareImageTwitter = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_537,w_537,c_fill/'+fileName
+      shareImageTwitter = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
       shareImageFacebook = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,w_1200,c_fill/'+fileName
     }
 
