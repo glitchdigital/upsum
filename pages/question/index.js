@@ -156,9 +156,11 @@ export default class extends Page {
       
       let imageTag
       if (this.props.question.image && this.props.question.image.url) {
+        let fileName = this.props.question.image.url.split('/').pop()
+        let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,c_fill/'+fileName
         imageTag = 
           <div>
-            <div className="question-image" style={{backgroundImage: 'url('+this.props.question.image.url+')'}}></div>
+            <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
             <div className="question-image-text">
               <p className="image-caption">{this.props.question.image.caption}</p>
               <p className="image-credit">Image credit: <a target="_blank" href={this.props.question.image.publisher.url || 'https://upsum.news'}>{this.props.question.image.publisher.name || 'Upsum'}</a></p>
