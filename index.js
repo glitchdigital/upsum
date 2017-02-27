@@ -15,6 +15,10 @@ const routes = {
 // Load environment variables from .env file if present
 require('dotenv').load()
 
+if (process.env.LOGS_SECRET) {
+  require('now-logs')(process.env.LOGS_SECRET)
+}
+
 process.on('uncaughtException', function (err) {
   console.log(err)
 })
