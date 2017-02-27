@@ -15,6 +15,10 @@ const routes = {
 // Load environment variables from .env file if present
 require('dotenv').load()
 
+process.on('uncaughtException', function (err) {
+  console.log(err)
+})
+
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
 
@@ -28,9 +32,22 @@ app.prepare()
 .then(() => {
   const server = express()
 
+  // Debug uncaughtException errors
+  server.on('uncaughtException', function (req, res, route, err) {
+    console.log(route)
+    console.log(err)
+    if (!res.headersSent) {
+      return res.send(500, {ok: false})
+    }
+    res.write('\n')
+    res.end()
+  })
+  
+  // Handle data submission
   server.use(bodyParser.json())
   server.use(bodyParser.urlencoded({ extended: true }))
   
+  // Improving caching behaviour across browsers
   server.use(function(req, res, next) {
     res.setHeader('Vary', 'Accept-Encoding')
     next()
@@ -61,6 +78,8 @@ app.prepare()
     }
   })
 
+  // Endpoint to search and upload images to the CDN
+  // (middleware as the backend doesn't do this directly)
   server.get('/images', routes.images.get)
   server.post('/images', routes.images.post)
 

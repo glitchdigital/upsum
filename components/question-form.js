@@ -171,8 +171,11 @@ export default class extends React.Component {
 
     let imageTag
     if (this.state.question.image && this.state.question.image.url) {
+      let imageUrl = this.state.question.image.url
       let fileName = this.state.question.image.url.split('/').pop()
-      let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,c_fill/'+fileName
+      if (fileName !== 'upsum-logo-share-twitter.png') {
+        imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,c_fill/'+fileName
+      }
       imageTag = 
         <div>
           <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>

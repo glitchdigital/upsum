@@ -12,14 +12,6 @@ export default class extends React.Component {
       images: []
     }
   }
-  
-  async componentWillMount() {
-    const images = new Images()
-    this.setState({
-      text: this.props.text,
-      images: await images.search(this.props.text)
-    })
-  }
 
   // Only redraw when getting new props if the text is different
   async componentWillReceiveProps(nextProps) {
@@ -58,7 +50,7 @@ export default class extends React.Component {
           <p>Found {this.state.images.length} images</p>
           {
             this.state.images.map((image, i) => {
-              return <span key={'image-'+i}><span onClick={() => this.props.addImage(image)}><span className="image-thumbnail" style={{backgroundImage: 'url('+image.thumbnail.src+')'}}></span></span></span>
+              return <span key={'image-'+i} onClick={() => this.props.addImage(image)} className="image-thumbnail" style={{backgroundImage: 'url('+image.thumbnail.src+')'}}></span>
             })
           }
         </div>
@@ -66,7 +58,7 @@ export default class extends React.Component {
     } else {
       return(
         <div>
-          <p style={{display: (this.props.text && this.props.text !== '') ? 'block' : 'none' }}><p>Found 0 images</p></p>
+          <p style={{display: (this.props.text && this.props.text !== '') ? 'block' : 'none' }}>Found 0 images</p>
         </div>
       )
     }
