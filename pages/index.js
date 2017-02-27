@@ -62,9 +62,12 @@ export default class extends Page {
           <meta name="twitter:image" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/>
         </Head>
         <div>
-          <div style={{display: 'none'}} className="row">
+          <div className="row">
             <div className="twelve columns">
-              <h3><i className="fa fa-fw fa-line-chart"></i> Trending Questions</h3>
+              <Link href="/about"><a><div className="alert">
+                <i className="fa fa-lg fa-fw fa-info-circle"/> Hello! We are Upsum and we give accurate, quick and simple answers to questions about the news.
+                Want to know more?
+              </div></a></Link>
             </div>
           </div>
           <MediaQuery maxWidth={659}>

@@ -488,6 +488,7 @@ height: 0px;
 }
 .question h2 {
   font-weight: 400;
+  margin-bottom: 10px;
 }
 .question .date-label {
   background-color: $primaryColor;
@@ -609,4 +610,16 @@ height: 0px;
 @keyframes grow {
     from { height: 0;}
     to   { max-height: 150px; }
+}
+
+.alert {
+  padding: 10px 20px;
+  background: #ddd;
+  margin-bottom: 30px;
+}
+
+.alert,
+.alert p,
+.alert a {
+  color: #555 !important;
 }
