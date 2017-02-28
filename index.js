@@ -9,6 +9,7 @@ const fetch = require('isomorphic-fetch')
 const sass = require('node-sass')
 const RSS = require('rss')
 const marked = require('marked')
+const ampl = require('ampl')
 const routes = {
   images: require('./routes/images')
 }
@@ -190,18 +191,18 @@ app.prepare()
             // Only add questions with answers to the feed!
             if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
               let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
-              let text = ''
+              let html = ''
               if ('text' in question && question.text !== '') {
-                text += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
+                html += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
               }
-              text += marked(question.acceptedAnswer.text)
+              html += marked(question.acceptedAnswer.text)
               if ('citation' in question.acceptedAnswer && question.acceptedAnswer.citation !== '') {
-                text += '<p><strong>Sources:</strong></p>'
+                html += '<p><strong>Sources:</strong></p>'
                      +marked(question.acceptedAnswer.citation)
               }
               rssFeed.item({
                   title: question.name,
-                  description: text,
+                  description: html,
                   url: url,
                   date: question['@dateCreated']
               })
@@ -212,6 +213,47 @@ app.prepare()
       })
     })
   })
+
+  // Render AMP pages
+  server.get('/amp/questions/:id', function(req, res) {
+    fetch('https://api.upsum.news/Question/'+req.params.id)
+    .then(function(response) {
+      response.json()
+      .then(function(question) {
+        let markdownString = '# '+question.name+'\n\n'
+
+        if ('image' in question &&
+            'url' in question.image &&
+            question.image.url != '') {
+          let fileName = question.image.url.split('/').pop()
+          let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
+          markdownString += '!['+question.name+']('+imageURL+')\n\n'
+        }
+
+        if ('text' in question && question.text !== '') {
+          markdownString += question.text+'\n\n'
+        }
+        
+        if ('acceptedAnswer' in question &&
+            'text' in question.acceptedAnswer &&
+            question.acceptedAnswer.text !== '') {
+              markdownString += question.acceptedAnswer.text+'\n\n'
+        }
+        
+        if ('acceptedAnswer' in question &&
+            'citation' in question.acceptedAnswer &&
+            question.acceptedAnswer.citation !== '') {
+          markdownString += "Sources:\n\n"+question.acceptedAnswer.citation
+        }
+          
+        ampl.parse(markdownString, {style: 'body { margin: 0; padding: 20px; font-family: sans-serif;}'}, function(ampHtml) {
+          res.send(ampHtml)
+        })
+      })
+    })
+    
+  })
+  
 
   server.get('*', (req, res) => {
     return handle(req, res)
