@@ -9,6 +9,7 @@ import Layout from '../components/layout'
 import Page from '../components/page'
 import QuestionCard from '../components/question-card'
 import removeMarkdown from 'remove-markdown'
+import moment from 'moment'
 
 export default class extends Page {
   
@@ -22,12 +23,11 @@ export default class extends Page {
     let shareImageTwitter = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
     let shareImageFacebook = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
 
-    let upsumQuestions = await questions.search({ limit: 10, name: "Upsum" })
-    upsumQuestions.reverse()
+    let dailyQuestions = await questions.search({ limit: 20, filter: '_created:date('+moment().format('YYYY-MM-DD')+')' })
     
     return {
       id: query.id,
-      questions: upsumQuestions,
+      questions: dailyQuestions,
       session: session.getState(),
       shareUrl: shareUrl,
       shareImage: shareImageTwitter,
@@ -35,21 +35,36 @@ export default class extends Page {
       shareImageFacebook: shareImageFacebook
     }
   }
-  
+
+  popup(e) {
+    window.open(e.target.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+    e.preventDefault()
+    return false
+  }
+
   render() {
+    let questions = []
+    this.props.questions.map((question, i) => {
+      if (moment(question['@dateCreated']) > moment().subtract(1, 'days')) {
+        questions.push(question)
+      }
+    })
 
     return (
       <Layout>
         <Head>
-          <title>About Upsum</title>
-          <meta name="description" content="Find out more about upsum.news"/>
+          <title>Upsum Daily Breifing</title>
+          <meta name="description" content="Questions raised about the news today"/>
         </Head>
-      
+        <div className="row">
+          <div className="twelve columns">
+            <h1 className="briefing"><span>Daily Briefing for {moment().format('Do MMMM, YYYY')}</span></h1>
+          </div>
+        </div>
         <div className="row">
           <div className="offset-by-two eight columns">
-            <h1 className="briefing"><span>About Upsum</span></h1>
             {
-              this.props.questions.map((question, i) => {
+              questions.map((question, i) => {
                 let imageTag
                 if (question.image && question.image.url) {
                   let fileName = question.image.url.split('/').pop()
@@ -65,6 +80,7 @@ export default class extends Page {
                 }
                 return <div key={i} className="question">
                     <h2><strong>{question.name}</strong></h2>
+                    {imageTag}
                     <div style={{fontStyle: 'oblique'}}>
                       <ReactMarkdown source={question.text || ''}/>
                     </div>
@@ -82,11 +98,15 @@ export default class extends Page {
                         <ReactMarkdown source={question.acceptedAnswer.citation}/>
                      </div>
                    </div>
-                   <p className="muted" style={{marginBottom: 0, textAlign: 'right'}}>{i+1} of {this.props.questions.length}</p>
+                  <div className="buttons">
+                    <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent('https://upsum.news/questions/'+question['@id'].split('/')[4]) + "&t=" + encodeURIComponent(question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Share</a>
+                    <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent('https://upsum.news/questions/'+question['@id'].split('/')[4]) + "&text=" + encodeURIComponent(question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+                  </div>
+                  <p className="muted" style={{marginBottom: 0, textAlign: 'right'}}>{i+1} of {questions.length}</p>
                 </div>
               })
             }
-            <p style={{marginTop: '40px', textAlign: 'center'}}><Link href="/"><a>That&#39;s all there is to know!</a></Link></p>
+            <p style={{marginTop: '40px', textAlign: 'center'}}><Link href="/"><a>That&#39;s all for today!</a></Link></p>
           </div>
         </div>
       </Layout>

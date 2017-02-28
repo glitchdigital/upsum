@@ -107,6 +107,21 @@ h1.title img {
   padding: 0 10px;
   white-space: nowrap;
 }
+h1.briefing {
+  text-align: center;
+}
+
+h1.briefing span {
+  padding: 10px 30px;
+  display: inline-block;
+  background: #ddd;
+  color: #666;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 50px;
+  font-size: 36px;
+  line-height: 42px;
+}
 h5 {
   text-transform: uppercase;
   font-weight: 600;
@@ -617,7 +632,12 @@ height: 0px;
   background: #ddd;
   margin-bottom: 30px;
 }
-
+@media (min-width: 660px) {
+  .alert {
+    border-radius: 50px;
+    border-bottom: 3px solid #ccc;
+  }
+}
 .alert,
 .alert p,
 .alert a {

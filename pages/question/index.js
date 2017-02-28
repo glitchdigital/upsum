@@ -269,8 +269,8 @@ export default class extends Page {
                       {citation}
                     </div>
                     <div className="buttons">
-                      <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + this.props.shareUrl + "&t=" + this.props.question.name} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Like</a>
-                      <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + this.props.shareUrl + "&text=" + this.props.question.name}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+                      <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent(this.props.shareUrl) + "&t=" + encodeURIComponent(this.props.question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Share</a>
+                      <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(this.props.shareUrl) + "&text=" + encodeURIComponent(this.props.question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
                       {editButton}
                     </div>
                   </div>
