@@ -2,7 +2,8 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const sitemap = require('express-sitemap')
+const Sitemap = require('express-sitemap')
+const NewsSitemap = require('./lib/news-sitemap')
 const next = require('next')
 const fetch = require('isomorphic-fetch')
 const sass = require('node-sass')
@@ -89,6 +90,7 @@ app.prepare()
 
   server.get('/robots.txt', function(req, res) {
     res.send("Sitemap: https://upsum.news/sitemap.xml\n"+
+             "Sitemap: https://upsum.news/news-sitemap.xml\n"+
              "User-agent: *\n"+
              "Disallow: /question/new\n"+
              "Disallow: /question/edit\n"+
@@ -110,8 +112,8 @@ app.prepare()
         }
       }
     }
-    // Add 50 most recently updated questions to the sitemap
-    fetch("https://api.upsum.news/Question?sort=-_created&limit=50")
+    // Add 500 most recently updated questions to the sitemap
+    fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
     .then(function(response) {
       response.json()
       .then(function(json) {
@@ -133,11 +135,39 @@ app.prepare()
             }
           })
         }
-        sitemap(sitemapOptions).XMLtoWeb(res)
+        Sitemap(sitemapOptions).XMLtoWeb(res)
       })
     })
   })
 
+  server.get('/news-sitemap.xml', function(req, res) {
+    var newsSitemap = new NewsSitemap({
+      publication_name: 'Upsum',
+      publication_language: 'en'
+    })
+
+    // Add 500 most recently updated questions to the news sitemap
+    fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
+    .then(function(response) {
+      response.json()
+      .then(function(json) {
+        if (json instanceof Array) {
+          json.forEach(function(question, index) {
+            // Only add questions with answers to the sitemap!
+            if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
+              newsSitemap.item({
+                  location: 'https://upsum.news/questions/'+question['@id'].split('/')[4],
+                  title: question.name,
+                  publication_date: question['@dateCreated']
+              })
+            }
+          })
+        }
+        res.send(newsSitemap.xml())
+      })
+    })
+  })
+  
   server.get('/rss.xml', function(req, res) {
     var rssFeed = new RSS({
       title: 'Upsum',

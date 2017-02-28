@@ -41,7 +41,7 @@ export default class extends Page {
     return (
       <Layout>
         <Head>
-          <title>Upsum - About</title>
+          <title>About Upsum</title>
           <meta name="description" content="Find out more about upsum.news"/>
         </Head>
       
