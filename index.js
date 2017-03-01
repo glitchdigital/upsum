@@ -104,20 +104,22 @@ app.prepare()
       http: 'https',
       url: 'upsum.news',
       map: {
-        '/': ['get']
+        '/': ['get'],
+        '/about': ['get'],
+        '/daily': ['get']
       },
       route: {
         '/': {
           changefreq: 'daily',
           priority: 1.0
         },
+        '/about': {
+          changefreq: 'weekly',
+          priority: 0.5
+        },
         '/daily': {
           changefreq: 'daily',
           priority: 0.9
-        },
-        '/about': {
-          changefreq: 'monthly',
-          priority: 0.5
         }
       }
     }
@@ -131,8 +133,10 @@ app.prepare()
             // Only add questions with answers to the sitemap!
             if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
               // Set homepage last modified date to that of last question modified
-              if (index === 0)
+              if (index === 0) {
                 sitemapOptions.route['/'].lastmod = question['@dateModified'].split('T')[0]
+                sitemapOptions.route['/daily'].lastmod = question['@dateModified'].split('T')[0]
+              }
 
               let route = "/questions/"+question['@id'].split('/')[4]
               sitemapOptions.map[route] = ['get']
