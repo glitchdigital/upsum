@@ -111,6 +111,18 @@ app.prepare()
           changefreq: 'daily',
           priority: 1.0
         }
+      },
+      route: {
+        '/daily': {
+          changefreq: 'daily',
+          priority: 0.8
+        }
+      }
+      route: {
+        '/about': {
+          changefreq: 'monthly',
+          priority: 0.5
+        }
       }
     }
     // Add 500 most recently updated questions to the sitemap

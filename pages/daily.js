@@ -23,7 +23,7 @@ export default class extends Page {
     let shareImageTwitter = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
     let shareImageFacebook = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
 
-    let dailyQuestions = await questions.search({ limit: 20, filter: '_created:date('+moment().format('YYYY-MM-DD')+')' })
+    let dailyQuestions = await questions.search({ limit: 50, filter: '_created:date('+moment().format('YYYY-MM-DD')+')' })
     
     return {
       id: query.id,
@@ -53,12 +53,12 @@ export default class extends Page {
     return (
       <Layout>
         <Head>
-          <title>Upsum Daily Breifing</title>
+          <title>Upsum Daily Briefing</title>
           <meta name="description" content="Questions raised about the news today"/>
         </Head>
         <div className="row">
           <div className="twelve columns">
-            <h1 className="briefing"><span>Daily Briefing for {moment().format('Do MMMM, YYYY')}</span></h1>
+            <h1 className="briefing"><span>Daily Briefing for {moment().format('D MMMM, YYYY')}</span></h1>
           </div>
         </div>
         <div className="row">
