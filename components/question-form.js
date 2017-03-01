@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import Link from 'next/link'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import TimeAgo from 'react-timeago'
 import Textarea from 'react-textarea-autosize'
 import DatePicker from 'react-datepicker'
@@ -39,7 +40,7 @@ export default class extends React.Component {
     }
    }
 
-   handleImageSearchClear(event) {
+   handleImageSearchClear() {
      this.setState({
        question: this.state.question,
        imageSearchTextInput: '',
@@ -47,7 +48,7 @@ export default class extends React.Component {
      })
    }
   
-  handleImageSearchSubmit(event) {
+  handleImageSearchSubmit() {
     this.setState({
       question: this.state.question,
       imageSearchTextInput: this.state.imageSearchTextInput,
@@ -145,6 +146,23 @@ export default class extends React.Component {
     
   async handleSubmit(event) {
     event.preventDefault()
+
+    // If image search field has focus perform search instead of submitting
+    if (document.activeElement === ReactDOM.findDOMNode(this.refs.imageSearchInput)) {
+      this.handleImageSearchSubmit()
+      return
+    }
+    
+    if (this.state.question.name.trim() === '') {
+      alert('Enter a question before saving changes')
+      return
+    }
+    
+    if (this.state.question.acceptedAnswer.name.trim() === '' &&
+        this.state.question.acceptedAnswer.text.trim() === '') {
+      alert('Enter an answer before saving changes')
+      return
+    }
     
     const session = Session()
     const questions = new Questions
@@ -203,7 +221,7 @@ export default class extends React.Component {
         <div style={{display: (this.state.question.image.url) ? 'none' : 'block'}}>
           <div style={{overflow: 'auto'}}>
             <i style={{float: 'left', marginRight: '5px', position: 'relative', top: '10px'}} className="fa fa-lg fa-fw fa-image"/>
-            <input style={{float: 'left', marginRight: '5px'}} name="imageSearchText" autoComplete="off" type="text" placeholder="Search for image…" value={this.state.imageSearchTextInput}/>
+            <input ref="imageSearchInput" style={{float: 'left', marginRight: '5px'}} name="imageSearchText" autoComplete="off" type="text" placeholder="Search for image…" value={this.state.imageSearchTextInput}/>
             <button style={{float: 'left', marginRight: '5px'}} type="button" onClick={this.handleImageSearchSubmit}>Search</button>
             <button style={{float: 'left'}} type="button" onClick={this.handleImageSearchClear}>Clear</button>
           </div>
