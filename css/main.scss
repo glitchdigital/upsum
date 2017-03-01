@@ -147,9 +147,14 @@ footer p {
   text-decoration: none;
 }
 #search {
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 0;
   position: relative;
+}
+@media (min-width: 660px) {
+  #search {
+    margin-top: 20px;
+  }  
 }
 #search .search-input {
   position: relative;

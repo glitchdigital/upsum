@@ -44,12 +44,12 @@ export default class extends Page {
     return (
       <Layout>
         <Head>
-          <title>Upsum Daily Briefing</title>
+          <title>Upsum Daily</title>
           <meta name="description" content="Questions raised about the news today"/>
         </Head>
         <div className="row">
           <div className="twelve columns">
-            <h1 className="briefing"><span>Daily Briefing for {moment().format('D MMMM, YYYY')}</span></h1>
+            <h1 className="briefing"><span>Upsum Daily for {moment().format('D MMMM, YYYY')}</span></h1>
           </div>
         </div>
         <div className="row">
