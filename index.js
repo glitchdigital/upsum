@@ -110,15 +110,11 @@ app.prepare()
         '/': {
           changefreq: 'daily',
           priority: 1.0
-        }
-      },
-      route: {
+        },
         '/daily': {
           changefreq: 'daily',
-          priority: 0.8
-        }
-      },
-      route: {
+          priority: 0.9
+        },
         '/about': {
           changefreq: 'monthly',
           priority: 0.5
@@ -143,7 +139,7 @@ app.prepare()
               sitemapOptions.route[route] = {
                 changefreq: 'weekly',
                 lastmod: question['@dateModified'].split('T')[0],
-                priority: 0.9
+                priority: 1.0
               }
             }
           })
