@@ -139,8 +139,70 @@ export default class extends Page {
     return relatedQuestions
   }
   
+  popup(e) {
+    window.open(e.target.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+    e.preventDefault()
+    return false
+  }
+   
   render() {
     if (this.props.question['@id']) {
+      
+      let editButton
+      if (this.props.session.sessionId) {
+        editButton = <Link href={"/question/edit?id="+this.props.id} as={"/questions/edit/"+this.props.id}><a className="button"><i className="fa fa-fw fa-lg fa-pencil"></i> Edit</a></Link>
+      } else {
+        editButton = <span/>
+      }
+      
+      let imageTag
+      if (this.props.question.image && this.props.question.image.url) {
+        let fileName = this.props.question.image.url.split('/').pop()
+        let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,c_fill/'+fileName
+        imageTag = 
+          <div>
+            <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
+            <div className="question-image-text">
+              <p className="image-caption">{this.props.question.image.caption}</p>
+              <p className="image-credit">Image credit: <a target="_blank" href={this.props.question.image.publisher.url || 'https://upsum.news'}>{this.props.question.image.publisher.name || 'Upsum'}</a></p>
+            </div>
+          </div>
+      }
+
+      let videoTag
+      if (this.props.question.video && this.props.question.video.url) {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
+        /*
+        var match = this.props.question.video.url.match(regExp)
+        if (match && match[2].length == 11) {
+          const videoEmbedUrl = "//www.youtube.com/embed/"+match[2]
+          videoTag =
+            <div className="question-video">
+              <iframe width="100%" height="400" src={videoEmbedUrl} frameBorder="0" allowFullScreen></iframe>
+            </div>
+        }
+        */
+      }
+      
+      let answeredOn = <div><h4>This question has not been answered yet!</h4></div>
+      if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text)
+        answeredOn =
+          <div>
+            <p className="date-label">
+              <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={this.props.question.acceptedAnswer.datePublished || this.props.question['@dateModified']} />
+            </p>
+          </div>
+
+      
+      let citation
+      if (this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.citation)
+        citation = 
+          <div>
+           <h5>Source(s)</h5>
+            <div className="muted">
+              <ReactMarkdown source={this.props.question.acceptedAnswer.citation}/>
+           </div>
+          </div>
 
       let datePublished = this.props.question['@dateCreated']
       if ('acceptedAnswer' in this.props.question
@@ -187,7 +249,32 @@ export default class extends Page {
             <div>
               <div className="row">
                 <div className="eight columns">
-                  <QuestionCard question={this.props.question} session={this.props.session}/>
+                  <div className="question">
+                    <div itemScope itemType="http://schema.org/Question">
+                      <h2 itemProp="name"><strong>{this.props.question.name}</strong></h2>
+                      <span itemProp="url" style={{display: 'none'}}>{this.props.shareUrl}</span>
+                      <span itemProp="datePublished" style={{display: 'none'}}>{datePublished}</span>
+                      <span itemProp="dateCreated" style={{display: 'none'}}>{this.props.question['@dateCreated']}</span>
+                      <span itemProp="dateModified" style={{display: 'none'}}>{this.props.question['@dateModified']}</span>
+                      {imageTag}
+                      {videoTag}
+                      <div style={{fontStyle: 'oblique'}}>
+                        <ReactMarkdown source={this.props.question.text || ''}/>
+                      </div>
+                      <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
+                      {answeredOn}
+                        <div itemProp="text">
+                          <ReactMarkdown source={(this.props.question.acceptedAnswer && this.props.question.acceptedAnswer.text) ? this.props.question.acceptedAnswer.text : "" }/>
+                        </div>
+                      </div>
+                      {citation}
+                    </div>
+                    <div className="buttons">
+                      <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent(this.props.shareUrl) + "&t=" + encodeURIComponent(this.props.question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Share</a>
+                      <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(this.props.shareUrl) + "&text=" + encodeURIComponent(this.props.question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+                      {editButton}
+                    </div>
+                  </div>
                   <p className="muted" style={{fontSize: '15px'}}>
                     <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
                   </p>
