@@ -28,8 +28,10 @@ export default class extends Page {
       <Layout>
         <div className="row">
           <div className="eight columns">
-            <div className="question">
-              <QuestionForm question={question}/>
+            <div className="question-card">
+              <div className="question-card-contents">
+                <QuestionForm question={question}/>
+              </div>
             </div>
           </div>
         </div>

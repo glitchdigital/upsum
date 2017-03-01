@@ -99,29 +99,33 @@ export default class extends React.Component {
 
     return(
       <div className="question-card" itemScope itemType="http://schema.org/Question">
-        <h2 itemProp="name"><strong>{question.name}</strong></h2>
-        <span itemProp="url" style={{display: 'none'}}>{shareUrl}</span>
-        <span itemProp="datePublished" style={{display: 'none'}}>{datePublished}</span>
-        <span itemProp="dateCreated" style={{display: 'none'}}>{question['@dateCreated']}</span>
-        <span itemProp="dateModified" style={{display: 'none'}}>{question['@dateModified']}</span>
+        <div className="question-card-contents">
+          <h2 itemProp="name"><strong>{question.name}</strong></h2>
+          <span itemProp="url" style={{display: 'none'}}>{shareUrl}</span>
+          <span itemProp="datePublished" style={{display: 'none'}}>{datePublished}</span>
+          <span itemProp="dateCreated" style={{display: 'none'}}>{question['@dateCreated']}</span>
+          <span itemProp="dateModified" style={{display: 'none'}}>{question['@dateModified']}</span>
+        </div>
         {imageTag}
         {videoTag}
-        <div style={{fontStyle: 'oblique'}}>
-          <ReactMarkdown source={question.text || ''}/>
-        </div>
-        <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
-          {answeredOn}
-          <div itemProp="text">
-            <ReactMarkdown source={(question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : "" }/>
+        <div className="question-card-contents">
+          <div style={{fontStyle: 'oblique'}}>
+            <ReactMarkdown source={question.text || ''}/>
           </div>
+          <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
+            {answeredOn}
+            <div itemProp="text">
+              <ReactMarkdown source={(question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : "" }/>
+            </div>
+          </div>
+          {citation}
+          <div className="buttons">
+            <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent(shareUrl) + "&t=" + encodeURIComponent(question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Share</a>
+            <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(shareUrl) + "&text=" + encodeURIComponent(question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
+            {editButton}
+          </div>
+          {footer}
         </div>
-        {citation}
-        <div className="buttons">
-          <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent(shareUrl) + "&t=" + encodeURIComponent(question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Share</a>
-          <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(shareUrl) + "&text=" + encodeURIComponent(question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
-          {editButton}
-        </div>
-        {footer}
       </div>
     )
   }

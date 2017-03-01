@@ -188,10 +188,9 @@ export default class extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-        <h4>Question</h4>
-        <label htmlFor="question">The question</label>
+        <label htmlFor="question">Question</label>
         <input name="question" className="u-full-width" type="text" placeholder="What is the question?" id="question" value={this.state.question.name}/>
-        <label htmlFor="questionDetail">Optional detail to clarify the question</label>
+        <label htmlFor="questionDetail">Detail to clarify the question (optional)</label>
         <Textarea name="questionDetail" className="u-full-width" placeholder="Optional detail to clarify the question." id="questionDetail" value={this.state.question.text}></Textarea>
         {/*
         <p className="buttons">
@@ -284,23 +283,19 @@ export default class extends React.Component {
             </div>
           </div>
         </div>
-          
-        <h4>Answer</h4>
         {/*
         <label htmlFor="answerDetail">The answer to the question</label>
         <input name="answer" className="u-full-width" type="text" placeholder="The answer to the question." id="answer" value={this.state.question.acceptedAnswer.name}>/>
         */}
-        <label htmlFor="answerDetail">The answer to the question</label>
+        <label htmlFor="answerDetail">Answer to the question</label>
         <Textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question." id="answerDetail" value={this.state.question.acceptedAnswer.text}></Textarea>
-        <label htmlFor="answerCitation">Source (Optional)</label>
+        <label htmlFor="answerCitation">Source (optional)</label>
         <Textarea name="answerCitation" className="u-full-width" placeholder="The source(s) being cited" id="answerCitation" value={this.state.question.acceptedAnswer.citation}></Textarea>
-
         <label htmlFor="answerDatePublished">Date Answered</label>
         <i className="fa fa-fw fa-calendar"/> <DatePicker fixedHeight todayButton={"Today"} dateFormat="YYYY-MM-DD" selected={moment(this.state.question.acceptedAnswer.datePublished)} onChange={this.handleDatePublishedChange}/>
         <p className="muted">
-          <i>When updating the answer for an existing question, leave "Date Answered" unchanged for minor edits but do change it for significant updates.</i>
+          <i>"Date Answered" should be left unchanged for minor edits (correcting typos, formatting changes, etc.) but updated for significant edits.</i>
         </p>
-          
         <div className="u-cf u-full-width">
           {deleteButton}
           <p className="buttons u-pull-right">

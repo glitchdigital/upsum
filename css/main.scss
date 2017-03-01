@@ -294,7 +294,7 @@ a.unstyled:hover {
 @media (min-width: 660px) {
   .question-card-preview:hover {
     background: #fff;
-    box-shadow: 4px 4px 0px rgba(0,0,0,.2);
+    box-shadow: 4px 4px 0px rgba(0,0,0,.15);
     transform: scale(1.025);
     transition-duration: 0.1s;
   }
@@ -365,7 +365,7 @@ a.unstyled:hover {
 
 .question-image-text {
   text-align: right;
-  padding: 5px 0;
+  padding: 5px 15px;
   background-color: transparent;
   margin-bottom: 20px;
 }
@@ -479,9 +479,11 @@ a.unstyled:hover {
 }
 .question-card {
   background: #fff;
-  padding: 10px 15px;
   margin-bottom: 25px;
-  box-shadow: 5px 5px 0px rgba(0,0,0,.2);
+  box-shadow: 5px 5px 0px rgba(0,0,0,.1);
+}
+.question-card .question-card-contents {
+  padding: 10px 15px;
 }
 .question-card h2 {
   font-weight: 400;

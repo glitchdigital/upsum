@@ -19,8 +19,10 @@ export default class extends Page {
       <Layout>
         <div className="row">
           <div className="eight columns">
-            <div className="question">
-              <QuestionForm question={this.props.question}/>
+            <div className="question-card">
+              <div className="question-card-contents">
+                <QuestionForm question={this.props.question}/>
+              </div>
             </div>
           </div>
         </div>
