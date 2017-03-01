@@ -117,7 +117,7 @@ app.prepare()
           changefreq: 'daily',
           priority: 0.8
         }
-      }
+      },
       route: {
         '/about': {
           changefreq: 'monthly',
