@@ -28,6 +28,7 @@ export default class extends React.Component {
         <Head>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+          <script src="/static/js/postscribe-2.0.8.min.js"/>
           {stylesheet}
         </Head>
         <div className="header">
