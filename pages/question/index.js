@@ -75,11 +75,16 @@ export default class extends Page {
     this.setState({
       relatedQuestions: relatedQuestions
     })
+    
+    this.loadAd()
   }
-  
+    
   // This is called any time the question changes
   // e.g. a related question is clicked on in the sidebar
   async componentWillReceiveProps(nextProps) {
+    if (nextProps.id === this.props.id)
+      return
+      
     super.componentWillReceiveProps(nextProps)
     
     this.setState({
@@ -92,6 +97,8 @@ export default class extends Page {
     this.setState({
       relatedQuestions: relatedQuestions
     })
+
+    this.loadAd()
   }
 
   // Get related questions
@@ -100,7 +107,8 @@ export default class extends Page {
       return
 
     const questions = new Questions
-
+    const maxQuestions = 6
+      
     let searchQuery = question.name
     searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
     searchQuery = searchQuery.replace(/(^who |^what |^why |^how |^the )/gi, '')
@@ -108,7 +116,7 @@ export default class extends Page {
 
       
     // Get questions that have a similar title
-    const relatedQuestions = await questions.search({ limit: 5, name: searchQuery, text: searchQuery  })
+    const relatedQuestions = await questions.search({ limit: maxQuestions, name: searchQuery, text: searchQuery  })
     
     // Don't include the question on this page as a related question
     relatedQuestions.forEach((relatedQuestion, index) => {
@@ -118,10 +126,10 @@ export default class extends Page {
     
     // If there are less than 5 questions in the related questions, add recent
     // questions to make up the difference in the list
-    if (relatedQuestions.length < 5) {
+    if (relatedQuestions.length < maxQuestions) {
       const recentQuestions = await questions.search({ limit: 10 })
       recentQuestions.forEach((recentQuestion, index) => {
-        if (relatedQuestions.length >= 5 || question['@id'] == recentQuestion['@id']) {
+        if (relatedQuestions.length >= maxQuestions || question['@id'] == recentQuestion['@id']) {
           return
         } else {
           let existsInArray = false
@@ -138,6 +146,47 @@ export default class extends Page {
     
     return relatedQuestions
   }
+
+  loadAd() {
+    /*
+    new Promise((resolve) => {
+      if (typeof window === 'undefined')
+        return resolve(true)
+
+      setTimeout(() => {
+        window.medianet_cId = "8CUX3Y6BU"
+        window.medianet_versionId = "111299"
+        const isSSL = 'https:' == window.document.location.protocol
+        const mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=' + window.medianet_cId + (isSSL ? '&https=1' : '')
+
+        let advertElementId = 'question-card-advert-1'
+        window.medianet_width = "728"
+        window.medianet_height = "90"
+        window.medianet_crid = "454917506"
+        
+        document.getElementById(advertElementId).innerHTML = '<div class="advertising-label">Advertising</div>'
+        // Add new adverts
+        postscribe('#'+advertElementId, '<script src="' + mnSrc + '"></script>', {
+          done: () => {
+            let advertElementId = 'question-sidebar-advert-1'
+            
+            window.medianet_width = "336"
+            window.medianet_height = "280"
+            window.medianet_crid = "314290551"
+            
+            document.getElementById(advertElementId).innerHTML = '<div class="advertising-label">Advertising</div>'
+            postscribe('#'+advertElementId, '<script src="' + mnSrc + '"></script>', {
+              done: () => {
+                resolve(true)
+              }
+            })
+          }
+        })
+    
+      }, 500)
+    })
+    */
+   }
   
   render() {
     if (this.props.question['@id']) {
@@ -162,11 +211,27 @@ export default class extends Page {
       if ('text' in this.props.question && this.props.question.text !== '') {
         fullText += this.props.question.text+"\n\n"
       }
+      
       if ('acceptedAnswer' in this.props.question
           && 'text' in this.props.question.acceptedAnswer
           && this.props.question.acceptedAnswer.text !== '') {
         fullText += this.props.question.acceptedAnswer.text
       }
+      
+      let sidebarRelatedQuestions = this.state.relatedQuestions
+      let followOnRelatedQuestions = []
+      
+      sidebarRelatedQuestions.forEach((question, index) => {
+        if (followOnRelatedQuestions.length >= 2)
+          return
+
+        if ('image' in question &&
+            'url' in question.image &&
+            question.image.url != '') {
+            followOnRelatedQuestions.push(question)
+            sidebarRelatedQuestions.splice(index, 1)
+        }
+      })
 
       return (
         <Layout>
@@ -191,11 +256,19 @@ export default class extends Page {
                   <p className="muted" style={{fontSize: '15px'}}>
                     <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
                   </p>
+                  <div className="row">
+                    {
+                      followOnRelatedQuestions.map((question, i) => {
+                        return <div className="six columns"><QuestionCardPreview question={question} key={i}/></div>
+                      })
+                    }
+                  </div>
                 </div>
                 <div className="four columns">
+                  {/*<div id="question-sidebar-advert-1"></div>*/}
                   <div className="question-sidebar">
                   {
-                    this.state.relatedQuestions.map((question, i) => {
+                    sidebarRelatedQuestions.map((question, i) => {
                       return <QuestionCardPreview question={question} key={i}/>
                     })
                   }

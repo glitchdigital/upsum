@@ -87,7 +87,7 @@ export default class extends React.Component {
     
     let footer
     if (this.props.footer) {
-      footer = <p className="muted" style={{marginBottom: 0, textAlign: 'right'}}>{this.props.footer}</p>
+      footer = <div className="question-card-contents"><p className="muted" style={{marginBottom: 0, textAlign: 'right'}}>{this.props.footer}</p></div>
     }
 
     let datePublished = question['@dateCreated']
@@ -124,8 +124,9 @@ export default class extends React.Component {
             <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(shareUrl) + "&text=" + encodeURIComponent(question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
             {editButton}
           </div>
-          {footer}
         </div>
+        <div id="question-card-advert-1"></div>
+        {footer}
       </div>
     )
   }
