@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.0.42",
+  "version": "2.0.43",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
