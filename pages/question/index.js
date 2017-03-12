@@ -253,9 +253,6 @@ export default class extends Page {
               <div className="row">
                 <div className="eight columns">
                   <QuestionCard question={this.props.question} session={this.props.session}/>
-                  <p className="muted" style={{fontSize: '15px'}}>
-                    <i>You may use the text of this article under the terms of the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.</i>
-                  </p>
                   <div className="row">
                     {
                       followOnRelatedQuestions.map((question, i) => {

@@ -289,7 +289,7 @@ a.unstyled:hover {
 .question-card-preview {
   background: #f9f9f9;
   margin-bottom: 25px;
-  box-shadow: 3px 3px 0px rgba(0,0,0,.1);
+  box-shadow: 3px 3px 0px rgba(0,0,0,.05);
   cursor: pointer;
   border-radius: 5px 30px 5px 30px;
 }
@@ -299,7 +299,7 @@ a.unstyled:hover {
 @media (min-width: 660px) {
   .question-card-preview:hover {
     background: #fff;
-    box-shadow: 4px 4px 0px rgba(0,0,0,.15);
+    box-shadow: 4px 4px 0px rgba(0,0,0,.1);
     transform: scale(1.025);
     transition-duration: 0.1s;
   }
@@ -484,15 +484,15 @@ a.unstyled:hover {
 }
 .question-card {
   background: #fff;
-  margin-bottom: 25px;
-  box-shadow: 5px 5px 0px rgba(0,0,0,.1);
+  margin-bottom: 35px;
+  box-shadow: 5px 5px 0px rgba(0,0,0,.05);
 }
 .question-card .question-card-contents {
   padding: 10px 15px;
 }
 .question-card h2 {
   font-weight: 400;
-  margin-bottom: 0px;
+  margin: 10px;
 }
 .question-card .date-label {
   background-color: $primaryColor;
@@ -642,4 +642,12 @@ height: 0px;
 #question-sidebar-advert-1 {
   min-height: 305px;
   margin-bottom: 10px;
+}
+
+blockquote {
+  color: #666;
+  border-left: 2px solid #ddd;
+  margin-left: 10px;
+  padding-left: 20px;
+  font-style: italic;
 }
