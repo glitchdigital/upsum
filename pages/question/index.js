@@ -256,7 +256,7 @@ export default class extends Page {
                   <div className="row">
                     {
                       followOnRelatedQuestions.map((question, i) => {
-                        return <div className="six columns"><QuestionCardPreview question={question} key={i}/></div>
+                        return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
                       })
                     }
                   </div>
@@ -266,7 +266,7 @@ export default class extends Page {
                   <div className="question-sidebar">
                   {
                     sidebarRelatedQuestions.map((question, i) => {
-                      return <QuestionCardPreview question={question} key={i}/>
+                      return <div key={i}><QuestionCardPreview question={question}/></div>
                     })
                   }
                   </div>
