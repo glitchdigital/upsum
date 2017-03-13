@@ -38,7 +38,7 @@ export default class extends Page {
       <Layout>
         <Head>
           <title>About Upsum</title>
-          <meta name="description" content="Find out more about upsum.news"/>
+          <meta name="description" content="The goal of Upsum is to answer questions people have about the news as accurately, quickly and simply as possible."/>
         </Head>
       
         <div className="row">
