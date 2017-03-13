@@ -31,7 +31,7 @@ a {
   text-align: center;
 }
 .logo img {
-  margin-top: 20px;
+  margin-top: 30px;
   height: 99px;
   width: 280px;
   border: 0;
@@ -51,7 +51,6 @@ a {
 @media (min-width: 660px) {
   .logo {
     text-align: left;
-    margin-bottom: 10px;
   }
 }
 .header .container {
@@ -69,7 +68,7 @@ a {
   }
   .container {
     background-color: #eee;
-    padding: 20px 30px 30px 30px;
+    padding: 10px 30px 30px 30px;
   }
 
 }
@@ -130,8 +129,10 @@ p {
   font-size: 18px;
   line-height: 28px;
 }
-.muted p,
-p.muted {
+
+i.muted,
+p.muted,
+.muted p {
   color: #888;
 }
 a {
@@ -265,7 +266,7 @@ a.unstyled:hover {
   border: 0;
 }
 .menubar .beta {
-  background: #7EAB49;
+  background-color: #7EAB49;
   color: #fff;
   border-radius: 2px;
   font-size: 15px;
@@ -625,6 +626,29 @@ height: 0px;
 .alert p,
 .alert a {
   color: #555 !important;
+}
+
+.navbar {
+  display: none;
+  padding: 10px 20px;
+  margin: 10px 0 30px 0;
+  background-color: #e5e5e5;
+  height: 25px;
+}
+.navbar,
+.navbar p,
+.navbar a {
+  color: #555 !important;
+}
+.navbar .seperator {
+  opacity: 0.25;
+  margin: 0 10px;
+}
+@media (min-width: 660px) {
+  .navbar {
+    display: block;
+    overflow-x: hidden;
+  }
 }
 
 .advertising-label {

@@ -40,7 +40,15 @@ export default class extends Page {
           <title>About Upsum</title>
           <meta name="description" content="The goal of Upsum is to answer questions people have about the news as accurately, quickly and simply as possible."/>
         </Head>
-      
+        <div className="row">
+          <div className="twelve columns">
+            <div className="navbar">
+              <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
+              <i className="fa fa-fw fa-chevron-right seperator"/>
+              <span>About Upsum</span>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="offset-by-two eight columns">
             <h1 className="briefing"><span>About Upsum</span></h1>

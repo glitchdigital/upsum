@@ -40,6 +40,22 @@ export default class extends Page {
         questions.push(question)
       }
     })
+    // If there are no questions for today show questions from last 48hrs
+    if (questions.length === 0) {
+      this.props.questions.map((question, i) => {
+        if (moment(question['@dateCreated']) > moment().subtract(48, 'hours')) {
+          questions.push(question)
+        }
+      })
+    }
+    // If there are no questions for last 48hrs show questions from last 72hrs
+    if (questions.length === 0) {
+      this.props.questions.map((question, i) => {
+        if (moment(question['@dateCreated']) > moment().subtract(72, 'hours')) {
+          questions.push(question)
+        }
+      })
+    }
 
     return (
       <Layout>
@@ -47,6 +63,15 @@ export default class extends Page {
           <title>Upsum Daily</title>
           <meta name="description" content="Questions raised about the news today"/>
         </Head>
+        <div className="row">
+          <div className="twelve columns">
+            <div className="navbar">
+              <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
+              <i className="fa fa-fw fa-chevron-right seperator"/>
+              <span>Upsum Daily Briefing</span>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="twelve columns">
             <h1 className="briefing"><span>Upsum Daily for {moment().format('D MMMM, YYYY')}</span></h1>

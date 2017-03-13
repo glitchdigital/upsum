@@ -18,11 +18,10 @@ export default connect(state => state)(class extends React.Component {
           <div className="container">
             <div className="row">
               <div className="twelve columns">
-                <p style={{margin: '10px 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled"><i className="fa fa-home"/> Upsum</a></Link> <span className="beta">BETA</span>
-                  &nbsp;<span className="hidden-mobile"><i className="fa fa-fw fa-user"></i> <strong>{this.props.name}</strong></span>
+                <p style={{margin: '5px 0 0 0', float: 'left'}}>
+                  <Link href="/"><a className="unstyled"><span className="beta">BETA</span> upsum.news</a></Link>
                 </p>
-                <p style={{margin: '5px 0', float: 'right'}}>
+                <p style={{margin: '0', float: 'right'}}>
                   <Link href="/question/new"><a className="button button-primary">New</a></Link>
                   &nbsp;
                   <a className="button" href="#" onClick={this.handleLogout} >Sign out</a>
@@ -39,12 +38,12 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled"><i className="fa fa-home"/> Upsum</a></Link> <span className="beta">BETA</span>
+                  <Link href="/about"><a className="unstyled"><span className="beta">BETA</span> About Upsum</a></Link>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}}>
-                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile"> Follow</span></a>
+                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile"> Follow @upsumnews</span></a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile"> Subscribe</span></a>
+                  <a className="unstyled" href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile"> Get Upsum Daily</span></a>
                 </p>
               </div>
             </div>

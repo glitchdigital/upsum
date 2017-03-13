@@ -249,57 +249,66 @@ export default class extends Page {
             <meta name="twitter:image" content={this.props.shareImage}/>
           </Head>
           <div>
-            <div>
-              <div className="row">
-                <div className="eight columns">
-                  <QuestionCard question={this.props.question} session={this.props.session}/>
-                  <div className="row">
-                    {
-                      followOnRelatedQuestions.map((question, i) => {
-                        return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
-                      })
-                    }
-                  </div>
-                </div>
-                <div className="four columns">
-                  {/*<div id="question-sidebar-advert-1"></div>*/}
-                  <div className="question-sidebar">
-                  {
-                    sidebarRelatedQuestions.map((question, i) => {
-                      return <div key={i}><QuestionCardPreview question={question}/></div>
-                    })
-                  }
-                  </div>
+            <div className="row">
+              <div className="twelve columns">
+                <div className="navbar">
+                  <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
+                  <i className="fa fa-fw fa-chevron-right seperator"/>
+                  <span>Questions</span>
+                  <i className="fa fa-fw fa-chevron-right seperator"/>
+                  <span>{this.props.question.name}</span>
                 </div>
               </div>
             </div>
-            <div style={{display: 'none'}}>
-              <div itemScope itemType="http://schema.org/NewsArticle">
-                <span itemProp="headline">{this.props.question.name}</span>
-                <link itemProp="mainEntityOfPage" href={this.props.shareUrl}/>
-                <span itemProp="url">{this.props.shareUrl}</span>
-                <span itemProp="datePublished">{datePublished}</span>
-                <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
-                <span itemProp="dateModified">{this.props.question['@dateModified']}</span>
-                <span itemProp="author" itemScope itemType="https://schema.org/Organization">
-                  <span itemProp="name">Upsum</span>
-                </span>
-                <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
-                  <span itemProp="name">Upsum</span>
-                  <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-                    <meta itemProp="url" content={this.props.shareImage}/>
-                    <meta itemProp="height" content="537"/>
-                    <meta itemProp="width" content="537"/>
-                  </span>
-                </span>
-                <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-                  <img src="{this.props.shareImage}"/>
+            <div className="row">
+              <div className="eight columns">
+                <QuestionCard question={this.props.question} session={this.props.session}/>
+                <div className="row">
+                  {
+                    followOnRelatedQuestions.map((question, i) => {
+                      return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
+                    })
+                  }
+                </div>
+              </div>
+              <div className="four columns">
+                {/*<div id="question-sidebar-advert-1"></div>*/}
+                <div className="question-sidebar">
+                {
+                  sidebarRelatedQuestions.map((question, i) => {
+                    return <div key={i}><QuestionCardPreview question={question}/></div>
+                  })
+                }
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{display: 'none'}}>
+            <div itemScope itemType="http://schema.org/NewsArticle">
+              <span itemProp="headline">{this.props.question.name}</span>
+              <link itemProp="mainEntityOfPage" href={this.props.shareUrl}/>
+              <span itemProp="url">{this.props.shareUrl}</span>
+              <span itemProp="datePublished">{datePublished}</span>
+              <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span>
+              <span itemProp="dateModified">{this.props.question['@dateModified']}</span>
+              <span itemProp="author" itemScope itemType="https://schema.org/Organization">
+                <span itemProp="name">Upsum</span>
+              </span>
+              <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+                <span itemProp="name">Upsum</span>
+                <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
                   <meta itemProp="url" content={this.props.shareImage}/>
                   <meta itemProp="height" content="537"/>
                   <meta itemProp="width" content="537"/>
                 </span>
-                <span itemProp="articleBody"><ReactMarkdown source={fullText}/></span>
-              </div>
+              </span>
+              <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+                <img src="{this.props.shareImage}"/>
+                <meta itemProp="url" content={this.props.shareImage}/>
+                <meta itemProp="height" content="537"/>
+                <meta itemProp="width" content="537"/>
+              </span>
+              <span itemProp="articleBody"><ReactMarkdown source={fullText}/></span>
             </div>
           </div>
         </Layout>
@@ -307,7 +316,7 @@ export default class extends Page {
     } else { 
       return (
         <Layout>
-          <h4>{"Couldn't find the question you were looking for."}</h4>
+          <h4>{"Unable to find the question you were looking for."}</h4>
         </Layout>
       )
     }

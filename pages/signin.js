@@ -27,10 +27,10 @@ export default class extends Page {
   
   handleChange(event) {
     if (event.target.name == "name")
-      this.state.name = event.target.value
+      this.state.name = event.target.value.trim()
 
     if (event.target.name == "apiKey")
-      this.state.sessionId = event.target.value
+      this.state.sessionId = event.target.value.trim()
       
     this.setState(this.state)
   }

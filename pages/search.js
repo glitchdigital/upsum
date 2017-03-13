@@ -39,7 +39,7 @@ export default class extends Page {
     
     let noResultsMessage
     if (this.props.questions.length === 0)
-      noResultsMessage = <p style={{textAlign: 'center'}}><i>Sorry, questions match what you searched for!</i></p>
+      noResultsMessage = <p style={{textAlign: 'center'}}><i>Sorry, we haven&#39;t answered any questions about that yet.</i></p>
 
     return (
       <Layout>
@@ -47,6 +47,17 @@ export default class extends Page {
           <title>Upsum - Search for {this.props.query}</title>
           <meta name="description" content="Search Upsum for answers to your questions about the news."/>
         </Head>
+        <div className="row">
+          <div className="twelve columns">
+            <div className="navbar">
+              <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
+              <i className="fa fa-fw fa-chevron-right seperator"/>
+              <span>Questions</span>
+              <i className="fa fa-fw fa-chevron-right seperator"/>
+              <span>Search</span>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="twelve columns">
             <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
