@@ -18,8 +18,8 @@ export default connect(state => state)(class extends React.Component {
           <div className="container">
             <div className="row">
               <div className="twelve columns">
-                <p style={{margin: '5px 0 0 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled"><span className="beta">BETA</span> upsum.news</a></Link>
+                <p style={{margin: '5px 0', float: 'left'}}>
+                  <Link href="/about"><a className="unstyled"><span className="beta">BETA</span> About Upsum</a></Link>
                 </p>
                 <p style={{margin: '0', float: 'right'}}>
                   <Link href="/question/new"><a className="button button-primary">New</a></Link>
