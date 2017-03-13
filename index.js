@@ -83,10 +83,6 @@ app.prepare()
       return app.render(req, res, '/', req.params)
     }
   })
-  
-  server.get('/questions', (req, res) => {
-    return app.render(req, res, '/', req.params)
-  })
 
   // Endpoint to search and upload images to the CDN
   // (middleware as the backend doesn't do this directly)

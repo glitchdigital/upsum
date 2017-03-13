@@ -42,7 +42,8 @@ export default class extends React.Component {
       }
       if (typeof window !== 'undefined') {
         
-        if (window.location.hostname === "localhost") {
+        if (window.location.hostname === "localhost" ||
+            window.location.hostname === "beta.upsum.news") {
           return
         }
         
