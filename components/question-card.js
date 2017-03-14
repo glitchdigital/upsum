@@ -101,10 +101,12 @@ export default class extends React.Component {
       <div className="question-card" itemScope itemType="http://schema.org/Question">
         <div className="question-card-contents">
           <h2 itemProp="name"><strong>{question.name}</strong></h2>
-          <span itemProp="url" style={{display: 'none'}}>{shareUrl}</span>
-          <span itemProp="datePublished" style={{display: 'none'}}>{datePublished}</span>
-          <span itemProp="dateCreated" style={{display: 'none'}}>{question['@dateCreated']}</span>
-          <span itemProp="dateModified" style={{display: 'none'}}>{question['@dateModified']}</span>
+          <div style={{display: 'none'}}>
+            <span itemProp="url">{shareUrl}</span><br/>
+            <span itemProp="datePublished">{datePublished}</span><br/>
+            <span itemProp="dateCreated">{question['@dateCreated']}</span><br/>
+            <span itemProp="dateModified">{question['@dateModified']}</span><br/>
+          </div>
         </div>
         {imageTag}
         {videoTag}

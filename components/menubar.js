@@ -19,7 +19,7 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/about"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
+                  <Link href="/"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
                 </p>
                 <p style={{margin: '0', float: 'right'}}>
                   <Link href="/question/new"><a className="button button-primary">New</a></Link>
@@ -38,7 +38,7 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/about"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
+                  <Link href="/"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}}>
                   <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile"> Follow @upsumnews</span></a>
