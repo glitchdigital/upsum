@@ -319,10 +319,9 @@ a.unstyled:hover {
   .question-card-preview:hover h3 a {
     color: #444;
   }
-
 }
+
 .question-card-preview .question-card-image {
-  background-color: #e5e5e5;
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -331,13 +330,22 @@ a.unstyled:hover {
   -o-background-size: cover;
   background-size: cover;
   background-position: center center;
+  animation: fadein 0.5s;
+}
+.question-card-preview .question-card-image-container {
+  background-color: #e5e5e5;
+  display: block;
+  height: 200px;
+  width: 100%;
+  border: 0;
 }
 @media (min-width: 660px) {
-  .question-card-preview .question-card-image {
+  .question-card-preview .question-card-image,
+  .question-card-preview .question-card-image-container {
     height: 250px;
   }
-
 }
+
 .question-image {
   background-color: #e5e5e5;
   height: 300px;

@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.0.43",
+  "version": "2.0.56",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
@@ -1282,6 +1282,11 @@
       "version": "1.7.0",
       "from": "etag@>=1.7.0 <1.8.0",
       "resolved": "https://registry.npmjs.org/etag/-/etag-1.7.0.tgz"
+    },
+    "eventlistener": {
+      "version": "0.0.1",
+      "from": "eventlistener@0.0.1",
+      "resolved": "https://registry.npmjs.org/eventlistener/-/eventlistener-0.0.1.tgz"
     },
     "events": {
       "version": "1.1.1",
@@ -2794,6 +2799,11 @@
       "from": "lodash.clonedeep@>=4.3.2 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
     },
+    "lodash.debounce": {
+      "version": "4.0.8",
+      "from": "lodash.debounce@>=4.0.0 <5.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
+    },
     "lodash.isarguments": {
       "version": "3.1.0",
       "from": "lodash.isarguments@>=3.0.0 <4.0.0",
@@ -2823,6 +2833,11 @@
       "version": "4.1.1",
       "from": "lodash.tail@>=4.1.1 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash.tail/-/lodash.tail-4.1.1.tgz"
+    },
+    "lodash.throttle": {
+      "version": "4.1.1",
+      "from": "lodash.throttle@>=4.0.0 <5.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
     },
     "lodash.toarray": {
       "version": "3.0.2",
@@ -3626,6 +3641,11 @@
           "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz"
         }
       }
+    },
+    "react-lazy-load": {
+      "version": "3.0.11",
+      "from": "react-lazy-load@latest",
+      "resolved": "https://registry.npmjs.org/react-lazy-load/-/react-lazy-load-3.0.11.tgz"
     },
     "react-markdown": {
       "version": "2.4.4",
