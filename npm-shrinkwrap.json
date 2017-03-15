@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.0.60",
+  "version": "2.0.62",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
@@ -1040,11 +1040,6 @@
       "version": "3.11.0",
       "from": "crypto-browserify@>=3.11.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/crypto-browserify/-/crypto-browserify-3.11.0.tgz"
-    },
-    "css-mediaquery": {
-      "version": "0.1.2",
-      "from": "css-mediaquery@>=0.1.2 <0.2.0",
-      "resolved": "https://registry.npmjs.org/css-mediaquery/-/css-mediaquery-0.1.2.tgz"
     },
     "ctype": {
       "version": "0.5.3",
@@ -2415,11 +2410,6 @@
       "from": "https-browserify@0.0.1",
       "resolved": "https://registry.npmjs.org/https-browserify/-/https-browserify-0.0.1.tgz"
     },
-    "hyphenate-style-name": {
-      "version": "1.0.2",
-      "from": "hyphenate-style-name@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz"
-    },
     "i": {
       "version": "0.3.5",
       "from": "i@>=0.3.0 <0.4.0",
@@ -2858,11 +2848,6 @@
       "version": "0.3.6",
       "from": "marked@>=0.3.6 <0.4.0",
       "resolved": "https://registry.npmjs.org/marked/-/marked-0.3.6.tgz"
-    },
-    "matchmedia": {
-      "version": "0.1.2",
-      "from": "matchmedia@>=0.1.2 <0.2.0",
-      "resolved": "https://registry.npmjs.org/matchmedia/-/matchmedia-0.1.2.tgz"
     },
     "mdurl": {
       "version": "1.0.1",
@@ -3660,11 +3645,6 @@
           "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz"
         }
       }
-    },
-    "react-responsive": {
-      "version": "1.2.6",
-      "from": "react-responsive@>=1.2.6 <2.0.0",
-      "resolved": "https://registry.npmjs.org/react-responsive/-/react-responsive-1.2.6.tgz"
     },
     "react-textarea-autosize": {
       "version": "4.0.5",

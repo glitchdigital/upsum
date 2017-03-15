@@ -233,6 +233,9 @@ footer p {
   color: #ddd;
 }
 @media (min-width: 660px) {
+  .hidden-desktop {
+    display: none;
+  }
   .menubar {
     padding: 5px 20px;
     background: transparent;
@@ -330,7 +333,6 @@ a.unstyled:hover {
   -o-background-size: cover;
   background-size: cover;
   background-position: center center;
-  animation: fadein 0.5s;
 }
 .question-card-preview .question-card-image-container {
   background-color: #e5e5e5;

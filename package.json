@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.0.60",
+  "version": "2.0.62",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
@@ -26,7 +26,6 @@
     "react-ga": "^2.1.2",
     "react-markdown": "^2.4.2",
     "react-redux": "^4.4.6",
-    "react-responsive": "^1.2.6",
     "react-textarea-autosize": "^4.0.5",
     "react-timeago": "^3.1.3",
     "redux": "^3.6.0",
