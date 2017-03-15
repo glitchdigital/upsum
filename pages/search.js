@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
-import MediaQuery from 'react-responsive'
 import Questions from '../models/questions'
 import { Session } from '../models/session'
 import Layout from '../components/layout'
@@ -64,7 +63,7 @@ export default class extends Page {
             {noResultsMessage}
           </div>
         </div>
-        <MediaQuery maxWidth={659}>
+        <div className="hidden-desktop">
           <div className="row question-cards">
             <div className="columns twelve">
               {
@@ -74,8 +73,8 @@ export default class extends Page {
               }
             </div>
           </div>
-        </MediaQuery>
-        <MediaQuery minWidth={660} values={{width: 660}}>
+        </div>
+        <div className="hidden-mobile">
           <div className="row question-cards">
             <div className="columns four first">
               {
@@ -99,7 +98,7 @@ export default class extends Page {
               }
             </div>
           </div>
-        </MediaQuery>
+        </div>
       </Layout>
     )
   }
