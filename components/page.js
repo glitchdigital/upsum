@@ -37,16 +37,23 @@ export default class extends React.Component {
   // Update Google Analytics on page load (both on first load & with new props)
   updateGoogleAnalytics() {
     try {
-      if (this.props.sessionId) {
-        return
-      }
+      // Don't attempt to track during server rendering
       if (typeof window !== 'undefined') {
         
+        // Don't track if on localhost or public beta site
         if (window.location.hostname === "localhost" ||
             window.location.hostname === "beta.upsum.news") {
           return
         }
-        
+
+        // Don't track if logged in (i.e. editors)
+        // @TODO Check if user is editor if we add site logins
+        if (this.props.session &&
+            this.props.session.sessionId &&
+            this.props.session.sessionId != '') {
+          return
+        }
+
         // @FIXME We should set page title as a prop on the layout and use
         // that here when sending the 'title' to Google Analytics.
         //
