@@ -272,12 +272,13 @@ a.unstyled:hover {
   background-color: #7EAB49;
   color: #fff;
   border-radius: 2px;
-  font-size: 15px;
-  line-height: 18px;
-  padding: 3px 6px 2px 6px;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 2px 6px 2px 6px;
   margin: 0 4px;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 .search {
   position: relative;
