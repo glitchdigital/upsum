@@ -13,14 +13,14 @@ export default class extends Page {
     await super.getInitialProps({req})
     const session = Session(req)
 
-    let searchQuery = query.q
+    let searchQuery = query.q || ''
     searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
     searchQuery = searchQuery.replace(/(^who |^what |^why |^how |^the )/gi, '')
     searchQuery = searchQuery.replace(/( the | to | and | is )/gi, ' ')
     
     const questions = new Questions
-    const results = await questions.search({ limit: 50, name: searchQuery, text: searchQuery })
-    return { questions: results, query: query.q }
+    let results = await questions.search({ limit: 50, name: searchQuery, text: searchQuery })
+    return { questions: results, query: query.q, searchQuery: searchQuery}
   }
 
   render() {
@@ -36,9 +36,10 @@ export default class extends Page {
       questions[currentList++].push(question)
     })
     
-    let noResultsMessage
-    if (this.props.questions.length === 0)
-      noResultsMessage = <p style={{textAlign: 'center'}}><i>Sorry, we haven&#39;t answered any questions about that yet.</i></p>
+    let message
+    if (this.props.questions.length === 0) {
+      message = <p style={{textAlign: 'center'}}><i>Sorry, we haven&#39;t answered any questions about that yet.</i></p>
+    }
 
     return (
       <Layout>
@@ -60,7 +61,7 @@ export default class extends Page {
         <div className="row">
           <div className="twelve columns">
             <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
-            {noResultsMessage}
+            {message}
           </div>
         </div>
         <div className="hidden-desktop">
@@ -68,7 +69,7 @@ export default class extends Page {
             <div className="columns twelve">
               {
                 this.props.questions.map((question, i) => {
-                  return <div key={i}><QuestionCardPreview question={question}/></div>
+                  return <div key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                 })
               }
             </div>
