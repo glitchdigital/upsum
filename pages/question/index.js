@@ -107,7 +107,7 @@ export default class extends Page {
       return
 
     const questions = new Questions
-    const maxQuestions = 6
+    const maxQuestions = 10
       
     let searchQuery = question.name
     searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
@@ -127,7 +127,7 @@ export default class extends Page {
     // If there are less than 5 questions in the related questions, add recent
     // questions to make up the difference in the list
     if (relatedQuestions.length < maxQuestions) {
-      const recentQuestions = await questions.search({ limit: 10 })
+      const recentQuestions = await questions.search({ limit: 20 })
       recentQuestions.forEach((recentQuestion, index) => {
         if (relatedQuestions.length >= maxQuestions || question['@id'] == recentQuestion['@id']) {
           return
@@ -276,7 +276,7 @@ export default class extends Page {
                 <div className="question-sidebar">
                 {
                   sidebarRelatedQuestions.map((question, i) => {
-                    return <div key={i}><QuestionCardPreview question={question}/></div>
+                    return <div key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
                 </div>

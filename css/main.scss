@@ -13,7 +13,7 @@ $primaryColorDarker: darken($primaryColor, 10%);
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   color: #444;
   background-color: #eee;
   font-size: 18px;
@@ -21,7 +21,8 @@ body {
 }
 
 h3 {
-  font-size: 28px;
+  font-size: 22px;
+  line-height: 28px;
   font-weight: 500;
 }
 a {
@@ -106,18 +107,17 @@ h1.title img {
   padding: 0 10px;
   white-space: nowrap;
 }
-h1.briefing {
+h1 {
   text-align: center;
+  font-weight: 300;
 }
 
-h1.briefing span {
+h1 span {
   padding: 10px 30px;
   display: inline-block;
-
   color: #666;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   text-align: center;
-  border-radius: 50px;
 }
 h5 {
   text-transform: uppercase;
@@ -295,7 +295,6 @@ a.unstyled:hover {
   margin-bottom: 25px;
   box-shadow: 3px 3px 0px rgba(0,0,0,.05);
   cursor: pointer;
-  border-radius: 5px 30px 5px 30px;
 }
 .question-card-preview .question-card-contents {
   padding: 10px 15px 10px 15px;
@@ -312,9 +311,10 @@ a.unstyled:hover {
 .question-card-preview h3,
 .question-card-preview h3 a {
   font-size: 22px;
-  line-height: 32px;
-  font-weight: 600;
+  line-height: 26px;
+  font-weight: 500;
   margin-top: 0;
+  margin-bottom: 10px;
   color: #555;
 }
 @media (min-width: 660px) {
@@ -323,8 +323,73 @@ a.unstyled:hover {
     color: #444;
   }
 }
+.question-card-preview-small {
+  margin-bottom: 20px;
+  cursor: pointer;
+  overflow: visible;
+  position: relative;
+  padding: 0;
+  clear: both;
+  overflow: visible;
+}
+.question-card-preview-small.has-image {
+  min-height: 100px;
+  padding: 0;
+  margin-bottom: 30px;
+}
 
-.question-card-preview .question-card-image {
+.question-card-preview-small .date-label {
+  font-size: 18px;
+  color: #888;
+  padding: 0;
+  margin: 0;
+}
+
+.question-card-preview-small .question-card-contents {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.question-card-preview-small.has-image .question-card-contents {
+  padding-left: 115px;
+}
+.question-card-preview-small h3 {
+  font-size: 22px;
+  line-height: 26px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.question-card-preview-small h3 a {
+  font-weight: 500;
+}
+.question-card-preview-small .question-card-image-container .question-card-image {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+}
+.question-card-preview-small .question-card-image-container {
+  position: absolute;
+  background-color: #e5e5e5;
+  display: inline-block;
+  height: auto;
+  top: 5px;
+  left: 0px;
+  border: 0;
+}
+@media (min-width: 660px) {
+  .question-card-preview-small .question-card-small-image-container .question-card-image,
+  .question-card-preview-small .question-card-small-image-container {
+
+  }
+}
+
+
+.question-card-preview .question-card-image-container .question-card-image {
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -342,14 +407,15 @@ a.unstyled:hover {
   border: 0;
 }
 @media (min-width: 660px) {
-  .question-card-preview .question-card-image,
+  .question-card-preview .question-card-image-container .question-card-image,
   .question-card-preview .question-card-image-container {
     height: 250px;
   }
 }
 
-.question-image {
+.question-card .question-image {
   background-color: #e5e5e5;
+  margin-top: 5px;
   height: 300px;
   width: 100%;
   overflow: hidden;
@@ -503,7 +569,9 @@ a.unstyled:hover {
 }
 .question-card h2 {
   font-weight: 400;
-  margin: 10px;
+  font-size: 42px;
+  line-height: 50px;
+  margin: 5px;
 }
 .question-card .date-label {
   background-color: $primaryColor;
@@ -584,13 +652,16 @@ height: 0px;
 }
 
 .question-card {
+  margin-top: 15px;
   animation: fadein 0.5s;
 }
 
 .question-card-preview {
   animation: fadein 0.2s;
 }
-
+.question-sidebar {
+  margin-top: 15px;
+}
 .question-sidebar .question-card-preview {
   animation: fadein 0.1s 0.5s ease-out forwards;
   opacity: 0;
@@ -628,26 +699,29 @@ height: 0px;
 }
 
 .alert {
+  margin-top: 15px;
   padding: 10px 20px;
   background: #ddd;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .alert,
 .alert p,
 .alert a {
   color: #555 !important;
 }
+.alert:hover,
+.alert:hover p,
+.alert:hover a {
+  color: #222 !important;
+}
 .alert .link {
   margin-left: 5px;
   padding-bottom: 2px;
 }
-.alert:hover .link {
-  border-bottom: 1px dotted #aaa;
-}
 
 .navbar {
   display: none;
-  margin: 5px 0 25px 0;
+  margin: 5px 0 5px 0;
   height: 25px;
   overflow: hidden;
 }
