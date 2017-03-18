@@ -240,13 +240,12 @@ export default class extends Page {
       
       let articleImageHtml = ''
       if (this.props.articleImageUrl) {
-        articleImageHtml = `
-        <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-          <img src=${this.props.articleImageUrl}/><br/>
-          <meta itemProp="url" content={this.props.shareImage}/><br/>
+        articleImageHtml = <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+          <img src={this.props.articleImageUrl} alt={description}/>
+          <meta itemProp="url" content={this.props.shareImage}/>
           <meta itemProp="height" content="512"/>
           <meta itemProp="width" content="1024"/>
-        </span>`
+        </span>
       }
 
       return (
