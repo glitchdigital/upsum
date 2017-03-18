@@ -96,7 +96,7 @@ exports.get = (req, res, next) => {
         <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
           <span itemProp="name">Upsum</span><br/>
           <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-            <meta itemProp="url" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/><br/>
+            <meta itemProp="url" content="https://upsum.news/static/images/upsum-publisher-logo.png"/><br/>
             <meta itemProp="height" content="537"/>
             <meta itemProp="width" content="537"/>
           </span>
