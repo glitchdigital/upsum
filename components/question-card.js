@@ -7,7 +7,9 @@ import ReactMarkdown from 'react-markdown'
 export default class extends React.Component {
   
   popup(e) {
-    window.open(e.target.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
+    // Get href or (if icon element clicked directly) parent node's href
+    let target = e.target.href || e.target.parentNode.href
+    window.open(target, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600')
     e.preventDefault()
     return false
   }
