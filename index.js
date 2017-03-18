@@ -2,16 +2,14 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const Sitemap = require('express-sitemap')
-const NewsSitemap = require('./lib/news-sitemap')
 const next = require('next')
-const fetch = require('isomorphic-fetch')
 const sass = require('node-sass')
-const RSS = require('rss')
-const marked = require('marked')
-const ampl = require('ampl')
 const routes = {
-  images: require('./routes/images')
+  images: require('./routes/images'),
+  amp: require('./routes/amp'),
+  rss: require('./routes/rss'),
+  sitemap: require('./routes/sitemap'),
+  newsSitemap: require('./routes/news-sitemap')
 }
 
 // Load environment variables from .env file if present
@@ -89,6 +87,17 @@ app.prepare()
   server.get('/images', routes.images.get)
   server.post('/images', routes.images.post)
 
+  // Serve AMP version of questions
+  server.get('/amp/questions/:id', routes.amp.get)
+
+  // Serve recent questions as an RSS feeed
+  server.get('/rss.xml', routes.rss.get)
+
+  // Serve sitemap (and news specific sitemap)
+  server.get('/sitemap.xml', routes.sitemap.get)
+  server.get('/news-sitemap.xml', routes.newsSitemap.get)
+
+  // Define robots.txt to tell search engines what they should & shouldn't index
   server.get('/robots.txt', function(req, res) {
     res.send("Sitemap: https://upsum.news/sitemap.xml\n"+
              "Sitemap: https://upsum.news/news-sitemap.xml\n"+
@@ -98,187 +107,8 @@ app.prepare()
              "Disallow: /questions/edit/*\n"+
              "Disallow: /signin\n")
   })
-  
-  server.get('/sitemap.xml', function(req, res) {
-    let sitemapOptions = {
-      http: 'https',
-      url: 'upsum.news',
-      map: {
-        '/': ['get'],
-        '/about': ['get'],
-        '/daily': ['get']
-      },
-      route: {
-        '/': {
-          changefreq: 'daily',
-          priority: 1.0
-        },
-        '/about': {
-          changefreq: 'weekly',
-          priority: 0.5
-        },
-        '/daily': {
-          changefreq: 'daily',
-          priority: 0.9
-        }
-      }
-    }
-    // Add 500 most recently updated questions to the sitemap
-    fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
-    .then(function(response) {
-      response.json()
-      .then(function(json) {
-        if (json instanceof Array) {
-          json.forEach(function(question, index) {
-            // Only add questions with answers to the sitemap!
-            if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
-              // Set homepage last modified date to that of last question modified
-              if (index === 0) {
-                sitemapOptions.route['/'].lastmod = question['@dateModified'].split('T')[0]
-                sitemapOptions.route['/daily'].lastmod = question['@dateModified'].split('T')[0]
-              }
 
-              let route = "/questions/"+question['@id'].split('/')[4]
-              sitemapOptions.map[route] = ['get']
-              sitemapOptions.route[route] = {
-                changefreq: 'weekly',
-                lastmod: question['@dateModified'].split('T')[0],
-                priority: 1.0
-              }
-            }
-          })
-        }
-        Sitemap(sitemapOptions).XMLtoWeb(res)
-      })
-    })
-  })
-
-  server.get('/news-sitemap.xml', function(req, res) {
-    var newsSitemap = new NewsSitemap({
-      publication_name: 'Upsum',
-      publication_language: 'en'
-    })
-
-    // Add 500 most recently updated questions to the news sitemap
-    fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
-    .then(function(response) {
-      response.json()
-      .then(function(json) {
-        if (json instanceof Array) {
-          json.forEach(function(question, index) {
-            // Only add questions with answers to the sitemap!
-            if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
-              newsSitemap.item({
-                  location: 'https://upsum.news/questions/'+question['@id'].split('/')[4],
-                  title: question.name,
-                  publication_date: question['@dateCreated']
-              })
-            }
-          })
-        }
-        res.send(newsSitemap.xml())
-      })
-    })
-  })
-  
-  server.get('/rss.xml', function(req, res) {
-    var rssFeed = new RSS({
-      title: 'Upsum',
-      description: 'The news, summed up',
-      feed_url: 'https://upsum.news/rss.xml',
-      site_url: 'https://upsum.news/',
-      image_url: 'https://upsum.news/static/images/upsum-logo-share-twitter.png',
-      language: 'en',
-      pubDate: new Date().toString(),
-      ttl: '60'
-    })
-
-    // Add 50 most recently updated questions to the RSS feed
-    fetch('https://api.upsum.news/Question?sort=-_created&limit=50')
-    .then(function(response) {
-      response.json()
-      .then(function(json) {
-        if (json instanceof Array) {
-          json.forEach(function(question, index) {
-            // Only add questions with answers to the feed!
-            if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
-              let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
-              let html = ''
-              if ('text' in question && question.text !== '') {
-                html += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
-              }
-              html += marked(question.acceptedAnswer.text)
-              if ('citation' in question.acceptedAnswer && question.acceptedAnswer.citation !== '') {
-                html += '<p><strong>Sources:</strong></p>'
-                     +marked(question.acceptedAnswer.citation)
-              }
-              rssFeed.item({
-                  title: question.name,
-                  description: html,
-                  url: url,
-                  date: question['@dateCreated']
-              })
-            }
-          })
-        }
-        res.send(rssFeed.xml())
-      })
-    })
-  })
-
-  // Render AMP pages
-  server.get('/amp/questions/:id', function(req, res) {
-    fetch('https://api.upsum.news/Question/'+req.params.id)
-    .then(function(response) {
-      response.json()
-      .then(function(question) {
-        let markdownString = '[upsum.news](https://upsum.news/)\n\n# ' + question.name+'\n\n'
-
-        if ('image' in question &&
-            'url' in question.image &&
-            question.image.url != '') {
-          let fileName = question.image.url.split('/').pop()
-          let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
-          markdownString += '!['+question.name+']('+imageURL+')\n\n'
-          if ('publisher' in question.image &&
-              'name' in question.image.publisher &&
-              'url' in question.image.publisher) {
-            markdownString += '*Image credit: ['+question.image.publisher.name +']('+question.image.publisher.url+')*\n\n'
-          }
-        }
-
-        if ('text' in question && question.text !== '') {
-          markdownString += question.text+'\n\n'
-        }
-        
-        if ('acceptedAnswer' in question &&
-            'text' in question.acceptedAnswer &&
-            question.acceptedAnswer.text !== '') {
-              markdownString += question.acceptedAnswer.text+'\n\n'
-        }
-        
-        if ('acceptedAnswer' in question &&
-            'citation' in question.acceptedAnswer &&
-            question.acceptedAnswer.citation !== '') {
-          markdownString += "Sources:\n\n"+question.acceptedAnswer.citation
-        }
-
-        markdownString += '\n\n[Read more at upsum.news](https://upsum.news/)'
-  
-        ampl.parse(markdownString, {
-          canonicalUrl: 'https://upsum.news/questions/' + req.params.id,
-          style: 'body{max-width: 660px; font-size: 18px; line-height: 24px; background: #eee; color: #444; margin: 0; padding: 0 20px; margin: 0; font-family: sans-serif;} h1 {margin: 0; font-size: 30px; line-height: 38px;} a {color: #444; font-weight: 300; text-decoration: none;} blockquote{color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: italic;}'
-        }, function(ampHtml) {
-          // Hack to fix known bug in ampl which puts doctype in the wrong place
-          ampHtml = ampHtml.replace(/<!doctype html>/, '')
-          res.send("<!doctype html>" + ampHtml)
-        })
-      })
-    })
-    
-  })
-  
-
+  // Default request handler (passes through to next.js)
   server.get('*', (req, res) => {
     return handle(req, res)
   })

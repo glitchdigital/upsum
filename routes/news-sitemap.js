@@ -1,5 +1,39 @@
+'use strict'
+
+const fetch = require('isomorphic-fetch')
+
+exports.get = (req, res, next) => {
+  var newsSitemap = new GoogleNewsSitemap({
+    publication_name: 'Upsum',
+    publication_language: 'en'
+  })
+
+  // Add 500 most recently updated questions to the news sitemap
+  fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
+  .then(function(response) {
+    response.json()
+    .then(function(json) {
+      if (json instanceof Array) {
+        json.forEach(function(question, index) {
+          // Only add questions with answers to the sitemap!
+          if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
+            newsSitemap.item({
+                location: 'https://upsum.news/questions/'+question['@id'].split('/')[4],
+                title: question.name,
+                publication_date: question['@dateCreated']
+            })
+          }
+        })
+      }
+      res.send(newsSitemap.xml())
+    })
+  })
+}
+
 /**
  * Based on https://github.com/iantocristian/node-gnews-sitemap/
+ * By Cristian Ianto <iantocristian@yahoo.com>
+ * Used under license http://github.com/iantocristian/node-gnews-sitemap/raw/master/LICENSE
  */
 const XML = require('xml')
 
@@ -74,5 +108,3 @@ function generateXML(data){
     
   return { urlset : urlset }
 }
-
-module.exports = GoogleNewsSitemap
