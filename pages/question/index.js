@@ -31,6 +31,7 @@ export default class extends Page {
 
     // Define URLs for sharing
     let shareUrl = 'https://upsum.news/questions/' + query.id
+    let ampUrl = 'https://upsum.news/amp/questions/' + query.id
     let shareImageTwitter = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
     let shareImageFacebook = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
 
@@ -48,6 +49,7 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       session: session.getState(),
       shareUrl: shareUrl,
+      ampUrl: ampUrl,
       shareImage: shareImageTwitter,
       shareImageTwitter: shareImageTwitter,
       shareImageFacebook: shareImageFacebook
@@ -247,6 +249,7 @@ export default class extends Page {
             <meta name="twitter:title" content={this.props.question.name}/>
             <meta name="twitter:description" content={description}/>
             <meta name="twitter:image" content={this.props.shareImage}/>
+            <link rel="amphtml" href={this.props.ampUrl} /> 
           </Head>
           <div>
             <div className="row">
