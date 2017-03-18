@@ -5,7 +5,6 @@
   "main": "index.js",
   "repository": "glitchdigital/upsum",
   "dependencies": {
-    "ampl": "^1.0.6",
     "body-parser": "^1.16.1",
     "cloudinary": "^1.7.1",
     "dotenv": "^4.0.0",

@@ -32,15 +32,17 @@ export default class extends Page {
     // Define URLs for sharing
     let shareUrl = 'https://upsum.news/questions/' + query.id
     let ampUrl = 'https://upsum.news/amp/questions/' + query.id
-    let shareImageTwitter = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
-    let shareImageFacebook = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
-
+    let twitterImageUrl = 'https://upsum.news/static/images/upsum-logo-share-twitter.png'
+    let facebookImageUrl = 'https://upsum.news/static/images/upsum-logo-share-facebook-v2.png'
+    let articleImageUrl
+    
     if ('image' in question &&
         'url' in question.image &&
         question.image.url != '') {
       let fileName = question.image.url.split('/').pop()
-      shareImageTwitter = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
-      shareImageFacebook = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,w_1200,c_fill/'+fileName
+      twitterImageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
+      facebookImageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_600,w_1200,c_fill/'+fileName
+      articleImageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
     }
 
     return {
@@ -50,9 +52,10 @@ export default class extends Page {
       session: session.getState(),
       shareUrl: shareUrl,
       ampUrl: ampUrl,
-      shareImage: shareImageTwitter,
-      shareImageTwitter: shareImageTwitter,
-      shareImageFacebook: shareImageFacebook
+      shareImage: twitterImageUrl,
+      twitterImageUrl: twitterImageUrl,
+      facebookImageUrl: facebookImageUrl,
+      articleImageUrl: articleImageUrl
     }
   }
   
@@ -234,6 +237,17 @@ export default class extends Page {
             sidebarRelatedQuestions.splice(index, 1)
         }
       })
+      
+      let articleImageHtml = ''
+      if (this.props.articleImageUrl) {
+        articleImageHtml = `
+        <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+          <img src=${this.props.articleImageUrl}/><br/>
+          <meta itemProp="url" content={this.props.shareImage}/><br/>
+          <meta itemProp="height" content="512"/>
+          <meta itemProp="width" content="1024"/>
+        </span>`
+      }
 
       return (
         <Layout>
@@ -300,17 +314,12 @@ export default class extends Page {
               <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
                 <span itemProp="name">Upsum</span><br/>
                 <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-                  <meta itemProp="url" content={this.props.shareImage}/><br/>
+                  <meta itemProp="url" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/><br/>
                   <meta itemProp="height" content="537"/>
                   <meta itemProp="width" content="537"/>
                 </span>
               </span>
-              <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-                <img src={this.props.shareImage}/><br/>
-                <meta itemProp="url" content={this.props.shareImage}/><br/>
-                <meta itemProp="height" content="537"/>
-                <meta itemProp="width" content="537"/>
-              </span>
+              {articleImageHtml}
               <span itemProp="articleBody"><ReactMarkdown source={fullText}/></span>
             </div>
           </div>
