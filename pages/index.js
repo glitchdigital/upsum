@@ -49,10 +49,10 @@ export default class extends Page {
           if (column == 0 && (row == 4 || row == 8 || row == 12)) {
             className = 'question-card-preview'
           }
-          if (column == 1 && (row == 6 || row == 9 || row == 18)) {
+          if (column == 1 && (row == 6 || row == 9 || row == 13)) {
             className = 'question-card-preview'
           }
-          if (column == 2 && (row == 5 || row == 10 || row == 15)) {
+          if (column == 2 && (row == 5 || row == 10 || row == 14)) {
             className = 'question-card-preview'
           }
         }
