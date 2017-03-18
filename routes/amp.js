@@ -17,11 +17,6 @@ exports.get = (req, res, next) => {
         let fileName = question.image.url.split('/').pop()
         let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
         markdownString += '!['+question.name+']('+imageURL+')\n\n'
-        if ('publisher' in question.image &&
-            'name' in question.image.publisher &&
-            'url' in question.image.publisher) {
-          markdownString += '*Image credit: ['+question.image.publisher.name +']('+question.image.publisher.url+')*\n\n'
-        }
       }
 
       if ('text' in question && question.text !== '') {
@@ -40,7 +35,14 @@ exports.get = (req, res, next) => {
         markdownString += "Sources:\n\n"+question.acceptedAnswer.citation
       }
 
-      markdownString += '\n\n[Read more at upsum.news](https://upsum.news/)'
+      if ('image' in question &&
+          'publisher' in question.image &&
+          'name' in question.image.publisher &&
+          'url' in question.image.publisher) {
+        markdownString += '*Image credit: ['+question.image.publisher.name +']('+question.image.publisher.url+')*\n\n'
+      }
+
+      markdownString += '\n\n[Read more at upsum.news](https://upsum.news)'
 
       ampl.parse(markdownString, {
         canonicalUrl: 'https://upsum.news/questions/' + req.params.id,
