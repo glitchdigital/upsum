@@ -267,7 +267,7 @@ app.prepare()
   
         ampl.parse(markdownString, {
           canonicalUrl: 'https://upsum.news/questions/' + req.params.id,
-          style: 'body{max-width: 660px; font-size: 18px; line-height: 24px; background: #eee; color: #666, margin: 0; padding: 10px 20px; margin: 0; font-family: sans-serif;} h1 {margin: 0; font-size: 30px; line-height: 38px;} a {color: #444; font-weight: 300; text-decoration: none;} blockquote{color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: italic;}'
+          style: 'body{max-width: 660px; font-size: 18px; line-height: 24px; background: #eee; color: #444; margin: 0; padding: 0 20px; margin: 0; font-family: sans-serif;} h1 {margin: 0; font-size: 30px; line-height: 38px;} a {color: #444; font-weight: 300; text-decoration: none;} blockquote{color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: italic;}'
         }, function(ampHtml) {
           // Hack to fix known bug in ampl which puts doctype in the wrong place
           ampHtml = ampHtml.replace(/<!doctype html>/, '')
