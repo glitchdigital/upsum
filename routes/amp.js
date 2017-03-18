@@ -75,6 +75,7 @@ exports.get = (req, res, next) => {
       .metadata {display: none;}
       .image {margin-top: 20px;}
     </style>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <title>${question.name}</title>
   </head>
@@ -105,6 +106,21 @@ exports.get = (req, res, next) => {
       <p><a href="https://upsum.news">Read more at upsum.news</a></p>
     </div>
   </body>
+  <amp-analytics type="googleanalytics">
+    <script type="application/json">
+    {
+      "vars": {
+        "account": "UA-92465819-2"
+      },
+      "triggers": {
+        "trackPageview": {
+          "on": "visible",
+          "request": "pageview"
+        }
+      }
+    }
+    </script>
+  </amp-analytics>
 </html>`
       
       res.send(ampHtml)
