@@ -87,10 +87,10 @@ exports.get = (req, res, next) => {
         float: left;
       }
       .logo .text h1 {
-        margin: 0 0 4px 0;
+        margin: 0;
         padding: 0;
-        font-size: 46px;
-        line-height: 48px;
+        font-size: 48px;
+        line-height: 52px;
         position: relative;
         text-align: left;
       }
@@ -112,7 +112,7 @@ exports.get = (req, res, next) => {
       }
       .logo amp-img {
         float: left;
-        margin-right: 5px;
+        margin-right: 2px;
       }
       .footer {
         text-align: right;
