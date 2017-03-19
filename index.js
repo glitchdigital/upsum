@@ -51,6 +51,15 @@ app.prepare()
   server.use(bodyParser.json())
   server.use(bodyParser.urlencoded({ extended: true }))
   
+  // Redirect requestions to www.upsum.news to https://upsum.news/
+  server.use(function (req, res, next) {
+    if (req.hostname === "www.upsum.news") {
+      res.redirect(301, 'https://upsum.news' + req.originalUrl)
+    } else {
+      next()
+    }
+  })
+  
   // Improving caching behaviour across browsers
   server.use(function(req, res, next) {
     res.setHeader('Vary', 'Accept-Encoding')
