@@ -58,7 +58,7 @@ app.prepare()
   })
 
   // Add route to serve compiled SCSS from /assets/{build id}/main.css
-  const sassResult = sass.renderSync({file: './css/main.scss'})
+  const sassResult = sass.renderSync({file: './css/main.scss', outputStyle: 'compressed'})
   server.get('/assets/:id/main.css', (req, res) => {
     res.setHeader('Content-Type', 'text/css')
     res.setHeader("Cache-Control", "public, max-age=2592000")
