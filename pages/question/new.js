@@ -32,7 +32,7 @@ export default class extends Page {
             <div className="navbar">
               <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
               <i className="fa fa-fw fa-chevron-right seperator"/>
-              <Link href="/questions"><a className="unstyled">Questions</a></Link>
+              <Link href="/" as="/questions"><a className="unstyled">Questions</a></Link>
               <i className="fa fa-fw fa-chevron-right seperator"/>
               <span>New</span>
             </div>
