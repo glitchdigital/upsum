@@ -168,6 +168,7 @@ exports.get = (req, res, next) => {
       }
       .timestamp {
         color: #888;
+        margin-top: 5px;
       }
     </style>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
@@ -184,7 +185,7 @@ exports.get = (req, res, next) => {
         </div>
       </div>
       <h1 itemProp="headline">${question.name}</h1>
-      <p class="timestamp" itemProp="datePublished">${moment(datePublished).format('D MMMM, YYYY')}</p>
+      <p class="timestamp" itemProp="datePublished"> ${moment(datePublished).format('D MMMM, YYYY')}</p>
       ${imageHtml}
       <span class="article-body" itemProp="articleBody">${articleHtml}</span>
       <span class="metadata">
