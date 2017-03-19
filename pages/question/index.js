@@ -197,7 +197,7 @@ export default class extends Page {
   render() {
     if (this.props.question['@id']) {
 
-      let datePublished = this.props.question['@dateCreated']
+      let datePublished = this.props.question['@dateModified']
       if ('acceptedAnswer' in this.props.question
           && 'text' in this.props.question.acceptedAnswer
           && this.props.question.acceptedAnswer.datePublished !== '') {

@@ -2,6 +2,7 @@
 
 const fetch = require('isomorphic-fetch')
 const marked = require('marked')
+const moment = require('moment')
 
 exports.get = (req, res, next) => {
   fetch('https://api.upsum.news/Question/'+req.params.id)
@@ -56,7 +57,14 @@ exports.get = (req, res, next) => {
           'url' in question.image.publisher) {
         articleHtml += marked('Image credit: ['+question.image.publisher.name +']('+question.image.publisher.url+')\n\n')
       }
-    
+
+      let datePublished = question['@dateModified']
+      if ('acceptedAnswer' in question
+          && 'text' in question.acceptedAnswer
+          && question.acceptedAnswer.datePublished !== '') {
+        datePublished = question.acceptedAnswer.datePublished
+      }
+
       const ampHtml = `<!doctype html>
 <html amp>
   <head>
@@ -66,23 +74,44 @@ exports.get = (req, res, next) => {
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
       body {
+        background-color: #eee;
         font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-size: 18px; line-height: 28px;
-        background: #eee;
         color: #444;
         margin: 0;
-        padding: 0 20px; margin: 0;
+        padding: 0;
+        margin: 0;
       }
-      h1 {margin: 0; font-size: 30px; line-height: 38px;}
-      a {color: #444; font-weight: 500; text-decoration: none;}
-      blockquote {color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: oblique;}
-      .content {max-width: 660px; margin: 0 auto;}
+      h1 {
+        margin: 0;
+        font-size: 30px;
+        line-height: 38px;
+      }
+      a {
+        color: #444;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      blockquote {
+        color: #666;
+        border-left: 2px solid #ddd;
+        margin-left: 10px;
+        padding-left: 20px;
+        font-style: oblique;
+      }
+      .content {
+        padding: 0 20px;
+        max-width: 660px;
+        margin: 0 auto;
+      }
       .question-text {
         font-size: 22px;
         line-height: 28px;
         font-style: oblique;
       }
-      .metadata {display: none;}
+      .metadata {
+        display: none;
+      }
       .image {
         margin-top: 20px;
       }
@@ -137,6 +166,9 @@ exports.get = (req, res, next) => {
       .article-body p:first-child {
         margin-top: 0;
       }
+      .timestamp {
+        color: #888;
+      }
     </style>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
@@ -152,12 +184,12 @@ exports.get = (req, res, next) => {
         </div>
       </div>
       <h1 itemProp="headline">${question.name}</h1>
+      <p class="timestamp" itemProp="datePublished">${moment(datePublished).format('D MMMM, YYYY')}</p>
       ${imageHtml}
       <span class="article-body" itemProp="articleBody">${articleHtml}</span>
       <span class="metadata">
         <link itemProp="mainEntityOfPage" href="${'https://upsum.news/questions/' + req.params.id}"/><br/>
         <span itemProp="url">${'https://upsum.news/questions/' + req.params.id}</span><br/>
-        <span itemProp="datePublished">${question['@dateCreated']}</span><br/>
         <span itemProp="dateCreated">${question['@dateCreated']}</span><br/>
         <span itemProp="dateModified">${question['@dateModified']}</span><br/>
         <span itemProp="author" itemScope itemType="https://schema.org/Organization"><br/>

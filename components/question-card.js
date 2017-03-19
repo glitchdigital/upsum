@@ -59,16 +59,22 @@ export default class extends React.Component {
       }
       */
     }
+
+    let datePublished = question['@dateModified']
+    if ('acceptedAnswer' in question
+        && 'text' in question.acceptedAnswer
+        && question.acceptedAnswer.datePublished !== '') {
+      datePublished = question.acceptedAnswer.datePublished
+    }
     
     let answeredOn = <div><h4>This question has not been answered yet!</h4></div>
     if (question.acceptedAnswer && question.acceptedAnswer.text)
       answeredOn =
         <div>
           <p className="date-label">
-            <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={question.acceptedAnswer.datePublished || question['@dateModified']} />
+            <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
           </p>
         </div>
-
     
     let citation
     if (question.acceptedAnswer && question.acceptedAnswer.citation)
@@ -90,13 +96,6 @@ export default class extends React.Component {
     let footer
     if (this.props.footer) {
       footer = <div className="question-card-contents"><p className="question-card-footer"><Link href={shareUrl}><a>{this.props.footer}</a></Link></p></div>
-    }
-
-    let datePublished = question['@dateCreated']
-    if ('acceptedAnswer' in question
-        && 'text' in question.acceptedAnswer
-        && question.acceptedAnswer.datePublished !== '') {
-      datePublished = question.acceptedAnswer.datePublished
     }
 
     return(
