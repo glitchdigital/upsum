@@ -74,7 +74,7 @@ export default class extends Page {
         </div>
         <div className="row">
           <div className="twelve columns">
-            <h1 className="briefing"><span>Upsum Daily for {moment().format('D MMMM, YYYY')}</span></h1>
+            <h1><span>Upsum Daily for {moment().format('D MMMM, YYYY')}</span></h1>
           </div>
         </div>
         <div className="row">

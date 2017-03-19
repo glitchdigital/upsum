@@ -39,8 +39,8 @@ export default class extends React.Component {
         <div>
           <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
           <div className="question-image-text">
-            <p className="image-caption">{question.image.caption}</p>
-            <p className="image-credit">Image credit: <a target="_blank" href={question.image.publisher.url || 'https://upsum.news'}>{question.image.publisher.name || 'Upsum'}</a></p>
+            <span className="image-caption">{(question.image.caption) ? question.image.caption + '. ' : ''}</span>
+            <span className="image-credit">Image credit <a target="_blank" href={question.image.publisher.url || 'https://upsum.news'}>{question.image.publisher.name || 'Upsum'}</a></span>
           </div>
         </div>
     }
@@ -89,7 +89,7 @@ export default class extends React.Component {
     
     let footer
     if (this.props.footer) {
-      footer = <div className="question-card-contents"><p className="muted" style={{marginBottom: 0, textAlign: 'right'}}>{this.props.footer}</p></div>
+      footer = <div className="question-card-contents"><p className="question-card-footer"><Link href={shareUrl}><a>{this.props.footer}</a></Link></p></div>
     }
 
     let datePublished = question['@dateCreated']

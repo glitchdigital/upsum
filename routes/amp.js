@@ -15,7 +15,6 @@ exports.get = (req, res, next) => {
           question.image.url != '') {
         let fileName = question.image.url.split('/').pop()
         let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
-        
         imageHtml = `<span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
 <amp-img class="image" width="1024" height="512" layout="responsive" src="${imageURL}" alt="${question.name}"/>
   <meta itemProp="url" content="${imageURL}"/><br/>
@@ -24,7 +23,6 @@ exports.get = (req, res, next) => {
 </span>`
       }
 
-      
       let articleHtml = ''
       
       if ('text' in question && question.text !== '') {
@@ -68,12 +66,57 @@ exports.get = (req, res, next) => {
         padding: 0 20px; margin: 0;
       }
       h1 {margin: 0; font-size: 30px; line-height: 38px;}
-      a {color: #444; font-weight: 300; text-decoration: none;}
+      a {color: #444; font-weight: 500; text-decoration: none;}
       blockquote {color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: italic;}
       .content {max-width: 660px; margin: 0 auto;}
       .question-text {font-style: italic;}
       .metadata {display: none;}
       .image {margin-top: 20px;}
+      .logo {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        overflow: auto;
+      }
+      .logo a {
+        border: 0;
+        color: #5c5c5c;
+      }
+      .logo .text {
+        display: inline-block;
+        text-align: left;
+        float: left;
+      }
+      .logo .text h1 {
+        margin: 0 0 4px 0;
+        padding: 0;
+        font-size: 46px;
+        line-height: 48px;
+        position: relative;
+        text-align: left;
+      }
+      .logo .text h1 a {
+        font-weight: 600;
+      }
+      .logo .text p {
+        margin: 0;
+        padding: 0 0 0 2px;
+      }
+      .logo .text p a {
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+      .logo img {
+        height: 75px;
+        width: 75px;
+        border: 0;
+      }
+      .logo amp-img {
+        float: left;
+        margin-right: 5px;
+      }
+      .footer {
+        text-align: right;
+      }
     </style>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
@@ -81,7 +124,13 @@ exports.get = (req, res, next) => {
   </head>
   <body>
     <div class="content" itemScope itemType="http://schema.org/NewsArticle">
-      <p><a href="https://upsum.news/">upsum.news</a></p>
+      <div class="logo">
+        <a href="https://upsum.news"><amp-img height="75" width="75" src="https://res.cloudinary.com/glitch-digital-limited/image/upload/h_150,w_150/v1489885960/upsum-publisher-logo_e6x61w.png" alt="Upsum - The news, summed up"/></a>
+        <div class="text">
+          <h1><a href="https://upsum.news">Upsum</a></h1>
+          <p><a href="https://upsum.news">The news, summed up</a></p>
+        </div>
+      </div>
       <h1 itemProp="headline">${question.name}</h1>
       ${imageHtml}
       <span itemProp="articleBody">${articleHtml}</span>
@@ -103,7 +152,7 @@ exports.get = (req, res, next) => {
           </span>
         </span>
       </span>
-      <p><a href="https://upsum.news">Read more at upsum.news</a></p>
+      <p class="footer"><a href="https://upsum.news">Read more at upsum.news</a></p>
     </div>
   </body>
   <amp-analytics type="googleanalytics">

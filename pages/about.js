@@ -51,7 +51,7 @@ export default class extends Page {
         </div>
         <div className="row">
           <div className="offset-by-two eight columns">
-            <h1 className="briefing"><span>About Upsum</span></h1>
+            <h1><span>About Upsum</span></h1>
             {
               this.props.questions.map((question, i) => {
                 return (

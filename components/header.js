@@ -36,7 +36,11 @@ export default class extends React.Component {
             <div className="row">
               <div className="six columns">
                 <div className="logo">
-                  <Link href="/"><a className="unstyled"><img src="//res.cloudinary.com/glitch-digital-limited/image/upload/v1489488302/upsum-logo-2017-02-24-1_uwvft9.png" alt="Upsum - The news, summed up"/></a></Link>
+                  <Link href="/"><a><img src="https://res.cloudinary.com/glitch-digital-limited/image/upload/h_150,w_150/v1489885960/upsum-publisher-logo_e6x61w.png" alt="Upsum - The news, summed up"/></a></Link>
+                  <div className="text">
+                    <h1><Link href="/"><a>Upsum</a></Link></h1>
+                    <p><Link href="/"><a>The news, summed up</a></Link></p>
+                  </div>
                 </div>
               </div>
               <div className="six columns">
