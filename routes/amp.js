@@ -15,12 +15,20 @@ exports.get = (req, res, next) => {
           question.image.url != '') {
         let fileName = question.image.url.split('/').pop()
         let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
-        imageHtml = `<span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-<amp-img class="image" width="1024" height="512" layout="responsive" src="${imageURL}" alt="${question.name}"/>
-  <meta itemProp="url" content="${imageURL}"/><br/>
-  <meta itemProp="height" content="512"/>
-  <meta itemProp="width" content="1024"/>
-</span>`
+        
+        let imageCredit = 'Upsum'
+        if ('publisher' in question.image && 'name' in question.image.publisher) {
+            imageCredit = question.image.publisher
+        }
+        
+        imageHtml = `<div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+<div class="image">
+  <amp-img width="1024" height="512" layout="responsive" attribution="${imageCredit}" src="${imageURL}" alt="${question.name}"/>
+</div>
+<meta itemProp="url" content="${imageURL}"/><br/>
+<meta itemProp="height" content="512"/>
+<meta itemProp="width" content="1024"/>
+</div>`
       }
 
       let articleHtml = ''
@@ -67,11 +75,20 @@ exports.get = (req, res, next) => {
       }
       h1 {margin: 0; font-size: 30px; line-height: 38px;}
       a {color: #444; font-weight: 500; text-decoration: none;}
-      blockquote {color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: italic;}
+      blockquote {color: #666; border-left: 2px solid #ddd; margin-left: 10px; padding-left: 20px; font-style: oblique;}
       .content {max-width: 660px; margin: 0 auto;}
-      .question-text {font-style: italic;}
+      .question-text {
+        font-size: 22px;
+        line-height: 28px;
+        font-style: oblique;
+      }
       .metadata {display: none;}
-      .image {margin-top: 20px;}
+      .image {
+        margin-top: 20px;
+      }
+      amp-img > img { 
+        object-fit: contain;
+      }
       .logo {
         margin-top: 25px;
         margin-bottom: 15px;
@@ -112,10 +129,13 @@ exports.get = (req, res, next) => {
       }
       .logo amp-img {
         float: left;
-        margin-right: 2px;
+        margin-right: 5px;
       }
       .footer {
         text-align: right;
+      }
+      .article-body p:first-child {
+        margin-top: 0;
       }
     </style>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
@@ -133,7 +153,7 @@ exports.get = (req, res, next) => {
       </div>
       <h1 itemProp="headline">${question.name}</h1>
       ${imageHtml}
-      <span itemProp="articleBody">${articleHtml}</span>
+      <span class="article-body" itemProp="articleBody">${articleHtml}</span>
       <span class="metadata">
         <link itemProp="mainEntityOfPage" href="${'https://upsum.news/questions/' + req.params.id}"/><br/>
         <span itemProp="url">${'https://upsum.news/questions/' + req.params.id}</span><br/>

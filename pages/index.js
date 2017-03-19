@@ -4,8 +4,8 @@ import React from 'react'
 import Questions from '../models/questions'
 import Layout from '../components/layout'
 import Page from '../components/page'
+import Navbar from '../components/navbar'
 import QuestionCardPreview from '../components/question-card-preview'
-
 
 export default class extends Page {
   
@@ -93,15 +93,9 @@ export default class extends Page {
           <meta name="twitter:image" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/>
         </Head>
         <div>
-          <div className="row">
-            <div className="twelve columns">
-              <div className="navbar">
-                <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
-                <i className="fa fa-fw fa-chevron-right seperator"/>
-                <span>Trending Questions</span>
-              </div>
-            </div>
-          </div>
+          <Navbar breadcrumbs={[
+            { name: 'Trending Questions', href: '/' }
+          ]}/>
           <div className="row">
             <div className="twelve columns">
               <Link href="/about"><a><div className="alert">

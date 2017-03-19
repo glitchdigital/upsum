@@ -38,10 +38,10 @@ export default class extends React.Component {
       imageTag = 
         <div>
           <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
-          <div className="question-image-text">
+          <p className="question-image-text">
             <span className="image-caption">{(question.image.caption) ? question.image.caption + '. ' : ''}</span>
             <span className="image-credit">Image credit <a target="_blank" href={question.image.publisher.url || 'https://upsum.news'}>{question.image.publisher.name || 'Upsum'}</a></span>
-          </div>
+          </p>
         </div>
     }
 
@@ -113,7 +113,7 @@ export default class extends React.Component {
         {imageTag}
         {videoTag}
         <div className="question-card-contents">
-          <div style={{fontStyle: 'oblique'}}>
+          <div className="question-card-question-text">
             <ReactMarkdown source={question.text || ''}/>
           </div>
           <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">

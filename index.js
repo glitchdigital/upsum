@@ -74,6 +74,10 @@ app.prepare()
     }
   })
 
+  server.get('/questions/new', (req, res) => {
+    return app.render(req, res, '/question/new', req.params)
+  })
+  
   server.get('/questions/:id', (req, res) => {
     if ("id" in req.params) {
       return app.render(req, res, '/question', req.params)
@@ -107,6 +111,7 @@ app.prepare()
              "Sitemap: https://upsum.news/news-sitemap.xml\n"+
              "User-agent: *\n"+
              "Disallow: /question/new\n"+
+             "Disallow: /questions/new\n"+
              "Disallow: /question/edit\n"+
              "Disallow: /questions/edit/*\n"+
              "Disallow: /signin\n")

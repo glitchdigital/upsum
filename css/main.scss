@@ -8,6 +8,7 @@ $primaryColorDarker: darken($primaryColor, 10%);
 $largeDesktopMinResolution: '1200px';
 $desktopMinResolution: '960px';
 $mobileMaxResolution: '959px';
+$smallMobileMaxResolution: '320px';
 
 @import "font-awesome.scss";
 @import "font-awesome-animation.min.scss";
@@ -68,11 +69,17 @@ a {
   font-weight: 400;
 }
 .logo img {
-  margin-right: 2px;
+  margin-right: 5px;
   height: 75px;
   width: 75px;
   border: 0;
   float: left;
+}
+@media (max-width: $smallMobileMaxResolution) {
+  .logo img {
+    height: 50px;
+    width: 50px;
+  }  
 }
 .header .container {
   padding-top: 0px;
@@ -188,6 +195,7 @@ footer p {
   line-height: 20px;
   width: 100%;
   text-align: center;
+  margin-bottom: 0;
 }
 @media (min-width: $desktopMinResolution) {
   #search {
@@ -289,7 +297,7 @@ a.unstyled:hover {
   color: #fff;
   border-radius: 2px;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 14px;
   padding: 3px 6px 3px 6px;
   margin: 0 4px;
   display: inline-block;
@@ -556,7 +564,9 @@ a.unstyled:hover {
 .question-image-text {
   text-align: right;
   padding: 10px 15px;
-  background-color: transparent;
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 5px;
 }
 
 .question-image-text .image-caption,
@@ -568,11 +578,6 @@ a.unstyled:hover {
 .question-image-text .image-credit p,
 .question-image-text .image-credit a {
   color: #888;
-}
-.question-image-text p {
-  font-size: 16px;
-  line-height: 18px;
-  margin-bottom: 5px;
 }
 .question-image-text a {
   border-bottom: 1px dotted #aaa !important;
@@ -692,7 +697,11 @@ a.unstyled:hover {
 .question-card .question-card-contents {
   padding: 10px 15px;
 }
-
+.question-card .question-card-question-text p {
+  font-style: oblique;
+  font-size: 22px;
+  line-height: 28px;
+}
 .question-card .question-card-footer {
   text-align: right;
   margin: 0;
@@ -708,7 +717,7 @@ a.unstyled:hover {
 .question-card h2 {
   font-weight: 400;
   font-size: 42px;
-  line-height: 50px;
+  line-height: 52px;
   margin: 5px;
 }
 .question-card .date-label {
@@ -790,13 +799,8 @@ height: 0px;
 }
 
 .question-card {
-  margin-top: 5px;
+  margin-top: 15px;
   animation: fadein 0.5s;
-}
-@media (min-width: $desktopMinResolution) {
-  .question-card {
-    margin-top: 15px;
-  }
 }
 
 .question-card-preview {
@@ -845,15 +849,10 @@ height: 0px;
 }
 
 .alert {
-  margin-top: 0px;
+  margin-top: 15px;
   padding: 10px 20px;
   background: #ddd;
   margin-bottom: 25px;
-}
-@media (min-width: $desktopMinResolution) {
-  .alert {
-    margin-top: 15px;
-  }
 }
 .alert,
 .alert p,
@@ -863,7 +862,7 @@ height: 0px;
 .alert:hover,
 .alert:hover p,
 .alert:hover a {
-  color: #222 !important;
+
 }
 .alert .link {
   margin-left: 5px;
@@ -883,7 +882,6 @@ height: 0px;
 }
 
 .navbar {
-  display: none;
   margin: 5px 0 5px 0;
   height: 25px;
   overflow: hidden;
@@ -926,4 +924,22 @@ blockquote {
   margin-left: 10px;
   padding-left: 20px;
   font-style: italic;
+}
+ol.breadcrumbs {
+  margin: 0;
+  padding: 0;
+  left: 0;
+}
+ol.breadcrumbs li {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  left: 0;
+}
+ol.breadcrumbs li:last-child a {
+  font-weight: normal;
+}
+ol.breadcrumbs .separator {
+  color: #aaa;
+  margin: 0 5px;
 }

@@ -197,10 +197,10 @@ export default class extends React.Component {
       imageTag = 
         <div>
           <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
-            <div className="question-image-text">
-              <p className="image-caption">{this.state.question.image.caption}</p>
-              <p className="image-credit">Image credit: <a target="_blank" href={this.state.question.image.publisher.url}>{this.state.question.image.publisher.name}</a></p>
-            </div>
+            <p className="question-image-text">
+              <span className="image-caption">{(this.state.question.image.caption) ? this.state.question.image.caption + '. ' : ''}</span>
+              <span className="image-credit">Image credit <a target="_blank" href={this.state.question.image.publisher.url || 'https://upsum.news'}>{this.state.question.image.publisher.name || 'Upsum'}</a></span>
+            </p>
         </div>
     }
 

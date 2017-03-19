@@ -5,6 +5,7 @@ import Questions from '../models/questions'
 import { Session } from '../models/session'
 import Layout from '../components/layout'
 import Page from '../components/page'
+import Navbar from '../components/navbar'
 import QuestionCard from '../components/question-card'
 
 export default class extends Page {
@@ -40,15 +41,9 @@ export default class extends Page {
           <title>About Upsum</title>
           <meta name="description" content="The goal of Upsum is to answer questions people have about the news as accurately, quickly and simply as possible."/>
         </Head>
-        <div className="row">
-          <div className="twelve columns">
-            <div className="navbar">
-              <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
-              <i className="fa fa-fw fa-chevron-right seperator"/>
-              <span>About Upsum</span>
-            </div>
-          </div>
-        </div>
+        <Navbar breadcrumbs={[
+          { name: 'About Upsum', href: '/about' }
+        ]}/>
         <div className="row">
           <div className="offset-by-two eight columns">
             <h1><span>About Upsum</span></h1>

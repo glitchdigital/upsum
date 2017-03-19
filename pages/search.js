@@ -6,6 +6,7 @@ import { Session } from '../models/session'
 import Layout from '../components/layout'
 import Page from '../components/page'
 import QuestionCardPreview from '../components/question-card-preview'
+import Navbar from '../components/navbar'
 
 export default class extends Page {
 
@@ -20,7 +21,7 @@ export default class extends Page {
     
     const questions = new Questions
     let results = await questions.search({ limit: 50, name: searchQuery, text: searchQuery })
-    return { questions: results, query: query.q, searchQuery: searchQuery}
+    return { questions: results, query: query.q || '', searchQuery: searchQuery}
   }
 
   render() {
@@ -35,10 +36,15 @@ export default class extends Page {
       if (currentList == numberOfColumns) currentList = 0
       questions[currentList++].push(question)
     })
+  
+    let query = <h3 style={{marginTop: '10px'}}>Enter a query in the search box to look for answers</h3>
+    if (this.props.query !== '') {
+      query = <h3 style={{marginTop: '10px'}}><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
+    }
     
     let message
     if (this.props.questions.length === 0) {
-      message = <p style={{textAlign: 'center'}}><i>Sorry, we haven&#39;t answered any questions about that yet.</i></p>
+      message = <p style={{textAlign: 'center'}}><i>Sorry, we don&#39;t have any answers about that.</i></p>
     }
 
     return (
@@ -47,20 +53,12 @@ export default class extends Page {
           <title>Upsum - Search for {this.props.query}</title>
           <meta name="description" content="Search Upsum for answers to your questions about the news."/>
         </Head>
+        <Navbar breadcrumbs={[
+          { name: 'Search', href: '/search' }
+        ]}/>
         <div className="row">
           <div className="twelve columns">
-            <div className="navbar">
-              <Link href="/"><a className="unstyled"><i className="fa fa-fw fa-home"/> Home</a></Link>
-              <i className="fa fa-fw fa-chevron-right seperator"/>
-              <Link href="/" as="/questions"><a className="unstyled">Questions</a></Link>
-              <i className="fa fa-fw fa-chevron-right seperator"/>
-              <span>Search</span>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="twelve columns">
-            <h3><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
+            {query}
             {message}
           </div>
         </div>
