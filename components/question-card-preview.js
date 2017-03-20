@@ -4,6 +4,15 @@ import React from 'react'
 import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {
+
+  clickPreview(e, url) {
+    // Don't trigger navigation on this page if modifer key held down
+    // (avoids overriding browser behaviour such as open in new tab or window)
+    if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
+      return
+    }
+    Router.push(url)
+  }
   
   render() {
     const question = this.props.question
@@ -31,7 +40,7 @@ export default class extends React.Component {
     }
 
     return(
-      <div className={className} onClick={ () => Router.push("/question?id="+questionId, "/questions/"+questionId) }>
+      <div className={className} onClick={ (e) => this.clickPreview(e, "/question?id="+questionId, "/questions/"+questionId)}>
         {imageTag}
         <div className="question-card-contents">
           <h3><Link href={"/question?id="+questionId} as={"/questions/"+questionId}><a className="unstyled">{question.name}</a></Link></h3>
