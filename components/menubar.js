@@ -22,7 +22,7 @@ export default connect(state => state)(class extends React.Component {
                   <Link href="/"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
                 </p>
                 <p style={{margin: '0', float: 'right'}}>
-                  <Link href="/questions/new"><a className="button button-primary">New</a></Link>
+                  <Link href="/question/new" as="/questions/new"><a className="button button-primary">New</a></Link>
                   &nbsp;
                   <a className="button" href="#" onClick={this.handleLogout} >Sign out</a>
                 </p>
