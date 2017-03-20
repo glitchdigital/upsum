@@ -62,7 +62,7 @@ export default class extends React.Component {
 
     let datePublished = question['@dateModified']
     if ('acceptedAnswer' in question
-        && 'text' in question.acceptedAnswer
+        && 'datePublished' in question.acceptedAnswer
         && question.acceptedAnswer.datePublished !== '') {
       datePublished = question.acceptedAnswer.datePublished
     }
@@ -95,7 +95,7 @@ export default class extends React.Component {
     
     let footer
     if (this.props.footer) {
-      footer = <div className="question-card-contents"><p className="question-card-footer"><Link href={shareUrl}><a>{this.props.footer}</a></Link></p></div>
+      footer = <div className="question-card-contents"><p className="question-card-footer"><Link href={"/question?id="+questionId} as={"/questions/"+questionId}><a>{this.props.footer}</a></Link></p></div>
     }
 
     return(

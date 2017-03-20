@@ -199,7 +199,7 @@ export default class extends Page {
 
       let datePublished = this.props.question['@dateModified']
       if ('acceptedAnswer' in this.props.question
-          && 'text' in this.props.question.acceptedAnswer
+          && 'datePublished' in this.props.question.acceptedAnswer
           && this.props.question.acceptedAnswer.datePublished !== '') {
         datePublished = this.props.question.acceptedAnswer.datePublished
       }
@@ -263,7 +263,8 @@ export default class extends Page {
             <meta name="twitter:title" content={this.props.question.name}/>
             <meta name="twitter:description" content={description}/>
             <meta name="twitter:image" content={this.props.shareImage}/>
-            <link rel="amphtml" href={this.props.ampUrl} /> 
+            <link rel="amphtml" href={this.props.ampUrl}/> 
+            <link rel="canonical" href={this.props.shareUrl}/>
           </Head>
           <div>
             <Navbar breadcrumbs={[

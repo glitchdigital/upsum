@@ -28,6 +28,8 @@ export default class extends React.Component {
         <Head>
           <title>Upsum</title>
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+          <meta property="fb:pages" content="272576466512375"/>
+          <meta property="fb:app_id" content="243413202788046"/>
           {/*<script src="/static/js/postscribe-2.0.8.min.js"/>*/}
           {stylesheet}
         </Head>
