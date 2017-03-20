@@ -8,6 +8,7 @@ const routes = {
   images: require('./routes/images'),
   amp: require('./routes/amp'),
   rss: require('./routes/rss'),
+  rssFacebook: require('./routes/rss-facebook'),
   sitemap: require('./routes/sitemap'),
   newsSitemap: require('./routes/news-sitemap')
 }
@@ -109,6 +110,9 @@ app.prepare()
 
   // Serve recent questions as an RSS feeed
   server.get('/rss.xml', routes.rss.get)
+
+  // Serve recent questions as an RSS feeed
+  server.get('/rss-facebook.xml', routes.rssFacebook.get)
 
   // Serve sitemap (and news specific sitemap)
   server.get('/sitemap.xml', routes.sitemap.get)
