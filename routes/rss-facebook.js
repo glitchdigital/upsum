@@ -26,11 +26,8 @@ exports.get = (req, res, next) => {
           // Only add questions with answers to the feed!
           if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
             let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
-            let html = ''
-            if ('text' in question && question.text !== '') {
-              html += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
-            }
-
+            let html = `<h1>${question.name}</h1>`
+            
             if (question.image && question.image.url && question.image.url !== '' && question.image.url !== 'undefined') {
               let fileName = question.image.url.split('/').pop()
               let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
@@ -39,20 +36,24 @@ exports.get = (req, res, next) => {
               if ('publisher' in question.image &&
                   'name' in question.image.publisher &&
                   'url' in question.image.publisher) {
-                imageCredit = '<a href="' + question.image.publisher.url + '">' + question.image.publisher.name + '</a>'
+                imageCredit = question.image.publisher.name
               }
 
               html += `<figure>
 <img src="${imageUrl}"/>
   <figcaption class="op-vertical-below">
-    <h1>${imageCaption}</h1>
+    <h3>${imageCaption}</h3>
     <cite>
       ${imageCredit}
     </cite>
   </figcaption>
 </figure>`
             }
-            
+
+            if ('text' in question && question.text !== '') {
+              html += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
+            }
+  
             html += marked(question.acceptedAnswer.text)
             if ('citation' in question.acceptedAnswer && question.acceptedAnswer.citation !== '') {
               html += '<p><strong>Sources:</strong></p>'
