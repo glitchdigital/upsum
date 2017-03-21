@@ -38,20 +38,11 @@ exports.get = (req, res, next) => {
                 imageCredit = question.image.publisher.name
               }
 
-              html += `<figure>
-<img src="${imageUrl}"/>
-  <figcaption class="op-vertical-below">
-    <cite>
-      ${imageCredit}
-    </cite>
-  </figcaption>
-</figure>`
+              html += `<figure><img src="${imageUrl}"/><figcaption class="op-vertical-below"><cite>${imageCredit}</cite></figcaption></figure>`
             }
             
-            html += `<h1>${question.name}</h1>`
-            
             if ('text' in question && question.text !== '') {
-              html += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
+              html += '<h2>' + question.text + '</h2>'
             }
   
             html += marked(question.acceptedAnswer.text)
