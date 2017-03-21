@@ -46,6 +46,7 @@ export default class extends Page {
       articleImageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
     }
 
+    console.log('getInitialProps')
     return {
       id: query.id,
       question: question,
@@ -63,7 +64,8 @@ export default class extends Page {
   constructor(props) {
     super(props)
     this.state = {
-      relatedQuestions: props.relatedQuestions
+      relatedQuestions: props.relatedQuestions,
+      relatedQuestionsLoading: false
     }
   }
 
@@ -71,18 +73,21 @@ export default class extends Page {
   async componentDidMount() {
     super.componentDidMount()
     
+    this.loadAd()
+    
     this.setState({
-      relatedQuestions: []
+      relatedQuestions: this.state.relatedQuestions,
+      relatedQuestionsLoading: true
     })
     
     const relatedQuestions = await this.constructor.getRelatedQuestions(this.props.question)
     
     // Update state
     this.setState({
-      relatedQuestions: relatedQuestions
+      relatedQuestions: relatedQuestions,
+      relatedQuestionsLoading: false
     })
-    
-    this.loadAd()
+    console.log('componentDidMount')
   }
     
   // This is called any time the question changes
@@ -92,19 +97,27 @@ export default class extends Page {
       return
       
     super.componentWillReceiveProps(nextProps)
-    
-    this.setState({
-      relatedQuestions: []
-    })
-
-    const relatedQuestions = await this.constructor.getRelatedQuestions(nextProps.question)
-    
-    // Update state
-    this.setState({
-      relatedQuestions: relatedQuestions
-    })
 
     this.loadAd()
+
+    this.setState({
+      relatedQuestions: this.state.relatedQuestions,
+      relatedQuestionsLoading: true
+    })
+    
+    const relatedQuestions = await this.constructor.getRelatedQuestions(nextProps.question)
+
+    this.setState({
+      relatedQuestions: [],
+      relatedQuestionsLoading: true
+    })
+
+    this.setState({
+      relatedQuestions: relatedQuestions,
+      relatedQuestionsLoading: false
+    })
+
+    console.log('componentWillReceiveProps')
   }
 
   // Get related questions
@@ -120,15 +133,8 @@ export default class extends Page {
     searchQuery = searchQuery.replace(/(^who |^what |^why |^how |^the )/gi, '')
     searchQuery = searchQuery.replace(/( the | to | and | is )/gi, ' ')
 
-      
     // Get questions that have a similar title
     const relatedQuestions = await questions.search({ limit: maxQuestions, name: searchQuery, text: searchQuery  })
-    
-    // Don't include the question on this page as a related question
-    relatedQuestions.forEach((relatedQuestion, index) => {
-      if (question['@id'] == relatedQuestion['@id'])
-        relatedQuestions.splice(index, 1)
-    })
     
     // If there are less than 5 questions in the related questions, add recent
     // questions to make up the difference in the list
@@ -149,7 +155,13 @@ export default class extends Page {
         }
       })
     }
-    
+
+    // Don't include the question on this page as a related question
+    relatedQuestions.forEach((relatedQuestion, index) => {
+      if (question['@id'] == relatedQuestion['@id'])
+        relatedQuestions.splice(index, 1)
+    })
+
     return relatedQuestions
   }
 
@@ -224,18 +236,21 @@ export default class extends Page {
         fullText += this.props.question.acceptedAnswer.text
       }
       
-      let sidebarRelatedQuestions = this.state.relatedQuestions
+      let sidebarRelatedQuestions = []
       let followOnRelatedQuestions = []
       
-      sidebarRelatedQuestions.forEach((question, index) => {
-        if (followOnRelatedQuestions.length >= 2)
-          return
+      this.state.relatedQuestions.forEach((question, index) => {
 
+        // Add a couple of questions with images as "follow on" questions
+        // (will add first two most 'relevant' cards with images)
         if ('image' in question &&
             'url' in question.image &&
-            question.image.url != '') {
-            followOnRelatedQuestions.push(question)
-            sidebarRelatedQuestions.splice(index, 1)
+            question.image.url != '' &&
+            followOnRelatedQuestions.length < 2) {
+            // Only two follow on questions for now (rest go in sidebar)
+          followOnRelatedQuestions.push(question)
+        } else {
+          sidebarRelatedQuestions.push(question)
         }
       })
       
@@ -283,10 +298,10 @@ export default class extends Page {
               </div>
               <div className="four columns">
                 {/*<div id="question-sidebar-advert-1"></div>*/}
-                <div className="question-sidebar">
+                <div className={(this.state.relatedQuestionsLoading) ? 'question-sidebar loading' : 'question-sidebar'}>
                 {
                   sidebarRelatedQuestions.map((question, i) => {
-                    return <div key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
+                    return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
                 </div>
