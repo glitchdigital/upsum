@@ -26,12 +26,11 @@ exports.get = (req, res, next) => {
           // Only add questions with answers to the feed!
           if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
             let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
-            let html = `<h1>${question.name}</h1>`
+            let html = ''
             
             if (question.image && question.image.url && question.image.url !== '' && question.image.url !== 'undefined') {
               let fileName = question.image.url.split('/').pop()
               let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
-              let imageCaption = question.image.caption || question.name
               let imageCredit = 'Upsum'
               if ('publisher' in question.image &&
                   'name' in question.image.publisher &&
@@ -42,14 +41,15 @@ exports.get = (req, res, next) => {
               html += `<figure>
 <img src="${imageUrl}"/>
   <figcaption class="op-vertical-below">
-    <h3>${imageCaption}</h3>
     <cite>
       ${imageCredit}
     </cite>
   </figcaption>
 </figure>`
             }
-
+            
+            html += `<h1>${question.name}</h1>`
+            
             if ('text' in question && question.text !== '') {
               html += '<div style="font-style: oblique;">'+marked(question.text)+'</div>'
             }
