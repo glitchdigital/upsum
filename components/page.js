@@ -39,12 +39,6 @@ export default class extends React.Component {
     try {
       // Don't attempt to track during server rendering
       if (typeof window !== 'undefined') {
-        
-        // Don't track if on localhost or public beta site
-        if (window.location.hostname === "localhost" ||
-            window.location.hostname === "beta.upsum.news") {
-          return
-        }
 
         // Don't track if logged in (i.e. editors)
         // @TODO Check if user is editor if we add site logins

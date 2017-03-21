@@ -10,10 +10,10 @@ import QuestionCardPreview from '../components/question-card-preview'
 export default class extends Page {
   
   static async getInitialProps({ req }) {
-    await super.getInitialProps({req})
+    let props = await super.getInitialProps({req})
     const questions = new Questions
-    const results = await questions.search({ limit: 50 })
-    return { questions: results }
+    props.questions= await questions.search({ limit: 50 })
+    return props
   }
 
   constructor(props) {

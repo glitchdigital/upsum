@@ -21,7 +21,7 @@ export default class extends Page {
     
     const questions = new Questions
     let results = await questions.search({ limit: 50, name: searchQuery, text: searchQuery })
-    return { questions: results, query: query.q || '', searchQuery: searchQuery}
+    return { session: session.getState(), questions: results, query: query.q || '', searchQuery: searchQuery}
   }
 
   render() {

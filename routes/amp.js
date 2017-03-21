@@ -22,12 +22,6 @@ exports.get = (req, res, next) => {
       let imageContainerClass = 'image-container-hidden'
       let imageCreditName = 'Upsum'
       let imageCreditUrl = 'Upsum'
-
-      // Disable tracking on localhost (dev instances) or public beta siet
-      const hostname = req.headers.host.split(':')[0]
-      if (hostname === 'localhost' || hostname === 'beta.upsum.news') {
-        trackingCode = ''
-      }
       
       if ('image' in question &&
           'url' in question.image &&
