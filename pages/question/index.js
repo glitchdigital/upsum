@@ -307,9 +307,9 @@ export default class extends Page {
               <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
                 <span itemProp="name">Upsum</span><br/>
                 <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-                  <meta itemProp="url" content="https://upsum.news/static/images/upsum-publisher-logo.png"/><br/>
-                  <meta itemProp="height" content="537"/>
-                  <meta itemProp="width" content="537"/>
+                  <meta itemProp="url" content="https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_512,c_fill/upsum-publisher-logo_e6x61w.png"/><br/>
+                  <meta itemProp="height" content="512"/>
+                  <meta itemProp="width" content="512"/>
                 </span>
               </span>
               {articleImageHtml}

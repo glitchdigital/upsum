@@ -3,6 +3,9 @@
 const fetch = require('isomorphic-fetch')
 const marked = require('marked')
 const moment = require('moment')
+const sass = require('node-sass')
+
+const css = sass.renderSync({file: './css/amp.scss', outputStyle: 'compressed'}).css
 
 exports.get = (req, res, next) => {
   fetch('https://api.upsum.news/Question/'+req.params.id)
@@ -10,29 +13,39 @@ exports.get = (req, res, next) => {
     response.json()
     .then(function(question) {
 
-      let imageHtml = ''
+      let articleHtml = ''
+      
+      let trackingCode = 'UA-92465819-2'
+      let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_256,w_512,c_fill/upsum-publisher-logo_e6x61w.png'
+      let imageHeight = '256'
+      let imageWidth = '512'
+      let imageContainerClass = 'image-container-hidden'
+      let imageCreditName = 'Upsum'
+      let imageCreditUrl = 'Upsum'
+
+      // Disable tracking on localhost (dev instances) or public beta siet
+      const hostname = req.headers.host.split(':')[0]
+      if (hostname === 'localhost' || hostname === 'beta.upsum.news') {
+        trackingCode = ''
+      }
+      
       if ('image' in question &&
           'url' in question.image &&
           question.image.url != '') {
         let fileName = question.image.url.split('/').pop()
-        let imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
+            
+        imageURL = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
+        imageHeight = '512'
+        imageWidth= '1024'
+        imageContainerClass = 'image-container'
         
-        let imageCredit = 'Upsum'
         if ('publisher' in question.image && 'name' in question.image.publisher) {
-            imageCredit = question.image.publisher
+          imageCreditName = question.image.publisher.name
         }
-        
-        imageHtml = `<div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-<div class="image">
-  <amp-img width="1024" height="512" layout="responsive" attribution="${imageCredit}" src="${imageURL}" alt="${question.name}"/>
-</div>
-<meta itemProp="url" content="${imageURL}"/><br/>
-<meta itemProp="height" content="512"/>
-<meta itemProp="width" content="1024"/>
-</div>`
+        if ('publisher' in question.image && 'url' in question.image.publisher) {
+          imageCreditUrl = question.image.publisher.url
+        }
       }
-
-      let articleHtml = ''
       
       if ('text' in question && question.text !== '') {
         articleHtml += '<div class="question-text">'+marked(question.text)+'</div>'
@@ -51,13 +64,6 @@ exports.get = (req, res, next) => {
                        marked(question.acceptedAnswer.citation)
       }
 
-      if ('image' in question &&
-          'publisher' in question.image &&
-          'name' in question.image.publisher &&
-          'url' in question.image.publisher) {
-        articleHtml += marked('Image credit: ['+question.image.publisher.name +']('+question.image.publisher.url+')\n\n')
-      }
-
       let datePublished = question['@dateModified']
       if ('acceptedAnswer' in question
           && 'datePublished' in question.acceptedAnswer
@@ -72,105 +78,7 @@ exports.get = (req, res, next) => {
     <link rel="canonical" href="${'https://upsum.news/questions/' + req.params.id}"/>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-    <style amp-custom>
-      body {
-        background-color: #eee;
-        font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        font-size: 18px; line-height: 28px;
-        color: #444;
-        margin: 0;
-        padding: 0;
-        margin: 0;
-      }
-      h1 {
-        margin: 0;
-        font-size: 30px;
-        line-height: 38px;
-      }
-      a {
-        color: #444;
-        font-weight: 500;
-        text-decoration: none;
-      }
-      blockquote {
-        color: #666;
-        border-left: 2px solid #ddd;
-        margin-left: 10px;
-        padding-left: 20px;
-        font-style: oblique;
-      }
-      .content {
-        padding: 0 20px;
-        max-width: 660px;
-        margin: 0 auto;
-      }
-      .question-text {
-        font-size: 22px;
-        line-height: 28px;
-        font-style: oblique;
-      }
-      .metadata {
-        display: none;
-      }
-      .image {
-        margin-top: 20px;
-      }
-      amp-img > img { 
-        object-fit: contain;
-      }
-      .logo {
-        margin-top: 25px;
-        margin-bottom: 15px;
-        overflow: auto;
-      }
-      .logo a {
-        border: 0;
-        color: #5c5c5c;
-      }
-      .logo .text {
-        display: inline-block;
-        text-align: left;
-        float: left;
-      }
-      .logo .text h1 {
-        margin: 0;
-        padding: 0;
-        font-size: 48px;
-        line-height: 52px;
-        position: relative;
-        text-align: left;
-      }
-      .logo .text h1 a {
-        font-weight: 600;
-      }
-      .logo .text p {
-        margin: 0;
-        padding: 0 0 0 2px;
-      }
-      .logo .text p a {
-        text-transform: uppercase;
-        font-weight: 400;
-      }
-      .logo img {
-        height: 75px;
-        width: 75px;
-        border: 0;
-      }
-      .logo amp-img {
-        float: left;
-        margin-right: 5px;
-      }
-      .footer {
-        text-align: right;
-      }
-      .article-body p:first-child {
-        margin-top: 0;
-      }
-      .timestamp {
-        color: #888;
-        margin-top: 5px;
-      }
-    </style>
+    <style amp-custom>${css}</style>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <title>${question.name}</title>
@@ -186,7 +94,15 @@ exports.get = (req, res, next) => {
       </div>
       <h1 itemProp="headline">${question.name}</h1>
       <p class="timestamp" itemProp="datePublished"> ${moment(datePublished).format('D MMMM, YYYY')}</p>
-      ${imageHtml}
+      <div class=${imageContainerClass}>
+        <div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+          <amp-img height="${imageHeight}" width="${imageWidth}" layout="responsive" attribution="${imageCreditName}" src="${imageURL}" alt="${question.name}"/>
+          <meta itemProp="url" content="${imageURL}"/><br/>
+          <meta itemProp="height" content="${imageHeight}"/>
+          <meta itemProp="width" content="${imageWidth}"/>
+        </div>
+        <p class="image-credit">Image credit: <a href="${imageCreditUrl}">${imageCreditName}</a></p>
+      </div>
       <span class="article-body" itemProp="articleBody">${articleHtml}</span>
       <span class="metadata">
         <link itemProp="mainEntityOfPage" href="${'https://upsum.news/questions/' + req.params.id}"/><br/>
@@ -212,7 +128,7 @@ exports.get = (req, res, next) => {
     <script type="application/json">
     {
       "vars": {
-        "account": "UA-92465819-2"
+        "account": "${trackingCode}"
       },
       "triggers": {
         "trackPageview": {

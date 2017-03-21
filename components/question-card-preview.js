@@ -5,13 +5,13 @@ import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {
 
-  clickPreview(e, url) {
+  clickPreview(e, url, as) {
     // Don't trigger navigation on this page if modifer key held down
     // (avoids overriding browser behaviour such as open in new tab or window)
     if (e.metaKey || e.ctrlKey || e.shiftKey || (e.nativeEvent && e.nativeEvent.which === 2)) {
       return
     }
-    Router.push(url)
+    Router.push(url, as)
   }
   
   render() {
