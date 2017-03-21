@@ -8,7 +8,7 @@ exports.get = (req, res, next) => {
     publication_language: 'en'
   })
 
-  // Add 500 most recently updated questions to the news sitemap
+  // Add 500 most recently created questions to the news sitemap
   fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
   .then(function(response) {
     response.json()

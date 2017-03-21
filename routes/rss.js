@@ -16,7 +16,7 @@ exports.get = (req, res, next) => {
     ttl: '60'
   })
 
-  // Add 50 most recently updated questions to the RSS feed
+  // Add 50 most recently created questions to the RSS feed
   fetch('https://api.upsum.news/Question?sort=-_created&limit=50')
   .then(function(response) {
     response.json()

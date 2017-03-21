@@ -16,8 +16,16 @@ export default class extends Page {
     return { questions: results }
   }
 
-  componentDidMount() {
+  constructor(props) {
+    super(props)
+    this.state = {
+      questions: props.questions
+    }
+  }
+  
+  async componentDidMount() {
     super.componentDidMount()
+
     /*
     if (!window.googleadsenseloaded) {
       window.googleadsenseloaded = true
@@ -28,6 +36,12 @@ export default class extends Page {
       })
     }
     */
+    
+    // Update with most recent questions on each page load
+    const questions = new Questions
+    this.setState({
+      questions: await questions.search({ limit: 50 })
+    })
   }
 
   getPreviewCardClassName(question, column, row) {
@@ -66,12 +80,7 @@ export default class extends Page {
     const numberOfColumns = 3
     const questions = []
     let currentList = 0
-    this.props.questions.forEach((question) => {
-
-      // Skip questions without answers
-      //if (!question.acceptedAnswer || !question.acceptedAnswer.text)
-      //  return
-      
+    this.state.questions.forEach((question) => {
       if (currentList == numberOfColumns) currentList = 0
       if (!questions[currentList]) questions[currentList] = []
       questions[currentList++].push(question)
@@ -108,7 +117,7 @@ export default class extends Page {
             <div className="row question-cards">
               <div className="columns twelve">
                 {
-                  this.props.questions.map((question, i) => {
+                  this.state.questions.map((question, i) => {
                     return <div key={i}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, null, i)}/></div>
                   })
                 }

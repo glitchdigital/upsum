@@ -46,7 +46,6 @@ export default class extends Page {
       articleImageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
     }
 
-    console.log('getInitialProps')
     return {
       id: query.id,
       question: question,
@@ -87,7 +86,6 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       relatedQuestionsLoading: false
     })
-    console.log('componentDidMount')
   }
     
   // This is called any time the question changes
@@ -116,8 +114,6 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       relatedQuestionsLoading: false
     })
-
-    console.log('componentWillReceiveProps')
   }
 
   // Get related questions

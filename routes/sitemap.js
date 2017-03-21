@@ -27,7 +27,7 @@ exports.get = (req, res, next) => {
       }
     }
   }
-  // Add 500 most recently updated questions to the sitemap
+  // Add 500 most recently created questions to the sitemap
   fetch("https://api.upsum.news/Question?sort=-_created&limit=500")
   .then(function(response) {
     response.json()
