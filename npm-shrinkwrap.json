@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "dependencies": {
     "abbrev": {
       "version": "1.1.0",
@@ -1237,7 +1237,7 @@
     },
     "escape-html": {
       "version": "1.0.3",
-      "from": "escape-html@>=1.0.3 <1.1.0",
+      "from": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
       "resolved": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz"
     },
     "escape-string-regexp": {

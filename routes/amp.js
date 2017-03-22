@@ -4,6 +4,7 @@ const fetch = require('isomorphic-fetch')
 const marked = require('marked')
 const moment = require('moment')
 const sass = require('node-sass')
+const escapeHtml = require('escape-html')
 
 const css = sass.renderSync({file: './css/amp.scss', outputStyle: 'compressed'}).css
 
@@ -75,7 +76,7 @@ exports.get = (req, res, next) => {
     <style amp-custom>${css}</style>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <title>${question.name}</title>
+    <title>${escapeHtml(question.name)}</title>
   </head>
   <body>
     <div class="content" itemScope itemType="http://schema.org/NewsArticle">
@@ -86,16 +87,16 @@ exports.get = (req, res, next) => {
           <p><a href="https://upsum.news">The news, summed up</a></p>
         </div>
       </div>
-      <h1 itemProp="headline">${question.name}</h1>
+      <h1 itemProp="headline">${escapeHtml(question.name)}</h1>
       <p class="timestamp" itemProp="datePublished"> ${moment(datePublished).format('D MMMM, YYYY')}</p>
       <div class=${imageContainerClass}>
         <div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-          <amp-img height="${imageHeight}" width="${imageWidth}" layout="responsive" attribution="${imageCreditName}" src="${imageURL}" alt="${question.name}"/>
+          <amp-img height="${imageHeight}" width="${imageWidth}" layout="responsive" attribution="${escapeHtml(imageCreditName)}" src="${imageURL}" alt="${escapeHtml(question.name)}"/>
           <meta itemProp="url" content="${imageURL}"/><br/>
           <meta itemProp="height" content="${imageHeight}"/>
           <meta itemProp="width" content="${imageWidth}"/>
         </div>
-        <p class="image-credit">Image credit: <a href="${imageCreditUrl}">${imageCreditName}</a></p>
+        <p class="image-credit">Image credit: <a href="${imageCreditUrl}">${escapeHtml(imageCreditName)}</a></p>
       </div>
       <span class="article-body" itemProp="articleBody">${articleHtml}</span>
       <span class="metadata">

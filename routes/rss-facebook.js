@@ -3,6 +3,7 @@
 const fetch = require('isomorphic-fetch')
 const marked = require('marked')
 const RSS = require('rss')
+const escapeHtml = require('escape-html')
 
 exports.get = (req, res, next) => {
   var rssFeed = new RSS({
@@ -38,11 +39,11 @@ exports.get = (req, res, next) => {
                 imageCredit = question.image.publisher.name
               }
 
-              html += `<figure><img src="${imageUrl}"/><figcaption class="op-vertical-below"><cite>${imageCredit}</cite></figcaption></figure>`
+              html += `<figure><img src="${imageUrl}"/><figcaption class="op-vertical-below"><cite>${escapeHtml(imageCredit)}</cite></figcaption></figure>`
             }
             
             if ('text' in question && question.text !== '') {
-              html += '<h2>' + question.text + '</h2>'
+              html += '<h2>' + escapeHtml(question.text) + '</h2>'
             }
   
             html += marked(question.acceptedAnswer.text)

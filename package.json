@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
@@ -8,6 +8,7 @@
     "body-parser": "^1.16.1",
     "cloudinary": "^1.7.1",
     "dotenv": "^4.0.0",
+    "escape-html": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
     "express": "^4.14.0",
     "express-sitemap": "^1.7.0",
     "flickrapi": "^0.6.0",
