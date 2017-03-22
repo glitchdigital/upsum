@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const next = require('next')
 const sass = require('node-sass')
+const loggly = require('loggly')
 const routes = {
   images: require('./routes/images'),
   amp: require('./routes/amp'),
@@ -16,16 +17,29 @@ const routes = {
 // Load environment variables from .env file if present
 require('dotenv').load()
 
+process.env.NODE_ENV = process.env.NODE_ENV || "production"
+process.env.PORT = process.env.PORT || 80
+
 if (process.env.LOGS_SECRET) {
   require('now-logs')(process.env.LOGS_SECRET)
 }
 
-process.on('uncaughtException', function (err) {
-  console.log(err)
+const logger = loggly.createClient({
+  token: process.env.LOGGLY_TOKEN || '',
+  subdomain: process.env.LOGGLY_SUBDOMAIN || '',
+  auth: {
+    username: process.env.LOGGLY_USERNAME || '',
+    password: process.env.LOGGLY_PASSWORD || ''
+  },
+  tags: ['upsum.news', process.env.NODE_ENV]
 })
 
-process.env.NODE_ENV = process.env.NODE_ENV || "production"
-process.env.PORT = process.env.PORT || 80
+logger.log("Instance intialized", ['startup'])
+
+process.on('uncaughtException', function (err) {
+  console.log(err)
+  logger.log(err, ['process','uncaughtException'])
+})
 
 const app = next({
   dir: '.', 
@@ -41,6 +55,7 @@ app.prepare()
   server.on('uncaughtException', function (req, res, route, err) {
     console.log(route)
     console.log(err)
+    logger.log({ req: req, res: res, route: route, err: err }, ['express','uncaughtException'])
     if (!res.headersSent) {
       return res.send(500, {ok: false})
     }
@@ -135,12 +150,16 @@ app.prepare()
     return handle(req, res)
   })
 
-  server.listen(process.env.PORT , (err) => {
+  server.listen(process.env.PORT, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:'+process.env.PORT+" ["+process.env.NODE_ENV+"]")
+    require('dns').lookup(require('os').hostname(), function(err, ipAddress, fam) {
+      console.log('Server running at http://%s:%d in %s mode', ipAddress, process.env.PORT, process.env.NODE_ENV)
+      logger.log('Instance started at http://'+ipAddress+':'+process.env.PORT+' in '+process.env.NODE_ENV+' mode', ['startup'])
+    })
   })
 })
 .catch(err => {
   console.log('An error occurred, unable to start the server')
+  logger.log("Instance failed to start", ['startup'])
   console.log(err)
 })

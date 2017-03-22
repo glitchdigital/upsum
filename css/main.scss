@@ -457,8 +457,8 @@ a.unstyled:hover {
   padding-left: 110px;
 }
 .question-card-preview-small h3 {
-  font-size: 22px;
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 22px;
   margin: 0;
   margin-bottom: 5px;
 }
@@ -466,21 +466,7 @@ a.unstyled:hover {
   font-weight: 500;
 }
 
-.question-card-preview-small.has-image h3 {
-  font-size: 18px;
-  line-height: 22px;
-  margin: 0;
-  margin-bottom: 5px;
-}
-.question-card-preview-small.has-image h3 a {
-  font-weight: 500;
-}
-
 @media (min-width: $mobileMaxResolution) and (max-width: $largeDesktopMinResolution) {
-  .question-card-preview-small h3 {
-    font-size: 18px;
-    line-height: 22px;
-  }
   .question-card-preview-small.has-image h3 {
     font-size: 15px;
     line-height: 18px;

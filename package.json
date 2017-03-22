@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.0.86",
+  "version": "2.1.0",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
@@ -11,6 +11,7 @@
     "express": "^4.14.0",
     "express-sitemap": "^1.7.0",
     "flickrapi": "^0.6.0",
+    "loggly": "^1.1.1",
     "marked": "^0.3.6",
     "moment": "https://registry.npmjs.org/moment/-/moment-2.17.1.tgz",
     "next": "^2.0.0-beta.32",
