@@ -8,20 +8,22 @@ import Questions from '../models/questions'
 import Page from '../components/page'
 import Navbar from '../components/navbar'
 import QuestionCardPreview from '../components/question-card-preview'
+import QuestionCard from '../components/question-card'
 
 export default class extends Page {
   
   static async getInitialProps({ req }) {
     let props = await super.getInitialProps({req})
     const questions = new Questions
-    props.questions= await questions.search({ limit: 100 })
+    props.questions= await questions.search({ limit: 50 })
     return props
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      questions: props.questions
+      questions: props.questions,
+      question: null
     }
   }
   
@@ -29,14 +31,28 @@ export default class extends Page {
     super.componentDidMount()
     // Update with most recent questions on each page load
     const questions = new Questions
+    const questionsResult = await questions.search({ limit: 50 })
     this.setState({
-      questions: await questions.search({ limit: 100 })
+      questions: questionsResult,
+      question: null
     })
   }
   
-  openQuestion(questionId) {
-    window.open("/questions/"+questionId)
+  openQuestion(question) {
+    //window.open("/questions/"+questionId)
     //Router.push("/question?id="+questionId, "/questions/"+questionId)
+    if (document.getElementById('question-container')) {
+      document.getElementById('question-container').scrollTop = 0
+      this.setState({
+        questions: this.state.questions,
+        question: null
+      })
+    } else {
+      this.setState({
+        questions: this.state.questions,
+        question: question
+      })
+    }
   }
   
   render() {
@@ -59,6 +75,13 @@ export default class extends Page {
       }
     })
     
+    let questionCard = ''
+    if (this.state.question !== null) {
+      questionCard = <div id="question-container" className="question-container">
+        <QuestionCard question={this.state.question} session={this.props.session}/>
+      </div>
+    }
+    
     return (
       <div>
         <Head>
@@ -76,10 +99,14 @@ export default class extends Page {
           {stylesheet}
         </Head>
         <div className="image-wall-container">
+          {questionCard}
           <div className="image-wall">
           {
             questionsWithThumbnails.map((item, i) => {
-              return <div onClick={() => this.openQuestion(item.questionId)} className="image" key={i}><h3>{item.question.name}</h3><image src={item.thumbnailUrl}/></div>
+              return <div onClick={() => this.openQuestion(item.question)} className="image" key={i}>
+                <h3>{item.question.name}</h3>
+                <div className="img-wrapper"><img src={item.thumbnailUrl}/></div>
+              </div>
             })
           }
           </div>
