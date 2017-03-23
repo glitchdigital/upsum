@@ -24,12 +24,18 @@ exports.get = (req, res, next) => {
     .then(function(json) {
       if (json instanceof Array) {
         json.forEach(function(question, index) {
+          // Don't add articles without images to the Facebook feed or Facebook
+          // will reject *all* articles (*sigh*)
+          if (!question.image || !question.image.url || question.image.url === '') {
+            return
+          }
+
           // Only add questions with answers to the feed!
           if ('acceptedAnswer' in question && 'text' in question.acceptedAnswer && question.acceptedAnswer.text !== '') {
             let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
             let html = ''
             
-            if (question.image && question.image.url && question.image.url !== '' && question.image.url !== 'undefined') {
+            if (question.image && question.image.url && question.image.url !== '') {
               let fileName = question.image.url.split('/').pop()
               let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
               let imageCredit = 'Upsum'
