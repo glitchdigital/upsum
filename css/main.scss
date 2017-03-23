@@ -457,8 +457,8 @@ a.unstyled:hover {
   padding-left: 110px;
 }
 .question-card-preview-small h3 {
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 22px;
+  line-height: 26px;
   margin: 0;
   margin-bottom: 5px;
 }
@@ -466,7 +466,21 @@ a.unstyled:hover {
   font-weight: 500;
 }
 
+.question-card-preview-small.has-image h3 {
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.question-card-preview-small.has-image h3 a {
+  font-weight: 500;
+}
+
 @media (min-width: $mobileMaxResolution) and (max-width: $largeDesktopMinResolution) {
+  .question-card-preview-small h3 {
+    font-size: 18px;
+    line-height: 22px;
+  }
   .question-card-preview-small.has-image h3 {
     font-size: 15px;
     line-height: 18px;
@@ -509,12 +523,6 @@ a.unstyled:hover {
   height: 200px;
   width: 100%;
   border: 0;
-}
-@media (min-width: $desktopMinResolution) {
-  .question-card-preview .question-card-image-container .question-card-image,
-  .question-card-preview .question-card-image-container {
-    height: 250px;
-  }
 }
 
 .question-card .question-image {
@@ -936,4 +944,51 @@ ol.breadcrumbs li:last-child a {
 ol.breadcrumbs .separator {
   color: #aaa;
   margin: 0 5px;
+}
+.image-wall-container {
+  position: absolute;
+  height: 100%;
+  width: 100%; 
+  overflow: hidden;
+  background: #000;
+}
+.image-wall {
+  line-height: 0;
+}
+.image-wall .image {
+  position: relative;
+  float: left;
+  width: auto;
+  width: 33.333%;
+  overflow: hidden;
+}
+@media (min-width: $desktopMinResolution) {
+  .image-wall .image {
+    width: 12.5%;
+  }
+}
+.image-wall .image:hover {
+  cursor: pointer;
+}
+.image-wall .image img {
+  width: 100%;
+  height: auto;
+  opacity: 0.5;
+}
+.image-wall .image:hover img {
+  opacity: 1;
+  box-shadow: 0 0 50px rgba(255,255,255,0.5);
+}
+.image-wall .image h3 {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 10px 10px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 20px;
+  text-shadow: 0 0 5px #000;
+}
+.image-wall .image:hover h3 {
+  display: block;
 }
