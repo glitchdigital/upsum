@@ -66,14 +66,23 @@ export default class extends React.Component {
       datePublished = question.acceptedAnswer.datePublished
     }
     
-    let answeredOn = <div><h4>This question has not been answered yet!</h4></div>
-    if (question.acceptedAnswer && question.acceptedAnswer.text)
+    let answeredOn
+    if (question.acceptedAnswer && question.acceptedAnswer.text) {
       answeredOn =
         <div>
           <p className="date-label">
             <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
           </p>
         </div>
+    } else {
+      answeredOn =
+        <div>
+          <p className="date-label">
+            <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
+          </p>
+          <p><i>This question has not been answered yet!</i></p>
+        </div>
+    }
     
     let citation
     if (question.acceptedAnswer && question.acceptedAnswer.citation)

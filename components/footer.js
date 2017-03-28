@@ -26,7 +26,7 @@ export default class extends React.Component {
               <hr/>
               <p style={{marginBottom: '10px'}}>
                 &copy; <Link href="/"><a>Upsum</a></Link> {new Date().getYear() + 1900} v{Package.version} {loginButton}
-                <span style={{float: 'right'}} ><a href="/rss.xml"><i className="fa fa-rss"/> RSS Feed</a></span>
+                <span style={{float: 'right'}} ><a href="/rss.xml"><i className="fa fa-rss"/> RSS</a></span>
               </p>
               <p style={{marginBottom: '10px'}}>
                 Upsum articles are published under the Creative Commons <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a> licence.

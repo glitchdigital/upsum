@@ -180,7 +180,7 @@ footer p {
   color: #888;
   text-decoration: none;
   font-size: 16px;
-  line-height: 18px;
+  line-height: 24px;
 }
 #search {
   margin-top: 0px;
@@ -321,7 +321,7 @@ a.unstyled:hover {
 .question-card-preview {
   background: #f9f9f9;
   margin-bottom: 15px;
-  box-shadow: 3px 3px 0px rgba(0,0,0,.05);
+  box-shadow: 0px 6px 0px -3px rgba(0,0,0,.05);
   cursor: pointer;
 }
 .question-card-preview .question-card-contents {
@@ -333,7 +333,7 @@ a.unstyled:hover {
   }
   .question-card-preview:hover {
     background: #fff;
-    box-shadow: 4px 4px 0px rgba(0,0,0,.1);
+    box-shadow: 0px 8px 0px -4px rgba(0,0,0,.1);
     transform: scale(1.025);
     transition-duration: 0.1s;
   }
@@ -419,7 +419,7 @@ a.unstyled:hover {
   overflow: visible;
   background: #f9f9f9;
   margin-bottom: 15px;
-  box-shadow: 3px 3px 0px rgba(0,0,0,.05);
+  box-shadow: 0px 6px 0px -3px rgba(0,0,0,.05);
   cursor: pointer;
   height: 100px;
 }
@@ -429,7 +429,7 @@ a.unstyled:hover {
   }
   .question-card-preview-small:hover {
     background: #fff;
-    box-shadow: 4px 4px 0px rgba(0,0,0,.1);
+    box-shadow: 0px 8px 0px -4px rgba(0,0,0,.1);
     transform: scale(1.025);
     transition-duration: 0.1s;
   }
@@ -641,7 +641,7 @@ a.unstyled:hover {
   background: #fff;
   padding: 15px 10px 0 10px;
   margin-bottom: 10px;
-  box-shadow: 2px 2px 2px rgba(0,0,0,.2);
+  box-shadow: 0px 4px 2px -2px gba(0,0,0,.2);
 }
 .box h5 {
   margin-bottom: 15px;
@@ -687,8 +687,13 @@ a.unstyled:hover {
 }
 .question-card {
   background: #fff;
-  margin-bottom: 35px;
-  box-shadow: 5px 5px 0px rgba(0,0,0,.05);
+  margin-bottom: 25px;
+  box-shadow: 0px 10px 0px -5px rgba(0,0,0,.05);
+}
+@media (min-width: $desktopMinResolution) {
+  .question-card {
+
+  }
 }
 .question-card .question-card-contents {
   padding: 10px 15px;
@@ -802,13 +807,14 @@ height: 0px;
 .question-card-preview {
   animation: fadein 0.2s;
 }
-.question-sidebar {
-  margin-top: 15px;
+@media (min-width: $desktopMinResolution) {
+  .question-sidebar {
+    margin-top: 15px;
+  }
 }
 .question-sidebar .question-sidebar-item {
   animation: fadein 0.1s 0.5s ease-out forwards;
   opacity: 0;
-  margin-bottom: 20px;
 }
 
 .question-sidebar .question-sidebar-item:nth-child(1) {
@@ -851,7 +857,13 @@ height: 0px;
   margin-top: 15px;
   padding: 10px 20px;
   background: #ddd;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: $desktopMinResolution) {
+  .alert {
+    margin-bottom: 25px;
+  }
 }
 .alert,
 .alert p,

@@ -96,6 +96,7 @@ export default class extends Page {
           <meta name="twitter:title" content="Upsum - The news, summed up"/>
           <meta name="twitter:description" content="Find accurate, quick and simple answers to your questions about the news."/>
           <meta name="twitter:image" content="https://upsum.news/static/images/upsum-logo-share-twitter.png"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
           {stylesheet}
         </Head>
         <div className="image-wall-container">
