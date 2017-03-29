@@ -10,7 +10,16 @@ export default class extends React.Component {
 
   static async getInitialProps({ req }) {
     const session = Session(req)
-    return { session: session.getState() }
+    let baseUrl
+    if (req) {
+       baseUrl = req.protocol + '://' + req.headers.host
+     } else {
+       baseUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
+     }
+    return { 
+      session: session.getState(),
+      baseUrl: baseUrl
+    }
   }
   
   constructor(props) {

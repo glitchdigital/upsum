@@ -15,7 +15,7 @@ import QuestionCard from '../../components/question-card'
 export default class extends Page {
   
   static async getInitialProps({ req, query }) {
-    await super.getInitialProps({req})
+    let props = await super.getInitialProps({req})
     const session = Session(req)
     const questions = new Questions
     
@@ -37,7 +37,7 @@ export default class extends Page {
       relatedQuestions = await this.getRelatedQuestions(question)
     */
 
-    const trendingQuestions = await questions.getTrendingQuestions()
+    const trendingQuestions = await questions.getQuestionsFromUrl(props.baseUrl + '/trending-questions')
 
     // Define URLs for sharing
     let shareUrl = 'https://upsum.news/questions/' + query.id
@@ -55,26 +55,25 @@ export default class extends Page {
       articleImageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_1024,c_fill/'+fileName
     }
 
-    return {
-      id: query.id,
-      question: question,
-      relatedQuestions: [],
-      trendingQuestions: trendingQuestions,
-      session: session.getState(),
-      shareUrl: shareUrl,
-      ampUrl: ampUrl,
-      shareImage: twitterImageUrl,
-      twitterImageUrl: twitterImageUrl,
-      facebookImageUrl: facebookImageUrl,
-      articleImageUrl: articleImageUrl
-    }
+    props.id = query.id
+    props.question = question
+    props.relatedQuestions = []
+    props.trendingQuestions = trendingQuestions
+    props.shareUrl = shareUrl
+    props.ampUrl = ampUrl
+    props.shareUrl = shareUrl
+    props.twitterImageUrl = twitterImageUrl
+    props.facebookImageUrl = facebookImageUrl
+    props.articleImageUrl = articleImageUrl
+    
+    return props
   }
   
   constructor(props) {
     super(props)
     this.state = {
       relatedQuestions: props.relatedQuestions,
-      relatedQuestionsLoading: false
+      trendingQuestions: props.trendingQuestions
     }
   }
 
@@ -86,7 +85,7 @@ export default class extends Page {
     
     this.setState({
       relatedQuestions: this.state.relatedQuestions,
-      relatedQuestionsLoading: true
+      trendingQuestions: this.state.trendingQuestions
     })
     
     const relatedQuestions = await this.constructor.getRelatedQuestions(this.props.question)
@@ -94,7 +93,7 @@ export default class extends Page {
     // Update state
     this.setState({
       relatedQuestions: relatedQuestions,
-      relatedQuestionsLoading: false
+      trendingQuestions: this.state.trendingQuestions
     })
   }
     
@@ -110,19 +109,21 @@ export default class extends Page {
 
     this.setState({
       relatedQuestions: this.state.relatedQuestions,
-      relatedQuestionsLoading: true
+      trendingQuestions: this.state.trendingQuestions
     })
     
+    const questions = new Questions
+    const trendingQuestions = await questions.getQuestionsFromUrl(this.props.baseUrl + '/trending-questions')
     const relatedQuestions = await this.constructor.getRelatedQuestions(nextProps.question)
-
+    
     this.setState({
       relatedQuestions: [],
-      relatedQuestionsLoading: true
+      trendingQuestions: []
     })
 
     this.setState({
       relatedQuestions: relatedQuestions,
-      relatedQuestionsLoading: false
+      trendingQuestions: trendingQuestions
     })
   }
 
@@ -293,7 +294,7 @@ export default class extends Page {
               </div>
               <div className="four columns">
                 {/*<div id="question-sidebar-advert-1"></div>*/}
-                <div className={(this.state.relatedQuestionsLoading) ? 'question-sidebar loading' : 'question-sidebar'}>
+                <div className="question-sidebar">
                 {
                   sidebarQuestions.map((question, i) => {
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>

@@ -12,7 +12,7 @@ export default class extends Page {
   static async getInitialProps({ req }) {
     let props = await super.getInitialProps({req})
     const questions = new Questions
-    props.questions= await questions.getTrendingQuestions()
+    props.questions= await questions.getQuestionsFromUrl(props.baseUrl + '/trending-questions')
     return props
   }
 
@@ -40,7 +40,7 @@ export default class extends Page {
     // Update with most recent questions on each page load
     const questions = new Questions
     this.setState({
-      questions: await questions.getTrendingQuestions()
+      questions: await questions.getQuestionsFromUrl(this.props.baseUrl + '/trending-questions')
     })
   }
 

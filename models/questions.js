@@ -104,8 +104,7 @@ export default class Questions {
     return result
   }
 
-  async getTrendingQuestions(hostname) {
-    const url = 'https://upsum.news/trending-questions'
+  async getQuestionsFromUrl(url) {
     const res = await fetch(url)
     let result = []
     try {
