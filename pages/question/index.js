@@ -22,21 +22,14 @@ export default class extends Page {
     // Get question
     const question = await questions.get(query.id)
     
-    /*
-    // Disabled fetching of relatedQuestions on the server temporarily as 
-    // we don't have an optimised way of doing this and want renders to be
-    // be as fast as possible. SSR for related questions will be enabled again
-    // when we have properly linked questions (and not relying on a free text
-    // comparison search on each page hit).
-    
     // When running on the server we get related questions in getInitialProps() 
     // When running in the browser we can fetch them after the page load in
     // componentDidMount() to improve page rendering time.
     let relatedQuestions = []
     if (typeof window === 'undefined' && question['@id']) {
       relatedQuestions = await this.getRelatedQuestions(question)
-    */
-
+    }
+    
     const trendingQuestions = await questions.getQuestionsFromUrl(props.baseUrl + '/trending-questions')
 
     // Define URLs for sharing
@@ -57,7 +50,7 @@ export default class extends Page {
 
     props.id = query.id
     props.question = question
-    props.relatedQuestions = []
+    props.relatedQuestions = relatedQuestions
     props.trendingQuestions = trendingQuestions
     props.shareUrl = shareUrl
     props.ampUrl = ampUrl
@@ -83,11 +76,6 @@ export default class extends Page {
     
     this.loadAd()
     
-    this.setState({
-      relatedQuestions: this.state.relatedQuestions,
-      trendingQuestions: this.state.trendingQuestions
-    })
-    
     const relatedQuestions = await this.constructor.getRelatedQuestions(this.props.question)
     
     // Update state
@@ -112,18 +100,11 @@ export default class extends Page {
       trendingQuestions: this.state.trendingQuestions
     })
     
-    const questions = new Questions
-    const trendingQuestions = await questions.getQuestionsFromUrl(this.props.baseUrl + '/trending-questions')
     const relatedQuestions = await this.constructor.getRelatedQuestions(nextProps.question)
-    
-    this.setState({
-      relatedQuestions: [],
-      trendingQuestions: []
-    })
 
     this.setState({
       relatedQuestions: relatedQuestions,
-      trendingQuestions: trendingQuestions
+      trendingQuestions: nextProps.trendingQuestions
     })
   }
 
@@ -153,24 +134,25 @@ export default class extends Page {
   }
 
   loadAd() {
-    /*
     new Promise((resolve) => {
       if (typeof window === 'undefined')
         return resolve(true)
 
       setTimeout(() => {
+
+        /*
         window.medianet_cId = "8CUX3Y6BU"
         window.medianet_versionId = "111299"
         const isSSL = 'https:' == window.document.location.protocol
         const mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=' + window.medianet_cId + (isSSL ? '&https=1' : '')
 
-        let advertElementId = 'question-card-advert-1'
+        let advertElementId = 'question-banner-advert-1'
         window.medianet_width = "728"
         window.medianet_height = "90"
         window.medianet_crid = "454917506"
         
         document.getElementById(advertElementId).innerHTML = '<div class="advertising-label">Advertising</div>'
-        // Add new adverts
+        // Add advert
         postscribe('#'+advertElementId, '<script src="' + mnSrc + '"></script>', {
           done: () => {
             let advertElementId = 'question-sidebar-advert-1'
@@ -187,12 +169,57 @@ export default class extends Page {
             })
           }
         })
-    
+        */
+
+        /*
+        window.advert_sidebar_element_id = 'question-sidebar-advert-1'
+        window.advert_sidebar_width = '300'
+        window.advert_sidebar_height = '250'
+        window.advert_sidebar_publisher_id = 'gillis49'
+
+        window.advert_banner_element_id = 'question-banner-advert-1'
+        window.advert_banner_width = '728'
+        window.advert_banner_height = '90'
+        window.advert_banner_publisher_id = 'gillis49'
+
+        // Placeholders
+        document.getElementById(window.advert_sidebar_element_id).innerHTML = '<div class="advertising-label">Advertising</div>'
+        document.getElementById(window.advert_banner_element_id).innerHTML = '<div class="advertising-label">Advertising</div>'
+
+        if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] } }
+        window.CHITIKA.units.push({"calltype":"async[2]","publisher":window.advert_sidebar_publisher_id,"width":window.advert_sidebar_width,"height":window.advert_sidebar_height,"sid":"Chitika Default"})
+        window.CHITIKA.units.push({"calltype":"async[2]","publisher":window.advert_sidebar_publisher_id,"width":window.advert_banner_width,"height":window.advert_banner_height,"sid":"Chitika Default"})
+
+        // Insert advert
+        postscribe('#'+advert_sidebar_element_id, '<div id="chitikaAdBlock-1"></div>', {
+          done: () => {
+            postscribe('#'+advert_banner_element_id, '<div id="chitikaAdBlock-2"></div>', {
+              done: () => {
+                // Insert advert loading script
+                postscribe('#'+advert_sidebar_element_id, '<script src="//cdn.chitika.net/getads.js" async/>', {
+                  done: () => {
+                    resolve(true)
+                  }
+                })
+              }
+            })
+          }
+        })
+      */
+        window.advert_banner_element_id = 'question-banner-advert-2'
+        document.getElementById(window.advert_banner_element_id).innerHTML = ''
+        let scriptSrc = 'https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=893386b4-be01-4fa9-84a7-334f009437a4'
+        postscribe('#'+advert_banner_element_id, '<script src="' + scriptSrc + '" async></script>', {
+          done: () => {
+            resolve(true)
+          }
+        })
       }, 500)
+        
     })
-    */
-   }
-  
+
+  }
+
   render() {
     if (this.props.question['@id']) {
 
@@ -284,6 +311,10 @@ export default class extends Page {
             <div className="row">
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>
+                <div id="question-banner-advert-1">
+                  <div className="advertising-label">Advertising</div>
+                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amazonhomepage&f=ifr&linkID=46138405dc7edcb73b439789149e5901&t=glitchdigital-20&tracking_id=glitchdigital-20" width="728" height="90" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
+                </div>
                 <div className="row">
                   {
                     followOnQuestions.map((question, i) => {
@@ -291,9 +322,13 @@ export default class extends Page {
                     })
                   }
                 </div>
+                <div id="question-banner-advert-2"></div>
               </div>
               <div className="four columns">
-                {/*<div id="question-sidebar-advert-1"></div>*/}
+                <div id="question-sidebar-advert-1">
+                  <div className="advertising-label">Advertising</div>
+                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=290&l=ur1&category=amzn_ereaders_prime_0417&banner=05WV7KZNWT6E3T9GFTR2&f=ifr&lc=pf4&linkID=a962e6ad40a3295e820bc0dcfa6f5e03&t=glitchdigital-20&tracking_id=glitchdigital-20" width="320" height="250" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
+                </div>
                 <div className="question-sidebar">
                 {
                   sidebarQuestions.map((question, i) => {

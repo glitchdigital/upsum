@@ -36,12 +36,6 @@ export default class extends Page {
       })
     }
     */
-    
-    // Update with most recent questions on each page load
-    const questions = new Questions
-    this.setState({
-      questions: await questions.getQuestionsFromUrl(this.props.baseUrl + '/trending-questions')
-    })
   }
 
   getPreviewCardClassName(question, column, row) {
@@ -85,7 +79,7 @@ export default class extends Page {
       questions[i] = []
     }
     
-    this.state.questions.forEach((question) => {
+    this.props.questions.forEach((question) => {
       if (currentList == numberOfColumns) currentList = 0
       questions[currentList++].push(question)
     })
@@ -121,7 +115,7 @@ export default class extends Page {
             <div className="row question-cards">
               <div className="columns twelve">
                 {
-                  this.state.questions.map((question, i) => {
+                  this.props.questions.map((question, i) => {
                     return <div key={i}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, null, i)}/></div>
                   })
                 }

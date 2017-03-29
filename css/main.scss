@@ -917,16 +917,25 @@ height: 0px;
   line-height: 15px;
   text-transform: uppercase;
   color: #999;
+  margin-bottom: 10px
 }
 
-#question-card-advert-1 {
-  margin: 0 8px;
+#question-banner-advert-1 {
+  min-height: 120px;
   overflow-x: hidden;
+  margin: 0 0 25px 0;
 }
 
 #question-sidebar-advert-1 {
-  min-height: 305px;
-  margin-bottom: 10px;
+  height: 275px;
+  margin-bottom: 25px;
+  margin-top: 15px;
+  padding: 15px;
+  background: #fff;
+}
+
+#question-banner-advert-2 {
+ background: #fff;
 }
 
 blockquote {
