@@ -22,13 +22,22 @@ export default class extends Page {
     // Get question
     const question = await questions.get(query.id)
     
+    /*
+    // Disabled fetching of relatedQuestions on the server temporarily as 
+    // we don't have an optimised way of doing this and want renders to be
+    // be as fast as possible. SSR for related questions will be enabled again
+    // when we have properly linked questions (and not relying on a free text
+    // comparison search on each page hit).
+    
     // When running on the server we get related questions in getInitialProps() 
     // When running in the browser we can fetch them after the page load in
     // componentDidMount() to improve page rendering time.
-    
     let relatedQuestions = []
-    if (typeof window === 'undefined' && question['@id'])
+    if (typeof window === 'undefined' && question['@id']) {
       relatedQuestions = await this.getRelatedQuestions(question)
+    */
+
+    const trendingQuestions = await questions.getTrendingQuestions()
 
     // Define URLs for sharing
     let shareUrl = 'https://upsum.news/questions/' + query.id
@@ -49,7 +58,8 @@ export default class extends Page {
     return {
       id: query.id,
       question: question,
-      relatedQuestions: relatedQuestions,
+      relatedQuestions: [],
+      trendingQuestions: trendingQuestions,
       session: session.getState(),
       shareUrl: shareUrl,
       ampUrl: ampUrl,
@@ -122,7 +132,7 @@ export default class extends Page {
       return
 
     const questions = new Questions
-    const maxQuestions = 10
+    const maxQuestions = 20
       
     let searchQuery = question.name
     searchQuery = searchQuery.replace(/(^who is |^what is |^why is |^who was |^what was |^who will |^what will |^why will |^who are |^what are |^why are |^who did |^why did |^what did |^how did |^how will|^how has |^how are )/gi, ' ')
@@ -130,27 +140,7 @@ export default class extends Page {
     searchQuery = searchQuery.replace(/( the | to | and | is )/gi, ' ')
 
     // Get questions that have a similar title
-    const relatedQuestions = await questions.search({ limit: maxQuestions, name: searchQuery, text: searchQuery  })
-    
-    // If there are less than 5 questions in the related questions, add recent
-    // questions to make up the difference in the list
-    if (relatedQuestions.length < maxQuestions) {
-      const recentQuestions = await questions.search({ limit: 20 })
-      recentQuestions.forEach((recentQuestion, index) => {
-        if (relatedQuestions.length >= maxQuestions || question['@id'] == recentQuestion['@id']) {
-          return
-        } else {
-          let existsInArray = false
-          relatedQuestions.forEach((relatedQuestion, index) => {
-            if (recentQuestion['@id'] == relatedQuestion['@id'])
-              existsInArray = true
-          })
-          if (existsInArray === false) {
-            relatedQuestions.push(recentQuestion)
-          }
-        }
-      })
-    }
+    const relatedQuestions = await questions.search({ limit: maxQuestions, name: searchQuery, text: searchQuery})
 
     // Don't include the question on this page as a related question
     relatedQuestions.forEach((relatedQuestion, index) => {
@@ -232,21 +222,30 @@ export default class extends Page {
         fullText += this.props.question.acceptedAnswer.text
       }
       
-      let sidebarRelatedQuestions = []
-      let followOnRelatedQuestions = []
+      let sidebarQuestions = []
+      let followOnQuestions = []
+      
+      this.props.trendingQuestions.forEach((question,index) => {
+        if (index < 10 && question['@id'] != this.props.question['@id'])
+          sidebarQuestions.push(question)
+      })
       
       this.state.relatedQuestions.forEach((question, index) => {
-
         // Add a couple of questions with images as "follow on" questions
         // (will add first two most 'relevant' cards with images)
         if ('image' in question &&
             'url' in question.image &&
             question.image.url != '' &&
-            followOnRelatedQuestions.length < 2) {
-            // Only two follow on questions for now (rest go in sidebar)
-          followOnRelatedQuestions.push(question)
-        } else {
-          sidebarRelatedQuestions.push(question)
+            followOnQuestions.length < 2) {
+
+          // @FIXME This is terrible, obviously
+          let isInSidebar = false
+          sidebarQuestions.forEach((sidebarQuestion,index) => {
+            if (question['@id'] === sidebarQuestion['@id'])
+              isInSidebar = true
+          })
+          if (isInSidebar === false)
+            followOnQuestions.push(question)
         }
       })
       
@@ -286,7 +285,7 @@ export default class extends Page {
                 <QuestionCard question={this.props.question} session={this.props.session}/>
                 <div className="row">
                   {
-                    followOnRelatedQuestions.map((question, i) => {
+                    followOnQuestions.map((question, i) => {
                       return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
                     })
                   }
@@ -296,7 +295,7 @@ export default class extends Page {
                 {/*<div id="question-sidebar-advert-1"></div>*/}
                 <div className={(this.state.relatedQuestionsLoading) ? 'question-sidebar loading' : 'question-sidebar'}>
                 {
-                  sidebarRelatedQuestions.map((question, i) => {
+                  sidebarQuestions.map((question, i) => {
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }

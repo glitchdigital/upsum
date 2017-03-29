@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
+// @FIXME Refactor all the things! \o/
 export default class Questions {
 
   hostname() {
@@ -94,13 +95,24 @@ export default class Questions {
       url += "&text="+encodeURIComponent(options.text.replace(/[^0-9a-z_ -]/gi, ''))
       
     const res = await fetch(url)
-    const questions = await res.json()
-    if (questions instanceof Array) {
-      return questions
-    } else {
+    let result = []
+    try {
+      result = await res.json()
+    } catch (e) {
       // @FIXME Something bad happened
-      return []
     }
+    return result
   }
-  
+
+  async getTrendingQuestions(hostname) {
+    const url = 'https://upsum.news/trending-questions'
+    const res = await fetch(url)
+    let result = []
+    try {
+      result = await res.json()
+    } catch (e) {
+      // @FIXME Something bad happened
+    }
+    return result
+  }
 }

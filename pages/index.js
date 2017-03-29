@@ -12,7 +12,7 @@ export default class extends Page {
   static async getInitialProps({ req }) {
     let props = await super.getInitialProps({req})
     const questions = new Questions
-    props.questions= await questions.search({ limit: 50 })
+    props.questions= await questions.getTrendingQuestions()
     return props
   }
 
@@ -40,7 +40,7 @@ export default class extends Page {
     // Update with most recent questions on each page load
     const questions = new Questions
     this.setState({
-      questions: await questions.search({ limit: 50 })
+      questions: await questions.getTrendingQuestions()
     })
   }
 
@@ -80,9 +80,13 @@ export default class extends Page {
     const numberOfColumns = 3
     const questions = []
     let currentList = 0
+    
+    for (let i = 0; i < numberOfColumns; i++) {
+      questions[i] = []
+    }
+    
     this.state.questions.forEach((question) => {
       if (currentList == numberOfColumns) currentList = 0
-      if (!questions[currentList]) questions[currentList] = []
       questions[currentList++].push(question)
     })
 

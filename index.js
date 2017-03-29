@@ -5,6 +5,9 @@ const bodyParser = require('body-parser')
 const next = require('next')
 const sass = require('node-sass')
 const loggly = require('loggly')
+const cron = require('node-cron')
+const fetch = require('isomorphic-fetch')
+
 const routes = {
   images: require('./routes/images'),
   amp: require('./routes/amp'),
@@ -46,6 +49,8 @@ const app = next({
   dev: (process.env.NODE_ENV == 'production') ? false : true
 })
 const handle = app.getRequestHandler()
+
+let trendingQuestions = []
 
 app.prepare()
 .then(() => {
@@ -111,10 +116,10 @@ app.prepare()
     }
   })
 
-  server.get('/questions', (req, res) => {
-    return app.render(req, res, '/')
+  server.get('/trending-questions', (req, res) => {
+    return res.send(trendingQuestions)
   })
-
+  
   // Endpoint to search and upload images to the CDN
   // (middleware as the backend doesn't do this directly)
   server.get('/images', routes.images.get)
@@ -150,11 +155,18 @@ app.prepare()
     return handle(req, res)
   })
 
+  // After startup & every 5 minutes after, update cached trending questions
+  updateTrendingQuestions()
+  cron.schedule('*/2 * * * *', function(){
+    updateTrendingQuestions()
+  })
+
   server.listen(process.env.PORT, (err) => {
     if (err) throw err
     require('dns').lookup(require('os').hostname(), function(err, ipAddress, fam) {
       console.log('Server running at http://%s:%d in %s mode', ipAddress, process.env.PORT, process.env.NODE_ENV)
       logger.log('Instance started at http://'+ipAddress+':'+process.env.PORT+' in '+process.env.NODE_ENV+' mode', ['startup'])
+      
     })
   })
 })
@@ -163,3 +175,13 @@ app.prepare()
   logger.log("Instance failed to start", ['startup'])
   console.log(err)
 })
+
+function updateTrendingQuestions() {
+  fetch('https://api.upsum.news/Question?sort=-_created&limit=64')
+  .then(function(response) {
+    response.json()
+    .then(function(json) {
+      trendingQuestions = json
+    })
+  })
+}
