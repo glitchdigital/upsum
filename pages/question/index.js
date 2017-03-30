@@ -207,7 +207,7 @@ export default class extends Page {
         })
       */
         window.advert_banner_element_id = 'question-banner-advert-2'
-        document.getElementById(window.advert_banner_element_id).innerHTML = ''
+        document.getElementById(window.advert_banner_element_id).innerHTML = '<div class="advertising-label">Advertisement</div>'
         let scriptSrc = 'https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=893386b4-be01-4fa9-84a7-334f009437a4'
         postscribe('#'+advert_banner_element_id, '<script src="' + scriptSrc + '" async></script>', {
           done: () => {
@@ -312,10 +312,11 @@ export default class extends Page {
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>
                 <div id="question-banner-advert-1">
-                  <div className="advertising-label">Advertising</div>
-                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amazonhomepage&f=ifr&linkID=46138405dc7edcb73b439789149e5901&t=glitchdigital-20&tracking_id=glitchdigital-20" width="728" height="90" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
+                  <div className="advertising-label">Advertisement</div>
+                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amazonhomepage_2017&f=ifr&linkID=c09f3ae29dcf9acc6572ab37eebfe274&t=glitchdigital-20&tracking_id=glitchdigital-20" width="728" height="90" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0" className="hidden-mobile"/>
+                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=288&l=ur1&category=amazonhomepage_2017&f=ifr&linkID=091b6746cbcb31c247b2f96f46e35432&t=glitchdigital-20&tracking_id=glitchdigital-20" width="320" height="50" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0" className="hidden-desktop"/>
                 </div>
-                <div className="row">
+                <div className="row follow-on-questions">
                   {
                     followOnQuestions.map((question, i) => {
                       return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
@@ -325,8 +326,8 @@ export default class extends Page {
                 <div id="question-banner-advert-2"></div>
               </div>
               <div className="four columns">
-                <div id="question-sidebar-advert-1">
-                  <div className="advertising-label">Advertising</div>
+                <div id="question-sidebar-advert-1" className="hidden-mobile">
+                  <div className="advertising-label">Advertisement</div>
                   <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=290&l=ur1&category=amzn_ereaders_prime_0417&banner=05WV7KZNWT6E3T9GFTR2&f=ifr&lc=pf4&linkID=a962e6ad40a3295e820bc0dcfa6f5e03&t=glitchdigital-20&tracking_id=glitchdigital-20" width="320" height="250" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
                 </div>
                 <div className="question-sidebar">

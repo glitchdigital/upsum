@@ -355,6 +355,10 @@ a.unstyled:hover {
   }
 }
 
+.follow-on-questions .question-card-preview {
+ 
+}
+
 .question-card-preview-sidebar {
   margin-bottom: 20px;
   cursor: pointer;
@@ -917,25 +921,44 @@ height: 0px;
   line-height: 15px;
   text-transform: uppercase;
   color: #999;
-  margin-bottom: 10px
-}
-
-#question-banner-advert-1 {
-  min-height: 120px;
-  overflow-x: hidden;
-  margin: 0 0 25px 0;
+  margin-bottom: 5px
 }
 
 #question-sidebar-advert-1 {
-  height: 275px;
   margin-bottom: 25px;
   margin-top: 15px;
-  padding: 15px;
-  background: #fff;
+  padding: 5px 0 10px 0;
+  border-right: 15px solid #e5e5e5;
+  border-left: 15px solid #e5e5e5;
+  background: #e5e5e5;
+  overflow-x: hidden;
+  overflow-y: visible;
+  text-align: center;
+}
+
+#question-banner-advert-1 {
+  padding: 8px 0 0 0;
+  overflow-x: hidden;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+@media (min-width: $desktopMinResolution) {
+  #question-banner-advert-1 {
+    background: #e5e5e5;
+    border-right: 8px solid #e5e5e5;
+    border-left: 8px solid #e5e5e5;
+  }
 }
 
 #question-banner-advert-2 {
- background: #fff;
+  min-height: 20px;
+  padding: 5px 15px 0 15px;
+  background: #e5e5e5;
+}
+
+#question-banner-advert-2 .advertising-label {
+  text-align: center;
 }
 
 blockquote {
@@ -1058,3 +1081,4 @@ ol.breadcrumbs .separator {
 .image-wall .image:hover h3 {
   opacity: 1;
 }
+
