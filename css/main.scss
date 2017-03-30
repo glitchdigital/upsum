@@ -968,7 +968,11 @@ height: 0px;
 #question-banner-advert-2 {
   min-height: 20px;
   padding: 5px 15px 0 15px;
-  background: #e5e5e5;
+}
+@media (min-width: $desktopMinResolution) {
+  #question-banner-advert-2 {
+    background: #e5e5e5;
+  }
 }
 
 #question-banner-advert-2 .advertising-label {
