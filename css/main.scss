@@ -175,8 +175,22 @@ a.nostyle {
   color: #444;
   text-decoration: none;
 }
-footer a,
-footer p {
+.footer.container {
+  background: transparent;
+  border-top: 2px solid #ddd;
+  background: #e5e5e5;
+  margin-top: 10px;
+  padding-top: 20px;
+}
+@media (min-width: $desktopMinResolution) {
+  .footer.container {
+    border-top: none;
+    margin-top: 0;
+    padding: 20px 0;
+  }
+}
+.footer a,
+.footer p {
   color: #888;
   text-decoration: none;
   font-size: 16px;
