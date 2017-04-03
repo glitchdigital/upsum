@@ -12,6 +12,7 @@ const routes = {
   images: require('./routes/images'),
   amp: require('./routes/amp'),
   rss: require('./routes/rss'),
+  rssEmail: require('./routes/rss-email'),
   rssFacebook: require('./routes/rss-facebook'),
   sitemap: require('./routes/sitemap'),
   newsSitemap: require('./routes/news-sitemap')
@@ -128,10 +129,9 @@ app.prepare()
   // Serve AMP version of questions
   server.get('/amp/questions/:id', routes.amp.get)
 
-  // Serve recent questions as an RSS feeed
+  // Serve recent questions as RSS feeeds
   server.get('/rss.xml', routes.rss.get)
-
-  // Serve recent questions as an RSS feeed
+  server.get('/rss-email.xml', routes.rssEmail.get)
   server.get('/rss-facebook.xml', routes.rssFacebook.get)
 
   // Serve sitemap (and news specific sitemap)

@@ -281,7 +281,7 @@ export default class extends Page {
       if (this.props.articleImageUrl) {
         articleImageHtml = <span itemProp="image" itemScope itemType="https://schema.org/ImageObject">
           <img src={this.props.articleImageUrl} alt={description}/>
-          <meta itemProp="url" content={this.props.shareImage}/>
+          <meta itemProp="url" content={this.props.shareUrl}/>
           <meta itemProp="height" content="512"/>
           <meta itemProp="width" content="1024"/>
         </span>
@@ -295,12 +295,12 @@ export default class extends Page {
             <meta property="og:title" content={this.props.question.name}/>
             <meta property="og:url" content={this.props.shareUrl}/>
             <meta property="og:description" content={description}/>
-            <meta property="og:image" content={this.props.shareImage}/>
+            <meta property="og:image" content={this.props.facebookImageUrl}/>
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content="upsumnews"/>
             <meta name="twitter:title" content={this.props.question.name}/>
             <meta name="twitter:description" content={description}/>
-            <meta name="twitter:image" content={this.props.shareImage}/>
+            <meta name="twitter:image" content={this.props.twitterImageUrl}/>
             <link rel="amphtml" href={this.props.ampUrl}/> 
             <link rel="canonical" href={this.props.shareUrl}/>
           </Head>
