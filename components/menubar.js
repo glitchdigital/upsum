@@ -45,7 +45,7 @@ export default connect(state => state)(class extends React.Component {
                   &nbsp; &nbsp; 
                   <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile">@upsumnews</span></a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="http://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile">Upsum Daily Email</span></a>
+                  <a className="unstyled" href="https://upsum.news/email"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile">Upsum Daily Email</span></a>
                 </p>
               </div>
             </div>

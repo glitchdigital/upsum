@@ -138,6 +138,11 @@ app.prepare()
   server.get('/sitemap.xml', routes.sitemap.get)
   server.get('/news-sitemap.xml', routes.newsSitemap.get)
 
+  // Email subscription link
+  server.get('/email', (req, res) => {
+    return res.redirect(301, 'https://news.us15.list-manage1.com/subscribe?u=90920d6af43c4d73f91ca0878&id=3f929585fa')
+  })
+
   // Define robots.txt to tell search engines what they should & shouldn't index
   server.get('/robots.txt', function(req, res) {
     res.send("Sitemap: https://upsum.news/sitemap.xml\n"+
