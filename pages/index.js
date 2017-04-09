@@ -26,7 +26,6 @@ export default class extends Page {
   async componentDidMount() {
     super.componentDidMount()
 
-    /*
     if (!window.googleadsenseloaded) {
       window.googleadsenseloaded = true
       if (!adsbygoogle) var adsbygoogle
@@ -35,7 +34,6 @@ export default class extends Page {
         enable_page_level_ads: true
       })
     }
-    */
   }
 
   getPreviewCardClassName(question, column, row) {

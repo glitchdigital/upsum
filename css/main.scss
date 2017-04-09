@@ -343,7 +343,7 @@ a.unstyled:hover {
 }
 @media (min-width: $desktopMinResolution) {
   .question-card-preview {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   .question-card-preview:hover {
     background: #fff;
@@ -351,12 +351,17 @@ a.unstyled:hover {
     transform: scale(1.025);
     transition-duration: 0.1s;
   }
+  .question-card-preview .question-card-contents {
 
+  }
+  .question-card-preview .question-card-contents h3 {
+
+  }
 }
 .question-card-preview h3,
 .question-card-preview h3 a {
   font-size: 22px;
-  line-height: 26px;
+  line-height: 30px;
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 10px;
@@ -374,7 +379,7 @@ a.unstyled:hover {
 }
 
 .question-card-preview-sidebar {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   cursor: pointer;
   overflow: visible;
   position: relative;
@@ -428,6 +433,14 @@ a.unstyled:hover {
   left: 0px;
   border: 0;
 }
+
+.question-card,
+.question-card-preview,
+.question-card-preview-small {
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
+}
+
 .question-card-preview-small {
   cursor: pointer;
   overflow: visible;
@@ -443,7 +456,7 @@ a.unstyled:hover {
 }
 @media (min-width: $desktopMinResolution) {
   .question-card-preview-small {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
   .question-card-preview-small:hover {
     background: #fff;
@@ -506,6 +519,7 @@ a.unstyled:hover {
 }
 
 .question-card-preview-small .question-card-image-container .question-card-image {
+  border-radius: 2px 0px 0 2px;
   height: 100px;
   width: 100px;
   overflow: hidden;
@@ -526,6 +540,7 @@ a.unstyled:hover {
 }
 
 .question-card-preview .question-card-image-container .question-card-image {
+  border-radius: 2px 2px 0 0;
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -630,15 +645,15 @@ a.unstyled:hover {
   */
 }
 @media (min-width: $desktopMinResolution) {
-  .question-card-previews .columns.four {
-    margin: 0 1.6%;
-    width: 31.2% !important;
+  .question-cards .columns.four {
+    margin: 0 1.2%;
+    width: 31.7333% !important;
   }
-  .question-card-previews .columns.four.first {
-    margin: 0 1.6% 0 0;
+  .question-cards .columns.four.first {
+    margin: 0 1.2% 0 0;
   }
-  .question-card-previews .columns.four.last {
-    margin: 0 0 0 1.6%;
+  .question-cards .columns.four.last {
+    margin: 0 0 0 1.2%;
   }
 }
 .buttons {
@@ -680,17 +695,20 @@ a.unstyled:hover {
 .question-card-preview .date-label {
   background-color: $primaryColor;
   color: #fff;
-  padding: 2px 16px 2px 20px;
+  padding: 0px 10px 0px 14px;
   margin: 0;
   margin-left: -25px;
   margin-bottom: 5px;
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 30px;
   position: relative;
   z-index: 1;
   height: 30px;
   border-radius: 0 2px 2px 0;
+}
+.date-label i {
+  margin-right: 2px;
 }
 .question-card-preview .date-label:before {
   content: "";
@@ -779,11 +797,6 @@ width: 5px;
 height: 0px;
 }
 */
-
-.question,
-.question-card-preview {
-  border-radius: 0 !important;
-}
 
 .button.button-facebook,
 .button.button-facebook:hover,
@@ -935,12 +948,12 @@ height: 0px;
   line-height: 15px;
   text-transform: uppercase;
   color: #999;
-  margin-bottom: 5px
+  margin-bottom: 5px;
 }
 
 #question-sidebar-advert-1 {
   margin-bottom: 25px;
-  margin-top: 15px;
+  margin-top: 25px;
   padding: 5px 0 10px 0;
   border-right: 15px solid #e5e5e5;
   border-left: 15px solid #e5e5e5;
@@ -966,6 +979,7 @@ height: 0px;
 }
 
 #question-banner-advert-2 {
+  margin-top: 10px;
   min-height: 20px;
   padding: 5px 15px 0 15px;
 }
@@ -1049,6 +1063,9 @@ ol.breadcrumbs .separator {
   width: 33.333%;
   overflow: hidden;
   transition-duration: 0.5s;
+  
+  background: navy;
+  min-height: 200px;
 }
 @media (min-width: $desktopMinResolution) {
   .image-wall .image {

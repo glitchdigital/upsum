@@ -214,7 +214,7 @@ export default class extends Page {
             resolve(true)
           }
         })
-      }, 500)
+      }, 1000)
         
     })
 
@@ -254,7 +254,7 @@ export default class extends Page {
       let followOnQuestions = []
       
       this.props.trendingQuestions.forEach((question,index) => {
-        if (index < 10 && question['@id'] != this.props.question['@id'])
+        if (index < 12 && question['@id'] != this.props.question['@id'])
           sidebarQuestions.push(question)
       })
       
@@ -326,6 +326,15 @@ export default class extends Page {
                 <div id="question-banner-advert-2"></div>
               </div>
               <div className="four columns">
+                <div className="question-sidebar">
+                {
+                  sidebarQuestions.map((question, i) => {
+                    if (i > sidebarQuestions.length / 4)
+                      return
+                    return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
+                  })
+                }
+                </div>
                 <div id="question-sidebar-advert-1" className="hidden-mobile">
                   <div className="advertising-label">Advertisement</div>
                   <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=12&l=ur1&category=audible&banner=1KNMQ6Z91A8KDJ552HG2&f=ifr&lc=pf4&linkID=be98b197c4f43d2a86ffbac3e5eea995&t=glitchdigital-20&tracking_id=glitchdigital-20" width="300" height="250" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
@@ -333,6 +342,8 @@ export default class extends Page {
                 <div className="question-sidebar">
                 {
                   sidebarQuestions.map((question, i) => {
+                    if (i <= sidebarQuestions.length / 4)
+                      return
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }

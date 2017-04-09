@@ -29,6 +29,10 @@ blockquote {
   max-width: 660px;
   margin: 0 auto;
 }
+.question {
+  padding: 10px 15px;
+  background-color: #fff;
+}
 .question-text {
   font-size: 22px;
   line-height: 28px;
@@ -58,7 +62,7 @@ amp-img > img {
   object-fit: contain;
 }
 .logo {
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 15px;
   overflow: auto;
 }
@@ -100,7 +104,14 @@ amp-img > img {
   margin-right: 5px;
 }
 .footer {
-  text-align: right;
+  text-align: center;
+  margin: 20px 0;
+}
+.footer a {
+  color: #eee;
+  background: #5c5c5c;
+  padding: 10px 20px;
+  display: block;
 }
 .article-body p:first-child {
   margin-top: 0;
@@ -108,4 +119,5 @@ amp-img > img {
 .timestamp {
   color: #888;
   margin-top: 5px;
+  margin-bottom: 5px;
 }

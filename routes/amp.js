@@ -87,36 +87,38 @@ exports.get = (req, res, next) => {
           <p><a href="https://upsum.news">The news, summed up</a></p>
         </div>
       </div>
-      <h1 itemProp="headline">${escapeHtml(question.name)}</h1>
-      <p class="timestamp" itemProp="datePublished"> ${moment(datePublished).format('D MMMM, YYYY')}</p>
-      <div class=${imageContainerClass}>
-        <div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-          <amp-img height="${imageHeight}" width="${imageWidth}" layout="responsive" attribution="${escapeHtml(imageCreditName)}" src="${imageURL}" alt="${escapeHtml(question.name)}"/>
-          <meta itemProp="url" content="${imageURL}"/><br/>
-          <meta itemProp="height" content="${imageHeight}"/>
-          <meta itemProp="width" content="${imageWidth}"/>
+      <div class="question">
+        <h1 itemProp="headline">${escapeHtml(question.name)}</h1>
+        <p class="timestamp" itemProp="datePublished"> ${moment(datePublished).format('D MMMM, YYYY')}</p>
+        <div class=${imageContainerClass}>
+          <div itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+            <amp-img height="${imageHeight}" width="${imageWidth}" layout="responsive" attribution="${escapeHtml(imageCreditName)}" src="${imageURL}" alt="${escapeHtml(question.name)}"/>
+            <meta itemProp="url" content="${imageURL}"/><br/>
+            <meta itemProp="height" content="${imageHeight}"/>
+            <meta itemProp="width" content="${imageWidth}"/>
+          </div>
+          <p class="image-credit">Image credit: <a href="${imageCreditUrl}">${escapeHtml(imageCreditName)}</a></p>
         </div>
-        <p class="image-credit">Image credit: <a href="${imageCreditUrl}">${escapeHtml(imageCreditName)}</a></p>
-      </div>
-      <span class="article-body" itemProp="articleBody">${articleHtml}</span>
-      <span class="metadata">
-        <link itemProp="mainEntityOfPage" href="${'https://upsum.news/questions/' + req.params.id}"/><br/>
-        <span itemProp="url">${'https://upsum.news/questions/' + req.params.id}</span><br/>
-        <span itemProp="dateCreated">${question['@dateCreated']}</span><br/>
-        <span itemProp="dateModified">${question['@dateModified']}</span><br/>
-        <span itemProp="author" itemScope itemType="https://schema.org/Organization"><br/>
-          <span itemProp="name">Upsum</span><br/>
-        </span>
-        <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
-          <span itemProp="name">Upsum</span><br/>
-          <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-            <meta itemProp="url" content="https://upsum.news/static/images/upsum-publisher-logo.png"/><br/>
-            <meta itemProp="height" content="537"/>
-            <meta itemProp="width" content="537"/>
+        <span class="article-body" itemProp="articleBody">${articleHtml}</span>
+        <span class="metadata">
+          <link itemProp="mainEntityOfPage" href="${'https://upsum.news/questions/' + req.params.id}"/><br/>
+          <span itemProp="url">${'https://upsum.news/questions/' + req.params.id}</span><br/>
+          <span itemProp="dateCreated">${question['@dateCreated']}</span><br/>
+          <span itemProp="dateModified">${question['@dateModified']}</span><br/>
+          <span itemProp="author" itemScope itemType="https://schema.org/Organization"><br/>
+            <span itemProp="name">Upsum</span><br/>
+          </span>
+          <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+            <span itemProp="name">Upsum</span><br/>
+            <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
+              <meta itemProp="url" content="https://upsum.news/static/images/upsum-publisher-logo.png"/><br/>
+              <meta itemProp="height" content="537"/>
+              <meta itemProp="width" content="537"/>
+            </span>
           </span>
         </span>
-      </span>
-      <p class="footer"><a href="https://upsum.news">Read more at upsum.news</a></p>
+      </div>
+      <p class="footer"><a href="https://upsum.news">Read more at upsum.news…</a></p>
     </div>
   </body>
   <amp-analytics type="googleanalytics">
