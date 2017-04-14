@@ -519,12 +519,9 @@ a.unstyled:hover {
 }
 
 #question-sidebar-advert-1 {
-  margin-bottom: 25px;
-  margin-top: 25px;
-  padding: 5px 0 10px 0;
-  border-right: 15px solid #e5e5e5;
-  border-left: 15px solid #e5e5e5;
-  background: #e5e5e5;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  padding: 5px 0 5px 0;
   overflow-x: hidden;
   overflow-y: visible;
   text-align: center;
@@ -533,16 +530,8 @@ a.unstyled:hover {
 #question-banner-advert-1 {
   padding: 8px 0 0 0;
   overflow-x: hidden;
-  margin-bottom: 25px;
+  margin-bottom:15px;
   text-align: center;
-}
-
-@media (min-width: $desktopMinResolution) {
-  #question-banner-advert-1 {
-    background: #e5e5e5;
-    border-right: 8px solid #e5e5e5;
-    border-left: 8px solid #e5e5e5;
-  }
 }
 
 #question-banner-advert-2 {
@@ -687,4 +676,3 @@ ol.breadcrumbs .separator {
 .image-wall .image:hover h3 {
   opacity: 1;
 }
-

@@ -23,8 +23,8 @@ export default class extends Page {
     return (
     <Layout>
       <Head>
-        <title>About Upsum</title>
-        <meta name="description" content="The goal of Upsum is to answer questions people have about the news as accurately, quickly and simply as possible."/>
+        <title>Upsum Topic: {this.props.topic || 'Everything'}</title>
+        <meta name="description" content={'Everything about ' + (this.props.topic || 'everything')}/>
       </Head>
       <Navbar breadcrumbs={[
         { name: 'Topic', href: '/topic' },

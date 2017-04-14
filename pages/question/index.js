@@ -380,7 +380,7 @@ export default class extends Page {
                 <div className="question-sidebar">
                 {
                   sidebarQuestions.map((question, i) => {
-                    if (i > sidebarQuestions.length / 4)
+                    if (i > 3)
                       return
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
@@ -393,7 +393,7 @@ export default class extends Page {
                 <div className="question-sidebar">
                 {
                   sidebarQuestions.map((question, i) => {
-                    if (i <= sidebarQuestions.length / 4)
+                    if (i <= 3)
                       return
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
