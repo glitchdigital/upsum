@@ -297,6 +297,40 @@ export default class extends Page {
         </span>
       }
 
+      let newsArticle = {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": this.props.question.name,
+        "mainEntityOfPage": this.props.shareUrl,
+        "datePublished": datePublished,
+        "dateCreated": this.props.question['@dateCreated'],
+        "dateModified": this.props.question['@dateModified'],
+        "articleBody": removeMarkdown(fullText),
+        "author": {
+          "@type":  "Organization",
+          "name": "Upsum News"
+        },
+        "publisher": {
+          "@type":  "Organization",
+          "name": "Upsum News",
+          "logo": {
+            "@type":  "ImageObject",
+            "url": "https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_512,c_fill/upsum-publisher-logo_e6x61w.png",
+            "height": "512",
+            "width": "512"
+          }
+        }
+      }
+
+      if (this.props.articleImageUrl) {
+        newsArticle.image = {
+          "@type":  "ImageObject",
+          "url": this.props.articleImageUrl,
+          "height": "512",
+          "width": "512"
+        }
+      }
+      
       return (
         <Layout>
           <Head>
@@ -368,29 +402,7 @@ export default class extends Page {
               </div>
             </div>
           </div>
-          <div style={{display: 'none'}}>
-            <div itemScope itemType="http://schema.org/NewsArticle">
-              <span itemProp="headline">{this.props.question.name}</span><br/>
-              <link itemProp="mainEntityOfPage" href={this.props.shareUrl}/><br/>
-              <span itemProp="url">{this.props.shareUrl}</span><br/>
-              <span itemProp="datePublished">{datePublished}</span><br/>
-              <span itemProp="dateCreated">{this.props.question['@dateCreated']}</span><br/>
-              <span itemProp="dateModified">{this.props.question['@dateModified']}</span><br/>
-              <span itemProp="author" itemScope itemType="https://schema.org/Organization"><br/>
-                <span itemProp="name">Upsum</span><br/>
-              </span>
-              <span itemProp="publisher" itemScope itemType="https://schema.org/Organization">
-                <span itemProp="name">Upsum</span><br/>
-                <span itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-                  <meta itemProp="url" content="https://res.cloudinary.com/glitch-digital-limited/image/upload/h_512,w_512,c_fill/upsum-publisher-logo_e6x61w.png"/><br/>
-                  <meta itemProp="height" content="512"/>
-                  <meta itemProp="width" content="512"/>
-                </span>
-              </span>
-              {articleImageHtml}
-              <span itemProp="articleBody"><ReactMarkdown source={fullText}/></span>
-            </div>
-          </div>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html:  JSON.stringify(newsArticle) }}/>
         </Layout>
       )
     } else { 

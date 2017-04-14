@@ -117,6 +117,14 @@ app.prepare()
     }
   })
 
+  server.get('/topic/:topic', (req, res) => {
+    if ("topic" in req.params) {
+      return app.render(req, res, '/topic', req.params)
+    } else {
+      return app.render(req, res, '/', req.params)
+    }
+  })
+
   server.get('/trending-questions', (req, res) => {
     return res.send(trendingQuestions)
   })
