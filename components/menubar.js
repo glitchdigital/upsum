@@ -41,11 +41,11 @@ export default connect(state => state)(class extends React.Component {
                   <Link href="/"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}}>
-                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/><span className="hidden-mobile">upsumnews</span></a>
+                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/><span className="hidden-mobile"> fb.me/upsumnews</span></a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile">@upsumnews</span></a>
+                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile"> @upsumnews</span></a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="https://upsum.news/email"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile">Upsum Daily Email</span></a>
+                  <a className="unstyled" href="https://upsum.news/email"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile"> Newsletter</span></a>
                 </p>
               </div>
             </div>

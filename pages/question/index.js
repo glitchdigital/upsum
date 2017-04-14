@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
+import AdSense from 'react-adsense'
 import ReactMarkdown from 'react-markdown'
 import TimeAgo from 'react-timeago'
 import removeMarkdown from 'remove-markdown'
@@ -83,6 +84,15 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       trendingQuestions: this.state.trendingQuestions
     })
+    
+    if (!window.googleadsenseloaded) {
+      window.googleadsenseloaded = true
+      if (!adsbygoogle) var adsbygoogle
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8690794745241806",
+        enable_page_level_ads: true
+      })
+    }
   }
     
   // This is called any time the question changes
@@ -207,7 +217,7 @@ export default class extends Page {
         })
       */
         window.advert_banner_element_id = 'question-banner-advert-2'
-        document.getElementById(window.advert_banner_element_id).innerHTML = '<div class="advertising-label">Advertisement</div>'
+        document.getElementById(window.advert_banner_element_id).innerHTML = ''
         let scriptSrc = 'https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=893386b4-be01-4fa9-84a7-334f009437a4'
         postscribe('#'+advert_banner_element_id, '<script src="' + scriptSrc + '" async></script>', {
           done: () => {
@@ -308,6 +318,13 @@ export default class extends Page {
             <Navbar breadcrumbs={[
               { name: 'Questions', href: '/' }
             ]}/>
+            {/*
+            <AdSense.Google
+              client='ca-pub-8690794745241806'
+              slot='7806394673'
+              style={{width: 500, height: 300, float: 'left'}}
+              format='' />
+            */}
             <div className="row">
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>

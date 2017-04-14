@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.5.12",
+  "version": "2.5.14",
   "description": "Upsum",
   "main": "index.js",
   "repository": "glitchdigital/upsum",
@@ -21,7 +21,7 @@
     "now-logs": "0.0.7",
     "raw-loader": "^0.5.1",
     "react": "^15.4.2",
-    "react-adsense": "0.0.1",
+    "react-adsense": "https://registry.npmjs.org/react-adsense/-/react-adsense-0.0.1.tgz",
     "react-cookie": "^1.0.4",
     "react-datepicker": "^0.41.1",
     "react-dom": "https://registry.npmjs.org/react-dom/-/react-dom-15.4.2.tgz",

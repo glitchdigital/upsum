@@ -199,7 +199,7 @@ export default class extends React.Component {
           <div className="question-image" style={{backgroundImage: 'url('+imageUrl+')'}}></div>
             <p className="question-image-text">
               <span className="image-caption">{(this.state.question.image.caption) ? this.state.question.image.caption + '. ' : ''}</span>
-              <span className="image-credit">Image credit <a target="_blank" href={this.state.question.image.publisher.url || 'https://upsum.news'}>{this.state.question.image.publisher.name || 'Upsum'}</a></span>
+              <span className="image-credit"><a target="_blank" href={this.state.question.image.publisher.url || 'https://upsum.news'}><i className="fa fa-flickr"/> {this.state.question.image.publisher.name || 'Upsum'}</a></span>
             </p>
         </div>
     }

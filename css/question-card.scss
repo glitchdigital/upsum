@@ -1,0 +1,195 @@
+.question-card {
+  background: #fff;
+  margin-bottom: 25px;
+  box-shadow: 0px 10px 0px -5px rgba(0,0,0,.05);
+}
+.question-card .question-card-contents {
+  padding: 10px 15px;
+}
+.question-card .question-card-question-text p {
+  font-style: oblique;
+  font-size: 22px;
+  line-height: 28px;
+  clear: both;
+  margin-bottom: 5px;
+}
+.question-card .question-card-footer {
+  text-align: right;
+  margin: 0;
+  padding: 0;
+}
+
+.question-card .question-card-footer a {
+  border: 0;
+  font-weight: normal;
+  color: #888;
+}
+
+.question-card h2 {
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 52px;
+  margin: 0;
+}
+.question-card .date-label {
+  background-color: #666;
+  color: #fff;
+  position: relative;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 2px 16px 2px 20px;
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: -25px;
+  z-index: 1;
+  border-radius: 0 2px 2px 0;
+}
+.question-card .date-label:before {
+  content: "";
+  font-size: 0.5em;
+  position: absolute;
+  border-style: solid;
+  border-color: transparent transparent #444 transparent;
+  top: -15px;
+  left: 0px;
+  border-width: 0 0 15px 10px;
+  z-index: -1;
+}
+/*
+.question-card .date-label:after {
+content: "";
+position: absolute;
+top: 0px;
+right: -15px;
+display: inline-block;
+background: transparent;
+border-top: 17px solid #25D5FD;
+border-bottom: 17px solid #25D5FD;
+border-right: 15px solid transparent;
+width: 5px;
+height: 0px;
+}
+*/
+
+@media (min-width: $desktopMinResolution) {
+  .question-card .question-image {
+    height: 400px;
+  }
+  /*
+  .question-cards {
+    max-height: 2000px;
+    overflow: hidden;
+  }
+  .question-cards-fade {
+    position: absolute; 
+    bottom: 30px;
+    left: 0;
+    width: 100%; 
+    text-align: center; 
+    margin: 0;
+    padding: 50px 0; 	
+    background-image: linear-gradient(to bottom, rgba(238,238,238,0), #eeeeee);
+    z-index: 10;
+  }
+  */
+}
+
+
+.question-card .question-image {
+  background-color: #e5e5e5;
+  margin-top: 5px;
+  height: 350px;
+  width: 100%;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+}
+
+
+
+.question-card {
+  margin-top: 15px;
+  animation: fadein 0.5s;
+}
+
+
+@media (min-width: $desktopMinResolution) {
+  .question-sidebar {
+    margin-top: 15px;
+  }
+}
+.question-sidebar .question-sidebar-item {
+  animation: fadein 0.1s 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.question-sidebar .question-sidebar-item:nth-child(1) {
+  animation: fadein 0.1s 0s ease-out forwards;
+}
+
+.question-sidebar .question-sidebar-item:nth-child(2) {
+  animation: fadein 0.1s 0.1s ease-out forwards;
+}
+
+.question-sidebar .question-sidebar-item:nth-child(3) {
+  animation: fadein 0.1s 0.2s ease-out forwards;
+}
+
+.question-sidebar .question-sidebar-item:nth-child(4) {
+  animation: fadein 0.1s 0.3s ease-out forwards;
+}
+
+.question-sidebar .question-sidebar-item:nth-child(5) {
+  animation: fadein 0.1s 0.4s ease-out forwards;
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+.question-card .question-image-text {
+  text-align: right;
+  padding: 2px 4px;
+  font-size: 16px;
+  line-height: 18px;
+  margin: 0;
+  position: relative;
+  background: rgba(0,0,0,0.5);
+  position: relative;
+  top: -22px;
+  display: inline-block;
+  float: right;
+}
+
+.question-card .question-image-text .image-caption,
+.question-card .question-image-text .image-caption p,
+.question-card .question-image-text .image-caption a,
+.question-card .question-image-text .image-credit,
+.question-card .question-image-text .image-credit p,
+.question-card .question-image-text .image-credit a {
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-weight: 500;
+}
+
+.question-card .question-image-text .image-caption {
+  display: none;
+}
+.question-card .question-video {
+  margin-bottom: 40px;
+  background-color: #e5e5e5;
+  height: 400px;
+}
+.question-card .question-video iframe {
+  border: 0;
+}
