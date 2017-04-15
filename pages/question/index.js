@@ -118,6 +118,11 @@ export default class extends Page {
     })
   }
 
+  componentWillUnmount() {
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adsbygoogle.length = 0;
+  }
+  
   // Get related questions
   static async getRelatedQuestions(question) {
     if (!question['@id'])
@@ -216,6 +221,8 @@ export default class extends Page {
           }
         })
       */
+        
+        /*
         window.advert_banner_element_id = 'question-banner-advert-2'
         document.getElementById(window.advert_banner_element_id).innerHTML = ''
         let scriptSrc = 'https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=893386b4-be01-4fa9-84a7-334f009437a4'
@@ -224,8 +231,8 @@ export default class extends Page {
             resolve(true)
           }
         })
+      */
       }, 1000)
-        
     })
 
   }
@@ -274,7 +281,7 @@ export default class extends Page {
         if ('image' in question &&
             'url' in question.image &&
             question.image.url != '' &&
-            followOnQuestions.length < 2) {
+            followOnQuestions.length < 4) {
 
           // @FIXME This is terrible, obviously
           let isInSidebar = false
@@ -352,24 +359,34 @@ export default class extends Page {
             <Navbar breadcrumbs={[
               { name: 'Questions', href: '/' }
             ]}/>
-            {/*
-            <AdSense.Google
-              client='ca-pub-8690794745241806'
-              slot='7806394673'
-              style={{width: 500, height: 300, float: 'left'}}
-              format='' />
-            */}
             <div className="row">
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>
                 <div id="question-banner-advert-1">
-                  <div className="advertising-label">Advertisement</div>
+                  <AdSense.Google
+                    client='ca-pub-8690794745241806'
+                    slot='1971760377'
+                    style={{width: 728, height: 90}}
+                    format=''/>
+                    {/*
                   <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amazonhomepage_2017&f=ifr&linkID=c09f3ae29dcf9acc6572ab37eebfe274&t=glitchdigital-20&tracking_id=glitchdigital-20" width="728" height="90" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0" className="hidden-mobile"/>
                   <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=288&l=ur1&category=amazonhomepage_2017&f=ifr&linkID=091b6746cbcb31c247b2f96f46e35432&t=glitchdigital-20&tracking_id=glitchdigital-20" width="320" height="50" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0" className="hidden-desktop"/>
+                  */}
                 </div>
                 <div className="row follow-on-questions">
                   {
                     followOnQuestions.map((question, i) => {
+                      if (i >= 2)
+                        return
+                      return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
+                    })
+                  }
+                </div>
+                <div className="row follow-on-questions">
+                  {
+                    followOnQuestions.map((question, i) => {
+                      if (i < 2)
+                        return
                       return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
                     })
                   }
@@ -385,12 +402,12 @@ export default class extends Page {
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
+                <div style={{width: 336, height: 280}}>
+                  <AdSense.Google
+                    client='ca-pub-8690794745241806'
+                    slot='2111361179'
+                    format='auto'/>
                 </div>
-                <div id="question-sidebar-advert-1" className="hidden-mobile">
-                  <div className="advertising-label">Advertisement</div>
-                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=12&l=ur1&category=audible&banner=1KNMQ6Z91A8KDJ552HG2&f=ifr&lc=pf4&linkID=be98b197c4f43d2a86ffbac3e5eea995&t=glitchdigital-20&tracking_id=glitchdigital-20" width="300" height="250" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
-                </div>
-                <div className="question-sidebar">
                 {
                   sidebarQuestions.map((question, i) => {
                     if (i <= 3)
@@ -399,6 +416,11 @@ export default class extends Page {
                   })
                 }
                 </div>
+                {/*
+                <div id="question-sidebar-advert-1" className="hidden-mobile">
+                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=12&l=ur1&category=audible&banner=1KNMQ6Z91A8KDJ552HG2&f=ifr&lc=pf4&linkID=be98b197c4f43d2a86ffbac3e5eea995&t=glitchdigital-20&tracking_id=glitchdigital-20" width="300" height="250" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
+                </div>
+                */}
               </div>
             </div>
           </div>
