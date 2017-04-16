@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
-import AdSense from 'react-adsense'
 import ReactMarkdown from 'react-markdown'
 import TimeAgo from 'react-timeago'
 import removeMarkdown from 'remove-markdown'
@@ -103,8 +102,6 @@ export default class extends Page {
       
     super.componentWillReceiveProps(nextProps)
 
-    this.loadAd()
-
     this.setState({
       relatedQuestions: this.state.relatedQuestions,
       trendingQuestions: this.state.trendingQuestions
@@ -116,11 +113,13 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       trendingQuestions: nextProps.trendingQuestions
     })
+    
+    this.loadAd()
   }
 
   componentWillUnmount() {
-    window.adsbygoogle = window.adsbygoogle || [];
-    window.adsbygoogle.length = 0;
+    window.adsbygoogle = window.adsbygoogle || []
+    window.adsbygoogle.length = 0
   }
   
   // Get related questions
@@ -149,94 +148,52 @@ export default class extends Page {
   }
 
   loadAd() {
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       if (typeof window === 'undefined')
         return resolve(true)
+        
+      window.adsbygoogle = window.adsbygoogle || []
+      window.adsbygoogle.length = 0
+
+      document.getElementById('ad-script').innerHTML = ''
+      postscribe('#ad-script', '<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async><\/script>')
 
       setTimeout(() => {
+        document.getElementById('ad-slot-0').innerHTML = ''
+        postscribe('#ad-slot-0', 
+          '<ins class="adsbygoogle"'+
+          ' style="display: block; width: 728px; height: 90px;"'+
+          ' data-ad-client="ca-pub-8690794745241806"'+
+          ' data-ad-slot="1971760377"'+
+          ' data-ad-format=""/>',
+          {
+            done: () => {
+              setTimeout(() => {
+                (adsbygoogle || window.adsbygoogle).push({})
 
-        /*
-        window.medianet_cId = "8CUX3Y6BU"
-        window.medianet_versionId = "111299"
-        const isSSL = 'https:' == window.document.location.protocol
-        const mnSrc = (isSSL ? 'https:' : 'http:') + '//contextual.media.net/nmedianet.js?cid=' + window.medianet_cId + (isSSL ? '&https=1' : '')
-
-        let advertElementId = 'question-banner-advert-1'
-        window.medianet_width = "728"
-        window.medianet_height = "90"
-        window.medianet_crid = "454917506"
-        
-        document.getElementById(advertElementId).innerHTML = '<div class="advertising-label">Advertising</div>'
-        // Add advert
-        postscribe('#'+advertElementId, '<script src="' + mnSrc + '"></script>', {
-          done: () => {
-            let advertElementId = 'question-sidebar-advert-1'
-            
-            window.medianet_width = "336"
-            window.medianet_height = "280"
-            window.medianet_crid = "314290551"
-            
-            document.getElementById(advertElementId).innerHTML = '<div class="advertising-label">Advertising</div>'
-            postscribe('#'+advertElementId, '<script src="' + mnSrc + '"></script>', {
-              done: () => {
-                resolve(true)
-              }
-            })
-          }
-        })
-        */
-
-        /*
-        window.advert_sidebar_element_id = 'question-sidebar-advert-1'
-        window.advert_sidebar_width = '300'
-        window.advert_sidebar_height = '250'
-        window.advert_sidebar_publisher_id = 'gillis49'
-
-        window.advert_banner_element_id = 'question-banner-advert-1'
-        window.advert_banner_width = '728'
-        window.advert_banner_height = '90'
-        window.advert_banner_publisher_id = 'gillis49'
-
-        // Placeholders
-        document.getElementById(window.advert_sidebar_element_id).innerHTML = '<div class="advertising-label">Advertising</div>'
-        document.getElementById(window.advert_banner_element_id).innerHTML = '<div class="advertising-label">Advertising</div>'
-
-        if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] } }
-        window.CHITIKA.units.push({"calltype":"async[2]","publisher":window.advert_sidebar_publisher_id,"width":window.advert_sidebar_width,"height":window.advert_sidebar_height,"sid":"Chitika Default"})
-        window.CHITIKA.units.push({"calltype":"async[2]","publisher":window.advert_sidebar_publisher_id,"width":window.advert_banner_width,"height":window.advert_banner_height,"sid":"Chitika Default"})
-
-        // Insert advert
-        postscribe('#'+advert_sidebar_element_id, '<div id="chitikaAdBlock-1"></div>', {
-          done: () => {
-            postscribe('#'+advert_banner_element_id, '<div id="chitikaAdBlock-2"></div>', {
-              done: () => {
-                // Insert advert loading script
-                postscribe('#'+advert_sidebar_element_id, '<script src="//cdn.chitika.net/getads.js" async/>', {
-                  done: () => {
-                    resolve(true)
-                  }
+                document.getElementById('ad-slot-1').innerHTML = ''
+                postscribe('#ad-slot-1', 
+                  '<ins class="adsbygoogle"'+
+                  ' style="display: block; width: 336px; height: 300px;"'+
+                  ' data-ad-client="ca-pub-8690794745241806"'+
+                  ' data-ad-slot="2111361179"'+
+                  ' data-ad-format=""/>',
+                  {
+                    done: () => {
+                      setTimeout(() => {
+                        (adsbygoogle || window.adsbygoogle).push({})
+                        resolve(true)
+                      }, 500)
+                    }
                 })
-              }
-            })
-          }
+
+              }, 500)
+            }
         })
-      */
-        
-        /*
-        window.advert_banner_element_id = 'question-banner-advert-2'
-        document.getElementById(window.advert_banner_element_id).innerHTML = ''
-        let scriptSrc = 'https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=893386b4-be01-4fa9-84a7-334f009437a4'
-        postscribe('#'+advert_banner_element_id, '<script src="' + scriptSrc + '" async></script>', {
-          done: () => {
-            resolve(true)
-          }
-        })
-      */
       }, 1000)
     })
-
   }
-
+  
   render() {
     if (this.props.question['@id']) {
 
@@ -281,7 +238,7 @@ export default class extends Page {
         if ('image' in question &&
             'url' in question.image &&
             question.image.url != '' &&
-            followOnQuestions.length < 4) {
+            followOnQuestions.length < 2) {
 
           // @FIXME This is terrible, obviously
           let isInSidebar = false
@@ -355,6 +312,7 @@ export default class extends Page {
             <link rel="amphtml" href={this.props.ampUrl}/> 
             <link rel="canonical" href={this.props.shareUrl}/>
           </Head>
+          <div id="ad-script"></div>
           <div>
             <Navbar breadcrumbs={[
               { name: 'Questions', href: '/' }
@@ -362,36 +320,14 @@ export default class extends Page {
             <div className="row">
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>
-                <div id="question-banner-advert-1">
-                  <AdSense.Google
-                    client='ca-pub-8690794745241806'
-                    slot='1971760377'
-                    style={{width: 728, height: 90}}
-                    format=''/>
-                    {/*
-                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=48&l=ur1&category=amazonhomepage_2017&f=ifr&linkID=c09f3ae29dcf9acc6572ab37eebfe274&t=glitchdigital-20&tracking_id=glitchdigital-20" width="728" height="90" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0" className="hidden-mobile"/>
-                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=288&l=ur1&category=amazonhomepage_2017&f=ifr&linkID=091b6746cbcb31c247b2f96f46e35432&t=glitchdigital-20&tracking_id=glitchdigital-20" width="320" height="50" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0" className="hidden-desktop"/>
-                  */}
-                </div>
+                 <div id="ad-slot-0" style={{width: 728, height: 90, marginBottom: '15px'}}></div>
                 <div className="row follow-on-questions">
                   {
                     followOnQuestions.map((question, i) => {
-                      if (i >= 2)
-                        return
                       return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
                     })
                   }
                 </div>
-                <div className="row follow-on-questions">
-                  {
-                    followOnQuestions.map((question, i) => {
-                      if (i < 2)
-                        return
-                      return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
-                    })
-                  }
-                </div>
-                <div id="question-banner-advert-2"></div>
               </div>
               <div className="four columns">
                 <div className="question-sidebar">
@@ -402,12 +338,7 @@ export default class extends Page {
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
-                <div style={{width: 336, height: 280}}>
-                  <AdSense.Google
-                    client='ca-pub-8690794745241806'
-                    slot='2111361179'
-                    format='auto'/>
-                </div>
+                <div id="ad-slot-1" style={{width: 336, height: 300}}></div>
                 {
                   sidebarQuestions.map((question, i) => {
                     if (i <= 3)
@@ -416,11 +347,6 @@ export default class extends Page {
                   })
                 }
                 </div>
-                {/*
-                <div id="question-sidebar-advert-1" className="hidden-mobile">
-                  <iframe src="https://rcm-na.amazon-adsystem.com/e/cm?o=1&p=12&l=ur1&category=audible&banner=1KNMQ6Z91A8KDJ552HG2&f=ifr&lc=pf4&linkID=be98b197c4f43d2a86ffbac3e5eea995&t=glitchdigital-20&tracking_id=glitchdigital-20" width="300" height="250" scrolling="no" marginWidth="0" style={{border:'none'}} frameBorder="0"/>
-                </div>
-                */}
               </div>
             </div>
           </div>
