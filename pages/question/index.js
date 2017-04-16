@@ -117,11 +117,6 @@ export default class extends Page {
     this.loadAd()
   }
 
-  componentWillUnmount() {
-    window.adsbygoogle = window.adsbygoogle || []
-    window.adsbygoogle.length = 0
-  }
-  
   // Get related questions
   static async getRelatedQuestions(question) {
     if (!question['@id'])
@@ -155,42 +150,36 @@ export default class extends Page {
       window.adsbygoogle = window.adsbygoogle || []
       window.adsbygoogle.length = 0
 
-      document.getElementById('ad-script').innerHTML = ''
-      postscribe('#ad-script', '<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async><\/script>')
-
-      setTimeout(() => {
-        document.getElementById('ad-slot-0').innerHTML = ''
-        postscribe('#ad-slot-0', 
-          '<ins class="adsbygoogle"'+
-          ' style="display: block; width: 728px; height: 90px;"'+
-          ' data-ad-client="ca-pub-8690794745241806"'+
-          ' data-ad-slot="1971760377"'+
-          ' data-ad-format=""/>',
-          {
-            done: () => {
-              setTimeout(() => {
-                (adsbygoogle || window.adsbygoogle).push({})
-
-                document.getElementById('ad-slot-1').innerHTML = ''
-                postscribe('#ad-slot-1', 
-                  '<ins class="adsbygoogle"'+
-                  ' style="display: block; width: 336px; height: 300px;"'+
-                  ' data-ad-client="ca-pub-8690794745241806"'+
-                  ' data-ad-slot="2111361179"'+
-                  ' data-ad-format=""/>',
-                  {
-                    done: () => {
-                      setTimeout(() => {
-                        (adsbygoogle || window.adsbygoogle).push({})
-                        resolve(true)
-                      }, 500)
-                    }
-                })
-
-              }, 500)
-            }
-        })
-      }, 1000)
+      // Reset ad on page
+      document.getElementById('ad-slot-0').innerHTML = ''
+      postscribe('#ad-slot-0', 
+        '<ins class="adsbygoogle"'+
+        ' style="display: block; width: 728px; height: 90px;"'+
+        ' data-ad-client="ca-pub-8690794745241806"'+
+        ' data-ad-slot="1971760377"'+
+        ' data-ad-format=""/>',
+        {
+          done: () => {
+              // Render ad
+              (adsbygoogle || window.adsbygoogle).push({})
+              
+              // Reset ad on page
+              document.getElementById('ad-slot-1').innerHTML = ''
+              postscribe('#ad-slot-1', 
+                '<ins class="adsbygoogle"'+
+                ' style="display: block; width: 336px; height: 300px;"'+
+                ' data-ad-client="ca-pub-8690794745241806"'+
+                ' data-ad-slot="2111361179"'+
+                ' data-ad-format=""/>',
+                {
+                  done: () => {
+                    // Render ad
+                    (adsbygoogle || window.adsbygoogle).push({})
+                    resolve(true)
+                  }
+              })
+          }
+      })
     })
   }
   
@@ -311,6 +300,7 @@ export default class extends Page {
             <meta name="twitter:image" content={this.props.twitterImageUrl}/>
             <link rel="amphtml" href={this.props.ampUrl}/> 
             <link rel="canonical" href={this.props.shareUrl}/>
+            <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async/>
           </Head>
           <div id="ad-script"></div>
           <div>
