@@ -89,7 +89,7 @@ export default class extends Page {
       if (!adsbygoogle) var adsbygoogle
       (adsbygoogle = window.adsbygoogle || []).push({
         google_ad_client: "ca-pub-8690794745241806",
-        enable_page_level_ads: true
+        enable_page_level_ads: false
       })
     }
   }
@@ -228,7 +228,7 @@ export default class extends Page {
       let followOnQuestions = []
       
       this.props.trendingQuestions.forEach((question,index) => {
-        if (index < 12 && question['@id'] != this.props.question['@id'])
+        if (index <= 8 && question['@id'] != this.props.question['@id'])
           sidebarQuestions.push(question)
       })
       
