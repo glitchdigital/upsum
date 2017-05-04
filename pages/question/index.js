@@ -113,8 +113,12 @@ export default class extends Page {
       relatedQuestions: relatedQuestions,
       trendingQuestions: nextProps.trendingQuestions
     })
-    
-    this.loadAd()
+
+    // Disabling updating adverts on same view navigation as doesn't work well
+    // with AdSense. The best workaround is AdSense + DoubleClick For Publishers
+    // though it also has it's own issues with responsive ads so not yet
+    // switched over).
+    //this.loadAd()
   }
 
   // Get related questions
@@ -147,7 +151,7 @@ export default class extends Page {
       if (typeof window === 'undefined')
         return resolve(true)
         
-      window.adsbygoogle = window.adsbygoogle || []
+      window.adsbygoogle = []
       window.adsbygoogle.length = 0
 
       // Reset ad on page
@@ -157,24 +161,24 @@ export default class extends Page {
         ' style="display: block; width: 728px; height: 90px;"'+
         ' data-ad-client="ca-pub-8690794745241806"'+
         ' data-ad-slot="1971760377"'+
-        ' data-ad-format=""/>',
+        ' data-ad-format="auto"/>',
         {
           done: () => {
               // Render ad
-              (adsbygoogle || window.adsbygoogle).push({})
+              window.adsbygoogle.push({})
               
               // Reset ad on page
               document.getElementById('ad-slot-1').innerHTML = ''
               postscribe('#ad-slot-1', 
                 '<ins class="adsbygoogle"'+
-                ' style="display: block; width: 336px; height: 280px;"'+
+                ' style="display: block; width: 300px; height: 250px;"'+
                 ' data-ad-client="ca-pub-8690794745241806"'+
                 ' data-ad-slot="2111361179"'+
                 ' data-ad-format=""/>',
                 {
                   done: () => {
                     // Render ad
-                    (adsbygoogle || window.adsbygoogle).push({})
+                    window.adsbygoogle.push({})
                     resolve(true)
                   }
               })
@@ -310,7 +314,7 @@ export default class extends Page {
             <div className="row">
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>
-                <div id="ad-slot-0" style={{width: '728px', height: '90px'}}></div>
+                <div id="ad-slot-0"></div>
                 <div className="row follow-on-questions">
                   {
                     followOnQuestions.map((question, i) => {
@@ -328,7 +332,7 @@ export default class extends Page {
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
-                <div id="ad-slot-1" style={{width: '336px', height: '280px'}}></div>
+                <div id="ad-slot-1"></div>
                 {
                   sidebarQuestions.map((question, i) => {
                     if (i <= 3)

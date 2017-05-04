@@ -520,16 +520,20 @@ a.unstyled:hover {
 
 #ad-slot-0 {
   display: none;
-  margin-bottom: 15px;
-  padding: 0 8px;
 }
-
 #ad-slot-1 {
   display: block;
-  margin-bottom: 15px;
-  padding: 0 5px;
 }
-
+#ad-slot-0,
+#ad-slot-1 {
+  margin-bottom: 15px;
+  text-align: center;
+  overflow: hidden;
+}
+#ad-slot-0 ins,
+#ad-slot-1 ins {
+  margin: 0 auto;
+}
 @media (min-width: $desktopMinResolution) {
   #ad-slot-0 {
     display: block;
