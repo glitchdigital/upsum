@@ -37,7 +37,7 @@ export default class extends Page {
       questions[currentList++].push(question)
     })
   
-    let query = <h3 style={{marginTop: '10px'}}>Enter a query in the search box to look for answers</h3>
+    let query = <h3 style={{marginTop: '10px'}}>Try asking us a question about something in the news</h3>
     if (this.props.query !== '') {
       query = <h3 style={{marginTop: '10px'}}><i className="fa fa-search"></i> <i>"{this.props.query}"</i></h3>
     }
