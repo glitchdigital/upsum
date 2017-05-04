@@ -518,34 +518,21 @@ a.unstyled:hover {
   margin-bottom: 5px;
 }
 
-#question-sidebar-advert-1 {
-  margin-top: 15px;
-  margin-bottom: 0px;
-  padding: 5px 0 5px 0;
-  overflow-x: hidden;
-  overflow-y: visible;
-  text-align: center;
+#ad-slot-0 {
+  display: none;
+  margin-bottom: 15px;
+  padding: 0 8px;
 }
 
-#question-banner-advert-1 {
-  padding: 8px 0 0 0;
-  overflow-x: hidden;
-  margin-bottom:15px;
-  text-align: center;
+#ad-slot-1 {
+  display: block;
+  margin-bottom: 15px;
+  padding: 0 5px;
 }
 
-#question-banner-advert-2 {
-  margin-top: 10px;
-  /*
-  min-height: 20px;
-  padding: 5px 15px 0 15px;
-  */
-}
 @media (min-width: $desktopMinResolution) {
-  #question-banner-advert-2 {
-    /*
-    background: #e5e5e5;
-    */
+  #ad-slot-0 {
+    display: block;
   }
 }
 

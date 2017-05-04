@@ -167,7 +167,7 @@ export default class extends Page {
               document.getElementById('ad-slot-1').innerHTML = ''
               postscribe('#ad-slot-1', 
                 '<ins class="adsbygoogle"'+
-                ' style="display: block; width: 336px; height: 300px;"'+
+                ' style="display: block; width: 336px; height: 280px;"'+
                 ' data-ad-client="ca-pub-8690794745241806"'+
                 ' data-ad-slot="2111361179"'+
                 ' data-ad-format=""/>',
@@ -310,7 +310,7 @@ export default class extends Page {
             <div className="row">
               <div className="eight columns">
                 <QuestionCard question={this.props.question} session={this.props.session}/>
-                 <div id="ad-slot-0" style={{width: 728, height: 90, marginBottom: '15px'}}></div>
+                <div id="ad-slot-0" style={{width: '728px', height: '90px'}}></div>
                 <div className="row follow-on-questions">
                   {
                     followOnQuestions.map((question, i) => {
@@ -328,7 +328,7 @@ export default class extends Page {
                     return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
-                <div id="ad-slot-1" style={{width: 336, height: 300}}></div>
+                <div id="ad-slot-1" style={{width: '336px', height: '280px'}}></div>
                 {
                   sidebarQuestions.map((question, i) => {
                     if (i <= 3)
