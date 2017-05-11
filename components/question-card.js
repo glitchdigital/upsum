@@ -88,7 +88,7 @@ export default class extends React.Component {
     if (question.acceptedAnswer && question.acceptedAnswer.citation)
       citation = 
         <div>
-         <h5>Source(s)</h5>
+          <h5>Sources</h5>
           <div className="muted">
             <ReactMarkdown source={question.acceptedAnswer.citation}/>
          </div>

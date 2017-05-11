@@ -307,7 +307,7 @@ export default class extends React.Component {
         */}
         <label htmlFor="answerDetail">Answer to the question</label>
         <Textarea name="answerDetail" className="u-full-width" placeholder="A detailed answer to the question." id="answerDetail" value={this.state.question.acceptedAnswer.text}></Textarea>
-        <label htmlFor="answerCitation">Source (optional)</label>
+        <label htmlFor="answerCitation">Sources (optional)</label>
         <Textarea name="answerCitation" className="u-full-width" placeholder="The source(s) being cited" id="answerCitation" value={this.state.question.acceptedAnswer.citation}></Textarea>
         <label htmlFor="answerDatePublished">Date Answered</label>
         <i className="fa fa-fw fa-calendar"/> <DatePicker fixedHeight todayButton={"Today"} dateFormat="YYYY-MM-DD" selected={moment(this.state.question.acceptedAnswer.datePublished)} onChange={this.handleDatePublishedChange}/>
