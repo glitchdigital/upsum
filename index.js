@@ -28,6 +28,12 @@ if (process.env.LOGS_SECRET) {
   require('now-logs')(process.env.LOGS_SECRET)
 }
 
+const logger = new function() {
+  this.log =  function(err, tags) { console.log(err, tags) }
+  return this
+}
+
+/*
 const logger = loggly.createClient({
   token: process.env.LOGGLY_TOKEN || '',
   subdomain: process.env.LOGGLY_SUBDOMAIN || '',
@@ -37,6 +43,7 @@ const logger = loggly.createClient({
   },
   tags: ['upsum.news', process.env.NODE_ENV]
 })
+*/
 
 logger.log("Instance intialized", ['startup'])
 
