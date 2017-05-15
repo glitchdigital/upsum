@@ -92,14 +92,14 @@ a {
 }
 @media (min-width: $desktopMinResolution) {
   body {
-    background-color: #e5e5e5;
+
   }
   .header .container {
-    padding: 0 30px;
+    padding: 0 0px;
   }
   .container {
     background-color: #eee;
-    padding: 10px 30px 30px 30px;
+    padding: 10px 0px 30px 0px;
   }
 
 }
@@ -181,7 +181,6 @@ a.nostyle {
 .footer.container {
   background: transparent;
   border-top: 2px solid #ddd;
-  background: #e5e5e5;
   margin-top: 10px;
   padding-top: 20px;
 }
@@ -409,6 +408,12 @@ a.unstyled:hover {
   margin-right: 2px;
 }
 
+.button.button-twitter,
+.button.button-google,
+.button.button-facebook {
+  border-radius: 0px !important;
+}
+
 .button.button-facebook,
 .button.button-facebook:hover,
 .button.button-facebook:active,
@@ -529,6 +534,8 @@ a.unstyled:hover {
   margin-bottom: 15px;
   text-align: center;
   overflow: hidden;
+  padding: 30px 0;
+  background-color: #e5e5e5;
 }
 #ad-slot-0 ins,
 #ad-slot-1 ins {
