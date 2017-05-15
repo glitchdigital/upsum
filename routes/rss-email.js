@@ -28,7 +28,7 @@ exports.get = (req, res, next) => {
             let url = 'https://upsum.news/questions/'+question['@id'].split('/')[4]
             let html = ''
             
-            if ((index % 3 === 0) && question.image && question.image.url && question.image.url !== '') {
+            if (question.image && question.image.url && question.image.url !== '') {
               let fileName = question.image.url.split('/').pop()
               let imageUrl = 'https://res.cloudinary.com/glitch-digital-limited/image/upload/h_400,w_600,c_fill/'+fileName
               html += '<a href="' + url + '" target="_blank"><img style="margin-top: 20px" border="0" width="100%" src="' + imageUrl + '"/></a>'
