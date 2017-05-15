@@ -22,8 +22,7 @@
   font-size: 22px;
   line-height: 28px;
   font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin: 10px 5px 20px 5px;
   color: #555;
 }
 @media (min-width: $desktopMinResolution) {
@@ -102,6 +101,17 @@
   }
 }
 
+.question-card-preview .question-card-question-text p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #666;
+  font-weight: normal;
+  margin: 0 10px 30px 10px;
+}
+
+.question-card-preview-small .question-card-question-text {
+  display: none;
+}
 .question-card-preview-small .question-card-image-container .question-card-image {
   height: 100px;
   width: 100px;

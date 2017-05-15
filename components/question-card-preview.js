@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Router from 'next/router'
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import TimeAgo from 'react-timeago'
 
 export default class extends React.Component {
@@ -44,6 +45,9 @@ export default class extends React.Component {
         {imageTag}
         <div className="question-card-contents">
           <h3><Link href={"/question?id="+questionId} as={"/questions/"+questionId}><a className="unstyled">{question.name}</a></Link></h3>
+          <div className="question-card-question-text">
+            <ReactMarkdown source={question.text || ''}/>
+          </div>
           <p className="date-label">
             <i className="fa fa-fw fa-clock-o"></i><TimeAgo date={datePublished} />
           </p>
