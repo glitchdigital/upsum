@@ -22,9 +22,14 @@
   font-size: 22px;
   line-height: 28px;
   font-weight: 600;
-  margin: 10px 5px 20px 5px;
   color: #555;
 }
+
+.question-card-preview h3 {
+  padding: 0 10px;
+  margin: 10px 0 20px 0;
+}
+
 @media (min-width: $desktopMinResolution) {
   .question-card-preview:hover h3,
   .question-card-preview:hover h3 a {
@@ -106,7 +111,7 @@
   line-height: 22px;
   color: #666;
   font-weight: normal;
-  margin: 0 10px 30px 10px;
+  padding: 0 10px 20px 10px;
 }
 
 .question-card-preview-small .question-card-question-text {

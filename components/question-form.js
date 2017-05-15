@@ -205,7 +205,7 @@ export default class extends React.Component {
     }
 
     return (
-      <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
+      <form className="question-form" onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <label htmlFor="question">Question</label>
         <input name="question" className="u-full-width" type="text" placeholder="What is the question?" id="question" value={this.state.question.name}/>
         <label htmlFor="questionDetail">Detail to clarify the question (optional)</label>

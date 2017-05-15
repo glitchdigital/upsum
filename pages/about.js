@@ -45,7 +45,7 @@ export default class extends Page {
           { name: 'About Upsum', href: '/about' }
         ]}/>
         <div className="row">
-          <div className="offset-by-two eight columns">
+          <div className="twelve columns">
             <h1><span>About Upsum</span></h1>
             {
               this.props.questions.map((question, i) => {

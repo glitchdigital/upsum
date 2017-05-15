@@ -37,7 +37,6 @@ a {
   font-weight: bold;
 }
 .logo {
-  margin-top: 25px;
   margin-bottom: 10px;
   overflow: auto;
 }
@@ -84,6 +83,13 @@ a {
     width: 50px;
   }  
 }
+
+.header {
+  padding-top: 0;
+  background-color: #f9f9f9;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
 .header .container {
   padding-top: 0px;
 }
@@ -91,14 +97,10 @@ a {
   padding-top: 10px;
 }
 @media (min-width: $desktopMinResolution) {
-  body {
-
-  }
   .header .container {
     padding: 0 0px;
   }
   .container {
-    background-color: #eee;
     padding: 10px 0px 30px 0px;
   }
 
@@ -207,7 +209,7 @@ a.nostyle {
   position: relative;
   border: none;
   background-color: #eee;
-  background-color: #f9f9f9;
+  background-color: #fff;
   border-radius: 20px;
   font-size: 18px;
   line-height: 20px;
@@ -218,6 +220,7 @@ a.nostyle {
 @media (min-width: $desktopMinResolution) {
   #search {
     right: -20px;
+    top: -20px;
   }
   #search .search-input {
     width: 70%;
@@ -265,14 +268,15 @@ a.nostyle {
 .menubar {
   text-align: right;
   margin: 0;
-  background-color: #e5e5e5;
   color: #444;
   padding: 5px 10px;
-  background: #444;
-  color: #fff;
+  background-color: #f9f9f9;
 }
 .menubar a {
-  color: #ddd;
+  color: #444
+}
+a.unstyled:hover {
+  border-bottom: 1px solid #000;
 }
 @media (min-width: $desktopMinResolution) {
   .hidden-desktop {
@@ -280,14 +284,6 @@ a.nostyle {
   }
   .menubar {
     padding: 5px 20px;
-    background: transparent;
-    color: #444
-  }
-  .menubar a {
-    color: #444
-  }
-  a.unstyled:hover {
-    border-bottom: 1px solid #000;
   }
 }
 @media (max-width: $mobileMaxResolution) {
@@ -671,4 +667,8 @@ ol.breadcrumbs .separator {
 }
 .image-wall .image:hover h3 {
   opacity: 1;
+}
+.question-form {
+  background-color: #fff;
+  padding-top: 10px;
 }

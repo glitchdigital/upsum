@@ -73,7 +73,7 @@ export default class extends Page {
           </div>
         </div>
         <div className="row">
-          <div className="offset-by-two eight columns">
+          <div className="twelve">
             {
               questions.map((question, i) => {
                 return (
