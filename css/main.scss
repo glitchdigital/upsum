@@ -81,15 +81,21 @@ a {
   .logo img {
     height: 50px;
     width: 50px;
-  }  
+  }
 }
 
 .header {
   padding-top: 0;
-  background-color: #f9f9f9;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ddd;
 }
+
+@media (min-width: $desktopMinResolution) {
+  .header {
+    background-color: #f9f9f9;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
 .header .container {
   padding-top: 0px;
 }
@@ -208,13 +214,14 @@ a.nostyle {
 #search .search-input {
   position: relative;
   border: none;
-  background-color: transparent;
+  background-color: #fff;
   border-radius: 20px;
   font-size: 18px;
   line-height: 20px;
   width: 100%;
   text-align: center;
   margin-bottom: 2px;
+  border: 1px solid #eee;
 }
 @media (min-width: $desktopMinResolution) {
   #search {
@@ -234,7 +241,7 @@ a.nostyle {
   position: absolute;
   top: -5px;
   right: 0px;
-  background-color: #ddd;
+  background-color: #e5e5e5;
   color: #888;
   line-height: 50px;
   padding: 0 12px;
@@ -249,7 +256,7 @@ a.nostyle {
 }
 #search .fa-microphone:hover,
 #search .fa-microphone:focus {
-  background-color: #888;
+  background-color: #bbb;
   color: #fff;
   cursor: pointer;
 }
@@ -270,6 +277,8 @@ a.nostyle {
   color: #444;
   padding: 5px 10px;
   background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 .menubar a {
   color: #444;
@@ -283,6 +292,8 @@ a.unstyled:hover {
   }
   .menubar {
     padding: 5px 20px;
+    border-bottom: none;
+    margin-bottom: 0;
   }
 }
 @media (max-width: $mobileMaxResolution) {
@@ -291,6 +302,11 @@ a.unstyled:hover {
   }
   .menubar a.button,  
   .menubar a.button:hover {
+    color: #444;
+  }
+  
+  .menubar a.button.button-primary,
+  .menubar a.button.button-primary:hover {
     color: #eee;
   }
 }
@@ -329,7 +345,6 @@ a.unstyled:hover {
     text-align: right;
   }
 }
-
 
 .image-thumbnail {
   display: inline-block;
