@@ -8,31 +8,36 @@ export default class Questions {
   }
   
   async get(id) {
-    const res = await fetch(this.hostname()+'/Question/'+id)
-    const question = await res.json()
+    try {
+      const res = await fetch(this.hostname()+'/Question/'+id)
+      const question = await res.json()
 
-    // If not all properties are specified on an question,
-    // add blank default values to make working with them easier
-    if (!question['acceptedAnswer'])
-      question['acceptedAnswer'] = { name: '', description: '', citation: '' }
+      // If not all properties are specified on an question,
+      // add blank default values to make working with them easier
+      if (!question['acceptedAnswer'])
+        question['acceptedAnswer'] = { name: '', description: '', citation: '' }
     
-    if (!question.acceptedAnswer.datePublished)
-      question.acceptedAnswer.datePublished = question['@dateModified']
+      if (!question.acceptedAnswer.datePublished)
+        question.acceptedAnswer.datePublished = question['@dateModified']
     
-    if (!question['image'])
-      question['image'] = {}
+      if (!question['image'])
+        question['image'] = {}
     
-    if (!question['image'].publisher)
-      question['image'].publisher = {}
+      if (!question['image'].publisher)
+        question['image'].publisher = {}
 
-    if (!question['video'])
-      question['video'] = {}
+      if (!question['video'])
+        question['video'] = {}
     
-    if (!question['video'].publisher)
-      question['video'].publisher = {}
+      if (!question['video'].publisher)
+        question['video'].publisher = {}
 
-    // @FIXME Check res to see if successful
-    return question
+      // @FIXME Check res to see if successful
+      return question
+    } catch (e) {
+      // @FIXME Something bad happened
+      return null
+    }
   }
 
   async create(question, apiKey) {
@@ -94,9 +99,9 @@ export default class Questions {
     if ("text" in options && options.text !== undefined)
       url += "&text="+encodeURIComponent(options.text.replace(/[^0-9a-z_ -]/gi, ''))
       
-    const res = await fetch(url)
     let result = []
     try {
+      const res = await fetch(url)
       result = await res.json()
     } catch (e) {
       // @FIXME Something bad happened

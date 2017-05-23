@@ -6,7 +6,12 @@ export default class Error extends React.Component {
   
   static getInitialProps({ req, res, xhr }) {
     const session = Session(req)
-    const errorCode = res ? res.statusCode : xhr.status
+    let errorCode = 500
+    if (res && res.statusCode) {
+      errorCode = res.statusCode
+    } else if (xhr && xhr.status) {
+      errorCode = res.status
+    }
     return { errorCode }
   }
   
