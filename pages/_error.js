@@ -1,18 +1,11 @@
 import React from 'react'
 import Layout from '../components/layout'
-import { Session } from '../models/session'
 
 export default class Error extends React.Component {
   
-  static getInitialProps({ req, res, xhr }) {
-    const session = Session(req)
-    let errorCode = 500
-    if (res && res.statusCode) {
-      errorCode = res.statusCode
-    } else if (xhr && xhr.status) {
-      errorCode = res.status
-    }
-    return { errorCode }
+  static getInitialProps({ req, res, xhr, err }) {
+    const errorCode = res ? res.statusCode : (xhr ? xhr.status : null)
+    return { errorCode, err }
   }
   
   render() {
@@ -35,6 +28,9 @@ export default class Error extends React.Component {
               An <strong>HTTP { this.props.errorCode }</strong> error occurred while
               trying to access <strong>{ this.props.url.pathname }</strong>
             </p>
+            <h4>Additional information about this error</h4>
+            <pre>{JSON.stringify(this.props)}</pre>
+            <pre>{JSON.stringify(err)}</pre>
           </Layout>
         )
     }

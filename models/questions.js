@@ -110,9 +110,9 @@ export default class Questions {
   }
 
   async getQuestionsFromUrl(url) {
-    const res = await fetch(url)
     let result = []
     try {
+      const res = await fetch(url)
       result = await res.json()
     } catch (e) {
       // @FIXME Something bad happened
