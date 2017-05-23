@@ -27,14 +27,6 @@ export default class Error extends React.Component {
           </Layout>
         )
         break
-      case 500:
-        response = (
-          <Layout>
-            <h3>Internal Server Error</h3>
-            <p>An internal server error occurred.</p>
-          </Layout>
-        )
-        break
       default:
         response = (
           <Layout>
