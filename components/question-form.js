@@ -104,6 +104,11 @@ export default class extends React.Component {
   }
 
   handleDatePublishedChange(date) {
+    date.set({
+     'hour': moment().get('hour'),
+     'minute': moment().get('minute'), 
+     'second': moment().get('second')
+    })
     this.state.question.acceptedAnswer.datePublished = date.toDate()
     this.setState({
       question: this.state.question,
@@ -203,7 +208,7 @@ export default class extends React.Component {
             </p>
         </div>
     }
-
+    
     return (
       <form className="question-form" onSubmit={this.handleSubmit} onChange={this.handleChange}>
         <label htmlFor="question">Question</label>
@@ -217,7 +222,6 @@ export default class extends React.Component {
           <button type="button"><i className="fa fa-lg fa-fw fa-volume-up"></i> Add audio…</button>
         </p>
         */}
-
         <div style={{display: (this.state.question.image.url) ? 'none' : 'block'}}>
           <div style={{overflow: 'auto'}}>
             <i style={{float: 'left', marginRight: '5px', position: 'relative', top: '10px'}} className="fa fa-lg fa-fw fa-image"/>
@@ -227,7 +231,6 @@ export default class extends React.Component {
           </div>
           <Images text={this.state.imageSearchText} addImage={this.handleAddImage}/>
         </div>
-
         <div>
           <div style={{display: (this.state.question.image.url) ? 'block' : 'none'}}>
             <div style={{marginBottom: '10px'}}>{imageTag}</div>
