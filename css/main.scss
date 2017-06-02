@@ -37,11 +37,13 @@ a {
   font-weight: bold;
 }
 .logo {
+  margin-top: 10px;
   margin-bottom: 10px;
   overflow: auto;
 }
 @media (min-width: $desktopMinResolution) {
   .logo {
+    margin-top: 20px;
     margin-bottom: 0;
   }
 }
@@ -90,9 +92,8 @@ a {
 
 @media (min-width: $desktopMinResolution) {
   .header {
-    background-color: #f9f9f9;
+    background-color: #fff;
     padding-bottom: 15px;
-    border-bottom: 1px solid #ddd;
   }
 }
 
@@ -226,7 +227,7 @@ a.nostyle {
 @media (min-width: $desktopMinResolution) {
   #search {
     right: -20px;
-    top: -20px;
+    top: 5px;
   }
   #search .search-input {
     width: 70%;
@@ -250,9 +251,8 @@ a.nostyle {
 @media (min-width: $desktopMinResolution) {
   #search .fa-microphone {
     position: absolute;
-    top: -5px;
+    top: 5px;
   }
-
 }
 #search .fa-microphone:hover,
 #search .fa-microphone:focus {
@@ -276,8 +276,7 @@ a.nostyle {
   margin: 0;
   color: #444;
   padding: 5px 10px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
+  background-color: #fff;
   margin-bottom: 10px;
 }
 .menubar a {
@@ -288,17 +287,21 @@ a.unstyled:hover {
 }
 @media (min-width: $desktopMinResolution) {
   .hidden-desktop {
-    display: none;
+    display: none !important;
   }
   .menubar {
     padding: 5px 20px;
-    border-bottom: none;
     margin-bottom: 0;
+    background-color: #444;
+    color: #eee;
+  }
+  .menubar a {
+    color: #eee !important;
   }
 }
 @media (max-width: $mobileMaxResolution) {
   .hidden-mobile {
-    display: none;
+    display: none !important;
   }
   .menubar a.button,  
   .menubar a.button:hover {
@@ -321,17 +324,18 @@ a.unstyled,
 a.unstyled:hover {
   border: 0;
 }
-.menubar .beta {
+.header .beta {
   background-color: #7EAB49;
   color: #fff;
   border-radius: 2px;
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 10px;
+  line-height: 10px;
   padding: 3px 6px 3px 6px;
-  margin: 0 4px;
-  display: inline-block;
+  display: none;
   font-weight: 400;
   letter-spacing: 0.05em;
+  position: absolute;
+  top: 2px;
 }
 .search {
   position: relative;

@@ -36,7 +36,8 @@ export default class extends React.Component {
         <div className="header">
           <div className="container">
             <div className="row">
-              <div className="six columns">
+              <div className="five columns">
+                <div className="beta">BETA</div>
                 <div className="logo">
                   <Link href="/"><a><img src="https://res.cloudinary.com/glitch-digital-limited/image/upload/h_150,w_150/v1489885960/upsum-publisher-logo_e6x61w.png" alt="Upsum - The news, summed up"/></a></Link>
                   <div className="text">
@@ -45,7 +46,14 @@ export default class extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="six columns">
+              <div className="seven columns">
+                <p style={{margin: '10px 0', float: 'right'}} className="hidden-mobile">
+                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/> fb.me/upsumnews</a>
+                  &nbsp; &nbsp; 
+                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/> @upsumnews</a>
+                  &nbsp; &nbsp; 
+                  <a className="unstyled" href="https://upsum.news/email"><i className="fa fa-fw fa-envelope"/> Newsletter</a>
+                </p>
                 <Search />
               </div>
             </div>

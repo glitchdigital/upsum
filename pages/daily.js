@@ -68,12 +68,12 @@ export default class extends Page {
           { name: 'Daily Briefing', href: '/daily' }
         ]}/>
         <div className="row">
-          <div className="twelve columns">
+          <div className="offset-by-one ten columns">
             <h1><span>Upsum Daily for {moment().format('D MMMM, YYYY')}</span></h1>
           </div>
         </div>
         <div className="row">
-          <div className="twelve">
+          <div className="offset-by-one ten columns">
             {
               questions.map((question, i) => {
                 return (

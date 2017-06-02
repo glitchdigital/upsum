@@ -31,7 +31,7 @@ export default class extends Page {
         { name: this.props.topic || 'Everything', href: '/topic/' + this.props.topic }
       ]}/>
       <div className="row">
-        <div className="twelve columns">
+          <div className="offset-by-one ten columns">
           {
             this.props.questions.map((question, i) => {
               return (

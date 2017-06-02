@@ -19,7 +19,7 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
+                  Signed in as <Link href="/"><a className="unstyled"> {this.props.name}</a></Link>
                 </p>
                 <p style={{margin: '0', float: 'right'}}>
                   <Link href="/question/new" as="/questions/new"><a className="button button-primary">New</a></Link>
@@ -33,19 +33,19 @@ export default connect(state => state)(class extends React.Component {
       )
     } else {
       return (
-        <div className="menubar">
+        <div className="menubar hidden-desktop">
           <div className="container">
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled">upsum.news <span className="beta">BETA</span></a></Link>
+                  <Link href="/"><a className="unstyled">upsum.news</a></Link>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}}>
-                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/><span className="hidden-mobile"> fb.me/upsumnews</span></a>
+                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/></a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/><span className="hidden-mobile"> @upsumnews</span></a>
+                  <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/></a>
                   &nbsp; &nbsp; 
-                  <a className="unstyled" href="https://upsum.news/email"><i className="fa fa-fw fa-envelope"/><span className="hidden-mobile"> Newsletter</span></a>
+                  <a className="unstyled" href="https://upsum.news/email"><i className="fa fa-fw fa-envelope"/></a>
                 </p>
               </div>
             </div>
