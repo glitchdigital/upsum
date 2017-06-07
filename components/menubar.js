@@ -38,10 +38,10 @@ export default connect(state => state)(class extends React.Component {
             <div className="row">
               <div className="twelve columns">
                 <p style={{margin: '5px 0', float: 'left'}}>
-                  <Link href="/"><a className="unstyled">upsum.news</a></Link>
+                  <Link href="/"><a className="unstyled">UPSUM.NEWS</a></Link>
                 </p>
-                <p style={{margin: '5px 0', float: 'right'}}>
-                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/></a>
+                <p style={{margin: '5px 0', float: 'right'}} className="menubar-links">
+                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook"/></a>
                   &nbsp; &nbsp; 
                   <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/></a>
                   &nbsp; &nbsp; 

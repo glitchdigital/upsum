@@ -47,8 +47,8 @@ export default class extends React.Component {
                 </div>
               </div>
               <div className="seven columns">
-                <p style={{margin: '10px 0', float: 'right'}} className="hidden-mobile">
-                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook-square"/> fb.me/upsumnews</a>
+                <p className="header-links hidden-mobile">
+                  <a className="unstyled" href="http://fb.me/upsumnews"><i className="fa fa-fw fa-facebook"/> fb.me/upsumnews</a>
                   &nbsp; &nbsp; 
                   <a className="unstyled" href="http://twitter.com/upsumnews"><i className="fa fa-fw fa-twitter"/> @upsumnews</a>
                   &nbsp; &nbsp; 
