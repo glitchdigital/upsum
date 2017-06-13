@@ -37,7 +37,7 @@ export default connect(state => state)(class extends React.Component {
           <div className="container">
             <div className="row">
               <div className="twelve columns">
-                <p style={{margin: '5px 0', float: 'left'}}>
+                <p style={{margin: '5px 0', float: 'left', paddingTop: 2.5}}>
                   <Link href="/"><a className="unstyled">UPSUM.NEWS</a></Link>
                 </p>
                 <p style={{margin: '5px 0', float: 'right'}} className="menubar-links">

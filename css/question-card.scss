@@ -1,16 +1,17 @@
 .question-card {
   background: #fff;
   margin-bottom: 15px;
+  padding-bottom: 5px;
 }
 .question-card .question-card-contents {
-  padding: 0 15px 10px 15px;
+  padding: 0 15px 0px 15px;
+  clear: both;
 }
 .question-card .question-card-question-text p {
   font-style: oblique;
   font-size: 20px;
   line-height: 28px;
   clear: both;
-  margin-bottom: 0px;
 }
 .question-card .question-card-footer {
   text-align: right;
@@ -29,10 +30,10 @@
   font-size: 38px;
   line-height: 48px;
   margin: 0;
-  padding-top: 10px;
+  padding-top: 20px;
   padding-left: 5px;
   padding-right: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 25px;
 }
 .question-card .date-label {
   background-color: #666;
@@ -40,11 +41,11 @@
   position: relative;
   font-size: 18px;
   line-height: 30px;
-  padding: 2px 16px 2px 20px;
+  padding: 4px 16px 4px 20px;
   display: inline-block;
   height: 30px;
   position: relative;
-  margin-top: 20px;
+
   margin-bottom: 15px;
   margin-left: -25px;
   z-index: 1;

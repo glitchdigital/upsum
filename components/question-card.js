@@ -69,19 +69,9 @@ export default class extends React.Component {
     let answeredOn
     if (question.acceptedAnswer && question.acceptedAnswer.text) {
       answeredOn =
-        <div>
-          <p className="date-label">
-            <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
-          </p>
-        </div>
-    } else {
-      answeredOn =
-        <div>
-          <p className="date-label">
-            <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
-          </p>
-          <p><i>This question has not been answered yet!</i></p>
-        </div>
+        <span className="date-label">
+          <i className="fa fa-fw fa-clock-o"></i> <TimeAgo date={datePublished} />
+        </span>
     }
     
     let citation
@@ -117,6 +107,13 @@ export default class extends React.Component {
             <span itemProp="dateModified">{question['@dateModified']}</span><br/>
           </div>
         </div>
+        <div className="question-card-contents">
+          {answeredOn}
+          <div className="buttons pull-right">
+            <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent(shareUrl) + "&t=" + encodeURIComponent(question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> <span className="hidden-mobile">Share</span></a>
+            <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(shareUrl) + "&text=" + encodeURIComponent(question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> <span className="hidden-mobile">Tweet</span></a>
+          </div>
+        </div>
         {imageTag}
         {videoTag}
         <div className="question-card-contents">
@@ -124,15 +121,12 @@ export default class extends React.Component {
             <ReactMarkdown source={question.text || ''}/>
           </div>
           <div itemProp="suggestedAnswer acceptedAnswer" itemScope itemType="http://schema.org/Answer">
-            {answeredOn}
             <div itemProp="text">
-              <ReactMarkdown source={(question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : "" }/>
+              <ReactMarkdown source={(question.acceptedAnswer && question.acceptedAnswer.text) ? question.acceptedAnswer.text : '*This question has not been answered yet!*' }/>
             </div>
           </div>
           {citation}
           <div className="buttons">
-            <a target="_blank" onClick={this.popup} className="button button-facebook" href={"http://www.facebook.com/sharer.php?u=" + encodeURIComponent(shareUrl) + "&t=" + encodeURIComponent(question.name)} title="Share on Facebook..."><i className="fa fa-fw fa-lg fa-facebook"/> Share</a>
-            <a target="_blank" onClick={this.popup} className="button button-twitter" href={"https://twitter.com/share?url=" + encodeURIComponent(shareUrl) + "&text=" + encodeURIComponent(question.name)}><i className="fa fa-fw fa-lg fa-twitter"/> Tweet</a>
             {editButton}
           </div>
         </div>

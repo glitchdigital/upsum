@@ -1,6 +1,6 @@
 {
   "name": "upsum",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "The upsum.news website",
   "main": "index.js",
   "repository": "glitchdigital/upsum",

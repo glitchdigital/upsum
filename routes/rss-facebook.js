@@ -43,6 +43,11 @@ exports.get = (req, res, next) => {
                   'name' in question.image.publisher &&
                   'url' in question.image.publisher) {
                 imageCredit = question.image.publisher.name
+                    
+                // @FIXME Temporarily removing imageCredit from Facebook RSS 
+                // Feed as it's showing up incorrectly in auto-posts by 
+                // dlvrit.com :-( Will restore once resolved.
+                imageCredit = ''
               }
 
               html += `<figure><img src="${imageUrl}"/><figcaption class="op-vertical-below"><cite>${escapeHtml(imageCredit)}</cite></figcaption></figure>`
