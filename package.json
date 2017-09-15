@@ -26,7 +26,7 @@
     "react-datepicker": "^0.41.1",
     "react-dom": "^15.5.4",
     "react-ga": "^2.1.2",
-    "react-markdown": "^2.4.2",
+    "react-markdown": "https://registry.npmjs.org/react-markdown/-/react-markdown-2.5.0.tgz",
     "react-redux": "^4.4.6",
     "react-textarea-autosize": "^4.0.5",
     "react-timeago": "^3.1.3",

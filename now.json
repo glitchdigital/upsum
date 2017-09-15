@@ -1,4 +1,7 @@
 {
   "name": "upsum",
-  "alias": ["upsum.news", "www.upsum.news"]
+  "alias": ["upsum.news", "www.upsum.news"],
+  "engines": {
+    "node": "7.x.x"
+  }
 }
