@@ -67,7 +67,7 @@ export default class extends Page {
             <div className="columns twelve">
               {
                 this.props.questions.map((question, i) => {
-                  return <div key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
+                  return <div key={`search-mobile-${i}`}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                 })
               }
             </div>
@@ -78,21 +78,21 @@ export default class extends Page {
             <div className="columns four first">
               {
                 questions[0].map((question, i) => {
-                  return <div key={i}><QuestionCardPreview question={question}/></div>
+                  return <div key={`search-desktop-1-${i}`}><QuestionCardPreview question={question}/></div>
                 })
               }
             </div>
             <div className="columns four">
               {
                 questions[1].map((question, i) => {
-                  return <div key={i}><QuestionCardPreview question={question}/></div>
+                  return <div key={`search-desktop-2-${i}`}><QuestionCardPreview question={question}/></div>
                 })
               }
             </div>
             <div className="columns four last">
               {
                 questions[2].map((question, i) => {
-                  return <div key={i}><QuestionCardPreview question={question}/></div>
+                  return <div key={`search-desktop-3-${i}`}><QuestionCardPreview question={question}/></div>
                 })
               }
             </div>

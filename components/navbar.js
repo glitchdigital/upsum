@@ -15,7 +15,7 @@ export default class extends React.Component {
               </li>
               {
                 breadcrumbs.map((item, i) => {
-                  return <li key={i} itemProp="itemListElement" itemScope
+                  return <li key={`navbar-${i}`} itemProp="itemListElement" itemScope
       itemType="http://schema.org/ListItem">
                       <i className="fa fa-fw fa-chevron-right separator"/>
                       <Link href={item.href}><a itemScope itemType="http://schema.org/Thing"

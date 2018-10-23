@@ -50,7 +50,7 @@ export default class extends Page {
             {
               this.props.questions.map((question, i) => {
                 return (
-                  <div key={i} className="question">
+                  <div key={`about-${i}`} className="question">
                     <QuestionCard question={question} session={this.props.session} footer={i+1 + ' of ' + this.props.questions.length}/>
                   </div>
                 )

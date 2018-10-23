@@ -104,7 +104,7 @@ export default class extends Page {
           <div className="image-wall">
           {
             questionsWithThumbnails.map((item, i) => {
-              return <div onClick={() => this.openQuestion(item.question)} className="image" key={i}>
+              return <div onClick={() => this.openQuestion(item.question)} className="image" key={`wall-${i}`}>
                 <h3>{item.question.name}</h3>
                 <div className="img-wrapper"><img src={item.thumbnailUrl}/></div>
               </div>

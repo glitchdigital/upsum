@@ -77,7 +77,7 @@ export default class extends Page {
             {
               questions.map((question, i) => {
                 return (
-                  <div key={i} className="question">
+                  <div key={`daily-${i}`} className="question">
                     <QuestionCard question={question} session={this.props.session} footer={i+1 + ' of ' + questions.length}/>
                   </div>
                 )

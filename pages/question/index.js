@@ -318,7 +318,7 @@ export default class extends Page {
                 <div className="row follow-on-questions">
                   {
                     followOnQuestions.map((question, i) => {
-                      return <div key={i} className="six columns"><QuestionCardPreview question={question}/></div>
+                      return <div key={`question-${i}`} className="six columns"><QuestionCardPreview question={question}/></div>
                     })
                   }
                 </div>
@@ -329,7 +329,7 @@ export default class extends Page {
                   sidebarQuestions.map((question, i) => {
                     if (i > 3)
                       return
-                    return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
+                    return <div key={`question-sidebar-1-${i}`} className="question-sidebar-item"><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
                 <div id="ad-slot-1"></div>
@@ -337,7 +337,7 @@ export default class extends Page {
                   sidebarQuestions.map((question, i) => {
                     if (i <= 3)
                       return
-                    return <div className="question-sidebar-item" key={i}><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
+                    return <div key={`question-sidebar-2-${i}`} className="question-sidebar-item"><QuestionCardPreview question={question} className="question-card-preview-small"/></div>
                   })
                 }
                 </div>

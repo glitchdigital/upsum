@@ -50,7 +50,7 @@ export default class extends React.Component {
           <p>Found {this.state.images.length} images</p>
           {
             this.state.images.map((image, i) => {
-              return <span key={'image-'+i} onClick={() => this.props.addImage(image)} className="image-thumbnail" style={{backgroundImage: 'url('+image.thumbnail.src+')'}}></span>
+              return <span key={`image-${i}`} onClick={() => this.props.addImage(image)} className="image-thumbnail" style={{backgroundImage: 'url('+image.thumbnail.src+')'}}></span>
             })
           }
         </div>

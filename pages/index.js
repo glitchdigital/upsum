@@ -105,7 +105,7 @@ export default class extends Page {
               <div className="columns twelve">
                 {
                   this.props.questions.map((question, i) => {
-                    return <div key={i}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, null, i)}/></div>
+                    return <div key={`mobile-${i}`}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, null, i)}/></div>
                   })
                 }
               </div>
@@ -116,21 +116,21 @@ export default class extends Page {
               <div className="columns four first">
                 {
                   questions[0].map((question, i) => {
-                    return <div key={i}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, 0, i)}/></div>
+                    return <div key={`desktop-1-${i}`}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, 0, i)}/></div>
                   })
                 }
               </div>
               <div className="columns four">
                 {
                   questions[1].map((question, i) => {
-                    return <div key={i}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, 1, i)}/></div>
+                    return <div key={`desktop-2-${i}`}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, 1, i)}/></div>
                   })
                 }
               </div>
               <div className="columns four last">
                 {
                   questions[2].map((question, i) => {
-                    return <div key={i}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, 2, i)}/></div>
+                    return <div key={`desktop-3-${i}`}><QuestionCardPreview question={question} className={this.getPreviewCardClassName(question, 2, i)}/></div>
                   })
                 }
               </div>
