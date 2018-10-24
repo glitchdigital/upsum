@@ -24,9 +24,6 @@ require('dotenv').load()
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
 
-if (process.env.LOGS_SECRET) {
-  require('now-logs')(process.env.LOGS_SECRET)
-}
 
 const logger = new function() {
   this.log =  function(err, tags) { console.log(err, tags) }
@@ -133,7 +130,7 @@ app.prepare()
   })
 
   server.get('/trending-questions', (req, res) => {
-    return res.send(trendingQuestions)
+    return res.json(trendingQuestions)
   })
   
   // Endpoint to search and upload images to the CDN
@@ -196,12 +193,11 @@ app.prepare()
   console.log(err)
 })
 
-function updateTrendingQuestions() {
-  fetch('https://api.upsum.news/Question?sort=-_created&limit=64')
-  .then(function(response) {
-    response.json()
-    .then(function(json) {
-      trendingQuestions = json
-    })
-  })
+const updateTrendingQuestions = async () => {
+  try {
+    const res = await fetch('https://api.upsum.news/Question?sort=-_created&limit=42')
+    trendingQuestions = await res.json()
+  } catch (e) {
+    console.error("Error fetching trending questions", e)
+  }
 }
