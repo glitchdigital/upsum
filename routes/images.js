@@ -3,7 +3,7 @@
 require('dotenv').load()
 
 const fs = require('fs')
-const Flickr = require('flickrapi')
+const Flickr = require('flickr-secure')
 const cloudinary = require('cloudinary')
 const request = require('request')
 

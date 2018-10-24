@@ -11,8 +11,7 @@
     "escape-html": "^1.0.3",
     "express": "^4.16.4",
     "express-sitemap": "^1.8.0",
-    "flickrapi": "^0.6.0",
-    "loggly": "^1.1.1",
+    "flickr-secure": "github:interactivelabs/node-flickrapi#master",
     "marked": "^0.5.1",
     "moment": "^2.22.2",
     "next": "^7.0.2",
@@ -32,6 +31,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "remove-markdown": "^0.3.0",
+    "request": "^2.88.0",
     "rss": "^1.2.2",
     "sass-loader": "^7.1.0"
   },

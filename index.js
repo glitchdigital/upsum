@@ -4,7 +4,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const next = require('next')
 const sass = require('node-sass')
-const loggly = require('loggly')
 const cron = require('node-cron')
 const fetch = require('isomorphic-fetch')
 
@@ -24,23 +23,10 @@ require('dotenv').load()
 process.env.NODE_ENV = process.env.NODE_ENV || "production"
 process.env.PORT = process.env.PORT || 80
 
-
 const logger = new function() {
   this.log =  function(err, tags) { console.log(err, tags) }
   return this
 }
-
-/*
-const logger = loggly.createClient({
-  token: process.env.LOGGLY_TOKEN || '',
-  subdomain: process.env.LOGGLY_SUBDOMAIN || '',
-  auth: {
-    username: process.env.LOGGLY_USERNAME || '',
-    password: process.env.LOGGLY_PASSWORD || ''
-  },
-  tags: ['upsum.news', process.env.NODE_ENV]
-})
-*/
 
 logger.log("Instance intialized", ['startup'])
 
